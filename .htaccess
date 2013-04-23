@@ -1,8 +1,0 @@
-# Denying direct access to the templates
-<FilesMatch "(.tpl|config.php)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Disable directory browsing
-Options -Indexes
