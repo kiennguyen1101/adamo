@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Database interface code for MySQL database servers.

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Initializes the list of date formats and their locales.

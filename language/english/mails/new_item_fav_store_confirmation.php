@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.02
 ## Email File -> confirm posting to the seller
 ## called only from the sell_item.php page

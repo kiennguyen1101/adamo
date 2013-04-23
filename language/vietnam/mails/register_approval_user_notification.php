@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> registration approval - user notification
 ## called only from the register.php page

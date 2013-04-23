@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Generic Database schema code.

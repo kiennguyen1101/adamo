@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * Indicates an error during check for PHP unicode support.
    */

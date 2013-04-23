@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Num\u00E9ros";

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify seller if multiple items closed but there was no sale
 ## called only from the main_cron.php page

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   $current_version = "6.03";
 
   (array) $setts = NULL;

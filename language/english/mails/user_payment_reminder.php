@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.02
 ## Email File -> invoice users periodically if site is in account mode and 
 ## called only from the invoice_cron.php page!

@@ -1,4 +1,4 @@
-﻿function MoveOption(objSourceElement, objTargetElement) {
+function MoveOption(objSourceElement, objTargetElement) {
     var aryTempSourceOptions = new Array();
     var x = 0;                //looping through source element to find selected options
     for (var i = 0; i < objSourceElement.length; i++) {

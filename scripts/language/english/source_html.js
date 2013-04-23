@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     document.getElementById("txtLang").innerHTML = "Wrap Text";
     document.getElementById("btnCancel").value = "cancel";

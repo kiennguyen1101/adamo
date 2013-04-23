@@ -1,4 +1,4 @@
-﻿/*** Translation ***/
+/*** Translation ***/
         LanguageDirectory = "schi";
 
 function getTxt(s)

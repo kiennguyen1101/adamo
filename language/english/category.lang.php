@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   $category_lang[2396] = "á»ng nhÃ²m ";
   $category_lang[2568] = "Äáº§u phÃ¡t HD";
   $category_lang[2446] = "BÃ¡t Ä‘Ä©a &amp; áº¤m chÃ©n";

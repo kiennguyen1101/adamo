@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     document.getElementById("txtLang").innerHTML = "Paste text content here (CTRL-V) ";
     document.getElementById("btnCancel").value = "Annuller";

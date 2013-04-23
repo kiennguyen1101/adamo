@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify seller on a new swap offer placed 
 ## called only from the $item->place_offer() function!

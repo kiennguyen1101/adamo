@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> notify remaining bidders that a user has retracted his bids on an auction
 ## called only from the item->retract_bid() function!

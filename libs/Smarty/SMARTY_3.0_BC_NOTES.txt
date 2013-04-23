@@ -1,4 +1,4 @@
-﻿== Smarty2 backward compatibility ==
+== Smarty2 backward compatibility ==
 All Smarty2 specific API functions and deprecated functionallity has been moved
 to the SmartyBC class.
 

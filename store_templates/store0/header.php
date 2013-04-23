@@ -1,4 +1,4 @@
-﻿<?php echo headercat($shop_header_msg); ?>
+<?php echo headercat($shop_header_msg); ?>
 
 <table border="0" cellpadding="5" cellspacing="0" width="100%" class="store_main">
   <tr>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> notify bidder if his offer is deleted (works with all 3 offer types)
 ## called only from the $item->delete_offer() function!
 

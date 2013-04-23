@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify buyer when the seller has posted bank details for an auction
 ## called only from the popup_bank_details.php page!

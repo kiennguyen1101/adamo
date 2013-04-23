@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions to aid in the creation of sortable tables.

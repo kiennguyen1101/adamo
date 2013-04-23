@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> notify user when a bid is placed on an auction on his watch list
 ## called only from the $item->assign_winner() function
 

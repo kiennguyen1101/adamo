@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions that need to be loaded on every Drupal request.

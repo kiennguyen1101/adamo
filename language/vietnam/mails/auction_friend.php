@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> email an auction to a friend
 ## called only from the $item->auction_friend() function!
 ## File Version -> v6.04

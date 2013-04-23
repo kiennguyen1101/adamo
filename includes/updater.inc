@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Classes used for updating various files in the Drupal webroot. These

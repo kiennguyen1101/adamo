@@ -1,4 +1,4 @@
-﻿Smarty 2 and Smarty 3 are quite similar in implementation, but do have a few
+Smarty 2 and Smarty 3 are quite similar in implementation, but do have a few
 differences you need to be aware of when upgrading from Smarty 2 to Smarty 3.
 
 = Known incompatibilities with Smarty 2 =

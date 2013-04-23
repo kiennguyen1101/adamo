@@ -1,4 +1,4 @@
-﻿= Known incompatibilities with Smarty 2 =
+= Known incompatibilities with Smarty 2 =
 
 == Syntax ==
 

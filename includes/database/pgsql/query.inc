@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @ingroup database
    * @{

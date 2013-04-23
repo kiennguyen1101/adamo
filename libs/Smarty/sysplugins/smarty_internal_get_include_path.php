@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * Smarty read include path plugin
    *

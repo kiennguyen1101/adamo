@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // Database configuration
   $db_server = 'localhost';
   $db_name = 'adamo_store';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify buyer on a successful purchase
 ## called only from the $item->assign_winner() function!

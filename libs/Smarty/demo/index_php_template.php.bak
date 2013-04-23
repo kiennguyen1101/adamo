@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * Test script for PHP template
    * @author Monte Ohrt <monte at ohrt dot com> 

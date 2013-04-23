@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> confirm posting to the seller
 ## called only from the sell_item.php page
 

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions for form and batch generation and processing.

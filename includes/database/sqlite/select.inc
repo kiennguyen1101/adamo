@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Select builder for SQLite embedded database engine.

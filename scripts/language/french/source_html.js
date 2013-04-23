@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     document.getElementById("txtLang").innerHTML = "Renvoi \u00E0 la ligne";
     document.getElementById("btnCancel").value = "Annuler";

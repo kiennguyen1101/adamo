@@ -1,4 +1,4 @@
-﻿PHP file test
+PHP file test
 $foo is <?= $foo ?>
 <br> Test functions
 <? echo trim($foo, "'"); ?>

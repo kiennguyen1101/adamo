@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> send contact form to site admin
 ## called only from the content_pages.php page!

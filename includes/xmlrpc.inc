@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Drupal XML-RPC library.

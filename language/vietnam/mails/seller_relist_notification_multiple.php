@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File version -> v6.05
 ## Email File -> notify seller if multiple items have been relisted (manually or automatically)
 ## called only from the main_cron.php page

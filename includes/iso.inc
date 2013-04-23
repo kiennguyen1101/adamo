@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Provides a list of countries and languages based on ISO standards.

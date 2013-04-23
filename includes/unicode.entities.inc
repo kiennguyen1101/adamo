@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * (X)HTML entities, as defined in HTML 4.01.

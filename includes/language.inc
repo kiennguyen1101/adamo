@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Multiple language handling functionality.

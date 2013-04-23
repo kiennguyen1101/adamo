@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify a buyer when a seller has created a new product invoice for him
 ## called only from the $item->send_invoice() function

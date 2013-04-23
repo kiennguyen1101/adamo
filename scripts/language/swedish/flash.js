@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "K\u00E4lla";

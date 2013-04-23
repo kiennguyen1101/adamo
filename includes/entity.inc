@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
   /**
    * Interface for entity controller classes.

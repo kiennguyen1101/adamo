@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> notify bidder when he is outbid
 ## called only from the bid.php page!

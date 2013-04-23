@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Common functions that many Drupal modules will need to reference.

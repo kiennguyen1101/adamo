@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Drupal stream wrapper interface.

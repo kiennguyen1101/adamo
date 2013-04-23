@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * This file contains the code registry parser engine.

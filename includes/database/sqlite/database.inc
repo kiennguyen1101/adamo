@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Database interface code for SQLite embedded database engine.

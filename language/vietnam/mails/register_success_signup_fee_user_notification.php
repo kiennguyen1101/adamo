@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> registration success - signup fee enabled
 ## called only from the $fees->callback_procees() function

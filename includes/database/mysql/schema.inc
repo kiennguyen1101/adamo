@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Database schema code for MySQL database servers.

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Administration functions for locale.module.

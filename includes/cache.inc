@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions and interfaces for cache handling.

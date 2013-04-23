@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * A database-mediated implementation of a locking mechanism.

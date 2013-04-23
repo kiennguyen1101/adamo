@@ -1,4 +1,4 @@
-﻿[15-Apr-2013 09:34:47 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/language/english/site.lang.php on line 31
+[15-Apr-2013 09:34:47 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/language/english/site.lang.php on line 31
 [15-Apr-2013 10:44:35 Asia/Bangkok] PHP Parse error:  syntax error, unexpected '{', expecting '(' in /home/adamo/public_html/includes/functions.php on line 1450
 [15-Apr-2013 13:40:48 Asia/Bangkok] PHP Fatal error:  Call to undefined function unlink_pin() in /home/adamo/public_html/includes/global.php on line 120
 [15-Apr-2013 14:50:53 Asia/Bangkok] PHP Parse error:  syntax error, unexpected $end, expecting T_VARIABLE or T_DOLLAR_OPEN_CURLY_BRACES or T_CURLY_OPEN in /home/adamo/public_html/includes/functions.php on line 962

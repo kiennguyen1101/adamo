@@ -1,4 +1,4 @@
-﻿function loadTxt()
+function loadTxt()
 {
     document.getElementById("txtLang").innerHTML = "Sisenn\u00E4 teksti";
     document.getElementById("btnCancel").value = "Peruuta";

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * Smarty Internal Plugin Compile Eval
    *

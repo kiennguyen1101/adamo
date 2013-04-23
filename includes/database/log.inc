@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Logging classes for the database layer.

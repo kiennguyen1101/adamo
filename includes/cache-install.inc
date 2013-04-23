@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Provides a stub cache implementation to be used during installation.

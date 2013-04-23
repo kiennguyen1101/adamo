@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> 6.05
 ## Email File -> notify the seller when the auction was not sold due to the reserve price not being met
 ## called only from item::assign_winner()

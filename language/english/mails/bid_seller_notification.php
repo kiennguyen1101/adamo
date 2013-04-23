@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.02
 ## Email File -> notify seller when a bid is placed
 ## called only from the bid.php page!

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify user when a bid is placed on an auction on his watch list
 ## called only from the bid.php page!

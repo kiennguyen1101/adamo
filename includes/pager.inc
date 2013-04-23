@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions to aid in presenting database results as a set of pages.

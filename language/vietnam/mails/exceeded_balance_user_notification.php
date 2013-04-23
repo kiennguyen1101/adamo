@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> notify user that his account has been suspended because the debit limit was exceeded.
 ## called only from the suspend_debit_users() function
 

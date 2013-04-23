@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
   /**
    * Extends All Resource

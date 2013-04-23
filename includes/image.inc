@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * API for manipulating images.

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.05
 ## Email File -> notify seller if multiple wanted ads have closed
 ## called only from the main_cron.php page

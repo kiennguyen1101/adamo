@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Functions to handle paths in Drupal, including path aliasing.

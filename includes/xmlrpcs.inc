@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Provides API for defining and handling XML-RPC requests.

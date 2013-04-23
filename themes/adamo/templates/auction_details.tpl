@@ -1,4 +1,4 @@
-﻿{extends file="layout.tpl"}
+{extends file="layout.tpl"}
 
 {block name=main}
     <div class="product-detail-page">

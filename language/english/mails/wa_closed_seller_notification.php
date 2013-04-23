@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> notify seller if an wanted ad has closed
 ## called only from the main_cron.php page
 

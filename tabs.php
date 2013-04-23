@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   include_once ('includes/global.php');
   include_once ('includes/functions.php');
   $cat = array($_GET['cat']);

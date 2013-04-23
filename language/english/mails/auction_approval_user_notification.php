@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.02
 ## Email File -> notify user when his auction is approved by the admin
 ## called only from admin/list_auctions.php

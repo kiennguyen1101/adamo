@@ -1,4 +1,4 @@
-﻿/*** Translation ***/
+/*** Translation ***/
         LanguageDirectory = "danish";
 
 function getTxt(s)

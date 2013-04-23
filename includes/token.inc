@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Drupal placeholder/token replacement system.

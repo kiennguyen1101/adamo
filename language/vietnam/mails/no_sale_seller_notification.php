@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> notify seller if an item closed but there was no sale
 ## called only from the main_cron.php page
 

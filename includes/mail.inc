@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * API functions for processing and sending e-mail.

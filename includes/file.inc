@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * API for handling file uploads and server file management.

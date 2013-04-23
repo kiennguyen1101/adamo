@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## Email File -> retrieve username
 ## called only from the retrieve_password.php page
 

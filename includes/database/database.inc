@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Core systems for the database layer.

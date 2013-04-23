@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   /**
    * @file
    * Provides a helper to properly encode HTML-safe JSON prior to PHP 5.3.0.
