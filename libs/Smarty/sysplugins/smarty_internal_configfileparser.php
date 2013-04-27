@@ -84,8 +84,8 @@
 
 
 #line 12 "smarty_internal_configfileparser.y"
-
-  class Smarty_Internal_Configfileparser#line 79 "smarty_internal_configfileparser.php" {
+#line 79 "smarty_internal_configfileparser.php"
+  class Smarty_Internal_Configfileparser {
 #line 14 "smarty_internal_configfileparser.y"
   // states whether the parse was successful or not
   public $successful = true;

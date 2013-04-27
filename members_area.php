@@ -11,16 +11,9 @@
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_shop.php');
-  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
   include_once ('includes/functions_login.php');
-  include_once ('includes/class_messaging.php');
-  include_once ('includes/class_reputation.php');
+
 
   if (!$session->value('user_id')) {
     header_redirect('login.php');
@@ -847,7 +840,7 @@
             $won_auctions_content .= '<tr class="' . $background . '"> ' .
                 '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a> - ' .
                 '		<a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display($item_details['auction_name'], MSG_AUCTION_DELETED) . '</a>' .
-                (($item_paid && !empty($item_details['direct_payment']) && !$item_details['direct_payment_paid'] && !$item_details['flag_paid'] && $item_details['bid_amount'] > 0) ? '<br><br>[ <a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display(MSG_PAY_WITH_DIRECT_PAYMENT, '') . '</a> ]' : '') .
+                (($item_paid && !$item_details['direct_payment_paid'] && !$item_details['flag_paid'] && $item_details['bid_amount'] > 0) ? '<br><br>[ <a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display(MSG_PAY_WITH_DIRECT_PAYMENT, '') . '</a> ]' : '') .
                 '	</td>' .
                 '	<td align="center">' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td>' .
                 '	<td align="center">' . MSG_REQUESTED . ': ' . $item_details['quantity_requested'] . '<br> ' .

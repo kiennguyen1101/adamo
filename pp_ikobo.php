@@ -27,7 +27,7 @@
     return (isset($_GET[$name])) ? $_GET[$name] : ((isset($_POST[$name])) ? $_POST[$name] : $default);
   }
 
-  list($custom, $fee_table) = explode('TBL', get_var('item_id');
+  list($custom, $fee_table) = explode('TBL', get_var('item_id'));
 
   if ($fee_table == 100) /* the tables for direct payment */ {## MyPHPAuction 2009 get the direct payment ikobo username/password
   }

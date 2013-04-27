@@ -104,7 +104,7 @@
         $template->set('pagination', $pagination);
 
         $total_balance_payments = abs($db->get_sql_field("SELECT sum(i.amount) AS total_amount FROM " . DB_PREFIX . "invoices i WHERE i.amount<0 " . $date_query . " " . $user_query, 'total_amount'));
-        $total_live_payments = $db->get_sql_field("SELECT sum(i.amount) AS total_amount FROM " . DB_PREFIX . "invoices i WHERE i.amount>0 AND i.live_fee=1 AND i.credit_adjustment=0 " . $date_query . " " . $user_query, 'total_amount');
+        $total_live_payments = $db->get_sql_field("SELECT sum(i.amount) AS total_amount FROM " . DB_PREFIX . "invoices i WHERE i.amount>0 AND i.live_fee=1  " . $date_query . " " . $user_query, 'total_amount');
         $total_invoiced = $db->get_sql_field("SELECT sum(i.amount) AS total_amount FROM " . DB_PREFIX . "invoices i WHERE i.amount>0 " . $date_query . " " . $user_query, 'total_amount');
         $total_paid = $total_balance_payments + $total_live_payments;
 

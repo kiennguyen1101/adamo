@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -11,13 +12,8 @@
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
-  include_once ('includes/class_shop.php');
+
 
   (array) $user_details = null;
   if ($session->value('user_id')) {
@@ -316,6 +312,7 @@
 
       $frmchk_details = $item_details;
 
+      /* Formchecker for user creation/edit */
       include('includes/procedure_frmchk_item.php');
 
       if ($fv->is_error()) {
@@ -552,12 +549,15 @@
       $template->set('current_step', 'shipping');
 
       $template->set('shipping_methods_drop_down', $item->shipping_methods_drop_down('type_service', $item_details['type_service']));
+      
+      
+//kiennguyen1101
+      
+        $direct_payments = $item->select_direct_payment($item_details['direct_payment'], $session->value('user_id'));
 
-      $direct_payments = $item->select_direct_payment($item_details['direct_payment'], $session->value('user_id'));
-
-      $direct_payment_table = $template->generate_table($direct_payments, 4, 1, 1, '75%');
-      $template->set('direct_payment_table', $direct_payment_table);
-
+        $direct_payment_table = $template->generate_table($direct_payments, 4, 1, 1, '75%');
+        $template->set('direct_payment_table', $direct_payment_table);
+       
       $offline_payments = $item->select_offline_payment($item_details['payment_methods']);
 
       $offline_payment_table = $template->generate_table($offline_payments, 4, 1, 1, '75%');
@@ -776,5 +776,4 @@
 
     echo $template_output;
   }
-
 ?>

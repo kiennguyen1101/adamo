@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -58,71 +59,25 @@
 
     function display_error($error_message, $sql_error = '', $sql_query = '') {
       $display_output = '<p style="font-family: arial; font-size: 12px;"><strong>' . MSG_MYSQL_ERROR_OCCURRED . '</strong>' .
-          '<ul>' .
-          '<li style="font-family: arial; font-size: 12px;">' . $error_message . '</li>' .
-          ((!empty($sql_error) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_ERROR . ':</strong> ' . $sql_error . '</li>' : '') .
-          ((!empty($sql_query) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_QUERY . ':</strong> ' . $sql_query . '</li>' : '') .
-          '</ul></p>';
+        '<ul>' .
+        '<li style="font-family: arial; font-size: 12px;">' . $error_message . '</li>' .
+        ((!empty($sql_error) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_ERROR . ':</strong> ' . $sql_error . '</li>' : '') .
+        ((!empty($sql_query) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_QUERY . ':</strong> ' . $sql_query . '</li>' : '') .
+        '</ul></p>';
 
       return $display_output;
     }
 
     function query($query, $debug_output = false, $die = true) {
-      if ($debug_output) {
-        (string) $explain_output = null;
-
-        $explain_result = @mysql_query("EXPLAIN " . $query);
-
-        $explain_output = '<table width="100%" cellpadding="3" cellspacing="2" class="contentfont border"> ' .
-            '	<tr class="c4"> ' .
-            '		<td colspan="10">SQL COMMAND</td> ' .
-            '	</tr> ' .
-            '	<tr> ' .
-            '		<td colspan="10">EXPLAIN ' . $query . '</td> ' .
-            '	</tr> ' .
-            '	<tr class="c4"> ' .
-            '		<td>id</td> ' .
-            '		<td>select_type</td> ' .
-            '		<td>table</td> ' .
-            '		<td>type</td> ' .
-            '		<td>possible_keys</td> ' .
-            '		<td>key</td> ' .
-            '		<td>key_len</td> ' .
-            '		<td>ref</td> ' .
-            '		<td>rows</td> ' .
-            '		<td>Extra</td> ' .
-            '	</tr>';
-        '	<tr class="c4"> ' .
-            '		<td colspan="10"></td> ' .
-            '	</tr> ';
-
-        if ($explain_result) {
-          while ($explain = $this->fetch_array($explain_result)) {
-            $explain_output .= '<tr class="c1"> ' .
-                '	<td>' . $explain['id'] . '</td> ' .
-                '	<td>' . $explain['select_type'] . '</td> ' .
-                '	<td>' . $explain['table'] . '</td> ' .
-                '	<td>' . $explain['type'] . '</td> ' .
-                '	<td>' . implode(', ', explode(',', $explain['possible_keys'])) . '</td> ' .
-                '	<td>' . $explain['key'] . '</td> ' .
-                '	<td>' . $explain['key_len'] . '</td> ' .
-                '	<td>' . $explain['ref'] . '</td> ' .
-                '	<td>' . $explain['rows'] . '</td> ' .
-                '	<td>' . $explain['Extra'] . '</td> ' .
-                '</tr>';
-          }
-        }
-        $explain_output .= '</table>';
-
-        echo $explain_output;
-      }
-
+      
       //echo $query . '<br>'; ## used if we want to display all queries made on a page
 
       $result = @mysql_query($query);
 
       if (!$result) {
         $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
+        if (DEBUG)
+          $mysql_error .= "<p>{$query}</p>";
         if ($die) {
           die($mysql_error);
         }
@@ -172,8 +127,9 @@
       return $result;
     }
 
-    function fetch_array($query_result) {
-      $result = @mysql_fetch_array($query_result);
+    function fetch_array($query_result, $assoc = false) {
+
+      $result = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH );
 
       if ($this->sql_error($result)) {
         die($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
@@ -182,9 +138,23 @@
       return $result;
     }
 
+    function fetch_all($query_result, $assoc = false) {
+      $a = array();
+      while ($a[] = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH)); array_pop($a);
+      return $a;
+    }
+
   }
 
   class database extends db_main {
+
+    public function __autoload($class_name) {
+      if (file_exists(BASE_DIR . $className . '.php')) {
+        if (!class_exists($class_name))
+          require_once $className . '.php';
+        return true;
+      }
+    }
 
     function get_sql_field($query, $field, $null_message = NULL) {
       (string) $field_value = NULL;
@@ -388,4 +358,5 @@
     }
 
   }
+
 ?>

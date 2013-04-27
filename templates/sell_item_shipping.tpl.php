@@ -74,6 +74,7 @@
         <td colspan="2"><?php echo MSG_SHIP_METHOD_EXPL; ?></td>
       </tr>
     <?php } ?>
+      <?php if ($direct_payment_table) : ?>
   <tr class="c4">
     <td colspan="3"><?php echo MSG_DIRECT_PAYMENT; ?></td>
   </tr>
@@ -89,6 +90,7 @@
     <td>&nbsp;</td>
     <td colspan="2"><?php echo MSG_DIRECT_PAYMENT_METHODS_EXPL; ?></td>
   </tr>
+  <?php endif; ?>
   <tr class="c4">
     <td colspan="3"><?php echo MSG_OFFLINE_PAYMENT; ?></td>
   </tr>

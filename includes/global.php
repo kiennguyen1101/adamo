@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -10,6 +11,44 @@
 
   include_once ($fileExtension . 'includes/config.php');
 
+  /**
+   *
+   * @param string $className Class or Interface name automatically
+   *              passed to this function by the PHP Interpreter
+   */
+  function autoLoader($className) {
+    //Directories added here must be
+//relative to the script going to use this file.
+//New entries can be added to this list
+    $directories = array(
+      INCLUDE_DIR,
+      'classes/'
+    );
+
+    //Add your file naming formats here
+    $fileNameFormats = array(     
+      '%s.class.php',
+      'class_%s.php',     
+    );
+
+    // this is to take care of the PEAR style of naming classes
+    $path = str_ireplace('_', '/', $className);
+    if (@include_once $path . '.php') {
+      return;
+    }
+
+    foreach ($directories as $directory) {
+      foreach ($fileNameFormats as $fileNameFormat) {
+        $path = $directory . sprintf($fileNameFormat, $className);
+        if (file_exists($path)) {
+          include_once $path;
+          return;
+        }
+      }
+    }
+  }
+
+  spl_autoload_register('autoLoader');
 
   define('INCLUDED', 1);
 
@@ -116,19 +155,19 @@
    * ************************************************* */
   include_once ($fileExtension . 'includes/class_template.php');
 
-  require_once('/../libs/Smarty/Smarty.class.php');
+  require_once(BASE_DIR . '/libs/Smarty/Smarty.class.php');
 
   $smarty = new Smarty();
 
-  $smarty->setTemplateDir(BASE_DIR. '/templates/');
-  $smarty->setCompileDir(BASE_DIR. '/templates_compiled/');
-  $smarty->setConfigDir(BASE_DIR. '/configs/');
-  $smarty->setCacheDir(BASE_DIR. '/cache/');
-    
+  $smarty->setTemplateDir(BASE_DIR . '/templates/');
+  $smarty->setCompileDir(BASE_DIR . '/templates_compiled/');
+  $smarty->setConfigDir(BASE_DIR . '/configs/');
+  $smarty->setCacheDir(BASE_DIR . '/cache/');
+
   if ($setts['default_theme']) {
-    $smarty->addTemplateDir (THEME_DIR. "{$setts['default_theme']}/templates/");    
+    $smarty->addTemplateDir(THEME_DIR . "{$setts['default_theme']}/templates/");
   }
-    
+
 
 
 ## initialize the template for the output that will be generated

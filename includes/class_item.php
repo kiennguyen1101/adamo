@@ -890,8 +890,9 @@
         $additional_query = ' AND pg_id IN (' . $selected_values . ')';
       }
 
-      $sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM
-			" . DB_PREFIX . "payment_gateways WHERE dp_enabled=1" . $additional_query);
+      //kiennguyen1101
+//      $sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM " . DB_PREFIX . "payment_gateways WHERE dp_enabled=1" . $additional_query);
+      $sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM " . DB_PREFIX . "payment_gateways WHERE checked=1" . $additional_query);
 
       $selected_value = explode(',', $selected_values);
 

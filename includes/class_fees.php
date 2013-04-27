@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -542,7 +543,8 @@
       else {
         $direct_payment = true;
         $pg_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . $user_id);
-        $gateways_query .= " WHERE dp_enabled=1";
+//        $gateways_query .= " WHERE dp_enabled=1";
+        $gateways_query .= " WHERE checked=1";
 
         if (!empty($dp_gateways)) {
           $gateways_query .= " AND pg_id IN (" . $dp_gateways . ")";
@@ -629,6 +631,7 @@
 
     function callback_process($custom_id, $fee_table, $payment_gateway, $payment_amount, $txn_id = null, $currency = null) {
       $custom_id = intval(ppb_mcrypt_decode($custom_id));
+      $invoice_time = CURRENT_TIME;
 
       if ($fee_table == 1) { ## signup process - alter 'users' table
         /**
@@ -642,10 +645,14 @@
         $payment_mode = $this->user_payment_mode($custom_id);
         $this->query("UPDATE " . DB_PREFIX . "users SET active=1, approved=1, payment_status='confirmed', mail_activated=1 WHERE user_id=" . $custom_id);
 
-        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-				(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-				('" . $custom_id . "', '" . GMSG_USER_SIGNUP_FEE . "', '" . $payment_amount . "',
-				'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+        //kiennguyen1101
+
+        $invoice_name = GMSG_USER_SIGNUP_FEE;
+
+        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$custom_id}', {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $custom_id . "', '" . GMSG_USER_SIGNUP_FEE . "', '" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+//        
         ## include registration success email - with signup fee included
         $mail_input_id = $custom_id;
         include('language/' . $this->setts['site_lang'] . '/mails/register_success_signup_fee_user_notification.php');
@@ -661,15 +668,19 @@
 
         ## this is a workaround to at least clear the balance on a payment, even if the gateway
         ## doesnt support account crediting. 
-        $balance = ($payment_amount > 0) ? ($account_balance - $payment_amount) : 0;
+//        $balance = ($payment_amount > 0) ? ($account_balance - $payment_amount) : 0;
+
+        $balance = ($payment_amount > 0) ? ($account_balance + $payment_amount) : 0;
+
         $invoice_amount = ($payment_amount > 0) ? $payment_amount : $account_balance;
 
         $this->query("UPDATE " . DB_PREFIX . "users SET active=1, balance=" . $balance . " WHERE user_id=" . intval($custom_id));
 
-        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-				(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-				('" . $custom_id . "', '" . GMSG_BALANCE_PAYMENT . "', '" . $invoice_amount . "',
-				'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+        $invoice_name = GMSG_BALANCE_PAYMENT;
+
+        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$custom_id}', {$invoice_name}, {$invoice_amount}, 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $custom_id . "', '" . GMSG_BALANCE_PAYMENT . "', '" . $invoice_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
       }
       else if ($fee_table == 3) { ## auction setup - live payment mode
         ## auctions counter - add process - single auction (activate auction - live payment)
@@ -691,10 +702,9 @@
         if ($user_id > 0) {
           $invoice_name = GMSG_AUCTION_SETUP_FEE . ' - ' . MSG_AUCTION_ID . ': ' . $custom_id;
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, item_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-					('" . $user_id . "', '" . $custom_id . "', '" . $invoice_name . "',
-					'" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$user_id}', '{$custom_id}', {$invoice_name}, '{$payment_amount}', 'auction_setup', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES	('" . $user_id . "', '" . $custom_id . "', '" . $invoice_name . "',	'" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
         }
       }
       else if ($fee_table == 4) { ## sale fee - live payment mode
@@ -713,10 +723,9 @@
 
           $invoice_name = GMSG_ENDAUCTION_FEE . ' - ' . MSG_AUCTION_ID . ': ' . $winner_details['auction_id'];
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, item_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-					('" . $payer_id . "', '" . $winner_details['auction_id'] . "', '" . $invoice_name . "',
-					'" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$payer_id}', '{$winner_details['auction_id']}', {$invoice_name}, '{$payment_amount}', 'auction_end', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $payer_id . "', '" . $winner_details['auction_id'] . "', '" . $invoice_name . "',	'" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
         }
       }
       else if ($fee_table == 5) { ## wanted ad setup fee - live payment mode
@@ -739,10 +748,9 @@
         if ($user_id > 0) {
           $invoice_name = GMSG_WA_SETUP_FEE . ' - ' . MSG_WANTED_AD_ID . ': ' . $custom_id;
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, wanted_ad_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-					('" . $user_id . "', '" . $custom_id . "', '" . $invoice_name . "',
-					'" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$user_id}', '{$custom_id}', {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $user_id . "', '" . $custom_id . "', '" . $invoice_name . "', '" . $payment_amount . "', '" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
         }
       }
       else if ($fee_table == 6) { ## seller verification fee - alter 'users' table
@@ -756,10 +764,9 @@
         $this->query("UPDATE " . DB_PREFIX . "users SET seller_verified=1, seller_verif_last_payment='" . CURRENT_TIME . "', 
 				seller_verif_next_payment='" . $seller_verif_next_payment . "' WHERE user_id=" . $custom_id);
 
-        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-				(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-				('" . $custom_id . "', '" . $invoice_name . "', '" . $payment_amount . "',
-				'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$custom_id}', {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $custom_id . "', '" . $invoice_name . "', '" . $payment_amount . "',	'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
       }
       else if ($fee_table == 10) { ## store subscription process - alter 'users' table
         $shop_details = $this->get_sql_row("SELECT f.*, u.shop_next_payment FROM " . DB_PREFIX . "fees_tiers f, " . DB_PREFIX . "users u WHERE 
@@ -772,18 +779,58 @@
         $this->query("UPDATE " . DB_PREFIX . "users SET shop_active=1, shop_last_payment='" . CURRENT_TIME . "', 
 				shop_next_payment='" . $shop_next_payment . "' WHERE user_id=" . $custom_id);
 
-        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-				(user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES
-				('" . $custom_id . "', '" . $invoice_name . "', '" . $payment_amount . "',
-				'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
+        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$custom_id}', {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+
+//        $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, name, amount, invoice_date, current_balance, live_fee, processor) VALUES ('" . $custom_id . "', '" . $invoice_name . "', '" . $payment_amount . "',	'" . CURRENT_TIME . "', '0', '1', '" . $payment_gateway . "')");
       }
-      else if ($fee_table == 50) { ## direct payment - single item
-        $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
-				flag_paid=1, direct_payment_paid=1 WHERE winner_id='" . $custom_id . "'");
+      /* Payment: Auction sold single item */
+      else if ($fee_table == 50) {
+
+        //update the winner: confirm the payment, flag_paid
+        $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, payment_status='confirmed', WHERE winner_id='{$custom_id}'");
+
+        //now we deal with all the fees the seller is pending
+        
+        //first: get winner details from winners table
+        $winner_details = $this->get_sql_row("SELECT w.*, a.category_id FROM " . DB_PREFIX . "winners w LEFT JOIN " . DB_PREFIX . "auctions a ON a.auction_id=w.auction_id WHERE w.winner_id='" . $custom_id . "'");
+
+        if ($winner_details['auction_id'] > 0) {
+          $this->set_fees($winner_details['seller_id'], $winner_details['category_id']);
+
+          $payer_id = (stristr($this->fee['endauction_fee_applies'], 'b')) ? $winner_details['buyer_id'] : $winner_details['seller_id'];
+
+          $invoice_name = GMSG_ENDAUCTION_FEE . ' - ' . MSG_AUCTION_ID . ': ' . $winner_details['auction_id'];
+
+          $invoices = new invoice();
+
+          $unpaid_invoices = $invoices->getItemInvoicesByState('pending', $winner_details['auction_id']);
+
+          $amount = 0;
+
+          if (is_array($unpaid_invoices)) {
+            foreach ($unpaid_invoices as $data) {
+              $invoice = new invoice();
+              $invoice->data = $data;
+              $amount += $data['amount'];
+              $invoice->data['invoice_status'] = 'completed';
+              $invoice->update();
+            }
+          }
+
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$payer_id}', '{$winner_details['auction_id']}', {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', '0', '1', {$payment_gateway})");
+          $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1 WHERE winner_id='" . $custom_id . "'");
+
+          $user_details = $this->get_sql_row("SELECT balance, active FROM	" . DB_PREFIX . "users WHERE user_id=" . intval($winner_details['seller_id']));
+
+          $account_balance = $user_details['balance'];
+
+          $account_balance -= $amount;
+
+          $this->query("UPDATE " . DB_PREFIX . "users SET active=1, balance=" . $balance . " WHERE user_id=" . intval($winner_details['seller_id']));
+        }
       }
       else if ($fee_table == 100) { ## direct payment - multiple items
-        $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
-				flag_paid=1, direct_payment_paid=1 WHERE winner_id IN (" . $custom_id . ")");
+        $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, direct_payment_paid=1 WHERE winner_id IN (" . $custom_id . ")");
       }
     }
 
@@ -1090,7 +1137,7 @@
       $can_rollback = ($this->edit_auction_id) ? 1 : 0;
 
       $output = array('display' => null, 'amount' => 0);
-      
+
       $fees_no_tier = $this->fees_no_tier_array($item_details);
 
       // we start with the setup fee
@@ -1102,7 +1149,12 @@
 
       $charged_fee_tier = array();
 
+      $invoice = new invoice();
+      $invoice_date = CURRENT_TIME;
+      $status = $invoice->getInvoiceStatus('auction_setup');
+
       if (is_array($setup_fee)) {
+
         foreach ($setup_fee as $key => $value) {
           if (!$value['amount']) {
             continue;
@@ -1127,15 +1179,15 @@
 
           ## now add the row on the invoices table
           if ($user_payment_mode == 2 && $add_invoices) {
-            $account_balance += $output['amount'];
 
-            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
-							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . GMSG_SETUP_FEE . "',
-							'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//            $account_balance += $output['amount'];
+            //kiennguyen1101
+            $invoice_name = GMSG_SETUP_FEE;
 
-            $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
-							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, can_rollback) VALUES ('{$user_details['user_id']}', {$item_details['auction_id']}, '{$invoice_name}', {$output['amount']}, '{$status['invoice_status_id']}', '{$invoice_date}', {$account_balance}, {$can_rollback})");
+
+//            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . GMSG_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//            $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
           }
         }
       }
@@ -1160,15 +1212,14 @@
 
             ## now add the row on the invoices table
             if ($user_payment_mode == 2 && $add_invoices) {
-              $account_balance += $fee_details['amount'];
 
-              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
-							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $value[0] . "',
-							'" . $fee_details['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//              $account_balance += $fee_details['amount'];
 
-              $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
-							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, can_rollback) VALUES ('{$user_details['user_id']}', {$item_details['auction_id']}, '{$value[0]}', {$fee_details['amount']}, '{$status['invoice_status_id']}', '{$invoice_date}', {$account_balance}, {$can_rollback})");
+
+//              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $value[0] . "', '" . $fee_details['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+              //kiennguyen1101
+//              $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
             }
           }
         }
@@ -1365,11 +1416,11 @@
 					active=1, payment_status='confirmed' WHERE winner_id='" . $winning_bid_details['winner_id'] . "'");
 
           $account_balance = $user_details['balance'] + $output['amount'];
+          $invoice_time = CURRENT_TIME;
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, item_id, name, amount, invoice_date, current_balance) VALUES
-					('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $endauction_fee_desc . "',
-					'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$user_details['user_id']}', '{$item_details['auction_id']}', {$endauction_fee_desc}, '{$output['amount']}', 'auction_end', '{$invoice_time}', {$account_balance})");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $endauction_fee_desc . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
 
           $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
@@ -1475,10 +1526,14 @@
 
           $account_balance = $user_details['balance'] + $output['amount'];
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES
-					('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "',
-					'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+          //kiennguyen1101
+
+          $invoice_name = GMSG_WA_SETUP_FEE;
+          $invoice_time = CURRENT_TIME;
+
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', {$item_details['wanted_ad_id']}, {$invoice_name}, '{$payment_amount}', 'completed', '{$invoice_time}', {$account_balance})");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
 
           $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
@@ -1599,4 +1654,5 @@
     }
 
   }
+
 ?>

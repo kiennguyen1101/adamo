@@ -12,14 +12,7 @@
   define('AUCTION_DETAILS', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
-  include_once ('includes/class_messaging.php');
-  include_once ('includes/class_reputation.php');
 
   require ('global_header.php');
 
@@ -61,6 +54,7 @@
       $adult_cat = true;
     }
   }
+  
 
   if ($can_view) {
     $blocked_user = blocked_user($session->value('user_id'), $item_details['owner_id']);
@@ -160,6 +154,7 @@
 
     $template->set('msg_changes_saved', $msg_changes_saved);
 
+
     $item_details['quantity'] = $item->set_quantity($item_details['quantity']);
 
     $custom_fld->save_edit_vars($item_details['owner_id'], $page_handle);
@@ -185,9 +180,9 @@
 
     $template->set('direct_payment_box', $item->direct_payment_box($item_details, $session->value('user_id')));
     $template->set('ad_display', 'live'); /* if ad_display = preview, then some table fields will be disabled */
-
+ 
     $template->set('show_buyout', show_buyout($item_details));
-
+   
     $template->set('your_bid', $item->your_bid($item_details['auction_id'], $session->value('user_id')));
 
     $tax = new tax();
@@ -225,7 +220,6 @@
     $ad_image_thumbnails = $item->item_media_thumbnails($item_details, 1);
     $full_size_images_link = $item->full_size_images($item_details);
     $template->set('ad_image_thumbnails', $ad_image_thumbnails . '<br>' . $full_size_images_link);
-
 
     $ad_video_thumbnails = $item->item_media_thumbnails($item_details, 2);
     $template->set('ad_video_thumbnails', $ad_video_thumbnails);
