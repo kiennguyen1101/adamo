@@ -195,12 +195,12 @@
         echo $e;
       }
 
-
-      ##keywords watch feature -> added back in v6.04
-      if (!$this->edit_auction) {
-        $mail_input_id = $auction_id;
-        include('language/' . $this->setts['site_lang'] . '/mails/keywords_watch_notification.php');
-      }
+//disable it
+//      ##keywords watch feature -> added back in v6.04
+//      if (!$this->edit_auction) {
+//        $mail_input_id = $auction_id;
+//        include('language/' . $this->setts['site_lang'] . '/mails/keywords_watch_notification.php');
+//      }
 
       return $auction_id;
     }

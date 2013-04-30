@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_abuses` (
   `auction_id` int(11) NOT NULL,
   PRIMARY KEY (`abuse_id`),
   KEY `reg_date` (`reg_date`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with abuse reports' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with abuse reports' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_admins` (
   `date_lastlogin` int(11) NOT NULL DEFAULT '0',
   `level` enum('1','2','3','4','5') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with admin info' AUTO_INCREMENT=2 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with admin info' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_admins`
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_admin_notes` (
   `reg_date` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_adverts` (
   `advert_type` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`advert_id`),
   KEY `views` (`views`,`clicks`,`views_purchased`,`clicks_purchased`,`advert_type`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with banners data' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with banners data' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auctions` (
   
   
   
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with auctions details' AUTO_INCREMENT=1 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with auctions details' AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `myphpauction_auctions`
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_durations` (
   `days` int(11) NOT NULL DEFAULT '0',
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction durations' AUTO_INCREMENT=7 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction durations' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `myphpauction_auction_durations`
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_media` (
   KEY `select_media_simple` (`auction_id`,`upload_in_progress`),
   KEY `select_wa_media_simple` (`wanted_ad_id`,`upload_in_progress`),
   KEY `select_media_advanced` (`auction_id`,`media_type`,`upload_in_progress`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction media details' AUTO_INCREMENT=3 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction media details' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `myphpauction_auction_media`
@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_offers` (
   `accepted` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`offer_id`),
   KEY `auction_id` (`auction_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_rollbacks` (
   `is_offer` tinyint(4) NOT NULL,
   PRIMARY KEY (`rollback_id`),
   KEY `auction_id` (`auction_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_watch` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `auction_id` (`auction_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table for Items Watching' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table for Items Watching' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_banned` (
   PRIMARY KEY (`banned_id`),
   KEY `address_type` (`address_type`)
   
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bids` (
   KEY `high_bids` (`auction_id`,`bid_amount`),
   KEY `bid_types` (`auction_id`,`bid_out`,`bid_invalid`),
   KEY `auction_bids` (`auction_id`,`bidder_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bids' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bids' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bid_increments` (
   `increment` double(16,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `value_from` (`value_from`,`value_to`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bid increments' AUTO_INCREMENT=150 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bid increments' AUTO_INCREMENT=150 ;
 
 --
 -- Dumping data for table `myphpauction_bid_increments`
@@ -416,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_blocked_domains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with blocked email domains' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with blocked email domains' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_blocked_users` (
   PRIMARY KEY (`block_id`),
   KEY `block_src` (`user_id`,`owner_id`),
   KEY `reg_src` (`owner_id`,`reg_date`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -499,7 +499,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bulktmp` (
   `catsubfieldval5` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 -- --------------------------------------------------------
 
@@ -529,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_categories` (
   KEY `parent_id` (`parent_id`),
   KEY `parent_id_2` (`parent_id`,`order_id`,`name`),
   KEY `parent_id_3` (`parent_id`,`user_id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with categories' AUTO_INCREMENT=1866 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with categories' AUTO_INCREMENT=1866 ;
 
 --
 -- Dumping data for table `myphpauction_categories`
@@ -2314,7 +2314,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_countries` (
   KEY `country_order` (`country_order`),
   KEY `parent_id` (`parent_id`)
   
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with countries' AUTO_INCREMENT=2286 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with countries' AUTO_INCREMENT=2286 ;
 
 --
 -- Dumping data for table `myphpauction_countries`
@@ -2738,7 +2738,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_currencies` (
   `convert_rate` double(16,6) NOT NULL DEFAULT '1.000000',
   `convert_date` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with currency listings' AUTO_INCREMENT=47 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with currency listings' AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `myphpauction_currencies`
@@ -2811,7 +2811,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields` (
   KEY `page_handle` (`page_handle`),
   KEY `section_id` (`section_id`),
   KEY `category_id` (`category_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2836,7 +2836,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_boxes` (
   KEY `box_order` (`box_order`),
   KEY `box_type` (`box_type`),
   KEY `box_searchable` (`box_searchable`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2854,7 +2854,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_data` (
   PRIMARY KEY (`data_id`),
   KEY `box_id` (`box_id`)
   
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2871,7 +2871,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_sections` (
   PRIMARY KEY (`section_id`),
   KEY `page_handle` (`page_handle`),
   KEY `order_id` (`order_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2888,7 +2888,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_special` (
   `box_value_code` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`type_id`),
   KEY `box_type` (`box_type`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2902,7 +2902,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_types` (
   `box_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `maxfields` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`type_id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `myphpauction_custom_fields_types`
@@ -2930,7 +2930,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_dateformat` (
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `active` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   KEY `active` (`active`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with date format';
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with date format';
 
 --
 -- Dumping data for table `myphpauction_dateformat`
@@ -2955,7 +2955,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_favourite_stores` (
   KEY `store_id` (`store_id`),
   KEY `user_id` (`user_id`),
   KEY `store_id_2` (`store_id`,`user_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2988,7 +2988,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_fees` (
   `free_images` int(11) NOT NULL,
   `free_media` int(11) NOT NULL,
   PRIMARY KEY (`fee_id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with fees' AUTO_INCREMENT=4 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with fees' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `myphpauction_fees`
@@ -3020,7 +3020,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_fees_tiers` (
   PRIMARY KEY (`tier_id`),
   KEY `category_id` (`category_id`),
   KEY `fee_type` (`fee_type`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `myphpauction_fees_tiers`
@@ -3065,7 +3065,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_gc_transactions` (
   `gc_payment_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `reg_date` int(11) NOT NULL,
   PRIMARY KEY (`trx_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3187,7 +3187,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_gen_setts` (
   `enable_second_chance` tinyint(4) NOT NULL,
   `second_chance_days` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with General Settings' AUTO_INCREMENT=2 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with General Settings' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_gen_setts`
@@ -3222,7 +3222,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_invoices` (
   KEY `account_history_item` (`user_id`,`item_id`,`invoice_date`,`live_fee`,`invoice_id`),
   KEY `account_history_wa` (`user_id`,`wanted_ad_id`,`invoice_date`,`live_fee`,`invoice_id`),
   KEY `account_history_live` (`user_id`,`invoice_date`,`live_fee`,`invoice_id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `myphpauction_invoices`
@@ -3246,7 +3246,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_invoice_statuses` (
   `weight` smallint(6) NOT NULL DEFAULT '0' COMMENT 'The sort criteria for statuses.',
   `locked` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'A flag indicating whether users can delete the status. 0 => Yes. 1 => No.',
   PRIMARY KEY (`invoice_status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Statuses the invoice can have during its lifecycle';
+) ENGINE=InnoDB ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT='Statuses the invoice can have during its lifecycle';
 
 --
 -- Dumping data for table `myphpauction_invoice_statuses`
@@ -3278,7 +3278,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_iphistory` (
   `time1` int(11) NOT NULL,
   `time2` int(11) NOT NULL,
   `ip` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `myphpauction_iphistory`
@@ -3305,7 +3305,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_keywords_watch` (
   PRIMARY KEY (`keyword_id`),
   KEY `user_id` (`user_id`)
   
-) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
+) ENGINE = MYISAM ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3339,7 +3339,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_layout_setts` (
   `is_pp` tinyint(4) NOT NULL DEFAULT '0',
   `nb_want_ads` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the site''s general layout settings' AUTO_INCREMENT=2 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the site''s general layout settings' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_layout_setts`
@@ -3380,7 +3380,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_messaging` (
   KEY `is_read` (`is_read`),
   KEY `auction_read` (`auction_id`,`is_read`),
   KEY `topic_read` (`topic_id`,`is_read`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3394,7 +3394,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_newsletters` (
   `newsletter_subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `newsletter_content` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`newsletter_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3410,7 +3410,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_newsletter_recipients` (
   `newsletter_id` int(11) NOT NULL,
   PRIMARY KEY (`recipient_id`),
   KEY `newsletter_id` (`newsletter_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3428,7 +3428,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_payment_gateways` (
   PRIMARY KEY (`pg_id`),
   KEY `checked` (`checked`),
   KEY `dp_enabled` (`dp_enabled`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment gateways' AUTO_INCREMENT=12 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment gateways' AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `myphpauction_payment_gateways`
@@ -3459,7 +3459,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_payment_options` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `logo_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment methods' AUTO_INCREMENT=11 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment methods' AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `myphpauction_payment_options`
@@ -3490,7 +3490,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_proxybid` (
   KEY `auction_id` (`auction_id`),
   KEY `bidder_id` (`bidder_id`),
   KEY `select_bids` (`auction_id`,`bidder_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with proxy bids' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with proxy bids' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3503,7 +3503,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_referrals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `myphpauction_referrals`
@@ -3537,7 +3537,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_reputation` (
   KEY `rep_sent` (`from_id`,`submitted`,`reg_date`),
   KEY `rep_received` (`submitted`,`user_id`,`reg_date`),
   KEY `rep_calculation` (`user_id`,`reputation_rate`,`submitted`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with feedbacks' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with feedbacks' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3555,7 +3555,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_reserve_offers` (
   `regdate` int(11) NOT NULL DEFAULT '0',
   `bidid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3568,7 +3568,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_shipping_options` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `myphpauction_shipping_options`
@@ -3595,7 +3595,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_stores_accounting` (
   `paymentdate` int(11) NOT NULL DEFAULT '0',
   `processor` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3610,7 +3610,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_suggested_categories` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `regdate` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -3630,7 +3630,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_swaps` (
   `winner_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`swap_id`),
   KEY `auction_id` (`auction_id`,`seller_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3648,7 +3648,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_tax_settings` (
   `site_tax` tinyint(4) NOT NULL DEFAULT '0',
   `seller_countries_id` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`tax_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3663,7 +3663,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_timesettings` (
   `caption` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `active` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with time settings' AUTO_INCREMENT=50 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with time settings' AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `myphpauction_timesettings`
@@ -3866,7 +3866,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_users` (
   KEY `users_tax_exempt` (`tax_apply_exempt`,`tax_exempted`,`reg_date`),
   KEY `active` (`active`)
   
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with myphpauction users' AUTO_INCREMENT=100005 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with myphpauction users' AUTO_INCREMENT=100005 ;
 
 --
 -- Dumping data for table `myphpauction_users`
@@ -3891,7 +3891,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vat_rates` (
   `country` int(11) NOT NULL DEFAULT '0',
   `rate` double(9,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3908,7 +3908,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vat_setts` (
   `users_sale_vat` set('a','b','c','d') COLLATE utf8_unicode_ci DEFAULT NULL,
   `users_no_vat` set('a','b','c','d') COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3931,7 +3931,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vouchers` (
   `voucher_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `voucher_duration` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`voucher_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3978,7 +3978,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_wanted_ads` (
   KEY `wa_browse_nb_bids` (`active`,`closed`,`deleted`,`wanted_ad_id`,`nb_bids`),
   KEY `wa_mainpage` (`closed`,`active`,`deleted`,`creation_in_progress`,`start_time`)
   
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with wanted ads details' AUTO_INCREMENT=2 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with wanted ads details' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -3993,7 +3993,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_wanted_offers` (
   `auction_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`offer_id`),
   KEY `wanted_ad_id` (`wanted_ad_id`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4044,7 +4044,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_winners` (
   KEY `sold_items_bid` (`seller_id`,`s_deleted`,`invoice_id`,`bid_amount`),
   KEY `sold_items_quantity` (`seller_id`,`s_deleted`,`invoice_id`,`quantity_offered`),
   KEY `sold_items_purchase_date` (`seller_id`,`s_deleted`,`invoice_id`,`purchase_date`)
-)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the auction''s declared winners' AUTO_INCREMENT=1 ;
+)  ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the auction''s declared winners' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4058,7 +4058,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_wordfilter` (
   `word` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
   
-)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with words that are filtered' AUTO_INCREMENT=5 ;
+)   ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with words that are filtered' AUTO_INCREMENT=5 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
