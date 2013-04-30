@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
@@ -26,11 +27,11 @@
       $item_details['shop_name'] = $db->rem_special_chars($_REQUEST['shop_name']);
       $template->set('item_details', $item_details);
 
-      $addl_store_query = "AND MATCH (shop_name) AGAINST ('" . $item_details['shop_name'] . "*' IN BOOLEAN MODE)";
       /**
        * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
        * anyone might want to use this instead
-       */## MyPHPAuction 2009 $addl_store_query = "(shop_name LIKE '%" . $item_details['shop_name'] . "%')";
+       */## MyPHPAuction 2009 
+      $addl_store_query = "(shop_name LIKE '%" . $item_details['shop_name'] . "%')";
     }
 
     $template->set('search_options_title', MSG_STORE_SEARCH);
@@ -95,7 +96,7 @@
     $template->set('featured_stores_table', $featured_stores_table); ## MyPHPAuction 2009 all stores (show
     $order_field = 'shop_nb_items';
     $order_type = 'DESC';
-     if (!$start)
+    if (!$start)
       $start = 0;
     $limit = 20;
 

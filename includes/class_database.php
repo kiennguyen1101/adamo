@@ -61,20 +61,50 @@
       $display_output = '<p style="font-family: arial; font-size: 12px;"><strong>' . MSG_MYSQL_ERROR_OCCURRED . '</strong>' .
         '<ul>' .
         '<li style="font-family: arial; font-size: 12px;">' . $error_message . '</li>' .
-        ((!empty($sql_error) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_ERROR . ':</strong> ' . $sql_error . '</li>' : '') .
-        ((!empty($sql_query) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_QUERY . ':</strong> ' . $sql_query . '</li>' : '') .
+        ((!empty($sql_error) && DEBUG) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_ERROR . ':</strong> ' . $sql_error . '</li>' : '') .
+        ((!empty($sql_query) && DEBUG) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_QUERY . ':</strong> ' . $sql_query . '</li>' : '') .
         '</ul></p>';
 
       return $display_output;
     }
 
+    public function beginTransaction() {
+      if ($this->query("START TRANSACTION"))
+        return true;
+      else
+        return false;
+    }
+
+    public function commit() {
+      if ($this->query("COMMIT"))
+        return true;
+      else
+        return false;
+    }
+
+    public function rollBack() {
+      if ($this->query("ROLLBACK"))
+        return true;
+      else
+        return false;
+    }
+
+    private function hasError() {
+      if (mysql_errno())
+        return true;
+      else
+        return false;
+    }
+
     function query($query, $debug_output = false, $die = true) {
-      
+
       //echo $query . '<br>'; ## used if we want to display all queries made on a page
 
       $result = @mysql_query($query);
 
-      if (!$result) {
+      if ($this->hasError()) {
+        
+        throw new error($this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error(), $query));
         $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
         if (DEBUG)
           $mysql_error .= "<p>{$query}</p>";
@@ -111,7 +141,7 @@
       $result = @mysql_result($query_result, $row_id, $field_name);
 
       if ($this->sql_error($result)) {
-        die($this->display_error(MSG_ERROR_MYSQL_RESULT, $this->sql_error($result)));
+        throw new Exception($this->display_error(MSG_ERROR_MYSQL_RESULT, $this->sql_error($result)));
       }
 
       return $result;
@@ -121,7 +151,7 @@
       $result = @mysql_num_rows($query_result);
 
       if ($this->sql_error($result)) {
-        die($this->display_error(MSG_ERROR_MYSQL_NUM_ROWS, $this->sql_error($result)));
+        throw new Exception($this->display_error(MSG_ERROR_MYSQL_NUM_ROWS, $this->sql_error($result)));
       }
 
       return $result;
@@ -132,7 +162,7 @@
       $result = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH );
 
       if ($this->sql_error($result)) {
-        die($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
+        throw new Exception($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
       }
 
       return $result;

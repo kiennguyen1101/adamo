@@ -11,7 +11,7 @@
 
   define('IN_SITE', 1);
 
-  include_once ('includes/global.php'); 
+  include_once ('includes/global.php');
   include_once ('includes/functions_item.php');
 
   if ($session->value('membersarea') != 'Active') {
@@ -62,21 +62,30 @@
           sleep(1); ## MyPHPAuction 2009 we dont want to create a huge load on the database.
         }
       }
+      
+      try {
+        $db->beginTransaction();
 
-      $mark_in_progress = $db->query("UPDATE " . DB_PREFIX . "auctions SET
+        $mark_in_progress = $db->query("UPDATE " . DB_PREFIX . "auctions SET
 			bid_in_progress=1 WHERE auction_id='" . $item_details['auction_id'] . "'"); ## MyPHPAuction 2009 we will assign the winner, and then close the auction if the case.
-      $purchase_result = $item->assign_winner($item_details, 'buy_out', $session->value('user_id'), $quantity);
+        $purchase_result = $item->assign_winner($item_details, 'buy_out', $session->value('user_id'), $quantity);
 
-      if ($purchase_result['auction_close']) {
-        $item->close($item_details);
-      }
+        if ($purchase_result['auction_close']) {
+          $item->close($item_details);
+        }
 
-      $session->set('buyout_id', $_REQUEST['auction_id']);
+        $session->set('buyout_id', $_REQUEST['auction_id']);
 
-      $unmark_in_progress = $db->query("UPDATE " . DB_PREFIX . "auctions SET
+        $unmark_in_progress = $db->query("UPDATE " . DB_PREFIX . "auctions SET
 			bid_in_progress=0 WHERE auction_id='" . $item_details['auction_id'] . "'");
 
-      $action = 'buy_out_success';
+        $action = 'buy_out_success';
+
+        $db->Commit();
+      } catch (error $e) {
+        $db->rollBack();
+        $action = 'buy_out_error';              
+      }
     }
 
     $template->set('item_details', $item_details);

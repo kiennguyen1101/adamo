@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.01															##
 ##-------------------------------------------------------------##
@@ -21,27 +22,36 @@
     $msg_changes_saved = '<p align="center" class="contentfont">' . AMSG_CHANGES_SAVED . '</p>';
 
     if (isset($_POST['form_save_settings'])) {
+      try {
 
-      $template->set('msg_changes_saved', $msg_changes_saved);
 
-      if (count($_POST['increment_id'])) {
-        foreach ($_POST['increment_id'] as $key => $value) {
-          $sql_update_increments = $db->query("UPDATE " . DB_PREFIX . "bid_increments SET
+        $template->set('msg_changes_saved', $msg_changes_saved);
+
+        if (count($_POST['increment_id'])) {
+          foreach ($_POST['increment_id'] as $key => $value) {
+            $sql_update_increments = $db->query("UPDATE " . DB_PREFIX . "bid_increments SET
 					value_from='" . $_POST['value_from'][$key] . "', value_to='" . $_POST['value_to'][$key] . "', 
 					increment='" . $_POST['increment'][$key] . "' WHERE id=" . $value);
+          }
         }
-      }
 
-      if ($_POST['new_value_from'] > 0 && $_POST['new_value_to'] > 0 && $_POST['new_increment'] > 0) {
-        $sql_insert_durations = $db->query("INSERT INTO " . DB_PREFIX . "bid_increments (value_from, value_to, increment) VALUES
+        if ($_POST['new_value_from'] > 0 && $_POST['new_value_to'] > 0 && $_POST['new_increment'] > 0) {
+          $sql_insert_durations = $db->query("INSERT INTO " . DB_PREFIX . "bid_increments (value_from, value_to, increment) VALUES
 				('" . $_POST['new_value_from'] . "', '" . $_POST['new_value_to'] . "', '" . $_POST['new_increment'] . "')");
-      }
+        }
 
-      if (count($_POST['delete']) > 0) {
-        $delete_array = $db->implode_array($_POST['delete']);
+        if (count($_POST['delete']) > 0) {
+          $delete_array = $db->implode_array($_POST['delete']);
 
-        $sql_delete_increments = $db->query("DELETE FROM " . DB_PREFIX . "bid_increments WHERE
+          $sql_delete_increments = $db->query("DELETE FROM " . DB_PREFIX . "bid_increments WHERE
 				id IN (" . $delete_array . ")");
+        }
+
+        $this->beginTransaction();
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
     }
 

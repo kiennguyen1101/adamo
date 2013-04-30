@@ -87,8 +87,8 @@
       $query[] = "(a.category_id IN (" . $all_subcategories . ") OR a.addl_category_id IN (" . $all_subcategories . "))";
     }
 
-    if ($keywords_search) {
-      $query[] = "MATCH (a.name, a.description) AGAINST ('" . $keywords_search . "*' IN BOOLEAN MODE)";
+    if ($keywords_search) {      
+      $query[] = " a.name or a.description LIKE '%" . $keywords_search . "%' ";
     }
 
     $addl_where_query = $db->implode_array($query, ' AND ');

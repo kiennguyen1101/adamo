@@ -71,19 +71,6 @@
 
     $subpage_title = AMSG_SOLD_ITEMS;
 
-    /*
-      if ($_REQUEST['keywords'])
-      {
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(a.name, a.description) AGAINST ('".$_REQUEST['keywords']."*' IN BOOLEAN MODE)";
-      $template->set('keywords', $_REQUEST['keywords']);
-      }
-      if ($_REQUEST['src_auction_id'])
-      {
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " a.auction_id='" . $_REQUEST['src_auction_id'] . "'";
-      $template->set('src_auction_id', $_REQUEST['src_auction_id']);
-      }
-     */
-
     $nb_winners = $db->count_rows('winners w');
 
     $template->set('nb_winners', $nb_winners);

@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -25,45 +26,59 @@
     if ($_REQUEST['operation'] == 'submit') {
       $template->set('msg_changes_saved', $msg_changes_saved);
 
-      if ($_REQUEST['tiers'] == 1) {
-        if (count($_POST['tier_id'])) {
-          foreach ($_POST['tier_id'] as $key => $value) {
-            $sql_update_tiers = $db->query("UPDATE " . DB_PREFIX . "fees_tiers SET
+      try {
+
+        if ($_REQUEST['tiers'] == 1) {
+          if (count($_POST['tier_id'])) {
+
+            global $db;
+
+
+
+            foreach ($_POST['tier_id'] as $key => $value) {
+              $sql_update_tiers = $db->query("UPDATE " . DB_PREFIX . "fees_tiers SET
 						fee_from='" . $_POST['fee_from'][$key] . "', fee_to='" . $_POST['fee_to'][$key] . "',
 						fee_amount='" . $_POST['fee_amount'][$key] . "', calc_type='" . $_POST['calc_type'][$key] . "' WHERE
 						tier_id=" . $value);
+            }
           }
-        }
 
-        if (!empty($_POST['new_fee_amount'])) {
-          $sql_insert_tier = $db->query("INSERT INTO " . DB_PREFIX . "fees_tiers
+          if (!empty($_POST['new_fee_amount'])) {
+            $sql_insert_tier = $db->query("INSERT INTO " . DB_PREFIX . "fees_tiers
 					(fee_from, fee_to, fee_amount, calc_type, category_id, fee_type) VALUES
 					('" . $_POST['new_fee_from'] . "', '" . $_POST['new_fee_to'] . "', '" . $_POST['new_fee_amount'] . "',
 					'" . $_POST['new_calc_type'] . "', " . $_POST['category_id'] . ", '" . $_POST['fee_column'] . "')");
+          }
+
+          if (count($_POST['delete']) > 0) {
+            $delete_array = $db->implode_array($_POST['delete']);
+
+            $sql_delete_tiers = $db->query("DELETE FROM " . DB_PREFIX . "fees_tiers WHERE tier_id IN (" . $delete_array . ")");
+          }
         }
 
-        if (count($_POST['delete']) > 0) {
-          $delete_array = $db->implode_array($_POST['delete']);
+        if ($_REQUEST['tiers'] != 1 || $_REQUEST['fee_column'] == 'endauction') {
+          $is_fee_row = $db->count_rows('fees', "WHERE category_id=" . $_REQUEST['category_id']);
 
-          $sql_delete_tiers = $db->query("DELETE FROM " . DB_PREFIX . "fees_tiers WHERE tier_id IN (" . $delete_array . ")");
-        }
-      }
-
-      if ($_REQUEST['tiers'] != 1 || $_REQUEST['fee_column'] == 'endauction') {
-        $is_fee_row = $db->count_rows('fees', "WHERE category_id=" . $_REQUEST['category_id']);
-
-        if (!$is_fee_row) {
-          $sql_insert_fee = $db->query("INSERT INTO " . DB_PREFIX . "fees
+          if (!$is_fee_row) {
+            $sql_insert_fee = $db->query("INSERT INTO " . DB_PREFIX . "fees
 					(category_id) VALUES (" . $_REQUEST['category_id'] . ")");
-        }
+          }
 
-        $fee_column = ($_REQUEST['fee_column'] == 'endauction') ? 'endauction_fee_applies' : $_REQUEST['fee_column'];
+          $fee_column = ($_REQUEST['fee_column'] == 'endauction') ? 'endauction_fee_applies' : $_REQUEST['fee_column'];
 
-        $sql_update_fee = $db->query("UPDATE " . DB_PREFIX . "fees SET
+          $sql_update_fee = $db->query("UPDATE " . DB_PREFIX . "fees SET
 				" . $fee_column . "='" . $_REQUEST['value'] . "' 
 				" . (($fee_column == 'picture_fee') ? ", free_images=" . intval($_REQUEST['free_images']) : '') . " 
 				" . (($fee_column == 'video_fee') ? ", free_media=" . intval($_REQUEST['free_media']) : '') . " 
 				WHERE category_id=" . $_REQUEST['category_id']);
+        }
+
+        $db->beginTransaction();
+        $db->commit();
+      } catch (error $e) {
+        $db->rollBack();
+        echo $e;
       }
     }
 

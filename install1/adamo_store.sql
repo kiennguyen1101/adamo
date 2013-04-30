@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2013 at 05:20 AM
+-- Generation Time: Apr 27, 2013 at 04:14 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_abuses` (
   `auction_id` int(11) NOT NULL,
   PRIMARY KEY (`abuse_id`),
   KEY `reg_date` (`reg_date`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with abuse reports' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with abuse reports' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -53,14 +53,14 @@ CREATE TABLE IF NOT EXISTS `myphpauction_admins` (
   `date_lastlogin` int(11) NOT NULL DEFAULT '0',
   `level` enum('1','2','3','4','5') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with admin info' AUTO_INCREMENT=2 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with admin info' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_admins`
 --
 
 INSERT INTO `myphpauction_admins` (`id`, `username`, `password`, `date_created`, `date_lastlogin`, `level`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1337852768, 1339678103, '1');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1337852768, 1367079009, '1');
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_admin_notes` (
   `reg_date` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_adverts` (
   `advert_type` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`advert_id`),
   KEY `views` (`views`,`clicks`,`views_purchased`,`clicks_purchased`,`advert_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with banners data' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with banners data' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -196,11 +196,11 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auctions` (
   KEY `auctions_name` (`active`,`approved`,`deleted`,`closed`,`creation_in_progress`,`name`),
   KEY `auctions_end_time` (`active`,`approved`,`deleted`,`closed`,`creation_in_progress`,`end_time`),
   KEY `hp_featured` (`hpfeat`,`active`,`approved`,`closed`,`creation_in_progress`,`deleted`),
-  KEY `cat_featured` (`catfeat`,`active`,`approved`,`closed`,`creation_in_progress`,`deleted`),
-  FULLTEXT KEY `name` (`name`),
-  FULLTEXT KEY `description` (`description`),
-  FULLTEXT KEY `zip_code` (`zip_code`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with auctions details' AUTO_INCREMENT=100009 ;
+  KEY `cat_featured` (`catfeat`,`active`,`approved`,`closed`,`creation_in_progress`,`deleted`)
+  
+  
+  
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with auctions details' AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `myphpauction_auctions`
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_durations` (
   `days` int(11) NOT NULL DEFAULT '0',
   `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction durations' AUTO_INCREMENT=7 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction durations' AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `myphpauction_auction_durations`
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_media` (
   KEY `select_media_simple` (`auction_id`,`upload_in_progress`),
   KEY `select_wa_media_simple` (`wanted_ad_id`,`upload_in_progress`),
   KEY `select_media_advanced` (`auction_id`,`media_type`,`upload_in_progress`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction media details' AUTO_INCREMENT=3 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with auction media details' AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `myphpauction_auction_media`
@@ -286,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_offers` (
   `accepted` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`offer_id`),
   KEY `auction_id` (`auction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -315,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_rollbacks` (
   `is_offer` tinyint(4) NOT NULL,
   PRIMARY KEY (`rollback_id`),
   KEY `auction_id` (`auction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_auction_watch` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `auction_id` (`auction_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table for Items Watching' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table for Items Watching' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -345,9 +345,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_banned` (
   `banned_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `address_type` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`banned_id`),
-  KEY `address_type` (`address_type`),
-  FULLTEXT KEY `banned_address` (`banned_address`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  KEY `address_type` (`address_type`)
+  
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bids` (
   KEY `high_bids` (`auction_id`,`bid_amount`),
   KEY `bid_types` (`auction_id`,`bid_out`,`bid_invalid`),
   KEY `auction_bids` (`auction_id`,`bidder_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bids' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bids' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bid_increments` (
   `increment` double(16,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`),
   KEY `value_from` (`value_from`,`value_to`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bid increments' AUTO_INCREMENT=150 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with bid increments' AUTO_INCREMENT=150 ;
 
 --
 -- Dumping data for table `myphpauction_bid_increments`
@@ -416,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_blocked_domains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with blocked email domains' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with blocked email domains' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_blocked_users` (
   PRIMARY KEY (`block_id`),
   KEY `block_src` (`user_id`,`owner_id`),
   KEY `reg_src` (`owner_id`,`reg_date`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -499,7 +499,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_bulktmp` (
   `catsubfieldval5` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 -- --------------------------------------------------------
 
@@ -529,7 +529,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_categories` (
   KEY `parent_id` (`parent_id`),
   KEY `parent_id_2` (`parent_id`,`order_id`,`name`),
   KEY `parent_id_3` (`parent_id`,`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with categories' AUTO_INCREMENT=1866 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with categories' AUTO_INCREMENT=1866 ;
 
 --
 -- Dumping data for table `myphpauction_categories`
@@ -2278,8 +2278,8 @@ CREATE TABLE IF NOT EXISTS `myphpauction_content_pages` (
   `page_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `page_handle` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`topic_id`),
-  KEY `topic_order` (`topic_order`,`reg_date`),
-  FULLTEXT KEY `topic_lang` (`topic_lang`)
+  KEY `topic_order` (`topic_order`,`reg_date`)
+  
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
 
 --
@@ -2312,9 +2312,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_countries` (
   `parent_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `country_order` (`country_order`),
-  KEY `parent_id` (`parent_id`),
-  FULLTEXT KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with countries' AUTO_INCREMENT=2286 ;
+  KEY `parent_id` (`parent_id`)
+  
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with countries' AUTO_INCREMENT=2286 ;
 
 --
 -- Dumping data for table `myphpauction_countries`
@@ -2738,7 +2738,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_currencies` (
   `convert_rate` double(16,6) NOT NULL DEFAULT '1.000000',
   `convert_date` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with currency listings' AUTO_INCREMENT=47 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with currency listings' AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `myphpauction_currencies`
@@ -2811,7 +2811,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields` (
   KEY `page_handle` (`page_handle`),
   KEY `section_id` (`section_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2836,7 +2836,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_boxes` (
   KEY `box_order` (`box_order`),
   KEY `box_type` (`box_type`),
   KEY `box_searchable` (`box_searchable`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2852,9 +2852,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_data` (
   `box_value` text COLLATE utf8_unicode_ci NOT NULL,
   `page_handle` varchar(25) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`data_id`),
-  KEY `box_id` (`box_id`),
-  FULLTEXT KEY `box_value` (`box_value`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  KEY `box_id` (`box_id`)
+  
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2871,7 +2871,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_sections` (
   PRIMARY KEY (`section_id`),
   KEY `page_handle` (`page_handle`),
   KEY `order_id` (`order_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2888,7 +2888,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_special` (
   `box_value_code` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`type_id`),
   KEY `box_type` (`box_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2902,7 +2902,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_custom_fields_types` (
   `box_type` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `maxfields` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`type_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `myphpauction_custom_fields_types`
@@ -2930,7 +2930,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_dateformat` (
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `active` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
   KEY `active` (`active`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with date format';
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with date format';
 
 --
 -- Dumping data for table `myphpauction_dateformat`
@@ -2955,7 +2955,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_favourite_stores` (
   KEY `store_id` (`store_id`),
   KEY `user_id` (`user_id`),
   KEY `store_id_2` (`store_id`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -2988,7 +2988,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_fees` (
   `free_images` int(11) NOT NULL,
   `free_media` int(11) NOT NULL,
   PRIMARY KEY (`fee_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with fees' AUTO_INCREMENT=4 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with fees' AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `myphpauction_fees`
@@ -3020,7 +3020,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_fees_tiers` (
   PRIMARY KEY (`tier_id`),
   KEY `category_id` (`category_id`),
   KEY `fee_type` (`fee_type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `myphpauction_fees_tiers`
@@ -3065,7 +3065,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_gc_transactions` (
   `gc_payment_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `reg_date` int(11) NOT NULL,
   PRIMARY KEY (`trx_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3187,14 +3187,14 @@ CREATE TABLE IF NOT EXISTS `myphpauction_gen_setts` (
   `enable_second_chance` tinyint(4) NOT NULL,
   `second_chance_days` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with General Settings' AUTO_INCREMENT=2 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with General Settings' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_gen_setts`
 --
 
 INSERT INTO `myphpauction_gen_setts` (`id`, `sitename`, `site_path`, `admin_email`, `pg_paypal_email`, `pg_worldpay_id`, `pg_checkout_id`, `pg_ikobo_username`, `pg_ikobo_password`, `pg_protx_username`, `pg_protx_password`, `pg_authnet_username`, `pg_authnet_password`, `language`, `currency`, `amount_format`, `amount_digits`, `currency_position`, `max_images`, `images_max_size`, `enable_hpfeat`, `enable_catfeat`, `enable_bold`, `enable_hl`, `enable_swaps`, `cron_job_type`, `enable_header_counter`, `is_ssl`, `site_path_ssl`, `account_mode`, `max_credit`, `init_credit`, `closed_auction_deletion_days`, `enable_shipping_costs`, `default_theme`, `metatags`, `site_lang`, `admin_lang`, `always_show_buyout`, `enable_addl_category`, `mailer`, `sendmail_path`, `user_lang`, `enable_sniping_feature`, `sniping_duration`, `enable_private_site`, `enable_pref_sellers`, `pref_sellers_reduction`, `enable_bcc`, `enable_asq`, `enable_reg_approval`, `enable_wanted_ads`, `enable_hpfeat_desc`, `auto_vat_exempt`, `invoice_header`, `invoice_footer`, `vat_number`, `invoice_comments`, `enable_bid_retraction`, `pg_mb_email`, `min_reg_age`, `birthdate_type`, `nb_other_items_adp`, `maintenance_mode`, `enable_stores`, `account_mode_personal`, `enable_bulk_lister`, `suspend_over_bal_users`, `activation_key`, `min_invoice_value`, `init_acc_type`, `enable_tax`, `enable_cat_counters`, `enable_display_phone`, `media_max_size`, `enable_auctions_approval`, `approval_categories`, `is_mod_rewrite`, `buyout_process`, `sell_nav_position`, `nb_autorelist_max`, `site_logo_path`, `time_offset`, `max_media`, `enable_other_items_adp`, `debug_load_time`, `debug_load_memory`, `pg_nochex_email`, `signup_settings`, `mcrypt_enabled`, `mcrypt_key`, `makeoffer_process`, `enable_duration_change`, `duration_change_days`, `enable_seller_verification`, `makeoffer_private`, `seller_verification_mandatory`, `enable_profile_page`, `enable_store_only_mode`, `enable_enhanced_ssl`, `watermark_text`, `watermark_size`, `watermark_pos`, `enable_auto_relist`, `pg_paymate_merchant_id`, `enable_skin_change`, `preferred_days`, `pg_gc_merchant_id`, `pg_gc_merchant_key`, `enable_second_chance`, `second_chance_days`) VALUES
-(1, 'Ebay Auction', 'http://localhost/adamo/', 'admin@atomic-noodle.com', 'abcd@adf.sss', '', '', '', '', '', '', '', '', 1, 'USD', 1, 2, 1, 4, 500, 1, 1, 1, 1, 1, 2, 1, 0, 'https://www.yoursite.com/', 2, 60.00, 3.00, 90, 1, 'adamo', '&lt;meta name=&quot;description&quot; content=&quot;enter general site description.&quot;&gt;\r\n&lt;meta name=&quot;keywords&quot; content=&quot;enter general site keywords&quot;&gt;', 'english', 'english', 1, 1, 'mail', '/usr/sbin/sendmail', 1, 1, 30, 0, 1, 25.00, 0, 1, 0, 1, 0, 0, 'Invoice Header', 'Invoice Footer', 'GB-0324982', 'Invoice Comments', 1, 'support@Clone Script Software.com', 16, 0, 4, 0, 1, 1, 1, 1, '', 5.00, 2, 1, 1, 0, 2048, 0, '0', 0, 1, 2, 15, 'images/myphpauction.gif', 0, 1, 1, 1, 0, '', 1, 0, '', 1, 1, 3, 0, 0, 0, 0, 0, 0, '', 500, 0, 1, '', 0, 0, '', '', 0, 0);
+(1, 'Ebay Auction', 'http://localhost/adamo/', 'admin@atomic-noodle.com', 'abcd@adf.sss', '', '', '', '', '', '', '', '', 1, 'USD', 1, 2, 1, 4, 500, 1, 1, 1, 1, 1, 2, 1, 0, 'https://www.yoursite.com/', 2, 60.00, 3.00, 90, 1, 'adamo', '&lt;meta name=&quot;description&quot; content=&quot;enter general site description.&quot;&gt;\r\n&lt;meta name=&quot;keywords&quot; content=&quot;enter general site keywords&quot;&gt;', 'vietnam', 'english', 1, 1, 'mail', '/usr/sbin/sendmail', 1, 1, 30, 0, 1, 25.00, 0, 1, 0, 1, 0, 0, 'Invoice Header', 'Invoice Footer', 'GB-0324982', 'Invoice Comments', 1, 'support@Clone Script Software.com', 16, 0, 4, 0, 1, 1, 1, 1, '', 5.00, 2, 1, 1, 0, 2048, 0, '0', 0, 1, 2, 15, 'images/myphpauction.gif', 0, 1, 1, 1, 0, '', 1, 0, '', 1, 1, 3, 0, 0, 0, 0, 0, 0, '', 500, 0, 1, '', 0, 0, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -3222,7 +3222,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_invoices` (
   KEY `account_history_item` (`user_id`,`item_id`,`invoice_date`,`live_fee`,`invoice_id`),
   KEY `account_history_wa` (`user_id`,`wanted_ad_id`,`invoice_date`,`live_fee`,`invoice_id`),
   KEY `account_history_live` (`user_id`,`invoice_date`,`live_fee`,`invoice_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `myphpauction_invoices`
@@ -3278,7 +3278,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_iphistory` (
   `time1` int(11) NOT NULL,
   `time2` int(11) NOT NULL,
   `ip` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `myphpauction_iphistory`
@@ -3289,7 +3289,7 @@ INSERT INTO `myphpauction_iphistory` (`memberid`, `time1`, `time2`, `ip`) VALUES
 (100002, 1337859719, 1338431298, '180.180.205.30'),
 (100001, 1339494361, 1339494539, '103.28.226.34'),
 (100004, 1367032861, 1367035411, '::1'),
-(100003, 1367034869, 1367039936, '::1');
+(100003, 1367034869, 1367040960, '::1');
 
 -- --------------------------------------------------------
 
@@ -3303,9 +3303,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_keywords_watch` (
   `user_id` int(11) NOT NULL DEFAULT '0',
   `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`keyword_id`),
-  KEY `user_id` (`user_id`),
-  FULLTEXT KEY `keyword` (`keyword`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
+  KEY `user_id` (`user_id`)
+  
+) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3339,7 +3339,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_layout_setts` (
   `is_pp` tinyint(4) NOT NULL DEFAULT '0',
   `nb_want_ads` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the site''s general layout settings' AUTO_INCREMENT=2 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the site''s general layout settings' AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `myphpauction_layout_setts`
@@ -3380,7 +3380,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_messaging` (
   KEY `is_read` (`is_read`),
   KEY `auction_read` (`auction_id`,`is_read`),
   KEY `topic_read` (`topic_id`,`is_read`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3394,7 +3394,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_newsletters` (
   `newsletter_subject` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `newsletter_content` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`newsletter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3410,7 +3410,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_newsletter_recipients` (
   `newsletter_id` int(11) NOT NULL,
   PRIMARY KEY (`recipient_id`),
   KEY `newsletter_id` (`newsletter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3428,7 +3428,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_payment_gateways` (
   PRIMARY KEY (`pg_id`),
   KEY `checked` (`checked`),
   KEY `dp_enabled` (`dp_enabled`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment gateways' AUTO_INCREMENT=12 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment gateways' AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `myphpauction_payment_gateways`
@@ -3459,7 +3459,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_payment_options` (
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `logo_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment methods' AUTO_INCREMENT=11 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with payment methods' AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `myphpauction_payment_options`
@@ -3490,7 +3490,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_proxybid` (
   KEY `auction_id` (`auction_id`),
   KEY `bidder_id` (`bidder_id`),
   KEY `select_bids` (`auction_id`,`bidder_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with proxy bids' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with proxy bids' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3503,7 +3503,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_referrals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `myphpauction_referrals`
@@ -3537,7 +3537,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_reputation` (
   KEY `rep_sent` (`from_id`,`submitted`,`reg_date`),
   KEY `rep_received` (`submitted`,`user_id`,`reg_date`),
   KEY `rep_calculation` (`user_id`,`reputation_rate`,`submitted`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with feedbacks' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with feedbacks' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3555,7 +3555,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_reserve_offers` (
   `regdate` int(11) NOT NULL DEFAULT '0',
   `bidid` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3568,7 +3568,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_shipping_options` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `myphpauction_shipping_options`
@@ -3595,7 +3595,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_stores_accounting` (
   `paymentdate` int(11) NOT NULL DEFAULT '0',
   `processor` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3610,7 +3610,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_suggested_categories` (
   `content` text COLLATE utf8_unicode_ci NOT NULL,
   `regdate` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -3630,7 +3630,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_swaps` (
   `winner_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`swap_id`),
   KEY `auction_id` (`auction_id`,`seller_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3648,7 +3648,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_tax_settings` (
   `site_tax` tinyint(4) NOT NULL DEFAULT '0',
   `seller_countries_id` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`tax_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3663,7 +3663,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_timesettings` (
   `caption` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `active` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with time settings' AUTO_INCREMENT=50 ;
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with time settings' AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `myphpauction_timesettings`
@@ -3864,9 +3864,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_users` (
   KEY `active_users` (`active`,`reg_date`,`approved`),
   KEY `users_tax_acc_type` (`tax_account_type`,`reg_date`),
   KEY `users_tax_exempt` (`tax_apply_exempt`,`tax_exempted`,`reg_date`),
-  KEY `active` (`active`),
-  FULLTEXT KEY `shop_name` (`shop_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with myphpauction users' AUTO_INCREMENT=100004 ;
+  KEY `active` (`active`)
+  
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with myphpauction users' AUTO_INCREMENT=100005 ;
 
 --
 -- Dumping data for table `myphpauction_users`
@@ -3875,7 +3875,8 @@ CREATE TABLE IF NOT EXISTS `myphpauction_users` (
 INSERT INTO `myphpauction_users` (`user_id`, `name`, `email`, `birthdate`, `address`, `city`, `state`, `country`, `zip_code`, `phone`, `username`, `password`, `active`, `payment_status`, `items_sold`, `items_bought`, `enable_aboutme_page`, `aboutme_page_content`, `shop_mainpage`, `shop_mainpage_preview`, `shop_logo_path`, `aboutme_page_type`, `newsletter`, `balance`, `reg_date`, `mail_activated`, `live_pm_amount`, `live_pm_date`, `live_pm_processor`, `lang`, `is_seller`, `preferred_seller`, `tax_apply_exempt`, `tax_reg_number`, `tax_exempted`, `shop_active`, `shop_last_payment`, `birthdate_year`, `default_duration`, `default_hidden_bidding`, `default_enable_swap`, `default_shipping_method`, `default_shipping_int`, `default_payment_methods`, `default_postage_amount`, `default_insurance_amount`, `default_type_service`, `default_shipping_details`, `referred_by`, `shop_account_id`, `shop_categories`, `shop_next_payment`, `shop_name`, `payment_mode`, `max_credit`, `default_public_questions`, `default_bid_placed_email`, `mail_account_suspended`, `mail_item_sold`, `mail_item_won`, `mail_buyer_details`, `mail_seller_details`, `mail_item_watch`, `mail_item_closed`, `mail_wanted_offer`, `mail_outbid`, `mail_keyword_match`, `mail_confirm_to_seller`, `shop_nb_items`, `shop_template_id`, `tax_company_name`, `pg_paypal_email`, `pg_worldpay_id`, `pg_ikobo_username`, `pg_ikobo_password`, `pg_checkout_id`, `pg_protx_username`, `pg_protx_password`, `pg_authnet_username`, `pg_authnet_password`, `pg_nochex_email`, `shop_about`, `shop_specials`, `shop_shipping_info`, `shop_company_policies`, `shop_nb_feat_items`, `shop_nb_ending_items`, `shop_nb_recent_items`, `shop_metatags`, `default_name`, `default_description`, `user_admin_notes`, `auction_approval`, `tax_account_type`, `salt`, `approved`, `mail_messaging_received`, `mail_messaging_sent`, `pg_mb_email`, `seller_verified`, `seller_verif_last_payment`, `seller_verif_next_payment`, `enable_profile_page`, `profile_www`, `profile_msn`, `profile_icq`, `profile_aim`, `profile_yim`, `profile_skype`, `profile_show_birthdate`, `paypal_address_override`, `paypal_first_name`, `paypal_last_name`, `paypal_address1`, `paypal_address2`, `paypal_city`, `paypal_state`, `paypal_zip`, `paypal_country`, `paypal_email`, `paypal_night_phone_a`, `paypal_night_phone_b`, `paypal_night_phone_c`, `default_currency`, `default_direct_payment`, `pg_paymate_merchant_id`, `preferred_seller_exp_date`, `pg_gc_merchant_id`, `pg_gc_merchant_key`) VALUES
 (100001, 'Teguh Hermawan', 'tguhhermawan@yahoo.com', '1980-01-06', 'Jl. Jend. Sudirman 32', 'Bandung', 'Bandung', '1966', '40115', '(081) 61748524', 'tguhhermawan', '4b34faf712aa2d82b5188f4b35cf35b3', 1, 'confirmed', 0, 0, 0, '', '', '', '', NULL, 1, 0.00, 1337852998, 1, 0.00, 0, '', 'english', 0, 0, 0, '', 0, 0, 0, 1980, 0, 0, 0, 0, 0, '', 0.00, 0.00, '', '', '', 0, '', 0, '', 2, 0.00, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 0, 0, '834', 1, 1, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', ''),
 (100002, 'dantestgseogold', 'dwhitemib@gmail.com', '1973-10-28', '9 dewstow close', 'newport', '2196', '2083', 'np264jp', '(01633) 283314', 'hybrid01', '8485adf2b7c6fd7f82135f65e84a3e08', 1, 'confirmed', 0, 0, 0, '', '', '', '', NULL, 0, 0.00, 1337859653, 1, 0.00, 0, '', 'english', 0, 0, 0, '', 0, 0, 0, 1973, 0, 0, 0, 0, 0, '', 0.00, 0.00, '', '', '', 0, '', 0, '', 2, 0.00, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, '', 'dwhite66@live.com', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 0, 0, '843', 1, 1, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', ''),
-(100003, 'david pelayo soberano', 'audia6gris@hotmail.com', '1979-07-29', 'el tejo 78', 'valdaliga', 'camtabria', '2058', '39528', '(942) 722194', 'Layordr', 'c3edfb6f4d0893493ba15054f629665e', 1, 'confirmed', 0, 0, 0, '', '', '', '', NULL, 0, 0.00, 1338387137, 1, 0.00, 0, '', 'english', 0, 0, 1, '72131435p', 0, 0, 0, 1979, 0, 0, 0, 0, 0, '', 0.00, 0.00, '', '', '', 0, '', 0, '', 2, 0.00, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, '', 'admin@rdrshop.com', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 0, 0, '1ca', 1, 1, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '');
+(100003, 'david pelayo soberano', 'audia6gris@hotmail.com', '1979-07-29', 'el tejo 78', 'valdaliga', 'camtabria', '2058', '39528', '(942) 722194', 'Layordr', 'c3edfb6f4d0893493ba15054f629665e', 1, 'confirmed', 0, 0, 0, '', '', '', '', NULL, 0, 0.00, 1338387137, 1, 0.00, 0, '', 'english', 0, 0, 1, '72131435p', 0, 0, 0, 1979, 0, 0, 0, 0, 0, '', 0.00, 0.00, '', '', '', 0, '', 0, '', 2, 0.00, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, '', 'admin@rdrshop.com', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 0, 0, '1ca', 1, 1, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', ''),
+(100004, 'Nguyen Kien', 'menoking@gmail.com', '1999-01-06', 'H', 'Hanoi', '', '', '', '() 12345', 'user1', 'a5c1dc23c39a8fbda2ffa5a091ad85d4', 1, 'confirmed', 0, 0, 0, '', '', '', '', NULL, 0, -3.00, 1367079258, 1, 0.00, 0, '', 'english', 0, 0, 0, '', 0, 0, 0, 1999, 0, 0, 0, 0, 0, '', 0.00, 0.00, '', '', '', 0, '', 0, '', 2, 60.00, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, 0, '', '', '', '', 0, 0, '42b', 1, 1, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -3890,7 +3891,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vat_rates` (
   `country` int(11) NOT NULL DEFAULT '0',
   `rate` double(9,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3907,7 +3908,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vat_setts` (
   `users_sale_vat` set('a','b','c','d') COLLATE utf8_unicode_ci DEFAULT NULL,
   `users_no_vat` set('a','b','c','d') COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3930,7 +3931,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_vouchers` (
   `voucher_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `voucher_duration` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`voucher_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -3975,9 +3976,9 @@ CREATE TABLE IF NOT EXISTS `myphpauction_wanted_ads` (
   KEY `wa_admin_id` (`creation_in_progress`,`active`,`closed`,`wanted_ad_id`),
   KEY `wa_browse_end_time` (`active`,`closed`,`deleted`,`wanted_ad_id`,`end_time`),
   KEY `wa_browse_nb_bids` (`active`,`closed`,`deleted`,`wanted_ad_id`,`nb_bids`),
-  KEY `wa_mainpage` (`closed`,`active`,`deleted`,`creation_in_progress`,`start_time`),
-  FULLTEXT KEY `wa_keywords` (`name`,`description`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with wanted ads details' AUTO_INCREMENT=2 ;
+  KEY `wa_mainpage` (`closed`,`active`,`deleted`,`creation_in_progress`,`start_time`)
+  
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=0 COMMENT='Table with wanted ads details' AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -3992,7 +3993,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_wanted_offers` (
   `auction_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`offer_id`),
   KEY `wanted_ad_id` (`wanted_ad_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4043,7 +4044,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_winners` (
   KEY `sold_items_bid` (`seller_id`,`s_deleted`,`invoice_id`,`bid_amount`),
   KEY `sold_items_quantity` (`seller_id`,`s_deleted`,`invoice_id`,`quantity_offered`),
   KEY `sold_items_purchase_date` (`seller_id`,`s_deleted`,`invoice_id`,`purchase_date`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the auction''s declared winners' AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with the auction''s declared winners' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -4055,9 +4056,9 @@ DROP TABLE IF EXISTS `myphpauction_wordfilter`;
 CREATE TABLE IF NOT EXISTS `myphpauction_wordfilter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `word` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`),
-  FULLTEXT KEY `word` (`word`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with words that are filtered' AUTO_INCREMENT=5 ;
+  PRIMARY KEY (`id`)
+  
+)   DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with words that are filtered' AUTO_INCREMENT=5 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction 2009															##
 ##-------------------------------------------------------------##
@@ -24,24 +25,34 @@
 
       $template->set('msg_changes_saved', $msg_changes_saved);
 
-      if (count($_POST['id'])) {
-        foreach ($_POST['id'] as $key => $value) {
-          $db->query("UPDATE " . DB_PREFIX . "blocked_domains SET
+      try {
+
+        $this->beginTransaction();
+
+        if (count($_POST['id'])) {
+          foreach ($_POST['id'] as $key => $value) {
+            $db->query("UPDATE " . DB_PREFIX . "blocked_domains SET
 					domain='" . $db->rem_special_chars($_POST['domain'][$key]) . "' WHERE
 					id=" . $value);
+          }
         }
-      }
 
-      if (!empty($_POST['new_domain'])) {
-        $db->query("INSERT INTO " . DB_PREFIX . "blocked_domains (domain) VALUES
+        if (!empty($_POST['new_domain'])) {
+          $db->query("INSERT INTO " . DB_PREFIX . "blocked_domains (domain) VALUES
 				('" . $db->rem_special_chars($_POST['new_domain']) . "')");
-      }
+        }
 
-      if (count($_POST['delete']) > 0) {
-        $delete_array = $db->implode_array($_POST['delete']);
+        if (count($_POST['delete']) > 0) {
+          $delete_array = $db->implode_array($_POST['delete']);
 
-        $sql_delete_words = $db->query("DELETE FROM " . DB_PREFIX . "blocked_domains WHERE
+          $sql_delete_words = $db->query("DELETE FROM " . DB_PREFIX . "blocked_domains WHERE
 				id IN (" . $delete_array . ")");
+        }
+
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
     }
 

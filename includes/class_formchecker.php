@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -116,7 +117,8 @@
           $custom_box_array[] = $custom_box_id;
         }
 
-        $custom_box_ids = @implode(',', $custom_box_array);
+        if (is_array($custom_box_array))
+          $custom_box_ids = @implode(',', $custom_box_array);
       }
 
       $main_category_id = $this->main_category($value_array['category_id']);
@@ -368,8 +370,6 @@
       $sql_query = "SELECT count(*) AS is_duplicate FROM " . DB_PREFIX . $table_name . " WHERE
 			" . $row_name . "='" . $value . "'";
 
-      //MATCH (" . $row_name . ") AGAINST ('" . $value . "')";
-
       if ($row_name_secondary) {
         $sql_query .= " AND " . $row_name_secondary . "!=" . intval($value_secondary); /* only for INT type fields, they also need to be indexed -> used in case we want to edit a field */
       }
@@ -448,4 +448,5 @@
     }
 
   }
+
 ?>

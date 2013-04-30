@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
@@ -77,9 +78,12 @@
 
     function update($user_id, $user_details, $new_password = null, $page_handle = 'register', $admin_edit = false) {
 
-      $user_details = $this->rem_special_chars_array($user_details);
+      try {
 
-      $sql_update_query = "UPDATE " . DB_PREFIX . "users SET
+
+        $user_details = $this->rem_special_chars_array($user_details);
+
+        $sql_update_query = "UPDATE " . DB_PREFIX . "users SET
 			name='" . $user_details['name'] . "', address='" . $user_details['address'] . "',
 			city='" . $user_details['city'] . "', country='" . $user_details['country'] . "',
 			state='" . $user_details['state'] . "', zip_code='" . $user_details['zip_code'] . "',
@@ -103,53 +107,60 @@
 			pg_gc_merchant_id = '" . $user_details['pg_gc_merchant_id'] . "', 
 			pg_gc_merchant_key = '" . $user_details['pg_gc_merchant_key'] . "'";
 
-      $user_old = $this->get_sql_row("SELECT balance, payment_mode, tax_apply_exempt FROM
+        $user_old = $this->get_sql_row("SELECT balance, payment_mode, tax_apply_exempt FROM
 			" . DB_PREFIX . "users WHERE user_id=" . $user_id);
 
-      if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number'])) {
-        $sql_update_query .= ", tax_apply_exempt=1";
-      }
+        if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number'])) {
+          $sql_update_query .= ", tax_apply_exempt=1";
+        }
 
-      if ($admin_edit) {
-        $sql_update_query .= ", payment_mode='" . $user_details['payment_mode'] . "'";
+        if ($admin_edit) {
+          $sql_update_query .= ", payment_mode='" . $user_details['payment_mode'] . "'";
 
-        if ($user_old['payment_mode'] == 2) {
-          $sql_update_query .= ", max_credit='" . $user_details['max_credit'] . "'";
-          // We can change here the balance and max_credit values. If the balance is changed, we will also create a line in the invoices table
-          $new_balance = $user_details['balance_type'] * $user_details['balance'];
+          if ($user_old['payment_mode'] == 2) {
+            $sql_update_query .= ", max_credit='" . $user_details['max_credit'] . "'";
+            // We can change here the balance and max_credit values. If the balance is changed, we will also create a line in the invoices table
+            $new_balance = $user_details['balance_type'] * $user_details['balance'];
 
-          if ($user_old['balance'] != $new_balance) {
-            $sql_update_query .= ", balance='" . $new_balance . "'";
+            if ($user_old['balance'] != $new_balance) {
+              $sql_update_query .= ", balance='" . $new_balance . "'";
 
-            // now we create the invoice row
-            $invoice_amount = $new_balance - $user_old['balance'];
+              // now we create the invoice row
+              $invoice_amount = $new_balance - $user_old['balance'];
 
-            $fee_name = GMSG_ADMIN_CREDIT_ADJUSTMENT . ' [ ' . (($invoice_amount >= 0) ? GMSG_DEBIT : GMSG_CREDIT) . ' ]';
+              $fee_name = GMSG_ADMIN_CREDIT_ADJUSTMENT . ' [ ' . (($invoice_amount >= 0) ? GMSG_DEBIT : GMSG_CREDIT) . ' ]';
 
-            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
+              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
 						(user_id, name, amount, invoice_date, current_balance, live_fee, credit_adjustment) VALUES
 						('" . $user_id . "', '" . $fee_name . "', '" . $invoice_amount . "',
 						'" . CURRENT_TIME . "', '" . $new_balance . "', '1', '1')");
+            }
           }
         }
+
+        if ($new_password) {
+          $salt = $this->create_salt();
+          $password_hashed = password_hash($new_password, $salt);
+          $sql_update_query .= ", password='" . $password_hashed . "', salt='" . $salt . "'";
+        }
+
+        $sql_update_query .= " WHERE user_id=" . $user_id;
+
+        $sql_update_user = $this->query($sql_update_query);
+
+        if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number']) && IN_ADMIN != 1) {
+          $mail_input_id = $user_id;
+          include('language/' . $this->setts['site_lang'] . '/mails/tax_apply_exempt_notification.php');
+        }
+
+        $this->update_page_data($user_id, $page_handle, $user_details);
+
+        $this->beginTransaction();
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
-
-      if ($new_password) {
-        $salt = $this->create_salt();
-        $password_hashed = password_hash($new_password, $salt);
-        $sql_update_query .= ", password='" . $password_hashed . "', salt='" . $salt . "'";
-      }
-
-      $sql_update_query .= " WHERE user_id=" . $user_id;
-
-      $sql_update_user = $this->query($sql_update_query);
-
-      if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number']) && IN_ADMIN != 1) {
-        $mail_input_id = $user_id;
-        include('language/' . $this->setts['site_lang'] . '/mails/tax_apply_exempt_notification.php');
-      }
-
-      $this->update_page_data($user_id, $page_handle, $user_details);
     }
 
     function delete($user_id, $page_handle = 'register') {
@@ -457,4 +468,5 @@
     }
 
   }
+
 ?>

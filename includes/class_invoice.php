@@ -112,7 +112,7 @@
       foreach ($this->data as $key => $value) {
         $sql .= "{$key}='{$value}', ";
       }
-      $sql = rtrim($sql, ",");
+      $sql = rtrim($sql, " ,");
       
       $sql .= " WHERE invoice_id='{$this->data['invoice_id']}'";
 

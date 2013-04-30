@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -30,12 +31,10 @@
       $basic_search = $db->rem_special_chars($_REQUEST['basic_search']);
       $basic_search = optimize_search_string($basic_search);
 
-      //$query[] = "(MATCH (a.name, a.description) AGAINST ('+" . $basic_search . "' IN BOOLEAN MODE))";
-      $query[] = "(MATCH (a.name) AGAINST ('+" . $basic_search . "' IN BOOLEAN MODE))";
-      /**
-       * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
-       * anyone might want to use this instead
-       */## MyPHPAuction 2009 $query[] = "(a.name LIKE '%" . $basic_search . "%' OR a.description LIKE '%" . $basic_search . "%')";
+      //      $query[] = "(MATCH (a.name, a.description) AGAINST ('+" . $basic_search . "' IN BOOLEAN MODE))";
+//      $query[] = "(MATCH (a.name) AGAINST ('+" . $basic_search . "' IN BOOLEAN MODE))";
+
+      $query[] = "(a.name LIKE '%" . $basic_search . "%' OR a.description LIKE '%" . $basic_search . "%')";
     }
   }
   else if ($_REQUEST['option'] == 'auction_search') {## MyPHPAuction 2009 auction search - advanced form
@@ -48,15 +47,11 @@
       $keywords_search = optimize_search_string($keywords_search);
 
       if ($_REQUEST['search_description'] == 1) {
-        $query[] = "MATCH (a.name, a.description) AGAINST ('+" . $keywords_search . "' IN BOOLEAN MODE)";
+        $query[] = "(a.name LIKE '%" . $keywords_search . "%' OR a.description LIKE '%" . $keywords_search . "%')";
       }
       else {
-        $query[] = "MATCH (a.name) AGAINST ('+" . $keywords_search . "' IN BOOLEAN MODE)";
+        $query[] = "(a.name LIKE '%" . $keywords_search . "%')";
       }
-      /**
-       * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
-       * anyone might want to use this instead
-       */## MyPHPAuction 2009 $query[] = "(a.name LIKE '%" . $keywords_search . "%' OR a.description LIKE '%" . $keywords_search . "%')";
     }
     if ($_REQUEST['buyout_price'] == 1) {
       $query[] = "a.buyout_price>0";
@@ -79,12 +74,9 @@
     }
     if (!empty($_REQUEST['zip_code'])) {
       $zip_code = $db->rem_special_chars($_REQUEST['zip_code']);
-      $query[] = "MATCH (a.zip_code) AGAINST ('" . $zip_code . "*' IN BOOLEAN MODE)";
-      /**
-       * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
-       * anyone might want to use this instead
-       */## MyPHPAuction 2009 $query[] = "(a.zip_code LIKE '%" . $zip_code . "%')";
-    }## MyPHPAuction 2009 now add the custom fields search feature
+      $query[] = "(a.zip_code LIKE '%" . $zip_code . "%')";
+    }
+## MyPHPAuction 2009 now add the custom fields search feature
     $sql_select_custom_boxes = $db->query("SELECT b.*, t.box_type AS box_type_name FROM " . DB_PREFIX . "custom_fields_boxes b, 
 	" . DB_PREFIX . "custom_fields f, " . DB_PREFIX . "custom_fields_types t WHERE 
 		f.active=1 AND f.page_handle='auction' AND f.field_id=b.field_id AND b.box_searchable=1 AND b.box_type=t.type_id");
@@ -105,7 +97,7 @@
           else if (in_array($custom_box['box_type_name'], array('checkbox'))) {
             (array) $checkbox_query = null;
             foreach ($_REQUEST['custom_box_' . $custom_box['box_id']] as $value) {
-              $checkbox_query[] = "MATCH (cfd_" . $box_id . ".box_value) AGAINST ('" . $value . "*' IN BOOLEAN MODE)";
+              $checkbox_query[] = " cfd_" . $box_id . ".box_value LIKE '%" . $value . "%'";
             }
 
             if (count($checkbox_query) > 0) {
@@ -113,8 +105,6 @@
             }
           }
           else {
-            //$query[] = "MATCH (cfd_" . $box_id . ".box_value) AGAINST ('" . $custom_box_value . "*' IN BOOLEAN MODE)";
-
             /**
              * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
              * anyone might want to use this instead
@@ -131,11 +121,7 @@
     if (!empty($_REQUEST['username'])) {
       $username = $db->rem_special_chars($_REQUEST['username']);
       $where_query = "LEFT JOIN " . DB_PREFIX . "users u ON u.user_id=a.owner_id ";
-      $query[] = "MATCH u.username AGAINST ('" . $username . "*' IN BOOLEAN MODE) AND u.active=1";
-      /**
-       * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
-       * anyone might want to use this instead
-       */## MyPHPAuction 2009 $query[] = "(u.username LIKE '%" . $username . "%')";
+      $query[] = " u.username LIKE '%" . $username . "%' AND u.active=1";
     }
   }
   else if ($_REQUEST['option'] == 'buyer_search') {## MyPHPAuction 2009 search auctions on which the buyer requested has placed bids
@@ -143,11 +129,7 @@
       $username = $db->rem_special_chars($_REQUEST['username']);
       $where_query = "LEFT JOIN " . DB_PREFIX . "bids b ON b.auction_id=a.auction_id
 			LEFT JOIN " . DB_PREFIX . "users u ON u.user_id=b.bidder_id ";
-      $query[] = "MATCH u.username AGAINST ('" . $username . "*' IN BOOLEAN MODE) AND u.active=1";
-      /**
-       * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
-       * anyone might want to use this instead
-       */## MyPHPAuction 2009 $query[] = "(u.username LIKE '%" . $username . "%')";
+      $query[] = " u.username LIKE '%" . $username . "%' AND u.active=1";
     }
   }
 

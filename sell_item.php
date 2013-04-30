@@ -14,6 +14,7 @@
   include_once ('includes/global.php');
   include_once ('includes/functions_item.php');
 
+  global $db;
 
   (array) $user_details = null;
   if ($session->value('user_id')) {
@@ -421,18 +422,21 @@
     }
 
     if ($sale_step == 'finish') /* auction submission page */ {
-      $template->set('sell_item_header', header7(strtoupper(MSG_FINISH)));
 
-      $sell_item_header_menu = $template->process('sell_item_header_menu.tpl.php');
-      $template->set('sell_item_header_menu', $sell_item_header_menu);
-
-      $template->set('current_step', 'finish'); ## MyPHPAuction 2009 add setup fee procedure here.
       $setup_fee = new fees();
       $setup_fee->setts = &$setts;
 
       $shop_status = $shop->shop_status($user_details, true);
 
       $show_list_similar = true;
+
+      $template->set('sell_item_header', header7(strtoupper(MSG_FINISH)));
+
+      $sell_item_header_menu = $template->process('sell_item_header_menu.tpl.php');
+      $template->set('sell_item_header_menu', $sell_item_header_menu);
+
+      $template->set('current_step', 'finish'); ## MyPHPAuction 2009 add setup fee procedure here.
+
       if ($session->value('refresh_id') > 0) {
         $template->set('sell_item_finish_content', '<p align="center" class="contentfont">' . MSG_DOUBLE_POST_ERROR . '</p>');
       }
@@ -448,16 +452,26 @@
           $refresh_id = $item->insert($item_details, $session->value('user_id'), 'auction', true);
         }
         else {
-          $setup_result = $setup_fee->setup($user_details, $item_details, $voucher_details);
 
-          $template->set('sell_item_finish_content', $setup_result['display']);
+          try {
+            $db->beginTransaction();
 
-          // first the insert procedure
-          $refresh_id = $item->insert($item_details, $session->value('user_id'));
+            $setup_result = $setup_fee->setup($user_details, $item_details, $voucher_details);
 
-          $mail_input_id = $refresh_id; ## MyPHPAuction 2009 confirm posting to seller
-          include('language/' . $setts['site_lang'] . '/mails/new_item_seller_confirmation.php'); ## MyPHPAuction 2009 if listed in store, announce users that have the store added to their favorites about the new item
-          include('language/' . $setts['site_lang'] . '/mails/new_item_fav_store_confirmation.php');
+            // first the insert procedure
+            $refresh_id = $item->insert($item_details, $session->value('user_id'));
+            $db->Commit();
+
+
+            $mail_input_id = $refresh_id; ## MyPHPAuction 2009 confirm posting to seller
+
+            $template->set('sell_item_finish_content', $setup_result['display']);
+            include('language/' . $setts['site_lang'] . '/mails/new_item_seller_confirmation.php'); ## MyPHPAuction 2009 if listed in store, announce users that have the store added to their favorites about the new item
+            include('language/' . $setts['site_lang'] . '/mails/new_item_fav_store_confirmation.php');
+          } catch (error $e) {
+            $db->rollBack();
+            echo $e;
+          }
         }
         $session->unregister('auction_id');
         $session->set('refresh_id', $refresh_id);
@@ -549,15 +563,15 @@
       $template->set('current_step', 'shipping');
 
       $template->set('shipping_methods_drop_down', $item->shipping_methods_drop_down('type_service', $item_details['type_service']));
-      
-      
-//kiennguyen1101
-      
-        $direct_payments = $item->select_direct_payment($item_details['direct_payment'], $session->value('user_id'));
 
-        $direct_payment_table = $template->generate_table($direct_payments, 4, 1, 1, '75%');
-        $template->set('direct_payment_table', $direct_payment_table);
-       
+
+//kiennguyen1101
+
+      $direct_payments = $item->select_direct_payment($item_details['direct_payment'], $session->value('user_id'));
+
+      $direct_payment_table = $template->generate_table($direct_payments, 4, 1, 1, '75%');
+      $template->set('direct_payment_table', $direct_payment_table);
+
       $offline_payments = $item->select_offline_payment($item_details['payment_methods']);
 
       $offline_payment_table = $template->generate_table($offline_payments, 4, 1, 1, '75%');

@@ -371,8 +371,9 @@
 
           $this->update_data($custom_box_id, $user_id, $value, $page_handle);
         }
-
-        $custom_box_ids = @implode(',', $custom_box_array);
+        
+        //unused code?
+//        $custom_box_ids = @implode(',', $custom_box_array);
       }
     }
 

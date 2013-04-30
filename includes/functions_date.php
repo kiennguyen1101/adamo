@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.04 														##
 ##-------------------------------------------------------------##
@@ -59,7 +59,12 @@
     (string) $display_output = null;
     (array) $current_date = null;
 
-    $years_array = array('2006', '2007', '2008', '2009', '2010', '2011', '2012');
+    $thisYear = date('Y');
+    $yearRange = $thisYear+2;
+    
+    foreach (range($thisYear, $yearRange) as $year) {
+      $years_array[] = $year;
+    }
 
     $months_array = array('01' => GMSG_MTH_JANUARY, '02' => GMSG_MTH_FEBRUARY, '03' => GMSG_MTH_MARCH, '04' => GMSG_MTH_APRIL,
       '05' => GMSG_MTH_MAY, '06' => GMSG_MTH_JUNE, '07' => GMSG_MTH_JULY, '08' => GMSG_MTH_AUGUST,
@@ -130,7 +135,7 @@
 
     $display_output .= '<a href="#" onclick="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_day)); return false;" ' .
       'title="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_date)); return false;" name="anchor' . $box_number . '" id="anchor' . $box_number . '">' .
-      '<img src="' . SITE_PATH . 'themes/' . $setts['default_theme'] . '/img/system/calendar_b2u.gif" border="0" align="absmiddle" /></a> ';
+      '<img src="' . SITE_PATH . 'themes/' . $setts['default_theme'] . '/images/system/calendar_b2u.gif" border="0" align="absmiddle" /></a> ';
 
     if ($display_time) {
 
@@ -156,7 +161,7 @@
   function get_box_timestamp($values_array, $time_box_id) /* this function converts the date selected in a date/time field into a timestamp */ {
     global $setts;
 
-    $timestamp = @mktime($values_array['date' . $time_box_id . '_hour'] - $setts['time_offset'], $values_array['date' . $time_box_id . '_minute'], 0, $values_array['date' . $time_box_id . '_month'], $values_array['date' . $time_box_id . '_day'], $values_array['date' . $time_box_id . '_year']);
+    $timestamp = mktime($values_array['date' . $time_box_id . '_hour'] - $setts['time_offset'], $values_array['date' . $time_box_id . '_minute'], 0, $values_array['date' . $time_box_id . '_month'], $values_array['date' . $time_box_id . '_day'], $values_array['date' . $time_box_id . '_year']);
 
     return $timestamp;
   }

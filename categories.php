@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -127,10 +128,11 @@
       $keywords_cat_search = optimize_search_string($item_details['keywords_cat_search']);
 
       if ($_REQUEST['search_description'] == 1) {
-        $addl_where_query .= " AND MATCH (a.name, a.description) AGAINST ('+" . $keywords_cat_search . "' IN BOOLEAN MODE)";
+        $addl_where_query .= " AND a.name or a.description LIKE '%" . $keywords_cat_search . "%' ";
       }
       else {
-        $addl_where_query .= " AND MATCH (a.name) AGAINST ('+" . $keywords_cat_search . "' IN BOOLEAN MODE)";
+        $addl_where_query .= " AND a.name LIKE '%" . $keywords_cat_search . "%' ";
+        //
       }
       /**
        * or the old and SLOW search using LIKE - disabled by default, just added the line in case 

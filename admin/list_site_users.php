@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
@@ -352,9 +353,9 @@
     }
 
     $template->set('management_box', $management_box);
-    
+
     if (!$start)
-        $start = 0;
+      $start = 0;
     $limit = 20;
 
     $order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'u.reg_date';
@@ -368,13 +369,12 @@
     (string) $search_filter = null;
 
     if ($_REQUEST['keywords_name']) {
-      //$search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(u.username) AGAINST ('".$_REQUEST['keywords_name']."' WITH QUERY EXPANSION)";
       $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " u.username LIKE '%" . $_REQUEST['keywords_name'] . "%'";
       $template->set('keywords_name', $_REQUEST['keywords_name']);
     }
     if ($_REQUEST['keywords_email']) {
-//		$search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(u.email) AGAINST ('".$_REQUEST['keywords_email']."*' IN BOOLEAN MODE)";
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " u.email LIKE '%" . $_REQUEST['keywords_email'] . "%'"; /* slow query - will need a workaround */
+      // $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " u.email LIKE '%" . $_REQUEST['keywords_email'] . "%'"; /* slow query - will need a workaround */
+      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " u.email = '" . $_REQUEST['keywords_email'] . "'";
       $template->set('keywords_email', $_REQUEST['keywords_email']);
     }
     if ($_REQUEST['show'] == 'active') {

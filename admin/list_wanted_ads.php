@@ -118,8 +118,8 @@
       $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " w.active=0";
     }
 
-    if ($_REQUEST['keywords']) {
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(w.name, w.description) AGAINST ('" . $_REQUEST['keywords'] . "*' IN BOOLEAN MODE)";
+    if ($_REQUEST['keywords']) {      
+      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " w.name OR w.description LIKE '%" . $_REQUEST['keywords'] . "%'";
       $template->set('keywords', $_REQUEST['keywords']);
     }
     if ($_REQUEST['src_wanted_ad_id']) {

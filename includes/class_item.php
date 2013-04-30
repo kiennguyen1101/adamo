@@ -1,4 +1,5 @@
 <?php
+
 #################################################################
 ## MyPHPAuction v6.05 														##
 ##-------------------------------------------------------------##
@@ -147,7 +148,10 @@
 
       // important: the active, approved & payment_status fields cannot be modified through here!
       ## no auction counter is applied on this query - if needed we will add one (for list_in eventually)
-      $sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
+
+      try {
+        $this->beginTransaction();
+        $sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
 			name='" . $word_filter['name'] . "', description='" . $word_filter['description'] . "',
 			quantity='" . $item_details['quantity'] . "', auction_type='" . $item_details['auction_type'] . "',
 			start_price='" . $item_details['start_price'] . "', reserve_price='" . $item_details['reserve_price'] . "',
@@ -172,19 +176,25 @@
 			creation_in_progress='" . $item_details['creation_in_progress'] . "', state='" . $item_details['state'] . "', 
 			is_draft='" . $is_draft . "'
 			WHERE auction_id='" . $item_details['auction_id'] . "' AND owner_id='" . $owner_id . "'");
-      //" . (($this->edit_auction) ? "is_relisted_item=0, " : '') . "
+        //" . (($this->edit_auction) ? "is_relisted_item=0, " : '') . "
 
-      $auction_id = $item_details['auction_id'];
+        $auction_id = $item_details['auction_id'];
 
-      if ($this->edit_auction) {
-        $update_auction_media = $this->query("UPDATE " . DB_PREFIX . "auction_media SET
+        if ($this->edit_auction) {
+          $update_auction_media = $this->query("UPDATE " . DB_PREFIX . "auction_media SET
 				upload_in_progress=0 WHERE auction_id='" . $auction_id . "'");
+        }
+
+        if (!$draft) {
+          $this->auction_approval($variables_array, $owner_id);
+        }
+        $this->update_page_data($auction_id, $page_handle, $item_details);
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
 
-      if (!$draft) {
-        $this->auction_approval($variables_array, $owner_id);
-      }
-      $this->update_page_data($auction_id, $page_handle, $item_details);
 
       ##keywords watch feature -> added back in v6.04
       if (!$this->edit_auction) {
@@ -913,40 +923,41 @@
             '		<td>';
 
           if (!$show_only) {
-            $user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
+//            $user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
+            //($this->setts)
 
             (string) $checkbox_status = null;
 
             switch ($payment_gateway['name']) {
               case 'PayPal':
-                $checkbox_status = ($user_details['pg_paypal_email']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_paypal_email']) ? '' : 'disabled';
                 break;
               case 'Worldpay':
-                $checkbox_status = ($user_details['pg_worldpay_id']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_worldpay_id']) ? '' : 'disabled';
                 break;
               case '2Checkout':
-                $checkbox_status = ($user_details['pg_checkout_id']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_checkout_id']) ? '' : 'disabled';
                 break;
               case 'Nochex':
-                $checkbox_status = ($user_details['pg_nochex_email']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_nochex_email']) ? '' : 'disabled';
                 break;
               case 'Ikobo':
-                $checkbox_status = ($user_details['pg_ikobo_username'] && $user_details['pg_ikobo_password']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_ikobo_username'] && $this->setts['pg_ikobo_password']) ? '' : 'disabled';
                 break;
               case 'Protx':
-                $checkbox_status = ($user_details['pg_protx_username'] && $user_details['pg_protx_password']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_protx_username'] && $this->setts['pg_protx_password']) ? '' : 'disabled';
                 break;
               case 'Authorize.net':
-                $checkbox_status = ($user_details['pg_authnet_username'] && $user_details['pg_authnet_password']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_authnet_username'] && $this->setts['pg_authnet_password']) ? '' : 'disabled';
                 break;
               case 'Moneybookers':
-                $checkbox_status = ($user_details['pg_mb_email']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_mb_email']) ? '' : 'disabled';
                 break;
               case 'Paymate':
-                $checkbox_status = ($user_details['pg_paymate_merchant_id']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_paymate_merchant_id']) ? '' : 'disabled';
                 break;
               case 'Google Checkout':
-                $checkbox_status = ($user_details['pg_gc_merchant_id'] && $user_details['pg_gc_merchant_key']) ? '' : 'disabled';
+                $checkbox_status = ($this->setts['pg_gc_merchant_id'] && $this->setts['pg_gc_merchant_key']) ? '' : 'disabled';
                 break;
             }
 
@@ -3134,4 +3145,5 @@
     }
 
   }
+
 ?>

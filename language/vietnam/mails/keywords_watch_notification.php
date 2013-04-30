@@ -13,7 +13,7 @@
 	u.name AS user_name, u.username, u.email FROM " . DB_PREFIX . "keywords_watch kw
 	INNER JOIN " . DB_PREFIX . "auctions a ON a.auction_id='" . $mail_input_id . "'
 	INNER JOIN " . DB_PREFIX . "users u ON u.user_id=kw.user_id WHERE 
-	MATCH (kw.keyword) AGAINST ('" . $keyword_search_string . "')");
+	kw.keyword LIKE '%" . $keyword_search_string . "%'");
 
 
   $send = true; ## always send

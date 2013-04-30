@@ -21,22 +21,14 @@
 //relative to the script going to use this file.
 //New entries can be added to this list
     $directories = array(
-      INCLUDE_DIR,
-      'classes/'
+      INCLUDE_DIR,      
     );
 
     //Add your file naming formats here
-    $fileNameFormats = array(     
-      '%s.class.php',
-      'class_%s.php',     
+    $fileNameFormats = array(      
+      'class_%s.php',
     );
-
-    // this is to take care of the PEAR style of naming classes
-    $path = str_ireplace('_', '/', $className);
-    if (@include_once $path . '.php') {
-      return;
-    }
-
+   
     foreach ($directories as $directory) {
       foreach ($fileNameFormats as $fileNameFormat) {
         $path = $directory . sprintf($fileNameFormat, $className);
@@ -49,7 +41,8 @@
   }
 
   spl_autoload_register('autoLoader');
-
+  
+ 
   define('INCLUDED', 1);
 
   define('DEFAULT_DB_LANGUAGE', 'english');
@@ -84,15 +77,13 @@
 ##$memory_start = memory_get_usage();
 
   include_once ($fileExtension . 'language/' . DEFAULT_DB_LANGUAGE . '/db.lang.php');
-
-  include_once ($fileExtension . 'includes/class_database.php');
-
+  global $db;
   $db = new database();
 
   $db->connect($db_host, $db_username, $db_password);
   $db->select_db($db_name);
   $db->display_errors = true;
-  include_once ($fileExtension . 'includes/class_session.php'); ## global
+  ## global
 ## create the session class, will contain all session variables.
   $session = new session;
 
@@ -153,7 +144,6 @@
   /*   * ***************************************************
    * Template
    * ************************************************* */
-  include_once ($fileExtension . 'includes/class_template.php');
 
   require_once(BASE_DIR . '/libs/Smarty/Smarty.class.php');
 
@@ -187,17 +177,12 @@
     die();
   }
   /*   * ********************************************************* */
-  include_once ($fileExtension . 'includes/class_voucher.php');
-  include_once ($fileExtension . 'includes/class_fees_main.php');
-  include_once ($fileExtension . 'includes/class_tax.php');
 
   $fees = new fees_main();
   $fees->setts = &$setts;
   $template->set('fees', $fees);
 
   $template->set('db', $db);
-
-  include_once ($fileExtension . 'includes/class_banner.php');
 
 ## classes used in most files will be initialized here.
 
@@ -256,6 +241,5 @@
     }
   }
 
-  include_once ($fileExtension . 'includes/class_shop.php');
   include_once ($fileExtension . 'includes/functions_addons.php');
 ?>
