@@ -237,8 +237,11 @@
     function show_balance($balance, $currency) {
       (string) $display_output = null;
 
-      $display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ' . (($balance > 0) ? GMSG_DEBIT : GMSG_CREDIT);
-
+      //format with currency
+      $display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ';
+      
+      $display_output .= ($balance > 0) ? GMSG_CREDIT : GMSG_DEBIT;
+      
       return $display_output;
     }
 
