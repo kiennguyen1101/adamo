@@ -112,8 +112,18 @@ class tax extends fees_main
 		}
 		else
 		{
-			$selected_value = (is_numeric($selected_value)) ? '' : $selected_value;
-			$display_output = '<input name="' . $box_name . '" type="text" id="' . $box_name . '" value="' . $selected_value . '" size="25" />';
+			$sql_select_states = $this->query("SELECT s.id, s.name FROM " . DB_PREFIX . "countries s WHERE
+				s.parent_id=2089 ORDER BY s.country_order ASC, s.name ASC");
+
+			$display_output = '<select name="' . $box_name . '" id="' . $box_name . '" ' . (($form_refresh) ? 'onChange = "submit_form(' . $form_refresh . ', \'\')"' : '') . '> ';
+			$display_output .= '<option value="" selected>' . MSG_SELECT_STATE . '</option> ';
+
+			while ($state_details = $this->fetch_array($sql_select_states))
+			{
+				$display_output .= '<option value="' . $state_details['id'] . '" ' . (($selected_value == $state_details['id']) ? 'selected' : ''). '>' . $state_details['name'] . '</option>';
+			}
+
+			$display_output .= '</select>';
 		}
 
 		return $display_output;

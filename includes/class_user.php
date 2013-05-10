@@ -80,12 +80,14 @@ class user extends custom_field
 		return $user_id;
 	}
 
-	function update ($user_id, $user_details, $new_password = null, $page_handle = 'register', $admin_edit = false)
-	{
+    function update($user_id, $user_details, $new_password = null, $page_handle = 'register', $admin_edit = false) {
 
-		$user_details = $this->rem_special_chars_array($user_details);
+      try {
 
-		$sql_update_query = "UPDATE " . DB_PREFIX . "users SET
+
+        $user_details = $this->rem_special_chars_array($user_details);
+
+        $sql_update_query = "UPDATE " . DB_PREFIX . "users SET
 			name='" . $user_details['name'] . "', address='" . $user_details['address'] . "',
 			city='" . $user_details['city'] . "', country='" . $user_details['country'] . "',
 			state='" . $user_details['state'] . "', zip_code='" . $user_details['zip_code'] . "',
@@ -109,61 +111,61 @@ class user extends custom_field
 			pg_gc_merchant_id = '" . $user_details['pg_gc_merchant_id'] . "', 
 			pg_gc_merchant_key = '" . $user_details['pg_gc_merchant_key'] . "'";
 
-		$user_old = $this->get_sql_row("SELECT balance, payment_mode, tax_apply_exempt FROM
+        $user_old = $this->get_sql_row("SELECT balance, payment_mode, tax_apply_exempt FROM
 			" . DB_PREFIX . "users WHERE user_id=" . $user_id);
 
-		if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number']))
-		{
-			$sql_update_query .= ", tax_apply_exempt=1";			
-		}
-		
-		if ($admin_edit)
-		{
-			$sql_update_query .= ", payment_mode='" . $user_details['payment_mode'] . "'";
+        if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number'])) {
+          $sql_update_query .= ", tax_apply_exempt=1";
+        }
 
-			if ($user_old['payment_mode'] == 2)
-			{
-				$sql_update_query .= ", max_credit='" . $user_details['max_credit'] . "'";
-				// We can change here the balance and max_credit values. If the balance is changed, we will also create a line in the invoices table
-				$new_balance = $user_details['balance_type'] * $user_details['balance'];
+        if ($admin_edit) {
+          $sql_update_query .= ", payment_mode='" . $user_details['payment_mode'] . "'";
 
-				if ($user_old['balance'] != $new_balance)
-				{
-					$sql_update_query .= ", balance='" .  $new_balance . "'";
+          if ($user_old['payment_mode'] == 2) {
+            $sql_update_query .= ", max_credit='" . $user_details['max_credit'] . "'";
+            // We can change here the balance and max_credit values. If the balance is changed, we will also create a line in the invoices table
+            $new_balance = $user_details['balance_type'] * $user_details['balance'];
 
-					// now we create the invoice row
-					$invoice_amount = $new_balance - $user_old['balance'];
+            if ($user_old['balance'] != $new_balance) {
+              $sql_update_query .= ", balance='" . $new_balance . "'";
 
-					$fee_name = GMSG_ADMIN_CREDIT_ADJUSTMENT . ' [ ' . (($invoice_amount>=0) ? GMSG_DEBIT : GMSG_CREDIT) . ' ]';
-					
-					$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
+              // now we create the invoice row
+              $invoice_amount = $new_balance - $user_old['balance'];
+
+              $fee_name = GMSG_ADMIN_CREDIT_ADJUSTMENT . ' [ ' . (($invoice_amount >= 0) ? GMSG_DEBIT : GMSG_CREDIT) . ' ]';
+
+              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
 						(user_id, name, amount, invoice_date, current_balance, live_fee, credit_adjustment) VALUES
 						('" . $user_id . "', '" . $fee_name . "', '" . $invoice_amount . "',
 						'" . CURRENT_TIME . "', '" . $new_balance . "', '1', '1')");
-				}
-			}
-		}
+            }
+          }
+        }
 
-		if ($new_password)
-		{
-			$salt = $this->create_salt();
-			$password_hashed = password_hash($new_password, $salt);
-			$sql_update_query .= ", password='" . $password_hashed . "', salt='" . $salt . "'";
-		}
+        if ($new_password) {
+          $salt = $this->create_salt();
+          $password_hashed = password_hash($new_password, $salt);
+          $sql_update_query .= ", password='" . $password_hashed . "', salt='" . $salt . "'";
+        }
 
-		$sql_update_query .= " WHERE user_id=" . $user_id;
+        $sql_update_query .= " WHERE user_id=" . $user_id;
 
-		$sql_update_user = $this->query($sql_update_query);
+        $sql_update_user = $this->query($sql_update_query);
 
-		if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number']) && IN_ADMIN != 1)
-		{
-			$mail_input_id = $user_id;
-			include('language/' . $this->setts['site_lang'] . '/mails/tax_apply_exempt_notification.php');
-		}
-		
-		$this->update_page_data($user_id, $page_handle, $user_details);
-	}
+        if (!$user_old['tax_apply_exempt'] && !empty($user_details['tax_reg_number']) && IN_ADMIN != 1) {
+          $mail_input_id = $user_id;
+          include('language/' . $this->setts['site_lang'] . '/mails/tax_apply_exempt_notification.php');
+        }
 
+        $this->update_page_data($user_id, $page_handle, $user_details);
+
+        $this->beginTransaction();
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
+      }
+    }
 	function delete ($user_id, $page_handle = 'register')
 	{
 		## delete user and all the related fields including custom fields
@@ -245,7 +247,9 @@ class user extends custom_field
 	{
 		(string)	$display_output = null;
 
-		$display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ' . (($balance>0) ? GMSG_DEBIT : GMSG_CREDIT);
+      $display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ';
+      
+      $display_output .= ($balance > 0) ? GMSG_CREDIT : GMSG_DEBIT;
 
 		return $display_output;
 	}
@@ -436,20 +440,10 @@ class user extends custom_field
 		}
 
 		$display_output = '<br /> '.
-			'<table width="100%" border="0" cellpadding="3" cellspacing="2" class="border"> '.
-      	'	<tr class="c5"> '.
-         '		<td><img src="themes/' . $this->setts['default_theme'] . '/img/pixel.gif" width="1" height="1" /></td> '.
-         '		<td><img src="themes/' . $this->setts['default_theme'] . '/img/pixel.gif" width="1" height="1" /></td> '.
-      	'	</tr> '.
       	'	<tr class="c1"> '.
          '		<td width="150" align="right" class="contentfont">' . $dob_text . '</td> '.
          '		<td class="contentfont">' . $birthdate_box . '</td> '.
-      	'	</tr> '.
-      	'	<tr class="reguser"> '.
-         '		<td>&nbsp;</td> '.
-         '		<td>' . $dob_expl . '</td> '.
-      	'	</tr> '.
-   		'</table> ';
+      	'	</tr> ';
 
    	return $display_output;
 	}
@@ -467,9 +461,9 @@ class user extends custom_field
 
 		$state = ($user_details['state_name']) ? $user_details['state_name'] : $user_details['state'];
 		// state_name and country_name are presumed to be taken from the countries table from the initial query.
-		$display_output = $user_details['address'] . '<br>'.
-			$user_details['zip_code'] . ', ' . $user_details['city'] . '<br>'.
-			$state . ', ' . $user_details['country_name'];
+		$display_output = $user_details['address'] .
+			$user_details['zip_code'] . ', ' . $user_details['city'] .
+			$state;
 
 		return $display_output;
 	}

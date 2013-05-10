@@ -9,7 +9,7 @@
 if ( !defined('INCLUDED') ) { die("Access Denied"); }
 ?>
 
-<table border="0" cellspacing="2" cellpadding="3" class="border">
+<table border="0" cellspacing="2" cellpadding="3" class="shared_table">
    <tr>
       <td colspan="6" class="sellingtitle"><b><?php echo MSG_SELLING_TOTALS;?></b></td>
    </tr>

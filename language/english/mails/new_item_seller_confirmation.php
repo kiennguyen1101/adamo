@@ -15,11 +15,8 @@ $text_message = 'Kính gửi %1$s,
 Bạn vừa khởi tạo phiên đấu giá tại %2$s:
 
 	- Tên đấu giá: %3$s
-	- Loại đấu giá: %4$s
 	- Số lượng sản phẩm: %5$s
-
 	- Nhóm sản phẩm: %6$s
-	- Nhóm phụ: %7$s
 
 	- Giá khởi điểm: %8$s
 	- Giá mua ngay: %9$s

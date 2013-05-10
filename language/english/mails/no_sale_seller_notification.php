@@ -25,7 +25,7 @@ Trân trọng,
 Ban quản trị %4$s';
 
 ## html message - editable
-$html_message = 'Dear %1$s, <br>
+$html_message = 'Kính gửi %1$s, <br>
 <br>
 Phiên đấu giá %2$s của bạn đã bị đóng và chưa tìm được người thắng cuộc. <br>
 Nguyên nhân có thể do không có người đấu giá hoặc giá đấu chưa đạt giá mong muốn của bạn. <br>

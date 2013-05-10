@@ -143,15 +143,15 @@ if ($frmchk_details['current_step'] == 'settings' || EDIT_AUCTION == 1) /* setti
 		$fv->field_greater(($setts['nb_autorelist_max'] + 1), $frmchk_details['auto_relist_nb'], MSG_FRMCHK_AUTORELIST_NB_ERROR);
 	}
 
-	$fv->check_box($frmchk_details['zip_code'], MSG_ZIP_CODE, array('field_empty', 'field_html'));
+	
 }
 
 if ($frmchk_details['current_step'] == 'shipping' || EDIT_AUCTION == 1) /* shipping step */
 {
-	if (empty($frmchk_details['direct_payment']) && empty($frmchk_details['payment_methods']))
-	{
-		$fv->error_list[] = array('value' => $frmchk_details['direct_payment'], 'msg' => MSG_FRMCHK_PM_METHODS);
-	}
+//	if (empty($frmchk_details['direct_payment']) && empty($frmchk_details['payment_methods']))
+//	{
+//		$fv->error_list[] = array('value' => $frmchk_details['direct_payment'], 'msg' => MSG_FRMCHK_PM_METHODS);
+//	}
 	$fv->check_box($frmchk_details['postage_amount'], MSG_POSTAGE, array('field_number'));
 	$fv->check_box($frmchk_details['insurance_amount'], MSG_INSURANCE, array('field_number'));
 	$fv->check_box($frmchk_details['shipping_details'], MSG_SHIPPING_DETAILS, array('field_js', 'field_iframes', 'invalid_html'));

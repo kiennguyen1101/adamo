@@ -128,7 +128,9 @@ class formchecker extends database
 				$custom_box_array[] = $custom_box_id;
 			}
 
-			$custom_box_ids = @implode(',', $custom_box_array);
+           if (is_array($custom_box_array))
+           $custom_box_ids = @implode(',', $custom_box_array);
+
 		}
 		
 		$main_category_id = $this->main_category($value_array['category_id']);

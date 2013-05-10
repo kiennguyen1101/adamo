@@ -162,7 +162,10 @@ class item extends custom_field
 		
 		// important: the active, approved & payment_status fields cannot be modified through here!
 		## no auction counter is applied on this query - if needed we will add one (for list_in eventually)
-		$sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
+      try {
+        $this->beginTransaction();
+        $sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
+
 			name='" . $word_filter['name'] . "', description='" . $word_filter['description'] . "',
 			quantity='" . $item_details['quantity'] . "', auction_type='" . $item_details['auction_type'] . "',
 			start_price='" . $item_details['start_price'] . "', reserve_price='" . $item_details['reserve_price'] . "',
@@ -197,10 +200,17 @@ class item extends custom_field
 				upload_in_progress=0 WHERE auction_id='" . $auction_id . "'");
 		}
 
-		if (!$draft)
-		{
-			$this->auction_approval($variables_array, $owner_id);
-		}
+       if (!$draft) {
+          $this->auction_approval($variables_array, $owner_id);
+        }
+        $this->update_page_data($auction_id, $page_handle, $item_details);
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
+       }
+
+		
 		$this->update_page_data($auction_id, $page_handle, $item_details);
 
 		##keywords watch feature -> added back in v6.04
@@ -680,7 +690,7 @@ class item extends custom_field
 			if ($box_title)
 			{
 				$display_output .= '<tr class="c4"> '.
-	      		'	<td colspan="3">' . $msg_upload_box_title . '</td> '.
+	      		'	<td colspan="3" class="c3">' . $msg_upload_box_title . '</td> '.
 	   			'</tr> '.
 	   			'<tr class="c5"> '.
 	      		'	<td><img src="themes/' . $this->setts['default_theme'] . '/img/pixel.gif" width="150" height="1"></td> '.
@@ -702,7 +712,7 @@ class item extends custom_field
 	   			'</tr> ';
    		}
    		
-   		$display_output .= '<tr class="reguser"> '.
+   		$display_output .= '<tr> '.
       		'	<td class="contentfont" align="right">' . $display_fee . '</td> '.
       		'	<td colspan="2">' . MSG_YOU_CAN_UPL_UP_TO . ' ' . $max_media . ' ' . $msg_media . '. ' . $fee_message . '</td> '.
    			'</tr> ';
@@ -1002,8 +1012,7 @@ class item extends custom_field
 			$additional_query = ' AND pg_id IN (' . $selected_values . ')';
 		}
 
-		$sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM
-			" . DB_PREFIX . "payment_gateways WHERE dp_enabled=1" . $additional_query);
+		$sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM " . DB_PREFIX . "payment_gateways WHERE checked=1" . $additional_query);
 
 		$selected_value = explode(',', $selected_values);
 
@@ -1028,41 +1037,41 @@ class item extends custom_field
 
 				if (!$show_only)
 				{
-					$user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
+					//$user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
 
 					(string) $checkbox_status = null;
 
 					switch ($payment_gateway['name'])
 					{
 						case 'PayPal':
-							$checkbox_status = ($user_details['pg_paypal_email']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_paypal_email']) ? '' : 'disabled';
 							break;
 						case 'Worldpay':
-							$checkbox_status = ($user_details['pg_worldpay_id']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_worldpay_id']) ? '' : 'disabled';
 							break;
 						case '2Checkout':
-							$checkbox_status = ($user_details['pg_checkout_id']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_checkout_id']) ? '' : 'disabled';
 							break;
 						case 'Nochex':
-							$checkbox_status = ($user_details['pg_nochex_email']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_nochex_email']) ? '' : 'disabled';
 							break;
 						case 'Ikobo':
-							$checkbox_status = ($user_details['pg_ikobo_username'] && $user_details['pg_ikobo_password']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_ikobo_username'] && $user_details['pg_ikobo_password']) ? '' : 'disabled';
 							break;
 						case 'Protx':
-							$checkbox_status = ($user_details['pg_protx_username'] && $user_details['pg_protx_password']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_protx_username'] && $user_details['pg_protx_password']) ? '' : 'disabled';
 							break;
 						case 'Authorize.net':
-							$checkbox_status = ($user_details['pg_authnet_username'] && $user_details['pg_authnet_password']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_authnet_username'] && $user_details['pg_authnet_password']) ? '' : 'disabled';
 							break;
 						case 'Moneybookers':
-							$checkbox_status = ($user_details['pg_mb_email']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_mb_email']) ? '' : 'disabled';
 							break;
 						case 'Paymate':
-							$checkbox_status = ($user_details['pg_paymate_merchant_id']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_paymate_merchant_id']) ? '' : 'disabled';
 							break;
 						case 'Google Checkout':
-							$checkbox_status = ($user_details['pg_gc_merchant_id'] && $user_details['pg_gc_merchant_key']) ? '' : 'disabled';
+							$checkbox_status = ($this->setts['pg_gc_merchant_id'] && $user_details['pg_gc_merchant_key']) ? '' : 'disabled';
 							break;
 					}
 
@@ -1165,9 +1174,9 @@ class item extends custom_field
 		}
 
 
-		if ($nb_uploads>0)
+	if ($nb_uploads>0)
 		{
-			$display_output = '<table cellpadding="2" cellspacing="2" border="0"> ';
+			$display_output = '<div class="list_product_thumbnails"> ';
 
 			foreach ($variables_array[$media_name] as $value)
 			{
@@ -1175,25 +1184,18 @@ class item extends custom_field
 				{
 					if ($file_type == 1)
 					{
-						$display_output .= '<tr><td> ';
+						
 						$display_output .= ($enable_links) ? '<a href="javascript:doPic(\'thumbnail.php?pic=' . $value . '&w=500&sq=Y&b=Y\');"> ' : '';
 						$display_output .= '<img src="thumbnail.php?pic=' . $value . '&w=100&sq=Y&b=Y" border="0">';
 						$display_output .= ($enable_links) ? '</a>' : '';
-						$display_output .= '</td></tr>';
+						
 					}
-					else if ($file_type == 2)
-					{
-						$display_output .= '<tr><td> ';
-						$display_output .= ($enable_links) ? '<a href="auction_details.php?auction_id=' . $variables_array['auction_id'] . '&video_name=' . $value . '"> ' : '';
-						$display_output .= '<img src="thumbnail.php?pic=images/media_icon.gif&w=100&sq=Y&b=Y" border="0">';
-						$display_output .= ($enable_links) ? '</a>' : '';
-						$display_output .= '</td></tr>';
-					}
+					
 				}
 			}
 
-			$display_output .= (!$enable_links) ? '<tr><td>' . GMSG_VIDEO_SWITCH_DISABLED . '</td></tr>' : '';
-			$display_output .= '</table> ';
+
+			$display_output .= '</div> ';
 		}
 
 		return $display_output;

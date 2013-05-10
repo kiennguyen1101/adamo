@@ -50,7 +50,8 @@ else
 		$db->query("DELETE FROM " . DB_PREFIX . "reputation WHERE reputation_id='" . intval($_REQUEST['reputation_id']) . "'");
 		$template->set('msg_changes_saved', '<p align="center">' . AMSG_RECORD_DELETED . '</p>');
 	}
-
+    // kien if (!$start)
+    //$start = 0;
 	$limit = 20;
 
 	$order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'r.reputation_id';

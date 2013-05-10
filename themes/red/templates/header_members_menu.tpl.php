@@ -53,7 +53,7 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
       	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'selling', 'section' => 'fees_calculator'));?>"><?php echo MSG_MM_FEES_CALCULATOR;?></a><br>
       	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'selling', 'section' => 'prefilled_fields'));?>"><?php echo MSG_MM_PREFILLED_FIELDS;?></a><br>
       	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'selling', 'section' => 'block_users'));?>"><?php echo MSG_MM_BLOCK_USERS;?></a><br>
-      	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'selling', 'section' => 'suggest_category'));?>"><?php echo MSG_MM_SUGGEST_CATEGORY;?></a>
+ 
       </td>
 	</tr>
 	<?php } ?>
@@ -76,17 +76,6 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
       </td>
 	</tr>
 	<?php } ?>
-   <tr>
-      <td class="c4"><b><?php echo MSG_MM_ABOUT_ME;?></b></td>
-   </tr>
-   <tr>
-      <td class="c2">
-      	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'about_me', 'section' => 'view'));?>"><?php echo MSG_MM_VIEW;?></a>
-      	<?php if ($setts['enable_profile_page']) { ?>
-      	<br>&raquo; <a href="<?php echo process_link('members_area', array('page' => 'about_me', 'section' => 'profile'));?>"><?php echo MSG_PROFILE_PAGE;?></a>
-      	<?php } ?>
-      </td>
-	</tr>
 	<?php if ($setts['enable_stores'] && $is_seller) { ?>
    <tr>
       <td class="c4"><b><?php echo MSG_MM_STORE;?></b></td>
@@ -118,6 +107,10 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
    </tr>
    <tr>
       <td class="c2">
+      	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'about_me', 'section' => 'view'));?>"><?php echo MSG_MM_VIEW;?></a>
+      	<?php if ($setts['enable_profile_page']) { ?>
+      	<br>&raquo; <a href="<?php echo process_link('members_area', array('page' => 'about_me', 'section' => 'profile'));?>"><?php echo MSG_PROFILE_PAGE;?></a>
+      	<?php } ?></br>
       	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'account', 'section' => 'editinfo'));?>"><?php echo MSG_MM_PERSONAL_INFO;?></a><br>
       	&raquo; <a href="<?php echo process_link('members_area', array('page' => 'account', 'section' => 'management'));?>"><?php echo MSG_MM_MANAGE_ACCOUNT;?></a><br>
       	<!--&raquo; <a href="<?php echo process_link('members_area', array('page' => 'account', 'section' => 'invoices'));?>"><?php echo MSG_MM_INVOICES;?></a><br>-->

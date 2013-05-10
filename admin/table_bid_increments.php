@@ -23,7 +23,7 @@ else
 	$msg_changes_saved = '<p align="center" class="contentfont">' . AMSG_CHANGES_SAVED . '</p>';
 
 	if (isset($_POST['form_save_settings']))
-	{
+	 try{
 
 		$template->set('msg_changes_saved', $msg_changes_saved);
 
@@ -50,8 +50,15 @@ else
 			$sql_delete_increments = $db->query("DELETE FROM " . DB_PREFIX . "bid_increments WHERE
 				id IN (" . $delete_array . ")");
 		}
-	}
 
+        $this->beginTransaction();
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
+		}
+
+	}
 	(string) $bid_increments_page_content = NULL;
 
 	$sql_select_increments = $db->query("SELECT * FROM

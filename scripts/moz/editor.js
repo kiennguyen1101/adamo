@@ -971,7 +971,7 @@ function RENDER(sPreloadHTML)
     sHTML+="<iframe style='width:100%;height:100%; margin-top:1px;border:solid 1px #cfcfcf' "+
             " name=idContent"+ this.oName + " id=idContent"+this.oName+ "></iframe>";
 
-	document.write("<iframe style='width:1px;height:1px;overflow:auto;border:0px' id=\"myStyle"+this.oName+"\" name=\"myStyle"+this.oName+"\" src='"+this.scriptPath+"blank.gif'></iframe>");
+	document.write("<iframe style='height:1px;overflow:auto;border:0px' id=\"myStyle"+this.oName+"\" name=\"myStyle"+this.oName+"\" src='"+this.scriptPath+"blank.gif'></iframe>");
 
 	sHTML+="</td><td id=idStyles"+this.oName+" style='padding:0px;background:#E9E8F2'></td></tr></table>"//StyleSelect
 

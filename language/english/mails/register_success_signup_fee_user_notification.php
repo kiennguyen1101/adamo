@@ -17,7 +17,7 @@ Tài khoản của bạn tại %2$s đã được kích hoạt thành công.
 Chi tiết đăng nhập:
 
 	- Tên đăng nhập: %3$s
-	- Mật khẩu: -hidden-
+	- Mật khẩu: -ẩn-
 
 Trân trọng,
 Ban quản trị %2$s';

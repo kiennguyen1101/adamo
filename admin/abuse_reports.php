@@ -65,15 +65,15 @@ else
 		$background = ($counter++%2) ? 'c1' : 'c2';
 
 		$abuse_reports_content .= '<tr class="' . $background . '"> '.
-    		'	<td> <b>' . AMSG_REPORTER . '</b>: ' . $abuse_details['reporter_username'] . '<br> '.
-    		'		<b>' . AMSG_REPORTED_USER . '</b>: ' . $abuse_details['abuser_username'] . '</td> '.
-    		'	<td>' . (($abuse_details['auction_id']) ? '<b>' . AMSG_REPORTED_AUCTION . '</b>: #' . $abuse_details['auction_id'] . ' - ' . $abuse_details['auction_name'] . '<hr>' : ''  ) . 
-    		'		'	. $abuse_details['comment'] . '</td>'.
-			'	<td align="center" class="contentfont"> '.
-			'		' . (($abuse_details['auction_id']) ? '[ <a href="abuse_reports.php?do=delete_auction&abuse_id=' . $abuse_details['abuse_id'] . '&auction_id=' . $abuse_details['auction_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . AMSG_DELETE_AUCTION_CONFIRM . '\');">' . AMSG_DELETE_AUCTION . '</a> ]<br> ' : '') .
-			'		[ <a href="abuse_reports.php?do=delete&abuse_id=' . $abuse_details['abuse_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . AMSG_DELETE_CONFIRM . '\');">' . AMSG_DELETE_REPORT . '</a> ]<br> '.
-			'		[ <a href="email_user.php?user_id=' . $abuse_details['user_id'] . '">' . AMSG_EMAIL_REPORTER . '</a> ]</td> '.
-			'</tr> ';
+          '	<td> <b>' . AMSG_REPORTER . '</b>: ' . $abuse_details['reporter_username'] . '<br> ' .
+          '		<b>' . AMSG_REPORTED_USER . '</b>: ' . $abuse_details['abuser_username'] . '</td> ' .
+          '	<td>' . (($abuse_details['auction_id']) ? '<b>' . AMSG_REPORTED_AUCTION . '</b>: #' . $abuse_details['auction_id'] . ' - ' . $abuse_details['auction_name'] . '<hr>' : '' ) .
+          '		' . $abuse_details['comment'] . '</td>' .
+          '	<td align="center" class="contentfont"> ' .
+          '		' . (($abuse_details['auction_id']) ? '[ <a href="abuse_reports.php?do=delete_auction&abuse_id=' . $abuse_details['abuse_id'] . '&auction_id=' . $abuse_details['auction_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . AMSG_DELETE_AUCTION_CONFIRM . '\');">' . AMSG_DELETE_AUCTION . '</a> ]<br> ' : '') .
+          '		[ <a href="abuse_reports.php?do=delete&abuse_id=' . $abuse_details['abuse_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . AMSG_DELETE_CONFIRM . '\');">' . AMSG_DELETE_REPORT . '</a> ]<br> ' .
+          '		[ <a href="email_user.php?user_id=' . $abuse_details['user_id'] . '">' . AMSG_EMAIL_REPORTER . '</a> ]</td> ' .
+          '</tr> ';
 	}
 
 	$template->set('abuse_reports_content', $abuse_reports_content);

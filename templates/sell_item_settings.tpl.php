@@ -26,50 +26,25 @@ function delete_media(form_name, file_type, file_id) {
 }
 </SCRIPT>
 
-<table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-   <tr class="c4">
-      <td colspan="3"><?php echo MSG_ITEM_SETTINGS;?></td>
-   </tr>
-   <tr class="c5">
-      <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-      <td colspan="2"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-   </tr>
+<table width="100%" class="sell_table">
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_AUCTION_TYPE;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_AUCTION_TYPE;?><span class="tooltip_content"><?php echo MSG_AUCTION_TYPE_EXPL;?></span></a></td>
       <td colspan="2"><select name="auction_type" onChange = "submit_form(ad_create_form, '');">
 	  			<option value="standard" selected><?php echo GMSG_STANDARD;?></option>
 	  			<option value="dutch" <?php echo ($item_details['auction_type']=='dutch') ? 'selected' : ''; ?>><?php echo GMSG_DUTCH;?></option>
 	  		</select></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_AUCTION_TYPE_EXPL;?></td>
-   </tr>
+  
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_CURRENCY;?></td>
-      <td colspan="2"><?php echo $currency_drop_down;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo GMSG_QUANTITY;?><span class="tooltip_content"><?php echo MSG_QUANTITY_EXPL;?></span></a></td>
+      <td colspan="2"><input type="text" name="quantity" value="<?php echo ($item_details['quantity']>0 && $item_details['auction_type'] == 'dutch') ? $item_details['quantity'] : 1;?>" <?php echo ($item_details['auction_type'] == 'dutch') ? '' : 'readonly'; ?> size="20"></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_CURRENCY_EXPL;?></td>
-   </tr>
-   <tr class="c1">
-      <td width="150" align="right"><?php echo GMSG_QUANTITY;?></td>
-      <td colspan="2"><input type="text" name="quantity" value="<?php echo ($item_details['quantity']>0 && $item_details['auction_type'] == 'dutch') ? $item_details['quantity'] : 1;?>" <?php echo ($item_details['auction_type'] == 'dutch') ? '' : 'readonly'; ?> size="8"></td>
-   </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_QUANTITY_EXPL;?></td>
-   </tr>
+
    <?php if (!$setts['enable_store_only_mode'] && $item_details['listing_type'] != 'buy_out') { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_AUCTION_STARTS_AT;?></td>
-      <td colspan="2"><?php echo $item_details['currency'];?>
-         <input type="text" name="start_price" value="<?php echo $item_details['start_price'];?>" size="8"></td>
-   </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_AUCTION_STARTS_AT_EXPL;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_AUCTION_STARTS_AT;?><span class="tooltip_content"><?php echo MSG_AUCTION_STARTS_AT_EXPL;?></span></a></td>
+      <td colspan="2">
+         <input type="text" name="start_price" value="<?php echo $item_details['start_price'];?>" size="20"><?php echo $item_details['currency'];?></td>
    </tr>
    <?php } ?>
    <?php if ($item_details['auction_type'] != 'dutch') { ?>
@@ -79,14 +54,9 @@ function delete_media(form_name, file_type, file_id) {
       <td colspan="2"><input type="checkbox" name="is_reserve" value="1" <?php echo ($item_details['is_reserve']==1) ? 'checked' : ''; ?>/></td>
    </tr>
    <tr class="c2">
-      <td width="150" align="right"><?php echo MSG_RES_PRICE;?></td>
-      <td><?php echo $item_details['currency'];?>
-         <input type="text" name="reserve_price" value="<?php echo $item_details['reserve_price'];?>" size="8"></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_RES_PRICE;?><span class="tooltip_content"><?php echo MSG_RES_PRICE_EXPL;?></span></a></td>
+      <td><input type="text" name="reserve_price" value="<?php echo $item_details['reserve_price'];?>" size="20"><?php echo $item_details['currency'];?></td>
       <td><?php echo $rp_fee_expl_message;?></td>
-   </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_RES_PRICE_EXPL;?></td>
    </tr>
    <?php } ?>
    <?php } ?>
@@ -99,15 +69,11 @@ function delete_media(form_name, file_type, file_id) {
    </tr>
    <?php } ?>
    <tr class="c2">
-      <td width="150" align="right"><?php echo MSG_BUYOUT_PRICE;?></td>
-      <td><?php echo $item_details['currency'];?>
-         <input type="text" name="buyout_price" value="<?php echo $item_details['buyout_price'];?>" size="8"></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_BUYOUT_PRICE;?><span class="tooltip_content"><?php echo ($item_details['listing_type'] == 'buy_out') ? MSG_INSTANT_PURCHASE_ONLY_EXPL : MSG_INSTANT_PURCHASE_EXPL;?></span></a></td>
+      <td><input type="text" name="buyout_price" value="<?php echo $item_details['buyout_price'];?>" size="20"><?php echo $item_details['currency'];?></td>
       <td><?php echo $buyout_fee_expl_message;?></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo ($item_details['listing_type'] == 'buy_out') ? MSG_INSTANT_PURCHASE_ONLY_EXPL : MSG_INSTANT_PURCHASE_EXPL;?></td>
-   </tr>
+
    <?php } ?>
    <?php if ($setts['makeoffer_process'] == 1) { ?>
    <tr class="c1">
@@ -116,11 +82,10 @@ function delete_media(form_name, file_type, file_id) {
    </tr>
    <tr>
       <td>&nbsp;</td>
-      <td class="c2"><?php echo $item_details['currency'];?>
-         <input type="text" name="offer_min" value="<?php echo $item_details['offer_min'];?>" size="8">
-         -
-         <?php echo $item_details['currency'];?>
-         <input type="text" name="offer_max" value="<?php echo $item_details['offer_max'];?>" size="8"></td>
+      <td class="c2">
+         <input type="text" name="offer_min" value="<?php echo $item_details['offer_min'];?>" size="8"><?php echo $item_details['currency'];?>
+         -         
+         <input type="text" name="offer_max" value="<?php echo $item_details['offer_max'];?>" size="8"><?php echo $item_details['currency'];?></td>
       <td class="c2"><?php echo $makeoffer_fee_expl_message;?></td>
    </tr>
    <tr class="reguser">
@@ -132,18 +97,14 @@ function delete_media(form_name, file_type, file_id) {
    <?php if ($item_details['listing_type'] != 'quick') { ?>
    <?php if (!$setts['enable_store_only_mode'] && $item_details['listing_type'] != 'buy_out') { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_BID_INCREMENT;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_BID_INCREMENT;?><span class="tooltip_content"><?php echo MSG_BID_INCREMENT_EXPL;?></span></a></td>
       <td colspan="2"><input type="radio" name="is_bid_increment" value="0" checked/> <?php echo MSG_STANDARD_BID_INCREMENT;?></td>
    </tr>
    <tr>
       <td width="150" align="right"></td>
       <td class="c2"><input type="radio" name="is_bid_increment" value="1" <?php echo ($item_details['is_bid_increment'] == 1) ? 'checked' : ''; ?>/> <?php echo MSG_CUSTOM_BID_INCREMENT;?>
-      <td class="c2"><?php echo $item_details['currency'];?>
-         <input type="text" name="bid_increment_amount" value="<?php echo $item_details['bid_increment_amount'];?>" size="8"></td>
-   </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_BID_INCREMENT_EXPL;?></td>
+      <td class="c2">
+         <input type="text" name="bid_increment_amount" value="<?php echo $item_details['bid_increment_amount'];?>" size="20"><?php echo $item_details['currency'];?></td>
    </tr>
    <?php } ?>
    <?php } ?>
@@ -160,7 +121,7 @@ function delete_media(form_name, file_type, file_id) {
    <?php if ($item_details['listing_type'] != 'quick') { ?>
    <?php if ($item_details['list_in'] != 'store') { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_AD_FEATURING;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_AD_FEATURING;?><span class="tooltip_content"><?php echo MSG_FEATURING_EXPL;?></span></a></td>
       <td nowrap><input type="checkbox" name="hpfeat" value="1" <?php echo ($item_details['hpfeat']==1) ? 'checked' : ''; ?> />
          <?php echo MSG_HP_FEATURED;?></td>
       <td width="100%"><?php echo $hpfeat_fee_expl_message;?></td>
@@ -184,14 +145,10 @@ function delete_media(form_name, file_type, file_id) {
          <?php echo MSG_BOLD_AD;?></td>
       <td class="c2"><?php echo $bold_fee_expl_message;?></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_FEATURING_EXPL;?></td>
-   </tr>
    <?php } ?>
    <?php if ($item_details['start_time'] > CURRENT_TIME || $auction_edit != 1) { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo GMSG_START_TIME;?>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo GMSG_START_TIME;?><span class="tooltip_content"><?php echo MSG_START_TIME_EXPL;?></span></a>
       </td>
       <td colspan="2"><input name="start_time_type" type="radio" value="now" checked />
          <?php echo GMSG_NOW;?>
@@ -205,13 +162,10 @@ function delete_media(form_name, file_type, file_id) {
       <td class="c2"><?php echo $start_date_box;?></td>
    </tr>
    <?php } ?>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_START_TIME_EXPL;?></td>
-   </tr>
+
    <?php } ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo GMSG_END_TIME;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo GMSG_END_TIME;?><span class="tooltip_content"><?php echo MSG_END_TIME_EXPL;?></span></a></td>
       <td><input name="end_time_type" type="radio" value="duration" checked />
          <?php echo GMSG_DURATION;?>
       </td>
@@ -226,27 +180,17 @@ function delete_media(form_name, file_type, file_id) {
       <td class="c2"><?php echo $end_date_box;?></td>
    </tr>
    <?php } ?>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_END_TIME_EXPL;?></td>
-   </tr>
+   
    <?php if ($item_details['listing_type'] != 'quick') { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_PRIVATE_AUCTION;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_PRIVATE_AUCTION;?><span class="tooltip_content"><?php echo MSG_PRIVATE_AUCTION_EXPL;?></span></a></td>
       <td colspan="2"><input type="checkbox" name="hidden_bidding" value="1" <?php echo ($item_details['hidden_bidding']==1) ? 'checked' : ''; ?>/></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_PRIVATE_AUCTION_EXPL;?></td>
-   </tr>
+
    <?php if ($setts['enable_swaps']) { ?>
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_ACCEPT_SWAP;?></td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_ACCEPT_SWAP;?><span class="tooltip_content"><?php echo MSG_ACCEPT_SWAP_EXPL;?></span></a></td>
       <td colspan="2"><input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap']==1) ? 'checked' : ''; ?>/></td>
-   </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_ACCEPT_SWAP_EXPL;?></td>
    </tr>
    <?php } ?>
    <?php } ?>
@@ -257,45 +201,29 @@ function delete_media(form_name, file_type, file_id) {
 
 	<?php if ($item_details['listing_type'] != 'quick' && $setts['enable_auto_relist']) { ?>
    <tr class="c4">
-      <td colspan="3"><?php echo MSG_AUTO_RELIST;?></td>
+      <td colspan="3" class="c3"><?php echo MSG_AUTO_RELIST;?></td>
    </tr>
-   <tr class="c5">
-      <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-      <td colspan="2"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-   </tr>
+
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_ENABLE_AUTO_RELIST;?> </td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_ENABLE_AUTO_RELIST;?><span class="tooltip_content"><?php echo MSG_ENABLE_AUTO_RELIST_EXPL;?></span></a></td>
       <td colspan="2"><input type="checkbox" name="is_auto_relist" value="1" <?php echo ($item_details['is_auto_relist']==1) ? 'checked' : ''; ?>/></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_ENABLE_AUTO_RELIST_EXPL;?> </td>
-   </tr>
+
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_AUTO_RELIST_SOLD;?> </td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_AUTO_RELIST_SOLD;?><span class="tooltip_content"><?php echo MSG_AUTO_RELIST_SOLD_EXPL;?></span></a> </td>
       <td colspan="2"><input type="checkbox" name="auto_relist_bids" value="1" <?php echo ($item_details['auto_relist_bids']==1) ? 'checked' : ''; ?>/></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_AUTO_RELIST_SOLD_EXPL;?> </td>
-   </tr>
+
    <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_NB_AUTO_RELISTS;?> </td>
+      <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_NB_AUTO_RELISTS;?><span class="tooltip_content"><?php echo MSG_NB_AUTO_RELISTS_EXPL;?></span></a> </td>
       <td colspan="2"><input type="text" name="auto_relist_nb" value="<?php echo $item_details['auto_relist_nb'];?>" size="8" maxlength="2" /></td>
    </tr>
-   <tr class="reguser">
-      <td>&nbsp;</td>
-      <td colspan="2"><?php echo MSG_NB_AUTO_RELISTS_EXPL;?> </td>
-   </tr>
+
    <?php } ?>
    <tr class="c4">
-      <td colspan="3"><?php echo MSG_LOCATION;?></td>
+      <td colspan="3" class="c3"><?php echo MSG_LOCATION;?></td>
    </tr>
-   <tr class="c5">
-      <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-      <td colspan="2"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-   </tr>
-   <tr class="c1">
+    <tr class="c1">
       <td width="150" align="right"><?php echo MSG_COUNTRY;?> </td>
       <td colspan="2"><?php echo $country_dropdown;?></td>
    </tr>
@@ -303,15 +231,9 @@ function delete_media(form_name, file_type, file_id) {
       <td width="150" align="right"><?php echo MSG_STATE;?> </td>
       <td colspan="2"><?php echo $state_box;?></td>
    </tr>
-   <tr class="c1">
-      <td width="150" align="right"><?php echo MSG_ZIP_CODE;?> </td>
-      <td colspan="2"><input type="text" name="zip_code" value="<?php echo $item_details['zip_code'];?>" size="25" /></td>
-   </tr>
+   
 	<?php if ($auction_edit != 1) { ?>
-   <tr class="c5">
-      <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-      <td colspan="2"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-   </tr>
+
    <tr>
       <td></td>
       <td colspan="2"><?php echo nav_btns_position();?></td>

@@ -1,17 +1,19 @@
-<?php
+﻿<?php
 ## File Version -> v6.05
 ## Email File -> notify seller if multiple wanted ads have closed
 ## called only from the main_cron.php page
 
-if ( !defined('INCLUDED') ) { die("Access Denied"); }
+  if (!defined('INCLUDED')) {
+    die("Access Denied");
+  }
 
-$row_details = $db->get_sql_row("SELECT u.name, u.username, u.email, u.mail_item_closed 
+  $row_details = $db->get_sql_row("SELECT u.name, u.username, u.email, u.mail_item_closed 
 	FROM " . DB_PREFIX . "users u WHERE u.user_id='" . $mail_input_id . "'");
 
-$send = ($row_details['mail_item_closed']) ? true : false;
+  $send = ($row_details['mail_item_closed']) ? true : false;
 
 ## text message - editable
-$text_message = 'Dear %1$s,
+  $text_message = 'Dear %1$s,
 
 Several wanted ads that you have listed have closed.
 
@@ -23,7 +25,7 @@ Best regards,
 The %3$s staff';
 
 ## html message - editable
-$html_message = 'Dear %1$s, <br>
+  $html_message = 'Dear %1$s, <br>
 <br>
 Several wanted ads that you have listed have closed. <br>
 <br>
@@ -33,11 +35,10 @@ Best regards, <br>
 The %3$s staff';
 
 
-$items_closed_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'wanted_ads', 'section' => 'closed'), true);
+  $items_closed_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'wanted_ads', 'section' => 'closed'), true);
 
-$text_message = sprintf($text_message, $row_details['name'], $items_closed_link, $setts['sitename']);
-$html_message = sprintf($html_message, $row_details['name'], $items_closed_link, $setts['sitename']);
+  $text_message = sprintf($text_message, $row_details['name'], $items_closed_link, $setts['sitename']);
+  $html_message = sprintf($html_message, $row_details['name'], $items_closed_link, $setts['sitename']);
 
-send_mail($row_details['email'], 'Multiple Wanted Ads Closed', $text_message, 
-	$setts['admin_email'], $html_message, null, $send);
+  send_mail($row_details['email'], 'Multiple Wanted Ads Closed', $text_message, $setts['admin_email'], $html_message, null, $send);
 ?>

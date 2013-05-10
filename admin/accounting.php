@@ -32,7 +32,7 @@ else
 	$item = new item();
 	$item->setts = &$setts;
 	$item->layout = &$layout;
-	
+
 	$limit = 20;
 
 	$show_history_table = false;
@@ -59,10 +59,10 @@ else
 			$show_history_table = true;
 			
 			$additional_vars .= '&do=display_accounting&user_id=' . $user_id . 'level=' . $level . '&date1_month=' . $_REQUEST['date1_month'] . 
-				'&date1_year=' . $_REQUEST['date1_year'] . '&date1_day=' . $_REQUEST['date1_day'] . 
-				'&date2_month=' . $_REQUEST['date2_month'] . '&date2_year=' . $_REQUEST['date2_year'] . 
-				'&date2_day=' . $_REQUEST['date2_day'];
-			
+			'&date1_year=' . $_REQUEST['date1_year'] . '&date1_day=' . $_REQUEST['date1_day'] .
+            '&date2_month=' . $_REQUEST['date2_month'] . '&date2_year=' . $_REQUEST['date2_year'] .
+            '&date2_day=' . $_REQUEST['date2_day'];
+
 			$date_query = "AND i.invoice_date>=" . $history_details['start_time'] . " AND i.invoice_date<='" . $history_details['end_time'] . "'";## MyPHPAuction 2009 we will generate the history table here.## MyPHPAuction 2009 first we select all auction invoices (account mode)## MyPHPAuction 2009 then we select all live fees (auction fees, store fees, signup fees)## MyPHPAuction 2009 we will only generate invoices for fees, not for payments, so only if invoice_amount>0 => invoice
 			$user_query = ($user_id>0) ? "AND i.user_id='" . $user_id . "' " : '';
 			
@@ -96,13 +96,13 @@ else
 				$history_row = $item->history_row($invoice_details);
 
 				$history_table_content .= '<tr class="' . $background . ' contentfont"> '.
-					'	<td>[ ' . MSG_ID . ': ' . $invoice_details['user_id'] . ' ] ' . $invoice_details['username'] . '</td> '.
-					'	<td align="center">' . $history_row['item_id'] . '</td> '.
-					'	<td>' . $history_row['invoice_name'] . '</td> '.
-					'	<td align="center">' . $history_row['date'] . '</td> '.
-					'	<td align="center">' . $history_row['amount'] . '</td> '.
-					//'	<td align="center">' . $history_row['balance'] . '</td> '.
-					'</tr>';
+				  '	<td>[ ' . MSG_ID . ': ' . $invoice_details['user_id'] . ' ] ' . $invoice_details['username'] . '</td> ' .
+				  '	<td align="center">' . $history_row['item_id'] . '</td> ' .
+				  '	<td>' . $history_row['invoice_name'] . '</td> ' .
+				  '	<td align="center">' . $history_row['date'] . '</td> ' .
+				  '	<td align="center">' . $history_row['amount'] . '</td> ' .
+				  //'	<td align="center">' . $history_row['balance'] . '</td> '.
+				  '</tr>';
 			}
 			$pagination = paginate($start, $limit, $nb_invoices, 'accounting.php', $additional_vars);
 			$template->set('pagination', $pagination);
@@ -163,12 +163,12 @@ else
 				} 
 			  	
 				$views_table_content .= '<tr> '.
-					'	<td><a href="accounting.php?do=display_accounting&user_id=' . $user_id . '&level=0&date1_month=' . $start['mon'] . 
-							'&date1_year=' . $start['year'] . '&date1_day=' . $start['mday'] . 
-							'&date2_month=' . $finish['mon'] . '&date2_year=' . $finish['year'] . 
-							'&date2_day=' . $finish['mday'] . '">' . $title . '</a></td> '.
-					'	<td align="center">' . $fees->display_amount($view_details['invoice_amount'], $setts['currency']) . '</td> ';
-			  		'</tr> ';
+              '	<td><a href="accounting.php?do=display_accounting&user_id=' . $user_id . '&level=0&date1_month=' . $start['mon'] .
+              '&date1_year=' . $start['year'] . '&date1_day=' . $start['mday'] .
+              '&date2_month=' . $finish['mon'] . '&date2_year=' . $finish['year'] .
+              '&date2_day=' . $finish['mday'] . '">' . $title . '</a></td> ' .
+              '	<td align="center">' . $fees->display_amount($view_details['invoice_amount'], $setts['currency']) . '</td> ';
+
 			}
 		}
 		

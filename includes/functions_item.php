@@ -113,16 +113,11 @@ function item_pics($item_details)
 	$is_images = $db->count_rows('auction_media', "WHERE auction_id='" . $item_details['auction_id'] . "' AND
 		media_type=1 AND upload_in_progress=0");
 
-	if ($is_images)
-	{
-		$display_output .= '<img src="themes/' . $setts['default_theme'] . '/img/system/camera1.gif" border="0" align="absmiddle" alt="' . $item_details['name'] . '"> ';
-	}
-
 	$show_buyout = show_buyout($item_details);
 
 	if ($setts['buyout_process'] == 1 && $show_buyout)
 	{
-		$image_link = '<img src="themes/' . $setts['default_theme'] . '/img/system/buyitnow25.gif" border="0" align="absmiddle" alt="' . GMSG_BUYOUT . '">';
+		$image_link = '<br /><img style="margin-top:10px" src="themes/' . $setts['default_theme'] . '/img/system/buyitnow25.gif" border="0" align="absmiddle" alt="' . GMSG_BUYOUT . '">';
 
 		if ($session->value('user_id') != $item_details['owner_id'])
 		{

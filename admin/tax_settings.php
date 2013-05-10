@@ -128,7 +128,8 @@ else
 
 		foreach ($tax_user_types as $value)
 		{
-			$box_checked = eregi($value[0], $row_tax['tax_user_types']) ? 'checked' : '';
+			// kien $box_checked = eregi($value[0], $row_tax['tax_user_types']) ? 'checked' : '';
+			$box_checked = stristr($row_tax['tax_user_types'], $value[0]) ? 'checked' : '';
 
 			$tax_settings_allowed_users_box_array[] = '<input type="checkbox" name="tax_user_types[]" value="' . $value[0] . '" ' . $box_checked . '> ' . $value[1];
 		}

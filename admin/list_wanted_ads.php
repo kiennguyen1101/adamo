@@ -43,7 +43,8 @@ else
 	$msg_changes_saved = '<p align="center" class="contentfont">' . AMSG_CHANGES_SAVED . '</p>';
 
 	$form_submitted = false;
-
+    //if (!$start)
+    //$start = 0;
 	$limit = 20;
 
 	$order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'w.wanted_ad_id';
@@ -131,7 +132,7 @@ else
 
 	if ($_REQUEST['keywords'])
 	{
-		$search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(w.name, w.description) AGAINST ('".$_REQUEST['keywords']."*' IN BOOLEAN MODE)";
+		$search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " w.name OR w.description LIKE '%" . $_REQUEST['keywords'] . "%'";
 		$template->set('keywords', $_REQUEST['keywords']);
 	}
 	if ($_REQUEST['src_wanted_ad_id'])

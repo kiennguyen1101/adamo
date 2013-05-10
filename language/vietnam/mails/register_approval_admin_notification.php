@@ -1,16 +1,17 @@
-<?php
+﻿<?php
 ## Email File -> registration approval - admin notification
 ## called only from the register.php page
 
-if ( !defined('INCLUDED') ) { die("Access Denied"); }
+  if (!defined('INCLUDED')) {
+    die("Access Denied");
+  }
 
-$row_details = $db->get_sql_row("SELECT u.user_id, u.name, u.username, u.email FROM " . DB_PREFIX . "users u WHERE 
+  $row_details = $db->get_sql_row("SELECT u.user_id, u.name, u.username, u.email FROM " . DB_PREFIX . "users u WHERE 
 	u.user_id='" . $mail_input_id . "'");
 
-$send = true; // always sent;
-
+  $send = true; // always sent;
 ## text message - editable
-$text_message = 'A new user account that requires admin approval has been created.
+  $text_message = 'A new user account that requires admin approval has been created.
 
 User details:
 
@@ -20,7 +21,7 @@ User details:
 Please access the Admin Area -> Users Management page, in order to review the newly created account.';
 
 ## html message - editable
-$html_message = 'A new user account that requires admin approval has been created. <br>
+  $html_message = 'A new user account that requires admin approval has been created. <br>
 <br>
 User Details:<br>
 <ul>
@@ -30,9 +31,8 @@ User Details:<br>
 Please access the <b>Admin Area</b> -> <b>Users Management</b> page, in order to review the newly created account.';
 
 
-$text_message = sprintf($text_message, $row_details['username'], $row_details['user_id']);
-$html_message = sprintf($html_message, $row_details['username'], $row_details['user_id']);
+  $text_message = sprintf($text_message, $row_details['username'], $row_details['user_id']);
+  $html_message = sprintf($html_message, $row_details['username'], $row_details['user_id']);
 
-send_mail($setts['admin_email'], $setts['sitename'] . ' - Approve Registration', $text_message, 
-	$setts['admin_email'], $html_message, null, $send);
+  send_mail($setts['admin_email'], $setts['sitename'] . ' - Approve Registration', $text_message, $setts['admin_email'], $html_message, null, $send);
 ?>

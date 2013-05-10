@@ -1,16 +1,17 @@
-<?php
+﻿<?php
 ## Email File -> apply for tax exempt notification
 ## called only from the $user->insert() and $user->update() functions!
 
-if ( !defined('INCLUDED') ) { die("Access Denied"); }
+  if (!defined('INCLUDED')) {
+    die("Access Denied");
+  }
 
-$row_details = $this->get_sql_row("SELECT u.* FROM " . DB_PREFIX . "users u 
+  $row_details = $this->get_sql_row("SELECT u.* FROM " . DB_PREFIX . "users u 
 	WHERE u.user_id='" . $mail_input_id . "'");
 
-$send = true; // always sent;
-
+  $send = true; // always sent;
 ## text message - editable
-$text_message = 'A new user has applied for Tax exempt.
+  $text_message = 'A new user has applied for Tax exempt.
 
 User Details:
 
@@ -28,7 +29,7 @@ NOTE: This link applies for the EU only.
 You can activate Tax exempt for this user from the admin area, users management page.';
 
 ## html message - editable
-$html_message = 'A new user has applied for Tax exempt. <br>
+  $html_message = 'A new user has applied for Tax exempt. <br>
 <br>
 User Details: <br>
 <ul>
@@ -44,11 +45,10 @@ To verify the validity of the Tax reg. number, [ <a href="%4$s">click here</a> ]
 You can activate Tax exempt for this user from the <b>Admin Area</b> - <b>Users Management</b> page.';
 
 
-$vat_verify_link = 'http://europa.eu.int/comm/taxation_customs/vies/en/vieshome.htm';
+  $vat_verify_link = 'http://europa.eu.int/comm/taxation_customs/vies/en/vieshome.htm';
 
-$text_message = sprintf($text_message, $row_details['username'], $row_details['user_id'], $row_details['tax_reg_number'], $vat_verify_link);
-$html_message = sprintf($html_message, $row_details['username'], $row_details['user_id'], $row_details['tax_reg_number'], $vat_verify_link);
+  $text_message = sprintf($text_message, $row_details['username'], $row_details['user_id'], $row_details['tax_reg_number'], $vat_verify_link);
+  $html_message = sprintf($html_message, $row_details['username'], $row_details['user_id'], $row_details['tax_reg_number'], $vat_verify_link);
 
-send_mail($this->setts['admin_email'], 'New Tax Exempt Request', $text_message, 
-	$this->setts['admin_email'], $html_message, null, $send);
+  send_mail($this->setts['admin_email'], 'New Tax Exempt Request', $text_message, $this->setts['admin_email'], $html_message, null, $send);
 ?>

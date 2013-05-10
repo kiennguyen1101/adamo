@@ -1,20 +1,22 @@
-<?php
+﻿<?php
 ## File Version -> v6.05
 ## Email File -> notify seller on a successful sale
 ## called only from the $item->assign_winner() function!
 
-if ( !defined('INCLUDED') ) { die("Access Denied"); }
+  if (!defined('INCLUDED')) {
+    die("Access Denied");
+  }
 
-$sale_details = $this->get_sql_row("SELECT w.*, u.name, u.username, u.email, u.mail_item_sold, 
+  $sale_details = $this->get_sql_row("SELECT w.*, u.name, u.username, u.email, u.mail_item_sold, 
 	a.name AS item_name, a.currency FROM " . DB_PREFIX . "winners w 
 	LEFT JOIN " . DB_PREFIX . "users u ON u.user_id=w.seller_id
 	LEFT JOIN " . DB_PREFIX . "auctions a ON a.auction_id=w.auction_id
 	WHERE w.winner_id='" . $mail_input_id . "'");
 
-$send = ($sale_details['mail_item_sold']) ? true : false;
+  $send = ($sale_details['mail_item_sold']) ? true : false;
 
 ## text message - editable
-$text_message = 'Dear %1$s,
+  $text_message = 'Dear %1$s,
 
 Your auction, %2$s, has been successfully sold.
 
@@ -38,7 +40,7 @@ Best regards,
 The %6$s staff';
 
 ## html message - editable
-$html_message = 'Dear %1$s, <br>
+  $html_message = 'Dear %1$s, <br>
 <br>
 Your auction, %2$s, has been successfully sold. <br>
 <br>
@@ -60,16 +62,15 @@ Best regards, <br>
 The %6$s staff';
 
 
-$items_sold_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'selling', 'section' => 'sold'), true);
-$auction_link = process_link('auction_details', array('name' => $sale_details['item_name'], 'auction_id' => $sale_details['auction_id']));
+  $items_sold_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'selling', 'section' => 'sold'), true);
+  $auction_link = process_link('auction_details', array('name' => $sale_details['item_name'], 'auction_id' => $sale_details['auction_id']));
 
-$this->fees = new fees();
-$this->fees->setts = $this->setts;
-$sale_price = $this->fees->display_amount($sale_details['bid_amount'], $sale_details['currency']);
+  $this->fees = new fees();
+  $this->fees->setts = $this->setts;
+  $sale_price = $this->fees->display_amount($sale_details['bid_amount'], $sale_details['currency']);
 
-$text_message = sprintf($text_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_sold_link, $this->setts['sitename'], $auction_link);
-$html_message = sprintf($html_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_sold_link, $this->setts['sitename'], $auction_link);
+  $text_message = sprintf($text_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_sold_link, $this->setts['sitename'], $auction_link);
+  $html_message = sprintf($html_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_sold_link, $this->setts['sitename'], $auction_link);
 
-send_mail($sale_details['email'], 'Auction ID: ' . $sale_details['auction_id'] . ' - Successful Sale', $text_message, 
-	$this->setts['admin_email'], $html_message, null, $send);
+  send_mail($sale_details['email'], 'Auction ID: ' . $sale_details['auction_id'] . ' - Successful Sale', $text_message, $this->setts['admin_email'], $html_message, null, $send);
 ?>

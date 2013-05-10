@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
-## Copyright �2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -10,79 +10,57 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 ?>
 <?php echo $header_search_page;?>
 <?php echo (!empty($no_results_message)) ? $no_results_message : '<br>';?>
+
 <?php if (!empty($search_options_menu)) { ?>
 
-<table width="100%" border="0" cellpadding="3" cellspacing="2" class="border contentfont">
-   <tr>
-      <td colspan="3" class="c2"><b><?php echo MSG_CHOOSE_SEARCH_METHOD;?></b>: <?php echo $search_options_menu;?></td>
-   </tr>
-</table>
-<br>
+<?php echo MSG_CHOOSE_SEARCH_METHOD;?> <?php echo $search_options_menu;?>
+  
 <?php } ?>
-<table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-   <?php if (!empty($search_options_title)) { ?>
-   <tr>
-      <td colspan="5" class="c3"><b>
-         <?php echo $search_options_title;?>
-         </b> &nbsp; <?php echo ($option == 'category_search') ? $cats_src_adv_search_link : '';?></td>
-   </tr>
-   <?php } ?>
-   <tr class="c5">
-      <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-      <td width="100%" colspan="4"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="100%" height="1"></td>
-   </tr>
+
+
+
+   
+   
+   
    <?php
 	$post_url = ($option == 'store_search') ? 'stores.php' : 'auction_search.php';
 	$post_url = ($option == 'category_search') ? 'categories.php' : $post_url;
 	?>
+	
    <form action="<?php echo $post_url;?>" method="POST" name="form_advanced_search">
       <input type="hidden" name="option" value="<?php echo $option;?>">
       <?php if ($option == 'auction_search') { ?>
-      <tr class="c1">
-         <td align="right"><?php echo MSG_SEARCH_AUCTION_ID;?></td>
-         <td colspan="2"><input name="src_auction_id" type="text" id="src_auction_id" size="15" value="<?php echo $item_details['src_auction_id'];?>"></td>
-      </tr>
-      <tr class="c1">
-         <td align="right"><?php echo MSG_SEARCH_KEYWORDS;?></td>
-         <td colspan="2"><input name="keywords_search" type="text" id="keywords_search" size="50" value="<?php echo $item_details['keywords_search'];?>"></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="search_description" value="1" <?php echo ($item_details['search_description'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="100%"><?php echo MSG_SEARCH_DESCRIPTION;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td colspan="2"><?php echo MSG_SEARCH_KEYWORDS_EXPL;?></td>
-      </tr>
-      <?php if ($layout['enable_buyout'] && $setts['buyout_process'] == 1) { ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="buyout_price" value="1" <?php echo ($item_details['buyout_price'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="100%"><?php echo MSG_SEARCH_BUYOUT_ITEMS;?></td>
-      </tr>
+     
+         <?php echo MSG_SEARCH_AUCTION_ID;?>
+         <input name="src_auction_id" type="text" id="src_auction_id" size="15" value="<?php echo $item_details['src_auction_id'];?>">
+		<?php echo MSG_SEARCH_KEYWORDS;?>
+         <input name="keywords_search" type="text" id="keywords_search" size="50" value="<?php echo $item_details['keywords_search'];?>">
+      
+        <input type="checkbox" name="search_description" value="1" <?php echo ($item_details['search_description'] == 1) ? 'checked' : '';?>>
+        <?php echo MSG_SEARCH_DESCRIPTION;?>
+     
+         <?php echo MSG_SEARCH_KEYWORDS_EXPL;?>
+    
+		<?php if ($layout['enable_buyout'] && $setts['buyout_process'] == 1) { ?>
+		<input type="checkbox" name="buyout_price" value="1" <?php echo ($item_details['buyout_price'] == 1) ? 'checked' : '';?>>
+        <?php echo MSG_SEARCH_BUYOUT_ITEMS;?>
+     
       <?php } ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="reserve_price" value="1" <?php echo ($item_details['reserve_price'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="100%"><?php echo MSG_SEARCH_RESERVE_PRICE_ITEMS;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="quantity" value="1" <?php echo ($item_details['quantity'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="100%"><?php echo MSG_SEARCH_QUANTITY_DUTCH;?></td>
-      </tr>
+     
+         <input type="checkbox" name="reserve_price" value="1" <?php echo ($item_details['reserve_price'] == 1) ? 'checked' : '';?>>
+        <?php echo MSG_SEARCH_RESERVE_PRICE_ITEMS;?>
+      
+         <input type="checkbox" name="quantity" value="1" <?php echo ($item_details['quantity'] == 1) ? 'checked' : '';?>>
+         <?php echo MSG_SEARCH_QUANTITY_DUTCH;?>
+     
       <?php if ($setts['enable_swaps']) { ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="100%"><?php echo MSG_SEARCH_SWAP_ENABLED;?></td>
-      </tr>
+      <input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap'] == 1) ? 'checked' : '';?>>
+        <?php echo MSG_SEARCH_SWAP_ENABLED;?>
+     
       <?php } ?>
       <?php if ($setts['enable_stores']) { ?>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_LISTED_IN;?></td>
-         <td colspan="2"><select name="list_in">
+     <?php echo MSG_LISTED_IN;?>
+         <select name="list_in">
                <option value="auction" selected>
                <?php echo GMSG_SITE;?>
                </option>
@@ -92,12 +70,10 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="both" <?php echo ($item_details['list_in'] == 'both') ? 'selected' : '';?>>
                <?php echo GMSG_BOTH;?>
                </option>
-            </select></td>
-      </tr>
+            </select>
       <?php } ?>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_VIEW_RESULTS;?></td>
-         <td colspan="2"><select name="results_view">
+     <?php echo MSG_VIEW_RESULTS;?>
+        <select name="results_view">
                <option value="all" <?php echo ($item_details['results_view'] == 'all') ? 'selected' : '';?>>
                <?php echo GMSG_ALL;?>
                </option>
@@ -107,11 +83,9 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="closed" <?php echo ($item_details['results_view'] == 'closed') ? 'selected' : '';?>>
                <?php echo GMSG_CLOSED_AUCTIONS_ONLY;?>
                </option>
-            </select></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_ORDER_BY;?></td>
-         <td colspan="2"><select name="ordering">
+            </select>
+       <?php echo MSG_ORDER_BY;?>
+        <select name="ordering">
                <option value="end_time_asc" selected>
                <?php echo MSG_ITEMS_ENDING_FIRST;?>
                </option>
@@ -121,32 +95,22 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="start_price_asc" <?php echo ($item_details['ordering'] == 'start_price_asc') ? 'selected' : '';?>>
                <?php echo MSG_LOWEST_PRICES_FIRST;?>
                </option>
-            </select></td>
-      </tr>
+            </select>
       <?php echo $custom_sections_table;?>
-      <tr>
-         <td colspan="3" class="c3"><?php echo MSG_LOCATION;?></td>
-      </tr>
-      <tr class="c5">
-         <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-         <td colspan="2"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_COUNTRY;?> </td>
-         <td colspan="2"><?php echo $country_dropdown;?></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_ZIP_CODE;?> </td>
-         <td colspan="2"><input type="text" name="zip_code" value="<?php echo $item_details['zip_code'];?>" size="25" /></td>
-      </tr>
+     <?php echo MSG_LOCATION;?>
+      
+        
+       <?php echo MSG_COUNTRY;?> 
+        <?php echo $country_dropdown;?>
+    <?php echo MSG_ZIP_CODE;?> 
+        <input type="text" name="zip_code" value="<?php echo $item_details['zip_code'];?>" size="25" />
+    
       <?php } else if ($option == 'seller_search') { ?>
-      <tr class="c1">
-         <td align="right"><?php echo MSG_USERNAME;?></td>
-         <td colspan="2"><input name="username" type="text" id="username" size="50" value="<?php echo $item_details['username'];?>"></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_VIEW_RESULTS;?></td>
-         <td colspan="2"><select name="results_view">
+      <?php echo MSG_USERNAME;?>
+       <input name="username" type="text" id="username" size="50" value="<?php echo $item_details['username'];?>">
+      
+     <?php echo MSG_VIEW_RESULTS;?>
+         <select name="results_view">
                <option value="all" <?php echo ($item_details['results_view'] == 'all') ? 'selected' : '';?>>
                <?php echo GMSG_ALL;?>
                </option>
@@ -156,11 +120,9 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="closed" <?php echo ($item_details['results_view'] == 'closed') ? 'selected' : '';?>>
                <?php echo GMSG_CLOSED_AUCTIONS_ONLY;?>
                </option>
-            </select></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_ORDER_BY;?></td>
-         <td colspan="2"><select name="ordering">
+            </select>
+        <?php echo MSG_ORDER_BY;?>
+         <select name="ordering">
                <option value="end_time_asc" selected>
                <?php echo MSG_ITEMS_ENDING_FIRST;?>
                </option>
@@ -170,16 +132,13 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="start_price_asc" <?php echo ($item_details['ordering'] == 'start_price_asc') ? 'selected' : '';?>>
                <?php echo MSG_LOWEST_PRICES_FIRST;?>
                </option>
-            </select></td>
-      </tr>
+            </select>
+     
       <?php } else if ($option == 'buyer_search') { ?>
-      <tr class="c1">
-         <td align="right"><?php echo MSG_USERNAME;?></td>
-         <td colspan="2"><input name="username" type="text" id="username" size="50" value="<?php echo $item_details['username'];?>"></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_VIEW_RESULTS;?></td>
-         <td colspan="2"><select name="results_view">
+      <?php echo MSG_USERNAME;?>
+         <input name="username" type="text" id="username" size="50" value="<?php echo $item_details['username'];?>">
+     <?php echo MSG_VIEW_RESULTS;?>
+        <select name="results_view">
                <option value="all" <?php echo ($item_details['results_view'] == 'all') ? 'selected' : '';?>>
                <?php echo GMSG_ALL;?>
                </option>
@@ -189,11 +148,9 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="closed" <?php echo ($item_details['results_view'] == 'closed') ? 'selected' : '';?>>
                <?php echo GMSG_CLOSED_AUCTIONS_ONLY;?>
                </option>
-            </select></td>
-      </tr>
-      <tr class="c1">
-         <td width="150" align="right"><?php echo MSG_ORDER_BY;?></td>
-         <td colspan="2"><select name="ordering">
+            </select>
+     <?php echo MSG_ORDER_BY;?>
+         <select name="ordering">
                <option value="end_time_asc" selected>
                <?php echo MSG_ITEMS_ENDING_FIRST;?>
                </option>
@@ -203,73 +160,57 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
                <option value="start_price_asc" <?php echo ($item_details['ordering'] == 'start_price_asc') ? 'selected' : '';?>>
                <?php echo MSG_LOWEST_PRICES_FIRST;?>
                </option>
-            </select></td>
-      </tr>
+            </select>
       <?php } else if ($option == 'store_search') { ?>
-      <tr class="c1">
-         <td align="right"><?php echo MSG_STORE_NAME;?></td>
-         <td colspan="2"><input name="shop_name" type="text" id="shop_name" size="50" value="<?php echo $item_details['shop_name'];?>"></td>
-      </tr>
+      <?php echo MSG_STORE_NAME;?>
+         <input name="shop_name" type="text" id="shop_name" size="50" value="<?php echo $item_details['shop_name'];?>">
+     
       <?php } else if ($option == 'category_search') { ?>
       <input type="hidden" name="advanced_search" value="<?php echo $advanced_search;?>" >
-      <tr class="c1">
-         <td align="right"><?php echo GMSG_SEARCH;?></td>
-         <td colspan="4"><input name="keywords_cat_search" type="text" id="shop_name" size="50" value="<?php echo $item_details['keywords_cat_search'];?>">
-            <?php echo GMSG_IN;?> <?php echo $cats_src_drop_down;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="search_description" value="1" <?php echo ($item_details['search_description'] == 1) ? 'checked' : '';?>></td>
-         <td colspan="3" class="c1" width="100%"><?php echo MSG_SEARCH_DESCRIPTION;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td colspan="4"><?php echo MSG_SEARCH_KEYWORDS_EXPL;?></td>
-      </tr>
+     
       <?php if ($advanced_search) { ?>
-      <?php if ($layout['enable_buyout'] && $setts['buyout_process'] == 1) { ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="buyout_price" value="1" <?php echo ($item_details['buyout_price'] == 1) ? 'checked' : '';?>></td>
-         <td colspan="3" class="c1" width="100%"><?php echo MSG_SEARCH_BUYOUT_ITEMS_ONLY;?></td>
-      </tr>
+	   <ul>
+	   <li>
+			<?php if ($layout['enable_buyout'] && $setts['buyout_process'] == 1) { ?>
+			<input type="checkbox" name="buyout_price" value="1" <?php echo ($item_details['buyout_price'] == 1) ? 'checked' : '';?>>
+			<?php echo MSG_SEARCH_BUYOUT_ITEMS_ONLY;?>
+			<?php } ?>
+		</li>
+		<li>
+			<input type="checkbox" name="reserve_price" value="1" <?php echo ($item_details['reserve_price'] == 1) ? 'checked' : '';?>>
+			 <?php echo MSG_SEARCH_RESERVE_PRICE_ITEMS_ONLY;?>
+		</li>
+		<li>
+			 <input type="checkbox" name="photos_only" value="1" <?php echo ($item_details['photos_only'] == 1) ? 'checked' : '';?>>
+			 <?php echo MSG_SEARCH_PHOTOS_ONLY;?>
+		</li>
+		<li>
+			<input type="checkbox" name="quantity_standard" value="1" <?php echo ($item_details['quantity_standard'] == 1) ? 'checked' : '';?>>
+			<?php echo MSG_SEARCH_QUANTITY_STANDARD_ONLY;?>
+		</li>
+		<li>
+			 <input type="checkbox" name="quantity" value="1" <?php echo ($item_details['quantity'] == 1) ? 'checked' : '';?>>
+			 <?php echo MSG_SEARCH_QUANTITY_DUTCH_ONLY;?>
+		</li>
+		<li>
+			<input type="checkbox" name="direct_payment_only" value="1" <?php echo ($item_details['direct_payment_only'] == 1) ? 'checked' : '';?>>
+			<?php echo MSG_SEARCH_DIRECT_PM_ONLY;?>
+		</li>
+		<li>
+			<input type="checkbox" name="regular_payment_only" value="1" <?php echo ($item_details['regular_payment_only'] == 1) ? 'checked' : '';?>>
+			<?php echo MSG_SEARCH_REGULAR_PM_ONLY;?>
+		</li>
+		<li>
+			<?php if ($setts['enable_swaps']) { ?>
+			<input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap'] == 1) ? 'checked' : '';?>>
+			<?php echo MSG_SEARCH_SWAP_ENABLED;?>
+			<?php } ?>
+		</li>
+		<li>
+			<input type="submit" name="form_search_proceed" value="<?php echo GMSG_SEARCH;?>">
+		</li>
+		<ul>
       <?php } ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="reserve_price" value="1" <?php echo ($item_details['reserve_price'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_RESERVE_PRICE_ITEMS_ONLY;?></td>
-         <td class="c1"><input type="checkbox" name="photos_only" value="1" <?php echo ($item_details['photos_only'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_PHOTOS_ONLY;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="quantity_standard" value="1" <?php echo ($item_details['quantity_standard'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_QUANTITY_STANDARD_ONLY;?></td>
-         <td class="c1"><input type="checkbox" name="quantity" value="1" <?php echo ($item_details['quantity'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_QUANTITY_DUTCH_ONLY;?></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="direct_payment_only" value="1" <?php echo ($item_details['direct_payment_only'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_DIRECT_PM_ONLY;?></td>
-         <td class="c1"><input type="checkbox" name="regular_payment_only" value="1" <?php echo ($item_details['regular_payment_only'] == 1) ? 'checked' : '';?>></td>
-         <td  class="c1" width="50%"><?php echo MSG_SEARCH_REGULAR_PM_ONLY;?></td>
-      </tr>
-		<?php if ($setts['enable_swaps']) { ?>
-      <tr>
-         <td></td>
-         <td class="c1"><input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap'] == 1) ? 'checked' : '';?>></td>
-         <td colspan="3" class="c1" width="100%"><?php echo MSG_SEARCH_SWAP_ENABLED;?></td>
-      </tr>
       <?php } ?>
-      <?php } ?>
-      <?php } ?>
-      <tr class="c4">
-         <td colspan="5"></td>
-      </tr>
-      <tr>
-         <td></td>
-         <td colspan="4"><input type="submit" name="form_search_proceed" value="<?php echo GMSG_SEARCH;?>"></td>
-      </tr>
+  
    </form>
-</table>

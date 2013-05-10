@@ -66,12 +66,14 @@ function checkAll2(field_a, field_b, array_len, check) {
                      <?php echo GMSG_AUCTION_SEARCH;?>
                      </b></td>
                </tr>
+			   <!--
                <tr class="c2">
                   <td><b>
                      <?php echo AMSG_BY_KEYWORDS;?>
                      </b> :</td>
                   <td colspan="2"><input name="keywords" type="text" id="keywords" value="<?php echo $keywords;?>" /></td>
                </tr>
+			   -->
                <tr class="c1">
                   <td><b>
                      <?php echo AMSG_BY_AUCTION_ID;?>

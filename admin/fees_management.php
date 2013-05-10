@@ -28,16 +28,16 @@ else
 	{
 		$template->set('msg_changes_saved', $msg_changes_saved);
 
-		if ($_REQUEST['tiers'] == 1)
-		{
-			if (count($_POST['tier_id']))
-			{
-				foreach ($_POST['tier_id'] as $key => $value)
-				{
-					$sql_update_tiers = $db->query("UPDATE " . DB_PREFIX . "fees_tiers SET
+      try {
+        if ($_REQUEST['tiers'] == 1) {
+          if (count($_POST['tier_id'])) {
+            global $db;
+            foreach ($_POST['tier_id'] as $key => $value) {
+              $sql_update_tiers = $db->query("UPDATE " . DB_PREFIX . "fees_tiers SET
 						fee_from='" . $_POST['fee_from'][$key] . "', fee_to='" . $_POST['fee_to'][$key] . "',
 						fee_amount='" . $_POST['fee_amount'][$key] . "', calc_type='" . $_POST['calc_type'][$key] . "' WHERE
 						tier_id=" . $value);
+					}
 				}
 			}
 
@@ -55,7 +55,7 @@ else
 
 				$sql_delete_tiers = $db->query("DELETE FROM " . DB_PREFIX . "fees_tiers WHERE tier_id IN (" . $delete_array . ")");
 			}
-		}
+		
 
 		if ($_REQUEST['tiers'] !=1 || $_REQUEST['fee_column'] == 'endauction')
 		{
@@ -74,6 +74,14 @@ else
 				" . (($fee_column == 'picture_fee') ? ", free_images=" . intval($_REQUEST['free_images']) : '') . " 
 				" . (($fee_column == 'video_fee') ? ", free_media=" . intval($_REQUEST['free_media']) : '') . " 
 				WHERE category_id=" . $_REQUEST['category_id']);
+				}
+
+				$db->beginTransaction();
+				$db->commit();
+			  } catch (error $e) {
+				$db->rollBack();
+				echo $e;
+
 		}
 
 	}

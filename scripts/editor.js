@@ -1081,7 +1081,7 @@ function RENDER(sPreloadHTML)
 			" contentEditable=true></iframe>";
 
 	//Paste From Word
-	sHTML+="<iframe style='width:1px;height:1px;overflow:auto;' src='"+this.scriptPath+"blank.gif'"+
+	sHTML+="<iframe style='height:1px;overflow:auto;' src='"+this.scriptPath+"blank.gif'"+
 		" name=idContentWord"+ this.oName +" id=idContentWord"+ this.oName+
 		" contentEditable=true onfocus='"+this.oName+".hide()'></iframe>";
 

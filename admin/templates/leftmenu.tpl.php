@@ -182,11 +182,16 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 			</div>
 	
 			<?php if (
-				eregi("table_countries.php",$_SERVER['PHP_SELF'])||
-				eregi("table_item_durations.php",$_SERVER['PHP_SELF'])||
-				eregi("table_payment_options.php",$_SERVER['PHP_SELF'])||
-				eregi("table_shipping_options.php",$_SERVER['PHP_SELF'])||
-				eregi("table_bid_increments.php",$_SERVER['PHP_SELF'])) { } 
+				//eregi("table_countries.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_item_durations.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_payment_options.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_shipping_options.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_bid_increments.php",$_SERVER['PHP_SELF'])) { } 
+				stristr($_SERVER['PHP_SELF'], "table_countries.php") ||
+				stristr($_SERVER['PHP_SELF'], "table_item_durations.php") ||
+				stristr($_SERVER['PHP_SELF'], "table_payment_options.php") ||
+				stristr($_SERVER['PHP_SELF'], "table_shipping_options.php") ||
+				stristr($_SERVER['PHP_SELF'], "table_bid_increments.php")) {}
 			else { ?>
 				<script language="javascript">toggle(getObject('exp3_link'), 'exp3');</script>
 			<?php } ?>
@@ -217,12 +222,19 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("vouchers_management.php",$_SERVER['PHP_SELF'])||
-				eregi("content_section.php",$_SERVER['PHP_SELF'])||
-				eregi("content_pages.php",$_SERVER['PHP_SELF'])||
-				eregi("content_system_emails.php",$_SERVER['PHP_SELF'])||
-				eregi("content_banners_management.php",$_SERVER['PHP_SELF'])||
-				eregi("content_language_files.php",$_SERVER['PHP_SELF'])) { } 
+				//eregi("vouchers_management.php",$_SERVER['PHP_SELF'])||
+				//eregi("content_section.php",$_SERVER['PHP_SELF'])||
+				//eregi("content_pages.php",$_SERVER['PHP_SELF'])||
+				//eregi("content_system_emails.php",$_SERVER['PHP_SELF'])||
+				//eregi("content_banners_management.php",$_SERVER['PHP_SELF'])||
+				//eregi("content_language_files.php",$_SERVER['PHP_SELF'])) { } 
+				
+				  stristr($_SERVER['PHP_SELF'], "vouchers_management.php") ||
+				  stristr($_SERVER['PHP_SELF'], "content_section.php") ||
+				  stristr($_SERVER['PHP_SELF'], "content_pages.php") ||
+				  stristr($_SERVER['PHP_SELF'], "content_system_emails.php") ||
+				  stristr($_SERVER['PHP_SELF'], "content_banners_management.php") ||
+                  stristr($_SERVER['PHP_SELF'], "content_language_files.php")) {}
 			else { ?>
 				<script language="javascript">toggle(getObject('exp4_link'), 'exp4');</script>
 			<?php } ?>
@@ -252,19 +264,32 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("list_admin_users.php",$_SERVER['PHP_SELF'])||
-				eregi("list_user_bids.php",$_SERVER['PHP_SELF'])||
-				eregi("list_site_users.php",$_SERVER['PHP_SELF'])||
-				eregi("list_users_reputations.php",$_SERVER['PHP_SELF'])||
-				eregi("user_login.php",$_SERVER['PHP_SELF'])||
-				eregi("send_activation_emails.php",$_SERVER['PHP_SELF'])||
-				eregi("user_newsletter.php",$_SERVER['PHP_SELF'])||
-				eregi("abuse_reports.php",$_SERVER['PHP_SELF'])||
-				eregi("ban_users.php",$_SERVER['PHP_SELF'])||
-				eregi("blocked_users.php",$_SERVER['PHP_SELF']) || 
-				$_REQUEST['page']=='register' ||
-				$_REQUEST['page']=='reputation_sale' || 
-				$_REQUEST['page']=='reputation_purchase' ) { } 
+				//eregi("list_admin_users.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_user_bids.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_site_users.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_users_reputations.php",$_SERVER['PHP_SELF'])||
+				//eregi("user_login.php",$_SERVER['PHP_SELF'])||
+				//eregi("send_activation_emails.php",$_SERVER['PHP_SELF'])||
+				//eregi("user_newsletter.php",$_SERVER['PHP_SELF'])||
+				//eregi("abuse_reports.php",$_SERVER['PHP_SELF'])||
+				//eregi("ban_users.php",$_SERVER['PHP_SELF'])||
+				//eregi("blocked_users.php",$_SERVER['PHP_SELF']) || 
+				//$_REQUEST['page']=='register' ||
+				//$_REQUEST['page']=='reputation_sale' || 
+				//$_REQUEST['page']=='reputation_purchase' ) { } 
+				stristr($_SERVER['PHP_SELF'], "list_admin_users.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_user_bids.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_site_users.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_users_reputations.php") ||
+				stristr($_SERVER['PHP_SELF'], "user_login.php") ||
+				stristr($_SERVER['PHP_SELF'], "send_activation_emails.php") ||
+				stristr($_SERVER['PHP_SELF'], "user_newsletter.php") ||
+				stristr($_SERVER['PHP_SELF'], "abuse_reports.php") ||
+				stristr($_SERVER['PHP_SELF'], "ban_users.php") ||
+				stristr($_SERVER['PHP_SELF'], "blocked_users.php") ||
+				$_REQUEST['page'] == 'register' ||
+				$_REQUEST['page'] == 'reputation_sale' ||
+				$_REQUEST['page'] == 'reputation_purchase') {}
 			else { ?>
 				<script language="javascript">toggle(getObject('exp5_link'), 'exp5');</script>
 			<?php } ?>
@@ -293,13 +318,20 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("list_auctions.php",$_SERVER['PHP_SELF'])||
-				eregi("list_sold_items.php",$_SERVER['PHP_SELF'])||
-				eregi("list_wanted_ads.php",$_SERVER['PHP_SELF'])||
-				eregi("list_messaging.php",$_SERVER['PHP_SELF']) ||
-				eregi("images_removal_tool.php",$_SERVER['PHP_SELF']) ||
-				$_REQUEST['page']=='auction' ||
-				$_REQUEST['page']=='wanted_ad' ) { } 
+				//eregi("list_auctions.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_sold_items.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_wanted_ads.php",$_SERVER['PHP_SELF'])||
+				//eregi("list_messaging.php",$_SERVER['PHP_SELF']) ||
+				//eregi("images_removal_tool.php",$_SERVER['PHP_SELF']) ||
+				//$_REQUEST['page']=='auction' ||
+				//$_REQUEST['page']=='wanted_ad' ) { } 
+				stristr($_SERVER['PHP_SELF'], "list_auctions.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_sold_items.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_wanted_ads.php") ||
+				stristr($_SERVER['PHP_SELF'], "list_messaging.php") ||
+				stristr($_SERVER['PHP_SELF'], "images_removal_tool.php") ||
+				$_REQUEST['page'] == 'auction' ||
+				$_REQUEST['page'] == 'wanted_ad') {}
 			else { ?>
 				<script language="javascript">toggle(getObject('exp6_link'), 'exp6');</script>
 			<?php } ?>
@@ -320,9 +352,14 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("stores_subscriptions.php",$_SERVER['PHP_SELF'])||
-				eregi("stores_management.php",$_SERVER['PHP_SELF'])||
-				$_REQUEST['page']=='enable_stores' ) { } 
+				//eregi("stores_subscriptions.php",$_SERVER['PHP_SELF'])||
+				//eregi("stores_management.php",$_SERVER['PHP_SELF'])||
+				//$_REQUEST['page']=='enable_stores' ) { } 
+				 stristr($_SERVER['PHP_SELF'], "stores_subscriptions.php") ||
+          stristr($_SERVER['PHP_SELF'], "stores_management.php") ||
+          $_REQUEST['page'] == 'enable_stores') {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp7_link'), 'exp7');</script>
 			<?php } ?>
@@ -341,7 +378,8 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("custom_fields_types.php",$_SERVER['PHP_SELF'])) { } 
+				//eregi("custom_fields_types.php",$_SERVER['PHP_SELF'])) { } 
+				 stristr($_SERVER['PHP_SELF'], "custom_fields_types.php")) {}
 			else { ?>
 				<script language="javascript">toggle(getObject('exp8_link'), 'exp8');</script>
 			<?php } ?>
@@ -362,9 +400,14 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("table_categories.php",$_SERVER['PHP_SELF'])||
-				eregi("categories_lang.php",$_SERVER['PHP_SELF'])||
-				eregi("table_suggested_categories.php",$_SERVER['PHP_SELF']) ) { } 
+				//eregi("table_categories.php",$_SERVER['PHP_SELF'])||
+				//eregi("categories_lang.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_suggested_categories.php",$_SERVER['PHP_SELF']) ) { } 
+				 stristr($_SERVER['PHP_SELF'], "table_categories.php") ||
+          stristr($_SERVER['PHP_SELF'], "categories_lang.php") ||
+          stristr($_SERVER['PHP_SELF'], "table_suggested_categories.php")) {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp9_link'), 'exp9');</script>
 			<?php } ?>
@@ -387,11 +430,18 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("fees_settings.php",$_SERVER['PHP_SELF'])||
-				eregi("fees_payment_gateways.php",$_SERVER['PHP_SELF'])||
-				eregi("fees_management.php",$_SERVER['PHP_SELF'])||
-				eregi("table_currencies.php",$_SERVER['PHP_SELF'])||
-				$_REQUEST['page']=='mcrypt' ) { } 
+				//eregi("fees_settings.php",$_SERVER['PHP_SELF'])||
+				//eregi("fees_payment_gateways.php",$_SERVER['PHP_SELF'])||
+				//eregi("fees_management.php",$_SERVER['PHP_SELF'])||
+				//eregi("table_currencies.php",$_SERVER['PHP_SELF'])||
+				//$_REQUEST['page']=='mcrypt' ) { } 
+				stristr($_SERVER['PHP_SELF'], "fees_settings.php") ||
+          stristr($_SERVER['PHP_SELF'], "fees_payment_gateways.php") ||
+          stristr($_SERVER['PHP_SELF'], "fees_management.php") ||
+          stristr($_SERVER['PHP_SELF'], "table_currencies.php") ||
+          $_REQUEST['page'] == 'mcrypt') {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp10_link'), 'exp10');</script>
 			<?php } ?>
@@ -411,8 +461,12 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("accounting.php",$_SERVER['PHP_SELF'])||
-				$_REQUEST['show']=='accounting_overdue' ) { } 
+				//eregi("accounting.php",$_SERVER['PHP_SELF'])||
+				//$_REQUEST['show']=='accounting_overdue' ) { } 
+				stristr($_SERVER['PHP_SELF'], "accounting.php") ||
+          $_REQUEST['show'] == 'accounting_overdue') {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp11_link'), 'exp11');</script>
 			<?php } ?>
@@ -432,8 +486,12 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("tax_settings.php",$_SERVER['PHP_SELF'])||
-				$_REQUEST['page']=='enable_tax' ) { } 
+				//eregi("tax_settings.php",$_SERVER['PHP_SELF'])||
+				//$_REQUEST['page']=='enable_tax' ) { } 
+				stristr($_SERVER['PHP_SELF'], "tax_settings.php") ||
+          $_REQUEST['page'] == 'enable_tax') {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp12_link'), 'exp12');</script>
 			<?php } ?>
@@ -454,8 +512,12 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 				<div><img src="images/subbottom.gif" width="208" height="4"></div>
 			</div>
 			<?php if (
-				eregi("word_filter.php",$_SERVER['PHP_SELF'])||
-				eregi("block_free_emails.php",$_SERVER['PHP_SELF'])) { } 
+				//eregi("word_filter.php",$_SERVER['PHP_SELF'])||
+				//eregi("block_free_emails.php",$_SERVER['PHP_SELF'])) { } 
+				stristr($_SERVER['PHP_SELF'], "word_filter.php") ||
+          stristr($_SERVER['PHP_SELF'], "block_free_emails.php")) {
+          
+        }
 			else { ?>
 				<script language="javascript">toggle(getObject('exp13_link'), 'exp13');</script>
 			<?php } ?>

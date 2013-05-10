@@ -1,14 +1,15 @@
-<?php
+﻿<?php
 ## File Version -> v6.04
 ## Email File -> send contact form to site admin
 ## called only from the content_pages.php page!
 
-if ( !defined('INCLUDED') ) { die("Access Denied"); }
+  if (!defined('INCLUDED')) {
+    die("Access Denied");
+  }
 
-$send = true; // always sent;
-
+  $send = true; // always sent;
 ## text message - editable
-$text_message = 'A new message has been sent from the contact us form.
+  $text_message = 'A new message has been sent from the contact us form.
 
 User Details:
 
@@ -21,7 +22,7 @@ Question / Query:
 %4$s';
 
 ## html message - editable
-$html_message = 'A new message has been sent from the contact us form.<br>
+  $html_message = 'A new message has been sent from the contact us form.<br>
 <br>
 User Details: <br>
 <ul>
@@ -34,11 +35,10 @@ Question / Query:<br>
 %4$s';
 
 
-$text_message = sprintf($text_message, $user_details['name'], $user_details['email'], $user_details['username'], $user_details['question_content']);
-$html_message = sprintf($html_message, $user_details['name'], $user_details['email'], $user_details['username'], $user_details['question_content']);
+  $text_message = sprintf($text_message, $user_details['name'], $user_details['email'], $user_details['username'], $user_details['question_content']);
+  $html_message = sprintf($html_message, $user_details['name'], $user_details['email'], $user_details['username'], $user_details['question_content']);
 
-$email_subject = ($topic_id) ? 'Ref. Message #' . $topic_id . '; Username: ' . $user_details['username'] : $setts['sitename'] . ' - New Contact Message';
+  $email_subject = ($topic_id) ? 'Ref. Message #' . $topic_id . '; Username: ' . $user_details['username'] : $setts['sitename'] . ' - New Contact Message';
 
-send_mail($setts['admin_email'], $email_subject, $text_message, 
-	$setts['admin_email'], $html_message, null, $send);
+  send_mail($setts['admin_email'], $email_subject, $text_message, $setts['admin_email'], $html_message, null, $send);
 ?>

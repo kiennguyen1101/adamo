@@ -8,17 +8,16 @@
 
 if ( !defined('INCLUDED') ) { die("Access Denied"); }
 ?>
-<?php echo $header_selling_page;?>
 <?php echo $display_formcheck_errors;?>
 <SCRIPT LANGUAGE="JavaScript">
 function submit_form(form_name) {
 	form_name.submit();
 }
 </script>
-<table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-   <tr>
-      <td colspan="6" class="c7"><b><?php echo MSG_ACCOUNT_DETAILS;?></b></td>
-   </tr>
+<table width="100%" border="0" cellpadding="3" cellspacing="2" class="shared_table">
+  <tr>
+    <td colspan="8" class="c3"><b><?php echo MSG_ACCOUNT_DETAILS;?></b></td>
+  </tr>
    <tr class="c5">
       <td width="20%"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
       <td width="30%"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
@@ -88,134 +87,4 @@ function submit_form(form_name) {
 <?php } ?>
 <?php if ($page != 'summary') { ?>
 <br />
-<form action="" method="post" name="manage_account_form">
-   <input type="hidden" name="operation" value="submit">
-   <input type="hidden" name="refresh" value="1">
-   <input type="hidden" name="page" value="account">
-   <input type="hidden" name="section" value="management">
-   <table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-      <tr>
-         <td colspan="2" class="c7"><b><?php echo MSG_PAYPAL_ADDRESS_OVERRIDE;?></b></td>
-      </tr>
-      <tr class="c5">
-         <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-         <td width="100%"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-      </tr>
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_ADDRESS_OVERRIDE;?></td> 
-			<td><input name="paypal_address_override" type="checkbox" value="1" <?php echo ($user_details['paypal_address_override']) ? 'checked' : '';?>></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_ADDRESS_OVERRIDE_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_FIRST_NAME;?></td> 
-			<td><input name="paypal_first_name" type="text" value="<?php echo $user_details['paypal_first_name'];?>" size="50" maxlength="32"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_FIRST_NAME_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_LAST_NAME;?></td> 
-			<td><input name="paypal_last_name" type="text" value="<?php echo $user_details['paypal_last_name'];?>" size="50" maxlength="64"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_LAST_NAME_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_COUNTRY;?></td> 
-			<td><?php echo $countries_drop_down;?></td> 
-		</tr> 
-		<tr class="contentfont"> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_COUNTRY_EXPL;?></td> 
-		</tr> 		
-		<?php if (!in_array($user_details['paypal_country'], array('GB'))) { ?>
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_STATE;?></td> 
-			<td><input name="paypal_state" type="text" value="<?php echo $user_details['paypal_state'];?>" size="25"></td> 
-		</tr> 
-		<tr class="contentfont"> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_STATE_EXPL;?></td> 
-		</tr> 					
-		<?php } ?>
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_ADDRESS1;?></td> 
-			<td><input name="paypal_address1" type="text" value="<?php echo $user_details['paypal_address1'];?>" size="50" maxlength="100"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_ADDRESS1_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_ADDRESS2;?></td> 
-			<td><input name="paypal_address2" type="text" value="<?php echo $user_details['paypal_address2'];?>" size="50" maxlength="100"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_ADDRESS2_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_CITY;?></td> 
-			<td><input name="paypal_city" type="text" value="<?php echo $user_details['paypal_city'];?>" size="50" maxlength="100"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_CITY_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_ZIP;?></td> 
-			<td><input name="paypal_zip" type="text" value="<?php echo $user_details['paypal_zip'];?>" size="25" maxlength="32"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_ZIP_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_PHONE_A;?></td> 
-			<td><input name="paypal_night_phone_a" type="text" value="<?php echo $user_details['paypal_night_phone_a'];?>" size="10" maxlength="3"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_PHONE_A_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_PHONE_B;?></td> 
-			<td><input name="paypal_night_phone_b" type="text" value="<?php echo $user_details['paypal_night_phone_b'];?>" size="25" maxlength="16"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_PHONE_B_EXPL;?></td> 
-		</tr> 					
-      <tr class="c1"> 
-			<td><?php echo MSG_PAYPAL_PHONE_C;?></td> 
-			<td><input name="paypal_night_phone_c" type="text" value="<?php echo $user_details['paypal_night_phone_c'];?>" size="10" maxlength="4"></td> 
-		</tr> 
-		<tr> 
-			<td></td> 
-			<td class="c1"><?php echo MSG_PAYPAL_PHONE_C_EXPL;?></td> 
-		</tr> 					
-   </table>
-   <br>
-   <table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-	   <?php if (!empty($display_direct_payment_methods)) { ?>
-      <tr>
-         <td colspan="2" class="c7"><b><?php echo MSG_DIRECT_PAYMENT_SETTINGS;?></b></td>
-      </tr>
-      <?php } ?>
-      <tr class="c5">
-         <td><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="150" height="1"></td>
-         <td width="100%"><img src="themes/<?php echo $setts['default_theme'];?>/img/pixel.gif" width="1" height="1"></td>
-      </tr>
-      <?php echo $display_direct_payment_methods;?>
-      <tr>
-     		<td></td>
-         <td><input name="form_register_proceed" type="submit" id="form_register_proceed" value="<?php echo $proceed_button;?>" /></td>
-      </tr>
-   </table>
-</form>
 <?php } ?>

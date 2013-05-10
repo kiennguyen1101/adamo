@@ -74,15 +74,44 @@ class db_main
 		$display_output = '<p style="font-family: arial; font-size: 12px;"><strong>'.MSG_MYSQL_ERROR_OCCURRED.'</strong>'.
 			'<ul>'.
 			'<li style="font-family: arial; font-size: 12px;">'.$error_message.'</li>'.
-			((!empty($sql_error) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>'.MSG_SQL_ERROR.':</strong> '.$sql_error.'</li>' : '').
-			((!empty($sql_query) && $this->display_errors) ? '<li style="font-family: arial; font-size: 12px;"><strong>'.MSG_SQL_QUERY.':</strong> '.$sql_query.'</li>' : '').
+        ((!empty($sql_error) && DEBUG) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_ERROR . ':</strong> ' . $sql_error . '</li>' : '') .
+        ((!empty($sql_query) && DEBUG) ? '<li style="font-family: arial; font-size: 12px;"><strong>' . MSG_SQL_QUERY . ':</strong> ' . $sql_query . '</li>' : '') .
 			'</ul></p>';
 		
 		return $display_output;
 	}
+    public function beginTransaction() {
+      if ($this->query("START TRANSACTION"))
+        return true;
+      else
+        return false;
+    }
+
+    public function commit() {
+      if ($this->query("COMMIT"))
+        return true;
+      else
+        return false;
+    }
+
+    public function rollBack() {
+      if ($this->query("ROLLBACK"))
+        return true;
+      else
+        return false;
+    }
+
+    private function hasError() {
+      if (mysql_errno())
+        return true;
+      else
+        return false;
+    }
+
 
 	function query ($query, $debug_output = false, $die = true)
 	{
+/*
 		if ($debug_output)
 		{
 			(string) $explain_output = null;
@@ -134,18 +163,19 @@ class db_main
 			
 			echo $explain_output;			
 		}
-
+*/
 		//echo $query . '<br>'; ## used if we want to display all queries made on a page
 
-		$result = @mysql_query($query);
-		
-		if (!$result)
-		{
-			$mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
-			if ($die)
-			{
-				die ($mysql_error);
-			}
+		       $result = @mysql_query($query);
+ 
+		   if (!$result) {
+			 $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
+			if (DEBUG)
+			  $mysql_error .= "<p>{$query}</p>";
+			 if ($die) {
+			   die($mysql_error);
+			 }
+
 			else 
 			{
 				$this->query_error = $mysql_error;
@@ -184,7 +214,7 @@ class db_main
 
 		if ($this->sql_error($result))
 		{
-			die ($this->display_error(MSG_ERROR_MYSQL_RESULT, $this->sql_error($result)));
+			throw new Exception($this->display_error(MSG_ERROR_MYSQL_RESULT, $this->sql_error($result)));
 		}
 
 		return $result;
@@ -196,27 +226,39 @@ class db_main
 
 		if ($this->sql_error($result))
 		{
-			die ($this->display_error(MSG_ERROR_MYSQL_NUM_ROWS, $this->sql_error($result)));
+			throw new Exception($this->display_error(MSG_ERROR_MYSQL_NUM_ROWS, $this->sql_error($result)));
 		}
 
 		return $result;
 	}
 
-	function fetch_array ($query_result)
+	function fetch_array($query_result, $assoc = false) {
 	{
-		$result = @mysql_fetch_array($query_result);
+		$result = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH );
 
 		if ($this->sql_error($result))
 		{
-			die ($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
+			throw new Exception($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
 		}
 
 		return $result;
 	}
 }
-
+    function fetch_all($query_result, $assoc = false) {
+      $a = array();
+      while ($a[] = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH)); array_pop($a);
+      return $a;
+    }
+}
 class database extends db_main
 {
+    public function __autoload($class_name) {
+      if (file_exists(BASE_DIR . $className . '.php')) {
+        if (!class_exists($class_name))
+          require_once $className . '.php';
+        return true;
+      }
+    }
 
 	function get_sql_field ($query, $field, $null_message = NULL)
 	{

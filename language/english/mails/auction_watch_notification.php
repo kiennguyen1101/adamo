@@ -25,7 +25,7 @@ Một người vừa đặt giá cho sản phẩm nằm trong danh sách theo d�
 	
 %3$s
 	
-Để xem lịch sử phiên đấu giá, vui lòng bấm vào đường dẫn sauTo view the bid history for the auction, please click on the following link:
+Để xem lịch sử phiên đấu giá, vui lòng bấm vào đường dẫn sau:
 	
 %4$s
 	

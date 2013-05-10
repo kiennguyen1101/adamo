@@ -17,7 +17,7 @@ Tài khoản của bạn tại %2$s đã được kích hoạt thành công.
 Chi tiết đăng nhập:
 
 	- Tên đăng nhập: %3$s
-	- Mật khẩu: -hidden-
+	- Mật khẩu: -ẩn-
 
 Trân trọng,
 Ban quản trị %2$s';
@@ -30,7 +30,7 @@ Tài khoản của bạn tại <b>%2$s</b> đã được kích hoạt thành cô
 Chi tiết đăng nhập:<br>
 <ul>
 	<li>Tên đăng nhập: <b>%3$s</b></li>
-	<li>Mật khẩu: -hidden-</li>
+	<li>Mật khẩu: -ẩn-</li>
 </ul>
 Trân trọng, <br>
 Ban quản trị %2$s';

@@ -173,16 +173,16 @@ class messaging extends database
 		switch ($message_details['message_handle'])
 		{
 			case 1:
-				$display_output = MSG_PUBLIC_QUESTION . '<br>' .
-					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'];
+				$display_output = '<h2 class="mes_title">'. MSG_PUBLIC_QUESTION . ' - ' .
+					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'].'</h2>';
 				break;
 			case 2:
-				$display_output = MSG_PRIVATE_QUESTION . '<br>' .
-					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'];
+				$display_output = '<h2 class="mes_title">'. MSG_PRIVATE_QUESTION . ' - ' .
+					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'].'</h2>';
 				break;
 			case 3:
-				$display_output = MSG_SUCCESSFUL_SALE . '<br>' .
-					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'];
+				$display_output = '<h2 class="mes_title">'. MSG_SUCCESSFUL_SALE . ' - ' .
+					MSG_AUCTION_ID . ': ' . $message_details['auction_id'] . ' - ' . $message_details['name'].'</h2>';
 				break;
 			case 4:
 				$display_output = MSG_PUBLIC_QUESTION . ' - ' . GMSG_WANTED_AD . '<br>' .

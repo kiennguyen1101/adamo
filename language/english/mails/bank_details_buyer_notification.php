@@ -25,7 +25,7 @@ Thông tin tài khoản của người bán như sau:
 	
 %3$s
 	
-Để xem chi tiết, vui lòng truy cập trang "Các phiên đã thắng", bằng cách bấm vào đường dẫn URL dưới đây:  
+Để xem chi tiết, vui lòng truy cập trang Các phiên đã thắng, bằng cách bấm vào đường dẫn URL dưới đây:  
 	
 %4$s
 	
