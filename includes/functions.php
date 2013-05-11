@@ -1290,7 +1290,7 @@ function header_redirect($redirect_url) {
 
   function get_home_cat() {
     global $db;
-    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE parent_id=0 ORDER BY order_id ASC, name ASC LIMIT 11";
+    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE parent_id=0 ORDER BY order_id ASC, name ASC LIMIT 10";
     $sql_select_home_cats = $db->query($sql);
     $x = 0;
     $home_cats_list = array();
@@ -1388,10 +1388,10 @@ function header_redirect($redirect_url) {
     return $cat_tabs;
   }
 
-  function get_cat_name(array $cats) {
-    $cats_list = implode(',', $cats);
+  function get_cat_name(array $cats, $order_array) {
+    $list = implode(',', $cats);
     global $db;
-    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE category_id in (" . $cats_list . ") ORDER BY order_id ASC, name ASC";
+    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE category_id in ($list) $order_array";
     $rows = $db->query($sql);
     $categories = array();
     while ($result = $db->fetch_array($rows)) {
@@ -1424,7 +1424,7 @@ function header_redirect($redirect_url) {
 	FROM " . DB_PREFIX . "auctions 
 	INNER JOIN " . DB_PREFIX . "auction_media ON " . DB_PREFIX . "auctions.auction_id = " . DB_PREFIX . "auction_media.auction_id 
 	INNER JOIN " . DB_PREFIX . "users ON " . DB_PREFIX . "users.user_id = " . DB_PREFIX . "auctions.owner_id
-	WHERE category_id in (" . $sub_cats_list . ") AND hpfeat=1 AND " . DB_PREFIX . "auctions.approved=1 AND closed=0 group by auction_id ORDER BY auction_id DESC LIMIT " . $start . "," . $limit . "";
+	WHERE category_id in (" . $sub_cats_list . ") AND deleted NOT IN (1) AND hpfeat=1 AND " . DB_PREFIX . "auctions.approved=1 AND closed=0 group by auction_id ORDER BY auction_id DESC LIMIT " . $start . "," . $limit . "";
     $rows = $db->query($sql);
     $i = 0;
     while ($result = $db->fetch_array($rows)) {

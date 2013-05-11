@@ -1738,8 +1738,8 @@ else
 					$auction_link = process_link('auction_details', array('auction_id' => $item_details['auction_id']));
 					$open_auctions_content .= '<tr class="' . $background . '"> '.
 						'	<td align="center"><a href="' . $auction_link . '"><img src="thumbnail.php?pic=' . $auction_image . '&w=96&sq=Y&b=Y" border="0" alt="' . $item_details['name'] . '"></a></td> '.
-						'	<td class="contentfont"><a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a></td> '.
-						'	<td class="contentfont"><a href="' . $auction_link . '">' . $item_details['name'] . '</a> ' . 
+						'	<td class=""><a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a></td> '.
+						'	<td class=""><a href="' . $auction_link . '">' . $item_details['name'] . '</a> ' . 
 						$item->relisted_tick($item_details['is_relisted_item']) . 
 						$item->new_message_tick($item_details['message_id']) . $item->listed_in($item_details) .
 						(($item_details['offer_id'] || $item_details['swap_id']) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_VIEW_AUCTION_OFFERS . '</a> ]' : '') .

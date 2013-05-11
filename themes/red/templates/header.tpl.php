@@ -32,9 +32,8 @@
         <script src="themes/<?php echo $setts['default_theme']; ?>/nivo_slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
                 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 		<!-- script for share this in product detail page -->
-		<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "a5a312de-9cc9-4e0f-bf28-7c34014db063", doNotHash: false, doNotCopy: false, hashAddressBar: false, onhover:false});</script>
+		<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+		<script type="text/javascript">stLight.options({publisher: "ur-c3f4d9c-f04c-766f-7689-f3cc1fd096bb", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
         <!-- script for orther items slider -->
 		<script src="themes/<?php echo $setts['default_theme'];?>/jquery.bxslider.min.js"></script>
 		<!-- bxSlider CSS file -->
@@ -172,6 +171,7 @@
                     echo "</ul></li>";
                     }
                     ?>
+					<li><a href='categories.php'>Tất cả danh mục</a></li>
                 </ul>
                 </div><?php } ?>
 				<!---//only show on homepage-->
@@ -212,8 +212,13 @@
 		<!---only show on homepage-->
         <?php
         if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "index.php") {
-            $cats = array(2117, 2114, 2092);
-            $categories = get_cat_name($cats);
+            $cats = array(2409, 2347, 2320, 2722, 2774, 2176);
+			$order_array = 'ORDER BY';
+			foreach ($cats as $item) {
+			  $order_array .= ' category_id = ' . $item . ' DESC,';
+			}
+			$order_array = trim($order_array, ',');
+            $categories = get_cat_name($cats,$order_array);
         ?>
 		<div id="products_wrapper" style="width:725px">
         <div id="tabs">
@@ -225,6 +230,10 @@
             ?>
             </ul>
         </div>
+		</div>
+		<div id="ads">
+			<img src="images/ads1.png"></img>
+			<img src="images/ads2.png"></img>
 		</div>
         <div style="clear:both"></div>
 		<?php } ?>

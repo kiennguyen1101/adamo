@@ -13,7 +13,7 @@
 <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
 <div style="padding: 5px; border-top:1px solid #cccccc; color:#9999FF;overflow: hidden;margin-bottom: 20px;" class="footerfont">
 	<div class="footer_column">
-		<h2>Adamo E-commerce</h2>
+		<h2>Adamo e-com</h2>
 		<ul> 	
 			<li><a href="<?php echo $register_link; ?>"><?php echo $register_btn_msg; ?></a></li>
 			<li><a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a></li>
@@ -40,16 +40,15 @@
 		<h2>Liên hệ</h2>
 		<ul>
 			<li class="contact_us"><?php if ($layout['is_contact']) { ?><a href="<?php echo process_link('content_pages', array('page' => 'contact_us')); ?>"><?php echo MSG_BTN_CONTACT_US; ?></a><?php } ?></li>
-			<li class="facebook"><a href="https://www.facebook.com/pages/Adamovn/117075068488687?notif_t=fbpage_fan_invite">Facebook</a></li>
-			<li class="twitter"><a href="#">Twitter</a></li>
-			<li class="youtube"><a href="#">Youtube</a></li>
+			<li class="facebook"><a href="https://www.facebook.com/adamovietnam">Facebook</a></li>
+			<li class="twitter"><a href="https://twitter.com/adamovietnam">Twitter</a></li>
 		</ul>
   
   <?php echo $custom_pages_links; ?> 
   </div>
-  <div class="footer_banner">
+  <div class="footer_column">
 	<h2>Đối tác</h2>
-	<a href=""><img src="http://adamo.vn/themes/red/img/SSL_305x81_ani1.gif" border="0"></a>
+	<a href=""><img src="http://adamo.vn/themes/red/img/SSL_200x40_ani1.gif" border="0"></a>
 	<a href="" id="cnbanner">SSL</a>
 	<script language="JavaScript" src="http://www.comodo.com/javascript/banner.js" type="text/javascript"></script>
 	<img src="http://adamo.vn/themes/red/img/nldb_s_200.png" border="0">

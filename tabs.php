@@ -61,9 +61,9 @@
       $pagination .= "<div style='clear:both'></div><div class=\"pagination\">";
       //previous button
       if ($page > 1)
-        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">Â«</a>";
+        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">«</a>";
       else
-        $pagination.= "<span class=\"disabled pre_btn\">Â«</span>";
+        $pagination.= "<span class=\"disabled pre_btn\">«</span>";
 
       //pages	
       if ($lastpage < 7 + ($adjacents * 2)) { //not enough pages to bother breaking it up
@@ -118,9 +118,9 @@
 
       //next button
       if ($page < $counter - 1)
-        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">Â»</a>";
+        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">»</a>";
       else
-        $pagination.= "<span class=\"disabled next_btn\">Â»</span>";
+        $pagination.= "<span class=\"disabled next_btn\">»</span>";
       $pagination.= "</div>\n";
     }
     echo $pagination;

@@ -23,7 +23,7 @@ myPopup = '';
 </SCRIPT>
 <?php echo $members_area_header; ?>
 <?php echo $members_area_header_menu; ?>
-<br>
+
 <?php echo $msg_store_cats_modified; ?>
 <?php echo $msg_pending_gc_transactions; ?>
 <?php echo $msg_unpaid_endauction_fees; ?>

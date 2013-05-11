@@ -14,7 +14,7 @@ include_once ('../includes/global.php');
 
 include_once ('../includes/functions_login.php');
 
-if (eregi('logout', $_GET['option']))
+//if (eregi('logout', $_GET['option']))if (stristr($_GET['option'], 'logout')) 
 {
 	logout(true);
 }

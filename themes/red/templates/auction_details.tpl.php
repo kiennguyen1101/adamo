@@ -43,19 +43,15 @@ function openPopup(url) {
 
 
       <?php if ($ad_display == 'live') { ?>
-      <img src="themes/<?php echo $setts['default_theme'];?>/img/system/home.gif" align="absmiddle" border="0" hspace="5"> <a href="<?php echo process_link('index');?>">
-         <?php echo MSG_BACK_TO_HP;?>
+      <!--<img src="themes/<?php echo $setts['default_theme'];?>/img/system/home.gif" align="absmiddle" border="0" hspace="5"> <a href="<?php echo process_link('index');?>">
+         <?php echo MSG_BACK_TO_HP;?>-->
          
       <?php } ?>
      
 	  
-         <p><?php echo MSG_MAIN_CATEGORY;?><?php echo $main_category_display;?></P>
+         <p><?php echo $main_category_display;?></P>
            
-            <?php if ($item_details['addl_category_id']) { ?>
-           
-         <p><?php echo MSG_ADDL_CATEGORY;?><?php echo $addl_category_display;?></p>
-            
-            <?php } ?>
+
 
 <div id="product_detail">  
 <!-- phan danh cho anh san pham ------------->
@@ -76,10 +72,11 @@ function openPopup(url) {
 				<h2><?php echo $item_details['name'];?></h2>
 				
 				<div class="social">
-					<span class='st_sharethis' displayText=''></span>
-<span class='st_fblike' displayText=''></span>
+					<span class='st_facebook_hcount' displayText=''></span>
+					<span class='st_twitter_hcount' displayText=''></span>
+					<span class='st_fblike_hcount' displayText=''></span>
 					<a id="watch" href="<?php echo process_link('auction_details', array('auction_id' => $item_details['auction_id'], 'option' => 'item_watch'));?>">
-						<img style="width:20px;height:20px;"src="themes/<?php echo $setts['default_theme'];?>/img/system/watch.png" align="absmiddle" border="0" hspace="5">	
+						<img style="width:60px;height:22px;"src="themes/<?php echo $setts['default_theme'];?>/img/system/watchthis.png" align="absmiddle" border="0" hspace="5">	
 					</a>
 				</div>
 				
@@ -120,7 +117,7 @@ function openPopup(url) {
                            <?php if ($item_details['auction_type']!='dutch') { ?>
                           
                            <?php } ?>
-                          <p><?php echo $item_details['currency'];?></p>
+                         
                         <input name="max_bid" type="text" id="max_bid" size="20" />
 						<input name="form_place_bid" type="submit" id="form_place_bid" value="<?php echo MSG_PLACE_BID;?>" <?php echo (!$item_can_bid['result'] || $blocked_user) ? 'disabled' : ''; ?>>
                   
@@ -337,8 +334,8 @@ function openPopup(url) {
         	<?php echo database::add_special_chars($item_details['description']);?>
         </div>
 		<div id="tab2" class="tabContents">
-        	<?php echo MSG_SHIPPING_CONDITIONS;?>
-				 <?php echo ($item_details['shipping_method'] == 1) ? MSG_BUYER_PAYS_SHIPPING : MSG_SELLER_PAYS_SHIPPING; ?>
+				<p><?php echo MSG_SHIPPING_CONDITIONS;?> :
+				 <?php echo ($item_details['shipping_method'] == 1) ? MSG_BUYER_PAYS_SHIPPING : MSG_SELLER_PAYS_SHIPPING; ?></p>
 			  
 			   <?php if ($item_details['shipping_int'] == 1) { ?>
 			   
@@ -346,15 +343,15 @@ function openPopup(url) {
 			  
 			   <?php } ?>
 			   <?php if ($setts['enable_shipping_costs']) { ?>
-			   <?php echo MSG_POSTAGE;?>
-				  <?php echo $fees->display_amount($item_details['postage_amount'], $item_details['currency']); ?>
+			   <p><?php echo MSG_POSTAGE;?> :
+				  <?php echo $fees->display_amount($item_details['postage_amount'], $item_details['currency']); ?></p>
 			   
-			   <?php echo MSG_SHIP_METHOD;?>
-				  <?php echo $item_details['type_service'];?>
+				<p><?php echo MSG_SHIP_METHOD;?> :
+				  <?php echo $item_details['type_service'];?></p>
 			   
 			   <?php if ($item_details['shipping_details']) { ?>
-			   <?php echo MSG_SHIPPING_DETAILS;?>
-				  <?php echo $item_details['shipping_details'];?>
+			   <p><?php echo MSG_SHIPPING_DETAILS;?> :
+				  <?php echo $item_details['shipping_details'];?></p>
 			   
 			   <?php } ?>
 			   <?php } ?>
@@ -449,9 +446,6 @@ function openPopup(url) {
             <a href="javascript:popUp('<?php echo process_link('auction_print', array('auction_id' => $item_details['auction_id']));?>');"><img src="themes/<?php echo $setts['default_theme'];?>/img/system/print.gif" align="absmiddle" border="0" hspace="5">
          <?php echo MSG_PRINT_VIEW;?>
          </a>
-      <a href="<?php echo process_link('auction_details', array('auction_id' => $item_details['auction_id'], 'option' => 'auction_friend'));?>"><img src="themes/<?php echo $setts['default_theme'];?>/img/system/tofriend.gif" align="absmiddle" border="0" hspace="5">
-         <?php echo MSG_SEND_TO_FRIEND;?>
-         </a> 
    
    <?php if (!empty($direct_payment_box)) { ?>
    
@@ -471,12 +465,12 @@ function openPopup(url) {
 
 
 
-
+<br/>
 <?php if ($ad_display == 'live') { ?>
-<?php echo MSG_THE_POSTER;?>
+<b><?php echo MSG_THE_POSTER;?>
          <?php echo $user_details['username'];?>
         
-         <?php echo MSG_ASSUMES_RESP_EXPL;?>
+         <?php echo MSG_ASSUMES_RESP_EXPL;?></b>
      
 
 <?php } ?>

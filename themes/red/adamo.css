@@ -179,6 +179,17 @@ select#parent_id{
     margin-top:15px;
 }
 .c2{background:none}
+#products_wrapper{
+	float:left
+}
+#ads{
+	float:left;
+	margin-left: 15px;
+	width:220px
+}
+#ads img{
+	margin-top:15px
+}
 /****TABS****/
 .img-wrap{
 	height:250px;
