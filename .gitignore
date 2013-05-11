@@ -1,7 +1,7 @@
-﻿/nbproject/
-/cache/
+﻿nbproject/
+cache/
 online_users.txt
-/templates_compiled/
-/includes/config.php
+templates_compiled/
+includes/config.php
 .htaccess
-/nbproject/private/
+nbproject/private/
