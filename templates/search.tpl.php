@@ -192,6 +192,7 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 			 <input type="checkbox" name="quantity" value="1" <?php echo ($item_details['quantity'] == 1) ? 'checked' : '';?>>
 			 <?php echo MSG_SEARCH_QUANTITY_DUTCH_ONLY;?>
 		</li>
+		<!--
 		<li>
 			<input type="checkbox" name="direct_payment_only" value="1" <?php echo ($item_details['direct_payment_only'] == 1) ? 'checked' : '';?>>
 			<?php echo MSG_SEARCH_DIRECT_PM_ONLY;?>
@@ -200,6 +201,7 @@ if ( !defined('INCLUDED') ) { die("Access Denied"); }
 			<input type="checkbox" name="regular_payment_only" value="1" <?php echo ($item_details['regular_payment_only'] == 1) ? 'checked' : '';?>>
 			<?php echo MSG_SEARCH_REGULAR_PM_ONLY;?>
 		</li>
+		-->
 		<li>
 			<?php if ($setts['enable_swaps']) { ?>
 			<input type="checkbox" name="enable_swap" value="1" <?php echo ($item_details['enable_swap'] == 1) ? 'checked' : '';?>>

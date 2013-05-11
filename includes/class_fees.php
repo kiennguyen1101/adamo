@@ -1237,7 +1237,7 @@ class fees extends tax
 
 		$output = array('display' => null, 'amount' => 0);
 
-		$output['display'] = '<tr class="c4"> '.
+		$output['display'] = '<tr class="c4 fees_preview"> '.
       	'	<td colspan="3">' . GMSG_AUCTION_FEES . '</td> '.
    		'</tr> '.
    		'<tr class="c5"> '.
@@ -1277,7 +1277,7 @@ class fees extends tax
    					$output['amount'] = $this->round_number($output['amount'] - $output['amount'] * $this->fee['relist_fee_reduction'] / 100);
    				}
 
-   				$output['display'] .= '<tr class="c1"> '.
+   				$output['display'] .= '<tr class="c1 fees_preview"> '.
    					'	<td align="right">' . GMSG_SETUP_FEE . '</td> '.
    					'	<td nowrap colspan="2">' . $fee_display . $value['display'] . '</td> '.
    					'</tr> ';
@@ -1314,8 +1314,9 @@ class fees extends tax
 
    			if ($fee_details['amount']) ## only do this if there is a fee
    			{
-   				$output['display'] .= '<tr class="c1"> '.
+   				$output['display'] .= '<tr class="c1 fees_preview"> '.
    					'	<td align="right">' . $value[0] . '</td> '.
+					'	<td width:50px ></td> '.
    					'	<td nowrap colspan="2">' . $fee_details['display'] . '</td> '.
    					'</tr> ';
 
@@ -1337,7 +1338,7 @@ class fees extends tax
     		}
    	}
 
-		$output['display'] .= '<tr class="c3"> '.
+		$output['display'] .= '<tr class="c3 fees_preview"> '.
   			'	<td align="right">' . GMSG_TOTAL . '</td> '.
   			'	<td nowrap colspan="2">' . $this->display_amount($output['amount'], $this->setts['currency']) . '</td> '.
   			'</tr> ';

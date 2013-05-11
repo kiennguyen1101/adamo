@@ -622,6 +622,9 @@ h2#orther_items_mes {
 .fees_form {
 	margin:20px 0px;
 }
+.fees_preview  td{
+	padding:5px 0px;
+}
 
 /************************************** css for bid.php **************************************/
 
