@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -36,8 +36,9 @@
     $msg_changes_saved = '<p align="center" class="contentfont">' . AMSG_CHANGES_SAVED . '</p>';
 
     $form_submitted = false;
-    //if (!$start)
-    //$start = 0;
+    
+     if (!$start)
+      $start = 0;
     $limit = 20;
 
     $order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'w.wanted_ad_id';

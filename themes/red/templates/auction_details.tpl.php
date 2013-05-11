@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -238,7 +238,7 @@ myPopup = '';
 
         <h2><?php echo $user_details['username']; ?></h2>
 
-        <p>Đánh giá : <?php echo user_pics($user_details['user_id']); ?></p>
+        <p>��nh gi� : <?php echo user_pics($user_details['user_id']); ?></p>
 
 <?php if ($ad_display == 'live') { ?>
 
@@ -291,10 +291,10 @@ myPopup = '';
                   <?php
                   if ($setts['enable_shipping_costs']) {
                     if ($fees->display_amount($item_details['postage_amount']) > 0) {
-                      echo '<em>Vận chuyển : ' . $fees->display_amount($item_details['postage_amount'], $item_details['currency']) . '</em>';
+                      echo '<em>V?n chuy?n : ' . $fees->display_amount($item_details['postage_amount'], $item_details['currency']) . '</em>';
                     }
                     else {
-                      echo '<em>Vận chuyển : Miễn phí</em>';
+                      echo '<em>V?n chuy?n : Mi?n ph�</em>';
                     }
                   }
                   ?>

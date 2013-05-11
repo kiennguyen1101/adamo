@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('FRMCHK_USER')) {
@@ -16,6 +16,7 @@
   $fv->check_box($frmchk_details['state'], MSG_STATE, array('field_empty', 'field_html'));
 
   if (!$frmchk_user_edit) {
+
     $fv->check_box($frmchk_details['phone_b'], MSG_PHONE_B, array('field_empty', 'field_html'));
   }
   else {

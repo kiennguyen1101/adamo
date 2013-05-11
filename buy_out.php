@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 
 
   session_start();
@@ -6,11 +7,6 @@
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
 
   if ($session->value('membersarea') != 'Active') {
@@ -61,6 +57,7 @@
           sleep(1); ## MyPHPAuction 2009 we dont want to create a huge load on the database.
         }
       }
+      
       try {
         $db->beginTransaction();
 
@@ -78,10 +75,11 @@
 			bid_in_progress=0 WHERE auction_id='" . $item_details['auction_id'] . "'");
 
         $action = 'buy_out_success';
+
         $db->Commit();
       } catch (error $e) {
         $db->rollBack();
-        $action = 'buy_out_error';
+        $action = 'buy_out_error';              
       }
     }
 

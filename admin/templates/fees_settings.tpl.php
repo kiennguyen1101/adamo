@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -77,8 +77,7 @@
             <input name="min_invoice_value" type="text" id="min_invoice_value" value="<?php echo $row_settings['min_invoice_value']; ?>" size="20">
           </td>
         </tr>
-      <?php
-      }
+      <?php }
       else {
         ?>
         <input name="init_credit" type="hidden" value="<?php echo $row_settings['init_credit']; ?>">

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
   define('IN_SITE', 1);
 

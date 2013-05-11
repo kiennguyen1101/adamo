@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -44,19 +44,18 @@
             echo ($address_type == 1) ? AMSG_IP_BAN : AMSG_EMAIL_BAN;
             ?>
             <input type="hidden" name="address_type" value="<?php echo $address_type; ?>">
-          <?php
-          }
+          <?php }
           else {
             ?>
             <select name="address_type" onchange="submit_form_b(form_content_bans);">
               <option value="0" selected>
-    <?php echo AMSG_SELECT_ADDRESS_TYPE; ?>
+                <?php echo AMSG_SELECT_ADDRESS_TYPE; ?>
               </option>
               <option value="1" <?php echo ($address_type == 1) ? 'selected' : ''; ?>>
-    <?php echo AMSG_IP_BAN; ?>
+                <?php echo AMSG_IP_BAN; ?>
               </option>
               <option value="2" <?php echo ($address_type == 2) ? 'selected' : ''; ?>>
-    <?php echo AMSG_EMAIL_BAN; ?>
+            <?php echo AMSG_EMAIL_BAN; ?>
               </option>
             </select>
   <?php } ?></td>

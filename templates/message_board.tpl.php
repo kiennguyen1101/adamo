@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -55,8 +50,7 @@
         <td></td>
         <td class="contentfont"><a href="content_pages.php?page=contact_us&topic_id=<?php echo $topic_id; ?>"><?php echo MSG_RESPOND_BY_EMAIL; ?></a></td>
       </tr>   
-      <?php
-    }
+    <?php }
     else if ($session->value('adminarea') != 'Active') {
       ?>
       <tr class="c4">
@@ -84,6 +78,6 @@
       <tr>
         <td align="center" colspan="2"><?php echo MSG_MSGBOARD_LOGGED_AS_ADMIN; ?></td>
       </tr>
-    <?php } ?>   
+  <?php } ?>   
 </table>
 

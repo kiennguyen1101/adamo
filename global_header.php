@@ -1,11 +1,4 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
-
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -23,7 +16,6 @@
 ## we will add lightbox to the variable below to be applied automatically to all skins
   $page_meta_tags = $meta_tags_details['meta_tags'];
 
-//if (eregi('auction_details.php', $_SERVER['PHP_SELF']))
   if (stristr($_SERVER['PHP_SELF'], 'auction_details.php')) {
     $page_meta_tags .= '<script type="text/javascript" src="lightbox/js/prototype.js"></script> 
 		<script type="text/javascript" src="lightbox/js/scriptaculous.js?load=effects,builder"></script> 
@@ -42,7 +34,8 @@
   if ($setts['user_lang']) {
     $template->set('languages_list', list_languages('site', false, null, true));
   }## MyPHPAuction 2009 set members/login box
-
+  $menu_box_header = header7(MSG_MEMBERS_AREA_TITLE . ' [<a title="show/hide" class="hidelayer" id="exp1102170142_link" href="javascript: void(0);" onclick="toggle(this, \'exp1102170142\');">&#8211;</a>]');
+  $template->set('menu_box_header', $menu_box_header);
 
   $category_box_header = headercat(MSG_CATEGORIES . ' [<a title="show/hide" class="hidelayer" id="exp1102170166_link" href="javascript: void(0);" onclick="toggle(this, \'exp1102170166\');">&#8211;</a>]');
   $template->set('category_box_header', $category_box_header);
@@ -126,9 +119,11 @@
       $announcements_box_content = $template->process('header_announcements_box.tpl.php');
       $template->set('announcements_box_content', $announcements_box_content);
     }
+
+    $menu_box_content = $template->process('header_members_menu.tpl.php');
+    $template->set('menu_box_content', $menu_box_content);
   }
 
-//if ($setts['enable_header_counter'] && eregi('index.php', $_SERVER['PHP_SELF']))
   if ($setts['enable_header_counter'] && stristr($_SERVER['PHP_SELF'], 'index.php')) {
     $template->set('header_site_status', header5(MSG_SITE_STATUS));
 

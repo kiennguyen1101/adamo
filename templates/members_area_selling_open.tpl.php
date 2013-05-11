@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -22,7 +22,6 @@
     <td class="membmenu" align="center" valign="top"><?php echo MSG_MAX_BID; ?><br><?php echo $page_order_max_bid; ?></td>
     <td class="membmenu" align="center" valign="top"><?php echo GMSG_OPTIONS; ?></td>
   </tr>
-
   <?php echo $open_auctions_content; ?>
   <?php if ($nb_items > 5) { ?>
       <tr class="no_border">

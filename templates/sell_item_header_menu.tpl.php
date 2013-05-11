@@ -1,14 +1,11 @@
-﻿<?php
-#################################################################
-## MyPHPAuction 2009															##
-##-------------------------------------------------------------##
-## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
+
   if (!defined('INCLUDED')) {
     die("Access Denied");
   }
 ?>
+
 <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sellsteptab">
   <tr align="center">
     <td class="selldigit" width="<?php echo $header_menu_cell_width; ?>">1</td>

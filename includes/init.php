@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
   $current_version = "6.03";
 
   (array) $setts = NULL;
@@ -29,7 +30,7 @@
     include_once($fileExtension . "language/" . $session->value("site_lang") . "/site.lang.php");
   }
 
-  if (IN_ADMIN == 1) {
+  if (@IN_ADMIN == 1) {
     include_once($fileExtension . "language/" . $setts['admin_lang'] . "/admin.lang.php");
   }
 
@@ -53,35 +54,35 @@
     }
   }
 
-  if (!eregi("sell_item.php", $_SERVER['PHP_SELF']) || !eregi("sell_item.php", $_SERVER['PHP_SELF']) || $_REQUEST['option'] == "new_item" || eregi("sell_item.php", $_SERVER['PHP_SELF']) && $_REQUEST['option'] == "sell_similar") {
+  if (!stristr($_SERVER['PHP_SELF'], "sell_item.php") || !stristr($_SERVER['PHP_SELF'], "sell_item.php") || $_REQUEST['option'] == "new_item" || stristr($_SERVER['PHP_SELF'], "sell_item.php") && $_REQUEST['option'] == "sell_similar") {
     $session->unregister("auction_id");
     $session->unregister("refresh_id");
   }
 
-  if (!eregi("wanted_manage.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "wanted_manage.php")) {
     $session->unregister("wanted_ad_id");
     $session->unregister("wa_refresh_id");
   }
 
-  if (!eregi("edit_item.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "edit_item.php")) {
     $session->unregister("edit_refresh_id");
   }
 
-  if (!eregi("bid.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "bid.php")) {
     $session->unregister("bid_id");
   }
 
-  if (!eregi("buy_out.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "buy_out.php")) {
     $session->unregister("buyout_id");
   }
 
-  if (!eregi("make_offer.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "make_offer.php")) {
     $session->unregister("make_offer_id");
   }
 
-  if (!eregi("swap_offer.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr($_SERVER['PHP_SELF'], "swap_offer.php")) {
     $session->unregister("swap_offer_id");
   }
-
-  $start = abs(intval($_GET['start']));
+  if (isset($_GET['start']))
+    $start = abs(intval($_GET['start']));
 ?>

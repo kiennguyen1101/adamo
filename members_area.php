@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -6,16 +6,9 @@
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_shop.php');
-  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
   include_once ('includes/functions_login.php');
-  include_once ('includes/class_messaging.php');
-  include_once ('includes/class_reputation.php');
+
 
   if (!$session->value('user_id')) {
     header_redirect('login.php');
@@ -119,12 +112,12 @@
 
         while ($payment_details = $db->fetch_array($sql_pending_gc_transactions)) {
           $pending_gc_transactions_content .= '<tr class="contentfont c1"> ' .
-            '	<td>' . $payment_details['gc_payment_description'] . '</td> ' .
-            '	<td nowrap align="center">' . field_display($payment_details['seller_id'], '<b>' . MSG_ADMIN . '</b>', $payment_details['username']) . '</td> ' .
-            '	<td nowrap align="center">' . $fees->display_amount($payment_details['gc_price'], $payment_details['gc_currency']) . '</td> ' .
-            '	<td nowrap align="center">' . show_date($payment_details['reg_date']) . '</td> ' .
-            '	<td nowrap align="center">' . field_display($payment_details['seller_id'], MSG_SITE_PAYMENT, MSG_DIRECT_PAYMENT) . '</td> ' .
-            '</tr> ';
+              '	<td>' . $payment_details['gc_payment_description'] . '</td> ' .
+              '	<td nowrap align="center">' . field_display($payment_details['seller_id'], '<b>' . MSG_ADMIN . '</b>', $payment_details['username']) . '</td> ' .
+              '	<td nowrap align="center">' . $fees->display_amount($payment_details['gc_price'], $payment_details['gc_currency']) . '</td> ' .
+              '	<td nowrap align="center">' . show_date($payment_details['reg_date']) . '</td> ' .
+              '	<td nowrap align="center">' . field_display($payment_details['seller_id'], MSG_SITE_PAYMENT, MSG_DIRECT_PAYMENT) . '</td> ' .
+              '</tr> ';
         }
 
         $template->set('pending_gc_transactions_content', $pending_gc_transactions_content);
@@ -132,7 +125,7 @@
       else {
         $page_link = process_link('members_area', array('page' => 'account', 'section' => 'management'));
         $msg_pending_gc_transactions = '<p align="center" class="errormessage contentfont">' . MSG_PENDING_GC_PAYMENTS_A .
-          ' [ <a href="' . $page_link . '">' . MSG_HERE . '</a> ] ' . MSG_PENDING_GC_PAYMENTS_B . '.</p>';
+            ' [ <a href="' . $page_link . '">' . MSG_HERE . '</a> ] ' . MSG_PENDING_GC_PAYMENTS_B . '.</p>';
       }
       $template->set('msg_pending_gc_transactions', $msg_pending_gc_transactions);
     }
@@ -148,22 +141,22 @@
 
       $eoa_fee->set_fees($session->value('user_id'));
 
-      if (eregi('b', $eoa_fee->fee['endauction_fee_applies'])) {
+      if (stristr($eoa_fee->fee['endauction_fee_applies'], 'b')) {
         $unpaid_fees = $db->count_rows('winners', "WHERE buyer_id='" . $session->value('user_id') . "' AND active!=1 AND payment_status!='confirmed'");
 
         if ($unpaid_fees) {
           $page_link = process_link('members_area', array('page' => 'bidding', 'section' => 'won_items'));
           $msg_unpaid_endauction_fees = '<p align="center" class="errormessage contentfont">' . MSG_UNPAID_EOAFEES_A .
-            ' [ <a href="' . $page_link . '">' . MSG_WON_ITEMS_PAGE . '</a> ] ' . MSG_UNPAID_EOAFEES_B . '.</p>';
+              ' [ <a href="' . $page_link . '">' . MSG_WON_ITEMS_PAGE . '</a> ] ' . MSG_UNPAID_EOAFEES_B . '.</p>';
         }
       }
-      else if (eregi('s', $eoa_fee->fee['endauction_fee_applies'])) {
+      else if (stristr($eoa_fee->fee['endauction_fee_applies'], 's')) {
         $unpaid_fees = $db->count_rows('winners', "WHERE seller_id='" . $session->value('user_id') . "' AND active!=1 AND payment_status!='confirmed'");
 
         if ($unpaid_fees) {
           $page_link = process_link('members_area', array('page' => 'selling', 'section' => 'sold'));
           $msg_unpaid_endauction_fees = '<p align="center" class="errormessage contentfont">' . MSG_UNPAID_EOAFEES_A .
-            ' [ <a href="' . $page_link . '">' . MSG_SOLD_ITEMS_PAGE . '</a> ] ' . MSG_UNPAID_EOAFEES_B . '.</p>';
+              ' [ <a href="' . $page_link . '">' . MSG_SOLD_ITEMS_PAGE . '</a> ] ' . MSG_UNPAID_EOAFEES_B . '.</p>';
         }
       }
 
@@ -327,7 +320,7 @@
           (string) $display_balance_details = null;
           $display_balance_details = $user->show_balance($row_user['balance'], $setts['currency']);
 
-          if ($user_payment_mode == 2 && $row_user['balance'] <= $setts['min_invoice_value']) {
+          if ($user_payment_mode == 2 && $row_user['balance'] >= $setts['min_invoice_value']) {
             $display_balance_details .= ' [ <a href="fee_payment.php?do=clear_balance">' . MSG_CLEAR_ACC_BALANCE . '</a> ]';
           }
 
@@ -377,9 +370,9 @@
           $show_history_table = true;
 
           $additional_vars .= '&do=view_history&date1_month=' . $_REQUEST['date1_month'] .
-            '&date1_year=' . $_REQUEST['date1_year'] . '&date1_day=' . $_REQUEST['date1_day'] .
-            '&date2_month=' . $_REQUEST['date2_month'] . '&date2_year=' . $_REQUEST['date2_year'] .
-            '&date2_day=' . $_REQUEST['date2_day'];
+              '&date1_year=' . $_REQUEST['date1_year'] . '&date1_day=' . $_REQUEST['date1_day'] .
+              '&date2_month=' . $_REQUEST['date2_month'] . '&date2_year=' . $_REQUEST['date2_year'] .
+              '&date2_day=' . $_REQUEST['date2_day'];
 
           $history_details['start_time'] = get_box_timestamp($_REQUEST, 1);
           $history_details['start_time'] = ($history_details['start_time'] > 0) ? $history_details['start_time'] : 0;
@@ -412,13 +405,13 @@
             $history_row = $item->history_row($invoice_details);
 
             $history_table_content .= '<tr class="' . $background . ' contentfont"> ' .
-              '	<td align="center">' . $history_row['item_id'] . '</td> ' .
-              '	<td>' . $history_row['invoice_name'] . '</td> ' .
-              '	<td align="center">' . $history_row['payment_type'] . '</td> ' .
-              '	<td align="center">' . $history_row['date'] . '</td> ' .
-              '	<td align="center">' . $history_row['amount'] . '</td> ' .
-              //'	<td align="center">' . $history_row['balance'] . '</td> '.
-              '</tr>';
+                '	<td align="center">' . $history_row['item_id'] . '</td> ' .
+                '	<td>' . $history_row['invoice_name'] . '</td> ' .
+                '	<td align="center">' . $history_row['payment_type'] . '</td> ' .
+                '	<td align="center">' . $history_row['date'] . '</td> ' .
+                '	<td align="center">' . $history_row['amount'] . '</td> ' .
+                //'	<td align="center">' . $history_row['balance'] . '</td> '.
+                '</tr>';
           }
 
           $template->set('history_table_content', $history_table_content);
@@ -480,8 +473,8 @@
           }
           else {
             $display_formcheck_errors = '<tr> ' .
-              '	<td align="center">' . MSG_ERROR_USER_DOESNT_EXIST . '</td> ' .
-              '</tr> ';
+                '	<td align="center">' . MSG_ERROR_USER_DOESNT_EXIST . '</td> ' .
+                '</tr> ';
             $template->set('display_formcheck_errors', $display_formcheck_errors);
           }
         }
@@ -544,12 +537,12 @@
             $content_options = '<a href="members_area.php?do=delete_message&type=receiver_deleted&message_id=' . $msg_details['message_id'] . $additional_vars . $limit_link . $order_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');">' . MSG_DELETE . '</a>';
 
             $received_messages_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"> ' .
-              '		<img src="themes/' . $setts['default_theme'] . '/img/system/' . $ico_read . '_mess.gif" border="0" align="absmiddle" hspace="5"><a href="' . $msg->msg_board_link($msg_details) . '">' . (($msg_details['admin_message']) ? GMSG_SITE_ADMIN : $msg_details['sender_username']) . '</a></td> ' .
-              '	<td class="contentfont">' . $msg->message_subject($msg_details) . '</td>' .
-              '	<td align="center">' . show_date($msg_details['reg_date']) . '</td> ' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"> ' .
+                '		<img src="themes/' . $setts['default_theme'] . '/img/system/' . $ico_read . '_mess.gif" border="0" align="absmiddle" hspace="5"><a href="' . $msg->msg_board_link($msg_details) . '">' . (($msg_details['admin_message']) ? GMSG_SITE_ADMIN : $msg_details['sender_username']) . '</a></td> ' .
+                '	<td class="contentfont">' . $msg->message_subject($msg_details) . '</td>' .
+                '	<td align="center">' . show_date($msg_details['reg_date']) . '</td> ' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -596,11 +589,11 @@
             $content_options = '<a href="members_area.php?do=delete_message&type=sender_deleted&message_id=' . $msg_details['message_id'] . $additional_vars . $limit_link . $order_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');">' . MSG_DELETE . '</a>';
 
             $sent_messages_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . $msg->msg_board_link($msg_details) . '">' . $msg_details['receiver_username'] . '</a></td> ' .
-              '	<td class="contentfont">' . $msg->message_subject($msg_details) . '</td>' .
-              '	<td align="center">' . show_date($msg_details['reg_date']) . '</td> ' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . $msg->msg_board_link($msg_details) . '">' . $msg_details['receiver_username'] . '</a></td> ' .
+                '	<td class="contentfont">' . $msg->message_subject($msg_details) . '</td>' .
+                '	<td align="center">' . show_date($msg_details['reg_date']) . '</td> ' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -756,14 +749,14 @@
 
             $current_bids_content .= '<tr class="' . $background . '"> ' .
               '	<td align="center"><a href="' . $auction_link . '"><img src="thumbnail.php?pic=' . $auction_image . '&w=96&sq=Y&b=Y" border="0" alt="' . $bid_details['name'] . '"></a></td> ' .
-              '	<td class="contentfont"><a href="' . $auction_link . '"># ' . $bid_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . $auction_link . '">' . $bid_details['name'] . '</a></td>' .
-              '	<td align="center">' . $fees->display_amount($bid_details['bid_amount'], $bid_details['currency']) . '</td> ' .
-              '	<td align="center">' . $fees->display_amount($bid_details['bid_proxy'], $bid_details['currency']) . '</td>' .
-              '	<td align="center">' . show_date($bid_details['bid_date']) . '</td>' .
-              '	<td align="center">' . field_display($bid_details['bid_out'], GMSG_ACTIVE, GMSG_INACTIVE) . '</td>' .
-              '	<td align="center" class="smallfont">' . $options_output . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . $auction_link . '"># ' . $bid_details['auction_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . $auction_link . '">' . $bid_details['name'] . '</a></td>' .
+                '	<td align="center">' . $fees->display_amount($bid_details['bid_amount'], $bid_details['currency']) . '</td> ' .
+                '	<td align="center">' . $fees->display_amount($bid_details['bid_proxy'], $bid_details['currency']) . '</td>' .
+                '	<td align="center">' . show_date($bid_details['bid_date']) . '</td>' .
+                '	<td align="center">' . field_display($bid_details['bid_out'], GMSG_ACTIVE, GMSG_INACTIVE) . '</td>' .
+                '	<td align="center" class="smallfont">' . $options_output . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -831,7 +824,7 @@
 
               $sale_fee->set_fees($item_details['buyer_id'], $item_details['category_id']); ## MyPHPAuction 2009 by default the seller will pay
 
-              if (eregi('b', $sale_fee->fee['endauction_fee_applies'])) {
+              if (stristr($sale_fee->fee['endauction_fee_applies'], 'b')) {
                 $content_options = '&#8226; <a href="fee_payment.php?do=sale_fee_payment&winner_id=' . $item_details['winner_id'] . '">' . MSG_PAY_ENDAUCTION_FEE . '</a>';
               }
               else {
@@ -841,56 +834,56 @@
 
             $won_auctions_content .= '<tr class="' . $background . '"> ' .
               '	<td class="contentfont with_border"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['auction_id'] . '</a> - ' .
-              '		<a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display($item_details['auction_name'], MSG_AUCTION_DELETED) . '</a>' .
+                '		<a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display($item_details['auction_name'], MSG_AUCTION_DELETED) . '</a>' .
               (($item_paid && !empty($item_details['direct_payment']) && !$item_details['direct_payment_paid'] && !$item_details['flag_paid'] && $item_details['bid_amount'] > 0) ? '<br><br>[ <a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display(MSG_PAY_WITH_DIRECT_PAYMENT, '') . '</a> ]' : '') .
-              '	</td>' .
+                '	</td>' .
               '	<td align="center" class="with_border">' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td>' .
               '	<td align="center" class="with_border">' . MSG_REQUESTED . ': ' . $item_details['quantity_requested'] . '<br> ' .
-              '		' . MSG_OFFERED . ': ' . $item_details['quantity_offered'] . '</td> ' .
+                '		' . MSG_OFFERED . ': ' . $item_details['quantity_offered'] . '</td> ' .
               '	<td align="center" class="with_border"> ';
 
             if ($item_paid) {
               $won_auctions_content .= '<table width="100%" border="0" cellpadding="3" cellspacing="2"> ' .
-                '	<tr valign="top" bgcolor="#FFFFF"> ' .
-                '		<td class="smallfont" nowrap><b>' . MSG_USERNAME . '</b></td> ' .
-                '		<td class="smallfont" width="100%">' . field_display($item_details['username'], GMSG_NA) . '</td> ' .
-                '	</tr> ' .
-                '	<tr valign="top" bgcolor="#FFFFF"> ' .
-                '		<td class="smallfont" nowrap><b>' . MSG_FULL_NAME . '</b></td> ' .
-                '		<td class="smallfont">' . field_display($item_details['name'], GMSG_NA) . '</td> ' .
-                '	</tr> ' .
-                '</table> ';
+                  '	<tr valign="top" bgcolor="#FFFFF"> ' .
+                  '		<td class="smallfont" nowrap><b>' . MSG_USERNAME . '</b></td> ' .
+                  '		<td class="smallfont" width="100%">' . field_display($item_details['username'], GMSG_NA) . '</td> ' .
+                  '	</tr> ' .
+                  '	<tr valign="top" bgcolor="#FFFFF"> ' .
+                  '		<td class="smallfont" nowrap><b>' . MSG_FULL_NAME . '</b></td> ' .
+                  '		<td class="smallfont">' . field_display($item_details['name'], GMSG_NA) . '</td> ' .
+                  '	</tr> ' .
+                  '</table> ';
             }
 
             $won_auctions_content .= '	</td>' .
               '	<td align="center" class="with_border">';
             if ($item_paid) {
               $won_auctions_content .= '<table width="100%" border="0" cellpadding="3" cellspacing="2"> ' .
-                '	<tr bgcolor="#FFFFF"> ' .
-                '		<td align="center">' . show_date($item_details['purchase_date']) . '</td> ' .
-                '	</tr> ' .
-                '	<tr bgcolor="#FFFFF"> ' .
-                '		<td align="center">' . $item->flag_paid($item_details['flag_paid'], $item_details['direct_payment_paid']) . '</td> ' .
-                '	</tr> ' .
-                '	<tr bgcolor="#FFFFF"> ' .
-                '		<td align="center">' . $item->flag_status($item_details['flag_status']) . '</td> ' .
-                '	</tr> ' .
-                '</table>';
+                  '	<tr bgcolor="#FFFFF"> ' .
+                  '		<td align="center">' . show_date($item_details['purchase_date']) . '</td> ' .
+                  '	</tr> ' .
+                  '	<tr bgcolor="#FFFFF"> ' .
+                  '		<td align="center">' . $item->flag_paid($item_details['flag_paid'], $item_details['direct_payment_paid']) . '</td> ' .
+                  '	</tr> ' .
+                  '	<tr bgcolor="#FFFFF"> ' .
+                  '		<td align="center">' . $item->flag_status($item_details['flag_status']) . '</td> ' .
+                  '	</tr> ' .
+                  '</table>';
             }
             $won_auctions_content .= '	</td>' .
               '	<td class="smallfont with_border">' . $content_options . '</td>' .
-              '</tr>';
+                '</tr>';
 
             if ($item_paid && $item_details['invoice_sent']) {
               $won_auctions_content .= '<tr> ' .
-                '	<td colspan="6" class="contentfont">' .
-                '		&#8226; <b>' . MSG_INVOICE_RECEIVED . '</b> [ ' . MSG_ID . ': ' . $item_details['invoice_id'] . ' ] <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $item_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a>' .
-                '	</td> ' .
-                '</tr> ';
+                  '	<td colspan="6" class="contentfont">' .
+                  '		&#8226; <b>' . MSG_INVOICE_RECEIVED . '</b> [ ' . MSG_ID . ': ' . $item_details['invoice_id'] . ' ] <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $item_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a>' .
+                  '	</td> ' .
+                  '</tr> ';
             }
             $won_auctions_content .= '<tr> ' .
-              '	<td colspan="6" class="c4"></td> ' .
-              '</tr>';
+                '	<td colspan="6" class="c4"></td> ' .
+                '</tr>';
           }
         }
         else {
@@ -924,7 +917,7 @@
             $invoices_received_content .= '<tr> ' .
               '	<td colspan="4"  class="with_border"><b>[ ' . MSG_INVOICE_ID . ': ' . $invoice_details['invoice_id'] . ' ] &nbsp; [ ' . MSG_SELLER_USERNAME . ': ' . $invoice_details['username'] . ' ]</b>' .
               '	<td align="center" class="contentfont with_border">[ <a href="members_area.php?do=delete_invoice&option=buyer&invoice_id=' . $invoice_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');"><b class="redfont">' . MSG_DELETE . '</b></a> ]' .
-              '</tr> ';
+                '</tr> ';
 
             $sql_select_products = $db->query("SELECT w.*, a.name,  
 						a.direct_payment, a.currency FROM " . DB_PREFIX . "winners w 
@@ -932,19 +925,19 @@
 						w.invoice_id='" . $invoice_details['invoice_id'] . "'");
 
             $invoices_received_content .= '<tr align="center" class="membmenu"> ' .
-              '	<td align="left">' . GMSG_DESCRIPTION . '</td> ' .
-              '	<td>' . GMSG_QUANTITY . '</td> ' .
-              '	<td>' . GMSG_PRICE_ITEM . '</td> ' .
-              '	<td>' . MSG_POSTAGE . '</td> ' .
-              '	<td>' . MSG_INSURANCE . '</td> ' .
-              '</tr> ' .
+                '	<td align="left">' . GMSG_DESCRIPTION . '</td> ' .
+                '	<td>' . GMSG_QUANTITY . '</td> ' .
+                '	<td>' . GMSG_PRICE_ITEM . '</td> ' .
+                '	<td>' . MSG_POSTAGE . '</td> ' .
+                '	<td>' . MSG_INSURANCE . '</td> ' .
+                '</tr> ' .
               '<tr> ' .
-              '	<td width="100%"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="60" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '</tr> ';
+                '	<td width="100%"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="60" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '</tr> ';
 
             (array) $dp_array = null;
             (array) $items_array = null;
@@ -957,12 +950,12 @@
               $auction_link = process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id']));
 
               $invoices_received_content .= '<tr class="' . $background . '" align="center"> ' .
-                '	<td align="left" class="contentfont">[ ' . MSG_ID . ': <a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a> ] <a href="' . $auction_link . '">' . $item_details['name'] . '</a></td> ' .
-                '	<td>' . $item_details['quantity_offered'] . '</td> ' .
-                '	<td>' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
-                '	<td>' . $fees->display_amount($product_postage, $item_details['currency']) . '</td> ' .
-                '	<td>' . $fees->display_amount($product_insurance, $item_details['currency']) . '</td> ' .
-                '</tr> ';
+                  '	<td align="left" class="contentfont">[ ' . MSG_ID . ': <a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a> ] <a href="' . $auction_link . '">' . $item_details['name'] . '</a></td> ' .
+                  '	<td>' . $item_details['quantity_offered'] . '</td> ' .
+                  '	<td>' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
+                  '	<td>' . $fees->display_amount($product_postage, $item_details['currency']) . '</td> ' .
+                  '	<td>' . $fees->display_amount($product_insurance, $item_details['currency']) . '</td> ' .
+                  '</tr> ';
 
               $items_array[] = $item_details;
               $dp_array[] = ($item_details['direct_payment']) ? @explode(',', $item_details['direct_payment']) : null;
@@ -977,11 +970,11 @@
             }
 
             $invoices_received_content .= '<tr> ' .
-              '	<td colspan="5" class="contentfont">[ <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $invoice_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a> ] ' . $direct_payment_link . '</td>' .
-              '</tr> ' .
-              '<tr> ' .
-              '	<td colspan="5" class="c4"></td> ' .
-              '</tr> ';
+                '	<td colspan="5" class="contentfont">[ <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $invoice_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a> ] ' . $direct_payment_link . '</td>' .
+                '</tr> ' .
+                '<tr> ' .
+                '	<td colspan="5" class="c4"></td> ' .
+                '</tr> ';
           }
         }
         else {
@@ -1019,11 +1012,11 @@
             $content_options = '<input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['auction_id'] . '" class="checkdelete">';
 
             $watched_items_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a></td>' .
-              '	<td align="center">' . show_date($item_details['end_time']) . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a></td>' .
+                '	<td align="center">' . show_date($item_details['end_time']) . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1056,12 +1049,12 @@
             $content_options = '<a href="members_area.php?do=delete_fav_store&id=' . $item_details['id'] . $additional_vars . $limit_link . $order_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');">' . MSG_DELETE . '</a>';
 
             $fav_stores_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '"># ' . $item_details['store_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '">' . $item_details['shop_name'] . '</a></td>' .
-              '	<td class="contentfont" align="center"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '">' . $item_details['username'] . '</a></td>' .
-              '	<td class="contentfont" align="center">' . $item_details['shop_nb_items'] . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '"># ' . $item_details['store_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '">' . $item_details['shop_name'] . '</a></td>' .
+                '	<td class="contentfont" align="center"><a href="' . process_link('shop', array('user_id' => $item_details['store_id'])) . '">' . $item_details['username'] . '</a></td>' .
+                '	<td class="contentfont" align="center">' . $item_details['shop_nb_items'] . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1096,9 +1089,9 @@
             $content_options = '<input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['keyword_id'] . '" class="checkdelete">';
 
             $keywords_watch_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont" colspan="2">' . $item_details['keyword'] . '</td> ' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont" colspan="2">' . $item_details['keyword'] . '</td> ' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1254,12 +1247,12 @@
               $background = ($counter++ % 2) ? 'c1' : 'c2';
 
               $winning_bids_content .= '<tr class="' . $background . '"> ' .
-                '	<td>' . $winning_bid_details['username'] . user_pics($winning_bid_details['buyer_id']) . '</td> ' .
-                '	<td align="center">' . $winning_bid_details['quantity_offered'] . '</td> ' .
-                '	<td align="center">' . $fees->display_amount($winning_bid_details['bid_amount'], $winning_bid_details['currency']) . '</td> ' .
-                '	<td align="center">' . show_date($winning_bid_details['purchase_date']) . '</td> ' .
-                '	<td align="center">' . $item->flag_paid($winning_bid_details['flag_paid'], $winning_bid_details['direct_payment_paid']) . '</td> ' .
-                '</tr> ';
+                  '	<td>' . $winning_bid_details['username'] . user_pics($winning_bid_details['buyer_id']) . '</td> ' .
+                  '	<td align="center">' . $winning_bid_details['quantity_offered'] . '</td> ' .
+                  '	<td align="center">' . $fees->display_amount($winning_bid_details['bid_amount'], $winning_bid_details['currency']) . '</td> ' .
+                  '	<td align="center">' . show_date($winning_bid_details['purchase_date']) . '</td> ' .
+                  '	<td align="center">' . $item->flag_paid($winning_bid_details['flag_paid'], $winning_bid_details['direct_payment_paid']) . '</td> ' .
+                  '</tr> ';
             }
             $template->set('winning_bids_content', $winning_bids_content);
           }
@@ -1273,12 +1266,12 @@
               $background = ($counter++ % 2) ? 'c1' : 'c2';
 
               $make_offer_content .= '<tr class="' . $background . '"> ' .
-                '	<td>' . $offer_details['username'] . '</td> ' .
-                '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
-                '	<td align="center">' . $offer_details['amount'] . '</td> ' .
-                '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
-                '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['offer_id'], $offer_details['accepted'], $can_make_offer, 'auction_offers') . '</td> ' .
-                '</tr> ';
+                  '	<td>' . $offer_details['username'] . '</td> ' .
+                  '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
+                  '	<td align="center">' . $offer_details['amount'] . '</td> ' .
+                  '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
+                  '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['offer_id'], $offer_details['accepted'], $can_make_offer, 'auction_offers') . '</td> ' .
+                  '</tr> ';
             }
 
             $template->set('make_offer_content', $make_offer_content);
@@ -1293,12 +1286,12 @@
               $background = ($counter++ % 2) ? 'c1' : 'c2';
 
               $swap_offer_content .= '<tr class="' . $background . '"> ' .
-                '	<td>' . $offer_details['username'] . '</td> ' .
-                '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
-                '	<td>' . $offer_details['description'] . '</td> ' .
-                '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
-                '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['swap_id'], $offer_details['accepted'], $can_make_offer, 'swaps') . '</td> ' .
-                '</tr> ';
+                  '	<td>' . $offer_details['username'] . '</td> ' .
+                  '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
+                  '	<td>' . $offer_details['description'] . '</td> ' .
+                  '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
+                  '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['swap_id'], $offer_details['accepted'], $can_make_offer, 'swaps') . '</td> ' .
+                  '</tr> ';
             }
 
             $template->set('swap_offer_content', $swap_offer_content);
@@ -1312,12 +1305,12 @@
               $background = ($counter++ % 2) ? 'c1' : 'c2';
 
               $reserve_offer_content .= '<tr class="' . $background . '"> ' .
-                '	<td>' . $offer_details['username'] . user_pics($offer_details['bidder_id']) . '</td> ' .
-                '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
-                '	<td align="center">' . $offer_details['bid_amount'] . '</td> ' .
-                '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
-                '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['bid_id'], 0, $can_make_offer, 'bids') . '</td> ' .
-                '</tr> ';
+                  '	<td>' . $offer_details['username'] . user_pics($offer_details['bidder_id']) . '</td> ' .
+                  '	<td align="center">' . $offer_details['quantity'] . '</td> ' .
+                  '	<td align="center">' . $offer_details['bid_amount'] . '</td> ' .
+                  '	<td align="center">' . $item->offer_status($offer_details['accepted']) . '</td> ' .
+                  '	<td align="center">' . $item->offer_options($item_details['auction_id'], $offer_details['bid_id'], 0, $can_make_offer, 'bids') . '</td> ' .
+                  '</tr> ';
             }
 
             $template->set('reserve_offer_content', $reserve_offer_content);
@@ -1330,17 +1323,17 @@
 
               while ($bid_details = $db->fetch_array($sql_select_bids)) {
                 $select_winner_link = '[ <a href="members_area.php?page=selling&section=view_offers&do=accept_offer&offer_id=' . $bid_details['bid_id'] .
-                  '&offer_type=bids&auction_id=' . $item_details['auction_id'] . '" ' .
-                  'onclick="return confirm(\'' . MSG_SECOND_CHANCE_PURCHASING_CONFIRM . '\');">' . MSG_SELECT_WINNER . '</a> ] ';
+                    '&offer_type=bids&auction_id=' . $item_details['auction_id'] . '" ' .
+                    'onclick="return confirm(\'' . MSG_SECOND_CHANCE_PURCHASING_CONFIRM . '\');">' . MSG_SELECT_WINNER . '</a> ] ';
 
                 $background = ($counter++ % 2) ? 'c1' : 'c2';
 
                 $second_chance_content .= '<tr class="' . $background . '"> ' .
-                  '	<td>' . $bid_details['username'] . user_pics($bid_details['bidder_id']) . '</td> ' .
-                  '	<td align="center">' . $bid_details['quantity'] . '</td> ' .
-                  '	<td align="center">' . $bid_details['bid_amount'] . '</td> ' .
-                  '	<td align="center">' . $select_winner_link . '</td> ' .
-                  '</tr> ';
+                    '	<td>' . $bid_details['username'] . user_pics($bid_details['bidder_id']) . '</td> ' .
+                    '	<td align="center">' . $bid_details['quantity'] . '</td> ' .
+                    '	<td align="center">' . $bid_details['bid_amount'] . '</td> ' .
+                    '	<td align="center">' . $select_winner_link . '</td> ' .
+                    '</tr> ';
               }
 
               $template->set('second_chance_content', $second_chance_content);
@@ -1410,20 +1403,20 @@
           $background = ($counter++ % 2) ? 'c1' : 'c2';
 
           $product_invoice_content .= '<tr class="' . $background . '"> ' .
-            '	<input type="hidden" name="auction_id[' . $item_details['winner_id'] . ']" value="' . $item_details['auction_id'] . '"> ' .
-            (($_REQUEST['option'] == 'edit_invoice') ?
-              '	<td align="center"><input name="winner_tmp[]" type="checkbox" value="' . $item_details['winner_id'] . '" checked disabled>' .
-              '		<input name="winner_id[]" type="hidden" value="' . $item_details['winner_id'] . '"></td>' :
-              '	<td align="center"><input name="winner_id[]" type="checkbox" value="' . $item_details['winner_id'] . '"></td>') .
-            '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '" target="_blank"># ' . $item_details['auction_id'] . '</a></td> ' .
-            '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '" target="_blank">' . $item_details['name'] . '</a></td>' .
-            '	<td align="center">' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
-            '	<td align="center">' . $item_details['quantity_offered'] . '</td>' .
-            '	<td align="center"><input name="postage_included[' . $item_details['winner_id'] . ']" type="checkbox" value="1" ' . (($_REQUEST['option'] == 'edit_invoice') ? (($item_details['postage_included']) ? 'checked' : '') : 'checked') . '> ' .
-            $item_details['currency'] . ' <input name="postage_amount[' . $item_details['winner_id'] . ']" type="text" value="' . $item_details['postage_amount'] . '" size="6"></td>' .
-            '	<td align="center"><input name="insurance_included[' . $item_details['winner_id'] . ']" type="checkbox" value="1" ' . (($_REQUEST['option'] == 'edit_invoice') ? (($item_details['insurance_included']) ? 'checked' : '') : 'checked') . '> ' .
-            $item_details['currency'] . ' <input name="insurance_amount[' . $item_details['winner_id'] . ']" type="text" value="' . $item_details['insurance_amount'] . '" size="6"></td>' .
-            '</tr>';
+              '	<input type="hidden" name="auction_id[' . $item_details['winner_id'] . ']" value="' . $item_details['auction_id'] . '"> ' .
+              (($_REQUEST['option'] == 'edit_invoice') ?
+                  '	<td align="center"><input name="winner_tmp[]" type="checkbox" value="' . $item_details['winner_id'] . '" checked disabled>' .
+                  '		<input name="winner_id[]" type="hidden" value="' . $item_details['winner_id'] . '"></td>' :
+                  '	<td align="center"><input name="winner_id[]" type="checkbox" value="' . $item_details['winner_id'] . '"></td>') .
+              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '" target="_blank"># ' . $item_details['auction_id'] . '</a></td> ' .
+              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '" target="_blank">' . $item_details['name'] . '</a></td>' .
+              '	<td align="center">' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
+              '	<td align="center">' . $item_details['quantity_offered'] . '</td>' .
+              '	<td align="center"><input name="postage_included[' . $item_details['winner_id'] . ']" type="checkbox" value="1" ' . (($_REQUEST['option'] == 'edit_invoice') ? (($item_details['postage_included']) ? 'checked' : '') : 'checked') . '> ' .
+              $item_details['currency'] . ' <input name="postage_amount[' . $item_details['winner_id'] . ']" type="text" value="' . $item_details['postage_amount'] . '" size="6"></td>' .
+              '	<td align="center"><input name="insurance_included[' . $item_details['winner_id'] . ']" type="checkbox" value="1" ' . (($_REQUEST['option'] == 'edit_invoice') ? (($item_details['insurance_included']) ? 'checked' : '') : 'checked') . '> ' .
+              $item_details['currency'] . ' <input name="insurance_amount[' . $item_details['winner_id'] . ']" type="text" value="' . $item_details['insurance_amount'] . '" size="6"></td>' .
+              '</tr>';
         }
 
         $template->set('product_invoice_content', $product_invoice_content);
@@ -1551,18 +1544,18 @@
               '	<td align="center"><a href="' . $auction_link . '"><img src="thumbnail.php?pic=' . $auction_image . '&w=96&sq=Y&b=Y" border="0" alt="' . $item_details['name'] . '"></a></td> ' .
               '	<td class=""><a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a></td> ' .
               '	<td class=""><a href="' . $auction_link . '">' . $item_details['name'] . '</a> ' .
-              $item->relisted_tick($item_details['is_relisted_item']) .
-              $item->new_message_tick($item_details['message_id']) . $item->listed_in($item_details) .
-              (($item_details['offer_id'] || $item_details['swap_id']) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_VIEW_AUCTION_OFFERS . '</a> ]' : '') .
-              '	</td>' .
-              '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
-              '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
-              '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                $item->relisted_tick($item_details['is_relisted_item']) .
+                $item->new_message_tick($item_details['message_id']) . $item->listed_in($item_details) .
+                (($item_details['offer_id'] || $item_details['swap_id']) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_VIEW_AUCTION_OFFERS . '</a> ]' : '') .
+                '	</td>' .
+                '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
+                '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
+                '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1645,18 +1638,18 @@
             $auction_link = process_link('auction_details', array('auction_id' => $item_details['auction_id']));
             $open_auctions_content .= '<tr class="' . $background . '"> ' .
               '	<td align="center"><a href="' . $auction_link . '"><img src="thumbnail.php?pic=' . $auction_image . '&w=96&sq=Y&b=Y" border="0" alt="' . $item_details['name'] . '"></a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' . $item->relisted_tick($item_details['is_relisted_item']) . $item->listed_in($item_details) .
-              (($item_details['offer_id'] || $item_details['swap_id']) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_VIEW_AUCTION_OFFERS . '</a> ]' : '') .
-              '	</td>' .
-              '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
-              '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
-              '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' . $item->relisted_tick($item_details['is_relisted_item']) . $item->listed_in($item_details) .
+                (($item_details['offer_id'] || $item_details['swap_id']) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_VIEW_AUCTION_OFFERS . '</a> ]' : '') .
+                '	</td>' .
+                '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
+                '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
+                '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1723,13 +1716,13 @@
             }
 
             $scheduled_auctions_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' . $item->listed_in($item_details) . '</td>' .
-              '	<td align="center">' . show_date($item_details['start_time']) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time']) . '</td>' .
-              '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' . $item->listed_in($item_details) . '</td>' .
+                '	<td align="center">' . show_date($item_details['start_time']) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time']) . '</td>' .
+                '	<td align="center">' . field_display($item_details['auto_relist_nb'], GMSG_NO, GMSG_YES . ' (' . $item_details['auto_relist_nb'] . ')') . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1781,18 +1774,18 @@
 
             $closed_auctions_content .= '<tr class="' . $background . '"> ' .
               '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' .
-              (($item_details['winner_id']) ? '<img src="themes/' . $setts['default_theme'] . '/img/system/relisted_sold.gif" border="0" alt="' . MSG_ITEM_WAS_SOLD . '">' : '') . ' ' . $item->listed_in($item_details) .
-              ((!$item_details['winner_id'] && (($item_details['bid_id'] && $item_details['max_bid'] < $item_details['reserve_price']) || $item_details['offer_id'] || $item_details['swap_id'])) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_SELECT_WINNER_MANUALLY . '</a> ]' : '') .
-              '	</td>' .
-              '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
-              '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
-              '	<td align="center"><input name="relist[]" type="checkbox" id="relist[]" value="' . $item_details['auction_id'] . '" class="checkrelist"> ' .
-              '		' . $item->durations_drop_down('duration[' . $item_details['auction_id'] . ']', $item_details['duration']) . '</td>' .
-              '	<td align="center" class="smallfont"><input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['auction_id'] . '" class="checkdelete"></td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a> ' .
+                (($item_details['winner_id']) ? '<img src="themes/' . $setts['default_theme'] . '/img/system/relisted_sold.gif" border="0" alt="' . MSG_ITEM_WAS_SOLD . '">' : '') . ' ' . $item->listed_in($item_details) .
+                ((!$item_details['winner_id'] && (($item_details['bid_id'] && $item_details['max_bid'] < $item_details['reserve_price']) || $item_details['offer_id'] || $item_details['swap_id'])) ? '<br>[ <a href="members_area.php?page=selling&section=view_offers&auction_id=' . $item_details['auction_id'] . '">' . MSG_SELECT_WINNER_MANUALLY . '</a> ]' : '') .
+                '	</td>' .
+                '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
+                '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['max_bid'], $item_details['currency']) . '</td>' .
+                '	<td align="center"><input name="relist[]" type="checkbox" id="relist[]" value="' . $item_details['auction_id'] . '" class="checkrelist"> ' .
+                '		' . $item->durations_drop_down('duration[' . $item_details['auction_id'] . ']', $item_details['duration']) . '</td>' .
+                '	<td align="center" class="smallfont"><input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['auction_id'] . '" class="checkdelete"></td>' .
+                '</tr>';
           }
         }
         else {
@@ -1835,11 +1828,11 @@
             $content_options .= '<a href="members_area.php?do=delete_auction&auction_id=' . $item_details['auction_id'] . $additional_vars . $limit_link . $order_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');">' . MSG_DELETE . '</a>';
 
             $drafts_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a></td>' .
-              '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '"># ' . $item_details['auction_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['name'] . '</a></td>' .
+                '	<td align="center">' . $fees->display_amount($item_details['start_price'], $item_details['currency']) . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -1909,7 +1902,7 @@
 
               $sale_fee->set_fees($item_details['seller_id'], $item_details['category_id']); ## MyPHPAuction 2009 by default the seller will pay
 
-              if (eregi('s', $sale_fee->fee['endauction_fee_applies'])) {
+              if (stristr($sale_fee->fee['endauction_fee_applies'], 's')) {
                 $content_options = '&#8226; <a href="fee_payment.php?do=sale_fee_payment&winner_id=' . $item_details['winner_id'] . '">' . MSG_PAY_ENDAUCTION_FEE . '</a>';
               }
               else {
@@ -1920,27 +1913,27 @@
             $sold_auctions_content .= '<tr class="' . $background . '"> ' .
               '	<td class="contentfont with_border"><b><a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . $item_details['auction_id'] . '</a> - ' .
               '		<a href="' . process_link('auction_details', array('auction_id' => $item_details['auction_id'])) . '">' . field_display($item_details['auction_name'], MSG_AUCTION_DELETED) . '</a></b> ' .
-              $item->new_message_tick($item_details['message_id']) . '</td>' .
+                $item->new_message_tick($item_details['message_id']) . '</td>' .
               '	<td align="center" class="with_border">' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td>' .
               '	<td align="center" class="with_border">' . MSG_REQUESTED . ': ' . $item_details['quantity_requested'] . '<br> ' .
-              '		' . MSG_OFFERED . ': ' . $item_details['quantity_offered'] . '</td> ' .
+                '		' . MSG_OFFERED . ': ' . $item_details['quantity_offered'] . '</td> ' .
               '	<td align="center" class="with_border"> ';
 
             if ($item_paid) {
               $sold_auctions_content .= '<table width="100%" border="0" cellpadding="3" cellspacing="2"> ' .
-                '	<tr valign="top" bgcolor="#FFFFF"> ' .
-                '		<td class="smallfont" nowrap><b>' . MSG_USERNAME . '</b></td> ' .
-                '		<td class="smallfont" width="100%">' . field_display($item_details['username'], GMSG_NA) . '</td> ' .
-                '	</tr> ' .
-                '	<tr valign="top" bgcolor="#FFFFF"> ' .
-                '		<td class="smallfont" nowrap><b>' . MSG_FULL_NAME . '</b></td> ' .
-                '		<td class="smallfont">' . field_display($item_details['name'], GMSG_NA) . '</td> ' .
-                '	</tr> ' .
+                  '	<tr valign="top" bgcolor="#FFFFF"> ' .
+                  '		<td class="smallfont" nowrap><b>' . MSG_USERNAME . '</b></td> ' .
+                  '		<td class="smallfont" width="100%">' . field_display($item_details['username'], GMSG_NA) . '</td> ' .
+                  '	</tr> ' .
+                  '	<tr valign="top" bgcolor="#FFFFF"> ' .
+                  '		<td class="smallfont" nowrap><b>' . MSG_FULL_NAME . '</b></td> ' .
+                  '		<td class="smallfont">' . field_display($item_details['name'], GMSG_NA) . '</td> ' .
+                  '	</tr> ' .
                 '	<tr valign="top" bgcolor="#FFFFF"> ' .
                 '		<td class="smallfont" nowrap><b>' . MSG_ADDRESS . '</b></td> ' .
                 '		<td class="smallfont">' . field_display($item_details['address'], GMSG_NA) . ', ' . field_display($item_details['city']) . ', ' . field_display($item_details['state']) . '</td> ' .
                 '	</tr> ' .
-                '</table> ';
+                  '</table> ';
             }
 
             $sold_auctions_content .= '	</td>' .
@@ -1948,37 +1941,37 @@
             if ($item_paid) {
               $sold_auctions_content .= show_date($item_details['purchase_date']) . '<br> ' .
                 '<table width="100%" border="0" cellpadding="3" cellspacing="2"> ' .
-                '	<form action="members_area.php?page=selling&section=sold" method="post"> ' .
-                '	<input type="hidden" name="winner_id" value="' . $item_details['winner_id'] . '"> ' .
-                '		<tr bgcolor="#FFFFF"> ' .
-                '			<td align="center"><select name="flag_paid" style="font-size:10px; width: 100px;"> ' .
-                '				<option value="0" ' . (($item_details['flag_paid'] == 0) ? 'selected' : '') . '>' . MSG_UNPAID . '</option> ' .
-                '				<option value="1" ' . (($item_details['flag_paid'] == 1) ? 'selected' : '') . '>' . MSG_PAID . '</option> ' .
-                '			</select></td> ' .
-                '		</tr> ' .
-                '		<tr bgcolor="#FFFFF"> ' .
-                '			<td align="center"><select name="flag_status" style="font-size:10px; width: 100px;"> ' .
-                '				<option value="0" ' . (($item_details['flag_status'] == 0) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_A . '</option> ' .
-                '				<option value="1" ' . (($item_details['flag_status'] == 1) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_B . '</option> ' .
-                '				<option value="2" ' . (($item_details['flag_status'] == 2) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_C . '</option> ' .
-                '				<option value="3" ' . (($item_details['flag_status'] == 3) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_D . '</option> ' .
-                '			</select></td> ' .
-                '		</tr> ' .
-                '		<tr bgcolor="#FFFFF"> ' .
-                '			<td align="center"><input type="submit" name="form_update_winner_status" value="' . GMSG_GO . '" style="font-size:10px; width: 100px;"></td> ' .
-                '		</tr> ' .
-                '	</form> ' .
-                '</table>';
+                  '	<form action="members_area.php?page=selling&section=sold" method="post"> ' .
+                  '	<input type="hidden" name="winner_id" value="' . $item_details['winner_id'] . '"> ' .
+                  '		<tr bgcolor="#FFFFF"> ' .
+                  '			<td align="center"><select name="flag_paid" style="font-size:10px; width: 100px;"> ' .
+                  '				<option value="0" ' . (($item_details['flag_paid'] == 0) ? 'selected' : '') . '>' . MSG_UNPAID . '</option> ' .
+                  '				<option value="1" ' . (($item_details['flag_paid'] == 1) ? 'selected' : '') . '>' . MSG_PAID . '</option> ' .
+                  '			</select></td> ' .
+                  '		</tr> ' .
+                  '		<tr bgcolor="#FFFFF"> ' .
+                  '			<td align="center"><select name="flag_status" style="font-size:10px; width: 100px;"> ' .
+                  '				<option value="0" ' . (($item_details['flag_status'] == 0) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_A . '</option> ' .
+                  '				<option value="1" ' . (($item_details['flag_status'] == 1) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_B . '</option> ' .
+                  '				<option value="2" ' . (($item_details['flag_status'] == 2) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_C . '</option> ' .
+                  '				<option value="3" ' . (($item_details['flag_status'] == 3) ? 'selected' : '') . '>' . MSG_FLAG_STATUS_D . '</option> ' .
+                  '			</select></td> ' .
+                  '		</tr> ' .
+                  '		<tr bgcolor="#FFFFF"> ' .
+                  '			<td align="center"><input type="submit" name="form_update_winner_status" value="' . GMSG_GO . '" style="font-size:10px; width: 100px;"></td> ' .
+                  '		</tr> ' .
+                  '	</form> ' .
+                  '</table>';
             }
             $sold_auctions_content .= '	</td>' .
               '	<td class="smallfont with_border">' . $content_options . '</td>' .
-              '</tr>';
+                '</tr>';
 
             if ($item_paid && !empty($item_details['auction_name'])) {
               $sold_auctions_content .= '<tr><td colspan="6" class="contentfont">';
               if ($item_details['invoice_sent']) {
                 $sold_auctions_content .= '&#8226; <b>' . MSG_INVOICE_SENT . '</b> [ ' . MSG_ID . ': ' . $item_details['invoice_id'] . ' ] <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $item_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a> &middot; ' .
-                  '<a href="members_area.php?do=resend_invoice&invoice_id=' . $item_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '">' . MSG_RESEND_PRODUCT_INVOICE . '</a>';
+                    '<a href="members_area.php?do=resend_invoice&invoice_id=' . $item_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '">' . MSG_RESEND_PRODUCT_INVOICE . '</a>';
               }
               else {
                 $sold_auctions_content .= '&#8226; <a href="members_area.php?page=selling&section=product_invoice&buyer_id=' . $item_details['buyer_id'] . '&auction_id=' . $item_details['auction_id'] . '">' . MSG_SEND_PRODUCT_INVOICE . '</a>';
@@ -2024,7 +2017,7 @@
             $invoices_sent_content .= '<tr> ' .
               '	<td colspan="4" class="with_border"><b>[ ' . MSG_INVOICE_ID . ': ' . $invoice_details['invoice_id'] . ' ] &nbsp; [ ' . MSG_BUYER_USERNAME . ': ' . $invoice_details['username'] . ' ]</b>' .
               '	<td align="center" class="contentfont with_border">[ <a href="members_area.php?do=delete_invoice&option=seller&invoice_id=' . $invoice_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');"><b class="redfont">' . MSG_DELETE . '</b></a> ]' .
-              '</tr> ';
+                '</tr> ';
 
             $sql_select_products = $db->query("SELECT w.*, a.name,  
 						a.direct_payment, a.currency FROM " . DB_PREFIX . "winners w 
@@ -2032,19 +2025,19 @@
 						w.invoice_id='" . $invoice_details['invoice_id'] . "'");
 
             $invoices_sent_content .= '<tr align="center" class="membmenu"> ' .
-              '	<td align="left">' . GMSG_DESCRIPTION . '</td> ' .
-              '	<td>' . GMSG_QUANTITY . '</td> ' .
-              '	<td>' . GMSG_PRICE_ITEM . '</td> ' .
-              '	<td>' . MSG_POSTAGE . '</td> ' .
-              '	<td>' . MSG_INSURANCE . '</td> ' .
-              '</tr> ' .
+                '	<td align="left">' . GMSG_DESCRIPTION . '</td> ' .
+                '	<td>' . GMSG_QUANTITY . '</td> ' .
+                '	<td>' . GMSG_PRICE_ITEM . '</td> ' .
+                '	<td>' . MSG_POSTAGE . '</td> ' .
+                '	<td>' . MSG_INSURANCE . '</td> ' .
+                '</tr> ' .
               '<tr> ' .
-              '	<td width="100%"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="60" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
-              '</tr> ';
+                '	<td width="100%"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="60" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '	<td><img src="themes/' . $setts['default_theme'] . '/img/pixel.gif" width="80" height="1"></td> ' .
+                '</tr> ';
 
             while ($item_details = $db->fetch_array($sql_select_products)) {
               $background = ($counter++ % 2) ? 'c1' : 'c2';
@@ -2054,24 +2047,24 @@
               $auction_link = process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id']));
 
               $invoices_sent_content .= '<tr class="' . $background . '" align="center"> ' .
-                '	<td align="left" class="contentfont">[ ' . MSG_ID . ': <a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a> ] <a href="' . $auction_link . '">' . $item_details['name'] . '</a></td> ' .
-                '	<td>' . $item_details['quantity_offered'] . '</td> ' .
-                '	<td>' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
-                '	<td>' . $fees->display_amount($product_postage, $item_details['currency']) . '</td> ' .
-                '	<td>' . $fees->display_amount($product_insurance, $item_details['currency']) . '</td> ' .
-                '</tr> ';
+                  '	<td align="left" class="contentfont">[ ' . MSG_ID . ': <a href="' . $auction_link . '">' . $item_details['auction_id'] . '</a> ] <a href="' . $auction_link . '">' . $item_details['name'] . '</a></td> ' .
+                  '	<td>' . $item_details['quantity_offered'] . '</td> ' .
+                  '	<td>' . $fees->display_amount($item_details['bid_amount'], $item_details['currency']) . '</td> ' .
+                  '	<td>' . $fees->display_amount($product_postage, $item_details['currency']) . '</td> ' .
+                  '	<td>' . $fees->display_amount($product_insurance, $item_details['currency']) . '</td> ' .
+                  '</tr> ';
             }
 
             (string) $direct_payment_link = null;
 
             $invoices_sent_content .= '<tr> ' .
-              '	<td colspan="5" class="contentfont">[ <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $invoice_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a> ] &middot; ' .
-              '		[ <a href="members_area.php?page=selling&section=product_invoice&option=edit_invoice&invoice_id=' . $invoice_details['invoice_id'] . '">' . MSG_EDIT_PRODUCT_INVOICE . '</a> ] &middot; ' .
-              '		[ <a href="members_area.php?do=resend_invoice&invoice_id=' . $invoice_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '">' . MSG_RESEND_PRODUCT_INVOICE . '</a>] ' . $direct_payment_link . '</td>' .
-              '</tr> ' .
-              '<tr> ' .
-              '	<td colspan="5" class="c4"></td> ' .
-              '</tr> ';
+                '	<td colspan="5" class="contentfont">[ <a href="' . process_link('invoice_print', array('invoice_type' => 'product_invoice', 'invoice_id' => $invoice_details['invoice_id'])) . '" target="_blank">' . MSG_VIEW_PRODUCT_INVOICE . '</a> ] &middot; ' .
+                '		[ <a href="members_area.php?page=selling&section=product_invoice&option=edit_invoice&invoice_id=' . $invoice_details['invoice_id'] . '">' . MSG_EDIT_PRODUCT_INVOICE . '</a> ] &middot; ' .
+                '		[ <a href="members_area.php?do=resend_invoice&invoice_id=' . $invoice_details['invoice_id'] . $additional_vars . $order_link . $limit_link . '">' . MSG_RESEND_PRODUCT_INVOICE . '</a>] ' . $direct_payment_link . '</td>' .
+                '</tr> ' .
+                '<tr> ' .
+                '	<td colspan="5" class="c4"></td> ' .
+                '</tr> ';
           }
         }
         else {
@@ -2147,11 +2140,11 @@
         $template->set('prefilled_fields', $prefilled_fields);
 
         $item_description_editor = "<script> \n" .
-          " 	var oEdit1 = new InnovaEditor(\"oEdit1\"); \n" .
-          " 	oEdit1.width=\"100%\";//You can also use %, for example: oEdit1.width=\"100%\" \n" .
-          "	oEdit1.height=300; \n" .
-          "	oEdit1.REPLACE(\"description_main\");//Specify the id of the textarea here \n" .
-          "</script>";
+            " 	var oEdit1 = new InnovaEditor(\"oEdit1\"); \n" .
+            " 	oEdit1.width=\"100%\";//You can also use %, for example: oEdit1.width=\"100%\" \n" .
+            "	oEdit1.height=300; \n" .
+            "	oEdit1.REPLACE(\"description_main\");//Specify the id of the textarea here \n" .
+            "</script>";
 
         $template->set('item_description_editor', $item_description_editor);
 
@@ -2200,8 +2193,8 @@
             }
             else {
               $display_formcheck_errors = '<tr> ' .
-                '	<td align="center">' . MSG_ERROR_USER_DOESNT_EXIST . '</td> ' .
-                '</tr> ';
+                  '	<td align="center">' . MSG_ERROR_USER_DOESNT_EXIST . '</td> ' .
+                  '</tr> ';
               $template->set('display_formcheck_errors', $display_formcheck_errors);
             }
           }
@@ -2268,11 +2261,11 @@
             $content_options .= '[ <a href="members_area.php?do=delete_user&block_id=' . $block_details['block_id'] . $additional_vars . $order_link . $limit_link . '" onclick="return confirm(\'' . MSG_DELETE_CONFIRM . '\');">' . MSG_DELETE . '</a> ]';
 
             $blocked_users_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont">' . $block_details['username'] . '</td>' .
-              '	<td>' . $block_details['block_reason'] . '</td>' .
-              '	<td align="center">' . field_display($block_details['show_reason'], '<span class="redfont">' . GMSG_NO . '</span>', '<span class="greenfont">' . GMSG_YES . '</span>') . '</td> ' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont">' . $block_details['username'] . '</td>' .
+                '	<td>' . $block_details['block_reason'] . '</td>' .
+                '	<td align="center">' . field_display($block_details['show_reason'], '<span class="redfont">' . GMSG_NO . '</span>', '<span class="greenfont">' . GMSG_YES . '</span>') . '</td> ' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -2365,13 +2358,13 @@
             $background = ($counter++ % 2) ? 'c1' : 'c2';
 
             $reputation_received_content .= '<tr class="' . $background . ' contentfont"> ' .
-              '	<td align="center">' . $reputation_details['username'] . '</td> ' .
-              '	<td align="center">' . $reputation->rep_rate($reputation_details['reputation_rate']) . '</td>' .
-              '	<td align="center">' . show_date($reputation_details['reg_date'], false) . '</td> ' .
-              '	<td>' . $reputation_details['reputation_content'] . '</td> ' .
-              '	<td align="center">[ <a href="javascript://" onclick="popUp(\'reputation_details.php?reputation_id=' . $reputation_details['reputation_id'] . '\');">' . GMSG_VIEW . '</a> ]</td> ' .
-              '	<td align="center">' . $reputation_details['reputation_type'] . '</td> ' .
-              '</tr>';
+                '	<td align="center">' . $reputation_details['username'] . '</td> ' .
+                '	<td align="center">' . $reputation->rep_rate($reputation_details['reputation_rate']) . '</td>' .
+                '	<td align="center">' . show_date($reputation_details['reg_date'], false) . '</td> ' .
+                '	<td>' . $reputation_details['reputation_content'] . '</td> ' .
+                '	<td align="center">[ <a href="javascript://" onclick="popUp(\'reputation_details.php?reputation_id=' . $reputation_details['reputation_id'] . '\');">' . GMSG_VIEW . '</a> ]</td> ' .
+                '	<td align="center">' . $reputation_details['reputation_type'] . '</td> ' .
+                '</tr>';
           }
         }
         else {
@@ -2404,12 +2397,12 @@
             $background = ($counter++ % 2) ? 'c1' : 'c2';
 
             $reputation_sent_content .= '<tr class="' . $background . ' contentfont"> ' .
-              '	<td align="center">' . $reputation_details['username'] . '</td> ' .
-              '	<td align="center"><a href="' . process_link('auction_details', array('auction_id' => $reputation_details['auction_id'])) . '">' . $reputation_details['auction_id'] . '</a></td> ' .
-              '	<td><a href="' . process_link('auction_details', array('auction_id' => $reputation_details['auction_id'])) . '">' . $reputation_details['auction_name'] . '</a></td>' .
-              '	<td align="center">' . $reputation_details['reputation_type'] . '</td> ' .
-              '	<td align="center">[<a href="members_area.php?page=reputation&section=post&reputation_id=' . $reputation_details['reputation_id'] . '">' . GMSG_PROCEED . '</a> ]</td> ' .
-              '</tr>';
+                '	<td align="center">' . $reputation_details['username'] . '</td> ' .
+                '	<td align="center"><a href="' . process_link('auction_details', array('auction_id' => $reputation_details['auction_id'])) . '">' . $reputation_details['auction_id'] . '</a></td> ' .
+                '	<td><a href="' . process_link('auction_details', array('auction_id' => $reputation_details['auction_id'])) . '">' . $reputation_details['auction_name'] . '</a></td>' .
+                '	<td align="center">' . $reputation_details['reputation_type'] . '</td> ' .
+                '	<td align="center">[ <a href="members_area.php?page=reputation&section=post&reputation_id=' . $reputation_details['reputation_id'] . '">' . GMSG_PROCEED . '</a> ]</td> ' .
+                '</tr>';
           }
         }
         else {
@@ -2736,35 +2729,35 @@
           $order_value = ($category_details['order_id'] > 0 && $category_details['order_id'] < 1000) ? $category_details['order_id'] : '';
 
           $categories_page_content .= '<tr class="' . $background . '"> ' .
-            '	<td class="' . $background_border . '"><a href="members_area.php?page=store&section=categories&parent_id=' . $category_details['category_id'] . '"> ' .
-            '		<img src="images/catplus.gif" alt="' . AMSG_VIEW_SUBCATEGORIES . '" width="20" height="20" border="0"></a></td> ' .
-            '	<td><input name="name[]" type="text" id="name[]" value="' . $category_details['name'] . '" style="width:65%"> ';
+              '	<td class="' . $background_border . '"><a href="members_area.php?page=store&section=categories&parent_id=' . $category_details['category_id'] . '"> ' .
+              '		<img src="images/catplus.gif" alt="' . AMSG_VIEW_SUBCATEGORIES . '" width="20" height="20" border="0"></a></td> ' .
+              '	<td><input name="name[]" type="text" id="name[]" value="' . $category_details['name'] . '" style="width:65%"> ';
 
           $categories_page_content .= '<input type="hidden" name="category_id[]" value="' . $category_details['category_id'] . '"> ';
 
           $categories_page_content .= '</td> ' .
-            '<td align="center"> ' .
-            '	<input name="order_id[]" type="text" id="order_id[]" value="' . $order_value . '" size="8"></td> ';
+              '<td align="center"> ' .
+              '	<input name="order_id[]" type="text" id="order_id[]" value="' . $order_value . '" size="8"></td> ';
 
           $categories_page_content .= '<td align="center"><input name="delete[]" type="checkbox" id="delete[]" value="' . $category_details['category_id'] . '"></td> ' .
-            '</tr> ';
+              '</tr> ';
         }
 
         (int) $add_cats_counter = 1;
 
         $add_category_content = '<tr class="c1"> ' .
-          '	<td>&nbsp;</td> ' .
-          '	<td> ';
+            '	<td>&nbsp;</td> ' .
+            '	<td> ';
 
         for ($i = 0; $i < $add_cats_counter; $i++) {
           $add_category_content .= '<input name="add_name[]" type="text" id="add_name[]"><br> ';
         }
 
         $add_category_content .='</td>' .
-          '	<td align="center">&nbsp;</td> ';
+            '	<td align="center">&nbsp;</td> ';
 
         $add_category_content .= '<td align="center">&nbsp;</td> ' .
-          '</tr> ';
+            '</tr> ';
 
         $template->set('categories_page_content', $categories_page_content);
         $template->set('add_category_content', $add_category_content);
@@ -2868,11 +2861,11 @@
 
             $open_wanted_ads_content .= '<tr class="' . $background . '"> ' .
               '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '">' . $item_details['wanted_ad_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '">' . $item_details['name'] . '</a></td>' .
-              '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
-              '	<td align="center" class="smallfont">' . $content_options . '</td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '">' . $item_details['name'] . '</a></td>' .
+                '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
+                '	<td align="center" class="smallfont">' . $content_options . '</td>' .
+                '</tr>';
           }
         }
         else {
@@ -2910,15 +2903,15 @@
             $background = ($counter++ % 2) ? 'c1' : 'c2';
 
             $closed_wanted_ads_content .= '<tr class="' . $background . '"> ' .
-              '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '"># ' . $item_details['wanted_ad_id'] . '</a></td> ' .
-              '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '">' . $item_details['name'] . '</a></td>' .
-              '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
-              '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
-              '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
-              '	<td align="center"><input name="relist[]" type="checkbox" id="relist[]" value="' . $item_details['wanted_ad_id'] . '" class="checkrelist"> ' .
-              '		' . $item->durations_drop_down('duration[' . $item_details['wanted_ad_id'] . ']', $item_details['duration']) . '</td>' .
-              '	<td align="center" class="smallfont"><input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['wanted_ad_id'] . '" class="checkdelete"></td>' .
-              '</tr>';
+                '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '"># ' . $item_details['wanted_ad_id'] . '</a></td> ' .
+                '	<td class="contentfont"><a href="' . process_link('wanted_details', array('wanted_ad_id' => $item_details['wanted_ad_id'])) . '">' . $item_details['name'] . '</a></td>' .
+                '	<td align="center">' . show_date($item_details['start_time'], false) . '</td> ' .
+                '	<td align="center">' . show_date($item_details['end_time'], false) . '</td>' .
+                '	<td align="center">' . field_display($item_details['nb_bids'], '-', $item_details['nb_bids']) . '</td>' .
+                '	<td align="center"><input name="relist[]" type="checkbox" id="relist[]" value="' . $item_details['wanted_ad_id'] . '" class="checkrelist"> ' .
+                '		' . $item->durations_drop_down('duration[' . $item_details['wanted_ad_id'] . ']', $item_details['duration']) . '</td>' .
+                '	<td align="center" class="smallfont"><input name="delete[]" type="checkbox" id="delete[]" value="' . $item_details['wanted_ad_id'] . '" class="checkdelete"></td>' .
+                '</tr>';
           }
         }
         else {
@@ -2938,16 +2931,16 @@
     if ($page == 'summary') /* BEGIN -> SUMMARY PAGE */ {
       if ($section == 'summary_main') {
         $summary_page_content['content'] = header6(MSG_MM_SUMMARY) .
-          $summary_page_content['manage_account'] .
-          $summary_page_content['messaging_received'] . '<br>' .
-          '<table cellpadding="0" cellspacing="0" width="100%" border="0"> ' .
-          '	<tr> ' .
-          '		<td valign="top">' . $summary_page_content['stats_bidding'] . '</td> ' .
-          '		<td align="right" valign="top">' . $summary_page_content['stats_selling'] . '</td> ' .
-          '	</tr> ' .
-          '</table>' .
-          $summary_page_content['bidding_current_bids'] .
-          $summary_page_content['selling_open'];
+            $summary_page_content['manage_account'] .
+            $summary_page_content['messaging_received'] . '<br>' .
+            '<table cellpadding="0" cellspacing="0" width="100%" border="0"> ' .
+            '	<tr> ' .
+            '		<td valign="top">' . $summary_page_content['stats_bidding'] . '</td> ' .
+            '		<td align="right" valign="top">' . $summary_page_content['stats_selling'] . '</td> ' .
+            '	</tr> ' .
+            '</table>' .
+            $summary_page_content['bidding_current_bids'] .
+            $summary_page_content['selling_open'];
 
         $template->set('members_area_page_content', $summary_page_content['content']);
       }
@@ -2995,7 +2988,7 @@
 
     $template->set('cell_width', $cell_width);
 
-    if ($page = 'summary') {
+    if ($page != 'summary') {
       $template->change_path('themes/' . $setts['default_theme'] . '/templates/');
       $members_area_header_menu = $template->process('members_area_header_menu.tpl.php');
       $template->change_path('templates/');

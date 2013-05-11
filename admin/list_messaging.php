@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -26,8 +26,9 @@
       $template->set('msg_changes_saved', '<p align="center">' . AMSG_TOPIC_DELETED . '</p>');
     }
     if (!$start)
-    // cho cua kien $start = 0;
-    //$limit = 20;
+        $start = 0;
+    $limit = 20;
+
       $order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'm.topic_id';
     $order_type = ($_REQUEST['order_type']) ? $_REQUEST['order_type'] : 'DESC';
 

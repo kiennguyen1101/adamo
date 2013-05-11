@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   include_once ('includes/global.php');
   include_once ('includes/functions.php');
   $cat = array($_GET['cat']);
@@ -12,11 +12,8 @@
   $sub_cats = get_all_subcats($cat);
   $total_pages = get_total_pages($sub_cats);
   $products = get_tab_products($sub_cats, $start, $limit);
-?>
-
-<?php
   if ($products == NULL) {
-    echo "ChÆ°a cÃ³ sáº£n pháº©m";
+    echo "Chưa có sản phẩm";
   }
   else {
     $i = 0;
@@ -61,9 +58,9 @@
       $pagination .= "<div style='clear:both'></div><div class=\"pagination\">";
       //previous button
       if ($page > 1)
-        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">Â«</a>";
+        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">«</a>";
       else
-        $pagination.= "<span class=\"disabled pre_btn\">Â«</span>";
+        $pagination.= "<span class=\"disabled pre_btn\">«</span>";
 
       //pages	
       if ($lastpage < 7 + ($adjacents * 2)) { //not enough pages to bother breaking it up
@@ -118,9 +115,9 @@
 
       //next button
       if ($page < $counter - 1)
-        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">Â»</a>";
+        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">»</a>";
       else
-        $pagination.= "<span class=\"disabled next_btn\">Â»</span>";
+        $pagination.= "<span class=\"disabled next_btn\">»</span>";
       $pagination.= "</div>\n";
     }
     echo $pagination;

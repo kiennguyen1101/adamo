@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.01															##
-##-------------------------------------------------------------##
-## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   if ($layout['hpfeat_nb']) {## MyPHPAuction 2009 home page featured auctions
     $featured_auctions_header = header1(MSG_FEATURED_AUCTIONS . ' [ <span class="sell"><a href="' . process_link('auctions_show', array('option' => 'featured')) . '">' . MSG_VIEW_ALL . '</a></span> ]');

@@ -1,10 +1,4 @@
-﻿<?php
-#################################################################
-## myphpauction															##
-##-------------------------------------------------------------##
-## Copyright ©2008 myphpauction SoftwareLTD. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -226,24 +220,21 @@ myPopup = '';
         <tr>
           <td align="center" colspan="2"><?php echo MSG_QUESTIONS_LOGGED_AS_ADMIN; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if (!$session->value('user_id')) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_LOGIN_TO_ASK_QUESTIONS; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if ($session->value('user_id') == $item_details['owner_id']) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_CANT_POST_QUESTION_OWNER; ?></td>
         </tr>
-      <?php
-      }
-      else {
-        ?>
+    <?php }
+    else {
+      ?>
         <tr>
           <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
           <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
@@ -332,15 +323,13 @@ myPopup = '';
             <td><?php echo $offer_drop_down; ?></td>
           </tr>
         </form>
-    <?php
-    }
+    <?php }
     else if ($item_details['closed']) {
       ?>
         <tr class="c1">
           <td align="center" class="contentfont"><?php echo MSG_CANTOFFER_CLOSED; ?></td>
         </tr>	
-    <?php
-    }
+    <?php }
     else {
       ?>
         <tr class="c1">

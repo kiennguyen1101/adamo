@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   class formchecker extends database {
@@ -104,7 +104,7 @@
 
     function check_custom_fields($value_array) {
       foreach ($value_array as $key => $value) {
-        if (eregi('custom_box_', $key)) {
+        if (stristr($key, 'custom_box_')) {
           $custom_box_id = intval(str_replace('custom_box_', '', $key));
           $custom_box_id = intval(str_replace('[]', '', $custom_box_id));
 
@@ -305,7 +305,7 @@
     function field_js($value, $msg) {
       $value = $this->add_special_chars($value);
 
-      if (!eregi('<script', $value)) {
+      if (!stristr($value, '<script')) {
         return true;
       }
       else {
@@ -317,7 +317,7 @@
     function field_iframes($value, $msg) {
       $value = $this->add_special_chars($value);
 
-      if (!eregi('<iframe', $value)) {
+      if (!stristr($value, '<iframe')) {
         return true;
       }
       else {
@@ -363,8 +363,6 @@
     function field_duplicate_fulltext($table_name, $row_name, $value, $msg, $row_name_secondary = null, $value_secondary = null) {
       $sql_query = "SELECT count(*) AS is_duplicate FROM " . DB_PREFIX . $table_name . " WHERE
 			" . $row_name . "='" . $value . "'";
-
-      //MATCH (" . $row_name . ") AGAINST ('" . $value . "')";
 
       if ($row_name_secondary) {
         $sql_query .= " AND " . $row_name_secondary . "!=" . intval($value_secondary); /* only for INT type fields, they also need to be indexed -> used in case we want to edit a field */
@@ -444,4 +442,5 @@
     }
 
   }
+
 ?>

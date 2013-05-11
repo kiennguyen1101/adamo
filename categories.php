@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -48,10 +48,10 @@
     while ($cat_details = $db->fetch_array($sql_select_categories)) {
       $background = ($counter++ % 2) ? 'c1' : 'c2';
 
-      $subcategories_content .= '<ul class="sub-category-list"> ' .
-        '	<li><a href="categories.php?parent_id=' . $cat_details['category_id'] . '">' . $category_lang[$cat_details['category_id']] . '</a> ' .
-        (($setts['enable_cat_counters']) ? (($cat_details['items_counter']) ? '(<strong>' . $cat_details['items_counter'] . '</strong>)' : '') : '') . '</li> ' .
-        '</ul> ';
+      $subcategories_content .= '<tr class="' . $background . '"> ' .
+        '	<td width="100%">&nbsp;&raquo;&nbsp;<a href="categories.php?parent_id=' . $cat_details['category_id'] . '">' . $category_lang[$cat_details['category_id']] . '</a> ' .
+        (($setts['enable_cat_counters']) ? (($cat_details['items_counter']) ? '(<strong>' . $cat_details['items_counter'] . '</strong>)' : '') : '') . '</td> ' .
+        '</tr> ';
     }
 
     $template->set('subcategories_content', $subcategories_content);
@@ -126,6 +126,7 @@
       }
       else {
         $addl_where_query .= " AND a.name LIKE '%" . $keywords_cat_search . "%' ";
+        //
       }
       /**
        * or the old and SLOW search using LIKE - disabled by default, just added the line in case 
@@ -217,10 +218,9 @@
         while ($store_details = $db->fetch_array($sql_select_stores)) {
           $background = ($counter++ % 2) ? 'c1' : 'c2';
 
-          $subcategories_content .= '<ul class="sub-category-list"> ' .
-            '	<li><a href="categories.php?parent_id=' . $cat_details['category_id'] . '">' . $category_lang[$cat_details['category_id']] . '</a> ' .
-            (($setts['enable_cat_counters']) ? (($cat_details['items_counter']) ? '(<strong>' . $cat_details['items_counter'] . '</strong>)' : '') : '') . '</li> ' .
-            '</ul> ';
+          $shop_stores_content .= '<tr class="' . $background . '"> ' .
+            '	<td width="100%">&nbsp;&raquo;&nbsp;<a href="shop.php?user_id=' . $store_details['user_id'] . '&parent_id=' . $parent_id . '">' . $store_details['shop_name'] . '</a></td> ' .
+            '</tr> ';
         }
 
         $template->set('shop_stores_content', $shop_stores_content);

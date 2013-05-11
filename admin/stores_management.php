@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -46,8 +46,9 @@
       $db->query("UPDATE " . DB_PREFIX . "users SET
 			shop_active='" . $_REQUEST['value'] . "' WHERE user_id=" . $_REQUEST['user_id']);
     }
-    // kien if (!$start)
-    //$start = 0;
+    
+     if (!$start)
+      $start = 0;
     $limit = 20;
 
     $order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'u.user_id';

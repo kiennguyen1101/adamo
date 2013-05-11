@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -47,8 +47,7 @@
             echo ($advert_type == 1) ? AMSG_CUSTOM_ADVERT : AMSG_CODE_ADVERT;
             ?>
             <input type="hidden" name="advert_type" value="<?php echo $advert_type; ?>">
-          <?php
-          }
+          <?php }
           else {
             ?>
             <select name="advert_type" onchange="submit_form_b(form_content_banners);">
@@ -103,7 +102,7 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_DISPLAY_IN_CATEGORIES_EXPL; ?></td>
         </tr>
-    <?php if ($advert_type == 1) { // custom advert    ?>
+    <?php if ($advert_type == 1) { // custom advert   ?>
           <tr class="c1">
             <td width="150" align="right"><b><?php echo AMSG_BANNER_IMAGE; ?></b></td>
             <td><?php echo $image_upload_manager; ?></td>
@@ -120,15 +119,14 @@
             <td width="150" align="right"><b><?php echo AMSG_ALT_TEXT; ?></b></td>
             <td><input type="text" name="advert_alt_text" value="<?php echo $banner_details['advert_alt_text']; ?>" size="40"></td>
           </tr>
-        <?php
-        }
-        else if ($advert_type == 2) { // code advert 
-          ?>
+    <?php }
+    else if ($advert_type == 2) { // code advert 
+      ?>
           <tr class="c1">
             <td align="right"><b><?php echo AMSG_ADVERT_CODE; ?></b></td>
             <td><textarea id="advert_code" name="advert_code" style="width: 100%; height: 150px; overflow: hidden;"><?php echo $db->add_special_chars($banner_details['advert_code']); ?></textarea></td>
           </tr>
-    <?php } ?>
+        <?php } ?>
         <tr>
           <td colspan="2" align="center"><input type="submit" name="form_save_settings" value="<?php echo AMSG_SAVE_CHANGES; ?>"></td>
         </tr>

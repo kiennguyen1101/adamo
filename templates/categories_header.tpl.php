@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -39,17 +39,17 @@
       for ($i = 0; $i < $featured_columns; $i++) {
         ?>
 
-        <?php
-        for ($j = 0; $j < $layout['catfeat_nb']; $j++) {
-          $width = 100 / $layout['catfeat_nb'] . '%';
-          ?>
           <?php
-          if (!empty($item_details[$counter]['name'])) {
-            $main_image = $db->get_sql_field("SELECT media_url FROM " . DB_PREFIX . "auction_media WHERE
+          for ($j = 0; $j < $layout['catfeat_nb']; $j++) {
+            $width = 100 / $layout['catfeat_nb'] . '%';
+            ?>
+          <?php
+              if (!empty($item_details[$counter]['name'])) {
+                $main_image = $db->get_sql_field("SELECT media_url FROM " . DB_PREFIX . "auction_media WHERE
       			auction_id='" . $item_details[$counter]['auction_id'] . "' AND media_type=1 AND upload_in_progress=0 ORDER BY media_id ASC LIMIT 0,1", 'media_url');
 
-            $auction_link = process_link('auction_details', array('name' => $item_details[$counter]['name'], 'auction_id' => $item_details[$counter]['auction_id']));
-            ?>
+                $auction_link = process_link('auction_details', array('name' => $item_details[$counter]['name'], 'auction_id' => $item_details[$counter]['auction_id']));
+                ?>
             <div class="item-feature-product">
               <div class="feature-product-image">
                 <a href="<?php echo $auction_link; ?>"><img src="<?php echo ((!empty($main_image)) ? 'thumbnail.php?pic=' . $main_image . '&w=' . $layout['catfeat_width'] . '&sq=Y' : 'themes/' . $setts['default_theme'] . '/img/system/noimg.gif'); ?>" border="0" alt="<?php echo $item_details[$counter]['name']; ?>"></a>
@@ -66,12 +66,12 @@
                 </ul>
               </div>
             </div>
-            <?php
-            $counter++;
-          }
-          ?></td>
-      <?php } ?>
-      </tr>
+                <?php
+                $counter++;
+              }
+              ?></td>
+        <?php } ?>
+        </tr>
     <?php } ?>
     </div>
   <?php } ?>

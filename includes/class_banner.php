@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   class banner extends database {
 
@@ -94,13 +89,13 @@
 
       if ($this->setts['is_ssl']) {
         foreach ($ssl_url_array as $value) {
-          if (eregi($value, $base_url)) {
+          if (stristr($base_url, $value)) {
             $advert_query .= " AND advert_type=1";
           }
         }
       }
 
-      if (eregi('categories.php', $base_url)) {
+      if (stristr($base_url, 'categories.php')) {
         $category_id = $this->main_category($parent_id);
         $advert_query_cats = " AND (LOCATE('," . $category_id . ",', CONCAT(',',advert_categories,','))>0 OR advert_categories='0')";
 
@@ -113,7 +108,7 @@
           $advert_query .= " AND advert_categories='0'";
         }
       }
-      else if (eregi('auction_details.php', $base_url)) {
+      else if (stristr($base_url, 'auction_details.php')) {
         $item_details = $this->get_sql_row("SELECT category_id, addl_category_id FROM " . DB_PREFIX . "auctions WHERE
 				auction_id='" . $auction_id . "'");
 

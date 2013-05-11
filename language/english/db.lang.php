@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   define('MSG_ERROR_MYSQL_CONNECT', 'Could not connect to the database with the credentials you have submitted');

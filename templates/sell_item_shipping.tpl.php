@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -28,14 +28,12 @@
         <td nowrap colspan="2">
           <input type="text" name="postage_amount" value="<?php echo $item_details['postage_amount']; ?>" size="20"><?php echo $item_details['currency']; ?></td>
       </tr>
-
-
       <tr class="c1">
         <td width="150" align="right"><?php echo MSG_SHIPPING_DETAILS; ?></td>
         <td nowrap colspan="2"><textarea name="shipping_details" style="width: 350px; height: 100px;"><?php echo $item_details['shipping_details']; ?></textarea></td>
 
 
-      <?php } ?>
+    <?php } ?>
   <tr class="c4">
     <td colspan="3" class="c3"><?php echo MSG_DIRECT_PAYMENT; ?></td>
   </tr>

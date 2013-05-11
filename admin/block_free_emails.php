@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 
 
   session_start();
@@ -30,7 +31,7 @@
 					id=" . $value);
           }
         }
-        }
+
         if (!empty($_POST['new_domain'])) {
           $db->query("INSERT INTO " . DB_PREFIX . "blocked_domains (domain) VALUES
 				('" . $db->rem_special_chars($_POST['new_domain']) . "')");

@@ -1,4 +1,4 @@
-﻿<table border="0" cellpadding="5" cellspacing="1" width="100%" class="store_main">
+<table border="0" cellpadding="5" cellspacing="1" width="100%" class="store_main">
   <tr>
     <td bgcolor="#5940ee" class="submenu_shop"><b><?php echo $shop_header_msg; ?></b></td>
   </tr>

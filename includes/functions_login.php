@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   function login_user($username, $password, $redirect_url = '', $admin_login = false) {
     global $db, $setts, $signup_fee;
@@ -85,7 +80,6 @@
       $login_details = $db->fetch_array($login_query);
 
       $valid_pin = true;
-
       if ($valid_pin) {
         $login_output['active'] = 'Active';
         $login_output['level'] = $login_details['level'];

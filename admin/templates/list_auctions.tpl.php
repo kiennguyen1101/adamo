@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -63,15 +63,7 @@
             <td colspan="3"><b>
                 <?php echo GMSG_AUCTION_SEARCH; ?>
               </b></td>
-          </tr>
-          <!--
-                <tr class="c2">
-                   <td><b>
-          <?php echo AMSG_BY_KEYWORDS; ?>
-                      </b> :</td>
-                   <td colspan="2"><input name="keywords" type="text" id="keywords" value="<?php echo $keywords; ?>" /></td>
-                </tr>
-          -->
+          </tr>          
           <tr class="c1">
             <td><b>
                 <?php echo AMSG_BY_AUCTION_ID; ?>
@@ -108,8 +100,7 @@
                     <?php echo GMSG_ALL; ?></font></a> | 
                   <a href="javascript:void(0);" onclick="checkAll(document.select_auctions['approve[]'], <?php echo $nb_auctions; ?>, false);"> <font color="#EEEE00">
                     <?php echo GMSG_NONE; ?></font></a> ] </td>
-              <?php
-              }
+              <?php }
               else {
                 ?>
                 <td align="center"><?php echo GMSG_STATUS; ?>

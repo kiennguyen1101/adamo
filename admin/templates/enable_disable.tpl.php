@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -45,8 +45,7 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_NB_NEWS_DISPLAYED_EXPL; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if ($page == 'buy_out_method') {
         ?>
         <tr class="c1">
@@ -65,24 +64,21 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_SHOW_MAKEOFFER_RANGE_EXPL; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if ($page == 'registration_terms') {
         ?>
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_REG_TERMS_CONTENT; ?></td>
           <td><textarea name="reg_terms_content" style="width: 100%; height: 150px;"><?php echo eregi_replace('<br>', "\n", $layout_tmp['reg_terms_content']); ?></textarea></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'sellitem_terms') {
-        ?>
+  <?php }
+  else if ($page == 'sellitem_terms') {
+    ?>
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_SELLITEM_TERMS_CONTENT; ?></td>
           <td><textarea name="auct_terms_content" style="width: 100%; height: 150px;"><?php echo eregi_replace('<br>', "\n", $layout_tmp['auct_terms_content']); ?></textarea></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'auction_sniping') {
     ?>
         <tr class="c1">
@@ -94,8 +90,7 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_SNIPING_DURATION_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'auction_approval') {
     ?>
         <tr>
@@ -131,9 +126,8 @@
                 </tr>
               </table></td>
           </tr>
-    <?php } ?>
-          <?php
-          }
+            <?php } ?>
+          <?php }
           else if ($page == 'preferred_sellers') {
             ?>
         <tr class="c1">
@@ -153,10 +147,9 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_REDUCTION_DESC; ?></td>
         </tr>
-          <?php
-          }
-          else if ($page == 'change_duration') {
-            ?>
+  <?php }
+  else if ($page == 'change_duration') {
+    ?>
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_NEW_DURATION; ?></td>
           <td><input name="duration_change_days" type="text" id="duration_change_days" value="<?php echo $setts_tmp['duration_change_days']; ?>" size="8">
@@ -166,8 +159,7 @@
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_NEW_DURATION_DESC; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'seller_verification') {
     ?>
         <tr class="c1">
@@ -184,32 +176,29 @@
             <input name="verification_fee" type="text" id="verification_fee" value="<?php echo $fees_tmp['verification_fee']; ?>" size="8">,
         <?php echo AMSG_RECURRING_EVERY; ?>
             <input name="verification_recurring" type="text" id="verification_recurring" value="<?php echo $fees_tmp['verification_recurring']; ?>" size="8">
-        <?php echo GMSG_DAYS; ?></td>
+    <?php echo GMSG_DAYS; ?></td>
         </tr>
         <tr>
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_VERIFICATION_FEE_EXPL; ?></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'seller_other_items') {
-        ?>
+  <?php }
+  else if ($page == 'seller_other_items') {
+    ?>
         <tr>
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_SELLER_OTHER_ITEMS_EXPL; ?></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'store_only_mode') {
-        ?>
+  <?php }
+  else if ($page == 'store_only_mode') {
+    ?>
         <tr>
           <td class="explain" align="right"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_ENABLE_STORE_ONLY_MODE_EXPL; ?></td>
         </tr>
-  <?php
-  }
-  else if ($page == 'second_chance') {
-    ?>
+      <?php }
+      else if ($page == 'second_chance') {
+        ?>
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_SELECT_INTERVAL; ?></td>
           <td><input name="second_chance_days" type="text" id="second_chance_days" value="<?php echo $setts_tmp['second_chance_days']; ?>" size="8">

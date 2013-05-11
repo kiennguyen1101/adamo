@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -82,8 +82,8 @@
       $query[] = "(a.category_id IN (" . $all_subcategories . ") OR a.addl_category_id IN (" . $all_subcategories . "))";
     }
 
-    if ($keywords_search) {
-      $query[] = "MATCH (a.name, a.description) AGAINST ('" . $keywords_search . "*' IN BOOLEAN MODE)";
+    if ($keywords_search) {      
+      $query[] = " a.name or a.description LIKE '%" . $keywords_search . "%' ";
     }
 
     $addl_where_query = $db->implode_array($query, ' AND ');
@@ -97,7 +97,8 @@
     $order_type = ($_REQUEST['order_type']) ? $_REQUEST['order_type'] : 'ASC';
 
     $additional_vars = '&parent_id=' . $parent_id . '&keywords_search=' . $keywords_search;
-    if (!$start)
+    
+     if (!$start)
       $start = 0;
     $limit = 20;
 

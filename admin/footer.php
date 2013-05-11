@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if ($setts['debug_load_time']) {

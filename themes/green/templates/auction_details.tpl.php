@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -252,8 +252,7 @@ myPopup = '';
                   </b></td>
                 <td><?php echo show_date($item_details['end_time']); ?></td>
               </tr>
-            <?php
-            }
+            <?php }
             else {
               ?>
               <tr >
@@ -381,10 +380,9 @@ myPopup = '';
     include ("themedesigner/template-" . $item_details['listing_template_id'] . ".php");
     ?>
     <table width="100%" border="0" cellspacing="0" cellpadding="3" class="border">
-    <?php
-    }
-    else {
-      ?>
+  <?php }
+  else {
+    ?>
       <table width="100%" border="0" cellspacing="0" cellpadding="3" class="border">
         <tr>
           <td class="c3" colspan="2"><?php echo GMSG_DESCRIPTION; ?></td>
@@ -448,35 +446,32 @@ myPopup = '';
               <tr>
                 <td nowrap><?php echo MSG_ITEM_VIEWED; ?>
     <?php echo ($item_details['nb_clicks'] + 1); ?>
-    <?php echo GMSG_TIMES; ?></td>
+        <?php echo GMSG_TIMES; ?></td>
               </tr>
             </table></td>
         </tr>
-    <?php if ($setts['enable_asq']) { ?>
+        <?php if ($setts['enable_asq']) { ?>
           <tr>
             <td style='background:#CCCCFF; padding:7px 0 7px 5px; font-size:16px' colspan="2"><?php echo MSG_ASK_SELLER_QUESTION; ?></td>
           </tr>
       <?php echo $public_questions_content; ?>
-      <?php if ($session->value('adminarea') == 'Active') { ?>
+          <?php if ($session->value('adminarea') == 'Active') { ?>
             <tr>
               <td align="center" colspan="2"><?php echo MSG_QUESTIONS_LOGGED_AS_ADMIN; ?></td>
             </tr>
-          <?php
-          }
-          else if (!$session->value('user_id')) {
-            ?>
+      <?php }
+      else if (!$session->value('user_id')) {
+        ?>
             <tr>
               <td align="center" colspan="2"><?php echo MSG_LOGIN_TO_ASK_QUESTIONS; ?></td>
             </tr>
-      <?php
-      }
-      else if ($session->value('user_id') == $item_details['owner_id']) {
-        ?>
+          <?php }
+          else if ($session->value('user_id') == $item_details['owner_id']) {
+            ?>
             <tr>
               <td align="center" colspan="2"><?php echo MSG_CANT_POST_QUESTION_OWNER; ?></td>
             </tr>
-      <?php
-      }
+      <?php }
       else {
         ?>
             <tr>
@@ -520,7 +515,7 @@ myPopup = '';
       <?php } ?>
     <?php } ?>
   <?php } ?>
-<?php if ($item_details['direct_payment']) { ?>
+    <?php if ($item_details['direct_payment']) { ?>
         <tr>
           <td style='background:#CCCCFF; padding:7px 0 7px 5px; font-size:16px' colspan="2"><?php echo MSG_DIRECT_PAYMENT; ?></td>
         </tr>
@@ -528,7 +523,7 @@ myPopup = '';
           <td colspan="2" align="center"><?php echo $direct_payment_methods_display; ?></td>
         </tr>
   <?php } ?>
-<?php if ($item_details['payment_methods']) { ?>
+    <?php if ($item_details['payment_methods']) { ?>
         <tr>
           <td class="c3" colspan="2"><?php echo MSG_OFFLINE_PAYMENT; ?></td>
         </tr>
@@ -571,12 +566,12 @@ myPopup = '';
   <?php } ?>
   </table>
   <br />
-            <?php if ($ad_display == 'live') { ?>
+<?php if ($ad_display == 'live') { ?>
       <table width="100%" border="1" cellpadding="3" cellspacing="1" class="subitem">
         <tr class="contentfont" align="center">
           <td><table width=100%>
               <tr>
-                    <?php if ($session->value('user_id')) { ?>
+    <?php if ($session->value('user_id')) { ?>
                   <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/status1.gif" vspace="5" align="absmiddle"></td>
                   <td nowrap><?php echo MSG_WELCOME; ?>
                     , <br>
@@ -585,49 +580,47 @@ myPopup = '';
                     </b></td>
                   <td align="center" width="100%"><?php if ($item_details['owner_id'] == $session->value('user_id')) { ?>
                       [ <a href="<?php echo process_link('sell_item', array('option' => 'sell_similar', 'auction_id' => $item_details['auction_id'])); ?>">
-                        <?php echo MSG_SELL_SIMILAR; ?>
+        <?php echo MSG_SELL_SIMILAR; ?>
                       </a> ]<br>
                         <?php if (!$item->under_time($item_details)) { ?>
-                          <?php if ($item_details['nb_bids'] == 0 && $item_details['active'] == 1) { ?>
+                        <?php if ($item_details['nb_bids'] == 0 && $item_details['active'] == 1) { ?>
                           [ <a href="edit_item.php?auction_id=<?php echo $item_details['auction_id']; ?>&edit_option=new">
                           <?php echo MSG_EDIT_AUCTION; ?>
                           </a> ]<br>
                           [ <a href="members_area.php?do=delete_auction&auction_id=<?php echo $item_details['auction_id']; ?>&page=selling&section=open" onclick="return confirm('<?php echo MSG_DELETE_CONFIRM; ?>');">
-                            <?php echo MSG_DELETE; ?>
+                          <?php echo MSG_DELETE; ?>
                           </a> ]<br>
-                        <?php
-                        }
+                        <?php }
                         else if ($item_details['nb_bids'] > 0 && $item_details['active'] == 1) {
                           ?>
                           [ <a href="edit_description.php?auction_id=<?php echo $item_details['auction_id']; ?>">
                         <?php echo MSG_EDIT_DESCRIPTION; ?>
                           </a> ]<br>
-                      <?php } ?>
+          <?php } ?>
         <?php } ?>
-      <?php } ?>
+                      <?php } ?>
                   </td>
-                    <?php
-                    }
-                    else {
-                      ?>
+                  <?php }
+                  else {
+                    ?>
                   <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/status.gif" vspace="5" align="absmiddle"></td>
                   <td width="100%"><?php echo MSG_STATUS_BIDDER_SELLER_A; ?>
                     <br>
                     <a href="<?php echo process_link('login'); ?>">
-                <?php echo MSG_STATUS_BIDDER_SELLER_B; ?>
+      <?php echo MSG_STATUS_BIDDER_SELLER_B; ?>
                     </a>
                 <?php echo MSG_STATUS_BIDDER_SELLER_C; ?></td>
-              <?php } ?>
+    <?php } ?>
               </tr>
             </table></td>
           <td align="center" class="leftborder" nowrap width="22%"><a href="javascript:popUp('<?php echo process_link('auction_print', array('auction_id' => $item_details['auction_id'])); ?>');"><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/print.gif" align="absmiddle" border="0" hspace="5">
-    <?php echo MSG_PRINT_VIEW; ?>
+        <?php echo MSG_PRINT_VIEW; ?>
             </a></td>
           <td align="center" class="leftborder" nowrap width="22%"><a href="<?php echo process_link('auction_details', array('auction_id' => $item_details['auction_id'], 'option' => 'item_watch')); ?>"><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/watch.gif" align="absmiddle" border="0" hspace="5">
-    <?php echo MSG_WATCH_ITEM; ?>
+              <?php echo MSG_WATCH_ITEM; ?>
             </a></td>
           <td align="center" class="leftborder" nowrap width="22%"><a href="<?php echo process_link('auction_details', array('auction_id' => $item_details['auction_id'], 'option' => 'auction_friend')); ?>"><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/tofriend.gif" align="absmiddle" border="0" hspace="5">
-    <?php echo MSG_SEND_TO_FRIEND; ?>
+        <?php echo MSG_SEND_TO_FRIEND; ?>
             </a> &nbsp; &nbsp;</td>
         </tr>
     <?php if (!empty($direct_payment_box)) { ?>
@@ -659,11 +652,11 @@ myPopup = '';
               $width = 100 / $layout['hpfeat_nb'] . '%';
               ?>
             <td width="<?php echo $width; ?>" align="center" valign="top"><?php
-        if (!empty($other_items[$counter]['name'])) {
-          $main_image = $db->get_sql_field("SELECT media_url FROM " . DB_PREFIX . "auction_media WHERE
+              if (!empty($other_items[$counter]['name'])) {
+                $main_image = $db->get_sql_field("SELECT media_url FROM " . DB_PREFIX . "auction_media WHERE
       			auction_id='" . $other_items[$counter]['auction_id'] . "' AND media_type=1 AND upload_in_progress=0 ORDER BY media_id ASC LIMIT 0,1", 'media_url');
 
-          $auction_link = process_link('auction_details', array('name' => $other_items[$counter]['name'], 'auction_id' => $other_items[$counter]['auction_id']));
+                $auction_link = process_link('auction_details', array('name' => $other_items[$counter]['name'], 'auction_id' => $other_items[$counter]['auction_id']));
                 ?>
                 <table width="100%" border="0" cellspacing="3" cellpadding="3">
                   <tr>
@@ -692,7 +685,7 @@ myPopup = '';
                         :</b> <?php echo show_date($other_items[$counter]['end_time']); ?> </td>
                   </tr>
                 </table>
-      <?php } ?></td>
+        <?php } ?></td>
       <?php } ?>
 
         </tr>
@@ -701,7 +694,7 @@ myPopup = '';
             <?php } ?>
   <br>
 
-        <?php if ($ad_display == 'live') { ?>
+<?php if ($ad_display == 'live') { ?>
       <table width=100% border=0 cellspacing=0 cellpadding=0>
         <tr>
           <td align='center' style="background:#EFEFFF; border:1px solid #CCCCFF;" ><?php echo MSG_THE_POSTER; ?>

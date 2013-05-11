@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## Auctionlivesoft V6.8															##
-##-------------------------------------------------------------##
-## Copyright ©2008 Auctionlivesoft SoftwareLTD. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -50,9 +45,9 @@
                 $counter++;
               }
               ?></td>
-          <?php } ?>
+        <?php } ?>
         </tr>
-      <?php } ?>
+    <?php } ?>
     </table>
     <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
   <?php } ?>
@@ -63,7 +58,7 @@
         <td></td>
         <td nowrap="nowrap" class="smallfont"><strong>Picture</strong></td>
         <td nowrap="nowrap" class="smallfont"><b>
-            <?php echo GMSG_START_TIME; ?>
+    <?php echo GMSG_START_TIME; ?>
           </b></td>
         <td class="smallfont" nowrap="nowrap">&nbsp;<b><?php echo MSG_START_BID; ?></b></td>
         <td class="smallfont" width="100%">&nbsp;<b><?php echo MSG_ITEM_TITLE; ?></b></td>
@@ -80,13 +75,13 @@
           <td width="11" id="bot"><img src="themes/<?php echo $setts['default_theme']; ?>/img/recent.gif" width="13" height="12" hspace="3"></td>
           <td class="smallfont" id="bot" nowrap="nowrap"><a href="<?php echo process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id'])); ?>"><img src="<?php echo ((!empty($item_details["media_url"])) ? 'thumbnail.php?pic=' . $item_details["media_url"] . '&w=50&sq=Y' : 'themes/' . $setts['default_theme'] . '/img/system/noimg.gif'); ?>" border="0" alt="<?php echo $item_details['name']; ?>" /></a></td>
           <td class="smallfont" id="bot" nowrap="nowrap"><b>
-              <?php echo show_date($item_details['start_time']); ?>
+      <?php echo show_date($item_details['start_time']); ?>
             </b></td>
           <td class="smallfont" id="bot" nowrap="nowrap">&nbsp;<?php echo $fees->display_amount($item_details['start_price'], $item_details['currency']); ?></td> 
           <td id="bot" width="100%" class="smallfont">&nbsp;<a href="<?php echo process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id'])); ?>"><?php echo title_resize($item_details['name']); ?></a></td> 
           <td nowrap id="bot"><?php echo item_pics($item_details); ?>&nbsp;</td>
         </tr> 
-      <?php } ?>
+    <?php } ?>
     </table>
     <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="10"></div>
   <?php } ?>
@@ -97,7 +92,7 @@
         <td></td>
         <td nowrap="nowrap" class="smallfont"><strong>Picture</strong></td>
         <td class="smallfont" nowrap="nowrap"><b>
-            <?php echo MSG_MAX_BID; ?>
+    <?php echo MSG_MAX_BID; ?>
           </b></td>
         <td class="smallfont" width="100%">&nbsp;<b><?php echo MSG_ITEM_TITLE; ?><b></td>
               <td class="smallfont" nowrap>&nbsp;</td>
@@ -116,19 +111,19 @@
                   <td width="100%" class="smallfont" id="bot">&nbsp;<a href="<?php echo process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id'])); ?>"><?php echo title_resize($item_details['name']); ?></a></td> 
                   <td nowrap id="bot"><?php echo item_pics($item_details); ?>&nbsp;</td> 
                 </tr> 
-              <?php } ?>
+    <?php } ?>
 
               </table>
               <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="10"></div>
             <?php } ?>
           <?php if ($layout['nb_ending_auct']) { ?>
-              <?php echo $ending_auctions_header; ?>
+    <?php echo $ending_auctions_header; ?>
               <table width="100%" border="0" cellpadding="3" cellspacing="1" class="border">
                 <tr class="c4" height="15">
                   <td></td>
                   <td class="smallfont" nowrap="nowrap">&nbsp;<strong>Picture</strong></td>
                   <td class="smallfont" nowrap="nowrap"><b>
-                      <?php echo MSG_TIME_LEFT; ?>
+    <?php echo MSG_TIME_LEFT; ?>
                     </b></td>
                   <td class="smallfont" nowrap="nowrap">&nbsp;<b><?php echo MSG_CURRENTLY; ?></b></td>
                   <td class="smallfont" width="100%">&nbsp;<b><?php echo MSG_ITEM_TITLE; ?></b></td>
@@ -150,12 +145,12 @@
                     <td  class="smallfont" width="100%" id="bot">&nbsp;<a href="<?php echo process_link('auction_details', array('name' => $item_details['name'], 'auction_id' => $item_details['auction_id'])); ?>"><?php echo title_resize($item_details['name']); ?></a></td> 
                     <td nowrap id="bot"><?php echo item_pics($item_details); ?>&nbsp;</td> 
                   </tr> 
-                <?php } ?>
+    <?php } ?>
               </table>
               <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="10"></div>
             <?php } ?>
           <?php if ($layout['nb_want_ads']) { ?>
-              <?php echo $recent_wa_header; ?>
+    <?php echo $recent_wa_header; ?>
               <table width="100%" border="0" cellpadding="3" cellspacing="1" class="border">
                 <tr class="c4" height="15">
                   <td></td>
@@ -172,10 +167,10 @@
                             <td class="smallfont" nowrap="nowrap" id="bot">&nbsp;<b><?php echo show_date($item_details['start_time']); ?></b></td> 
                             <td class="smallfont" width="100%" id="bot">&nbsp;<a href="<?php echo process_link('wanted_details', array('name' => $item_details['name'], 'wanted_ad_id' => $item_details['wanted_ad_id'])); ?>"><?php echo title_resize($item_details['name']); ?></a></td> 
                           </tr> 
-                        <?php } ?>
+    <?php } ?>
                         </table>
                         <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
-                      <?php } ?>
+  <?php } ?>
 
                     </td>
 

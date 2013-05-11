@@ -1,10 +1,6 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
+
 
   class user extends custom_field {
 
@@ -438,9 +434,9 @@
 
       $state = ($user_details['state_name']) ? $user_details['state_name'] : $user_details['state'];
       // state_name and country_name are presumed to be taken from the countries table from the initial query.
-      $display_output = $user_details['address'] .
-        $user_details['zip_code'] . ', ' . $user_details['city'] .
-        $state;
+      $display_output = $user_details['address'] . '<br>' .
+        $user_details['zip_code'] . ', ' . $user_details['city'] . '<br>' .
+        $state . ', ' . $user_details['country_name'];
 
       return $display_output;
     }

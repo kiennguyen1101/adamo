@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -45,7 +45,7 @@
 
           $sql_delete_tiers = $db->query("DELETE FROM " . DB_PREFIX . "fees_tiers WHERE tier_id IN (" . $delete_array . ")");
         }
-
+        }
 
         if ($_REQUEST['tiers'] != 1 || $_REQUEST['fee_column'] == 'endauction') {
           $is_fee_row = $db->count_rows('fees', "WHERE category_id=" . $_REQUEST['category_id']);

@@ -1,4 +1,4 @@
-Ôªø/*
+/*
  Script: CountDownPro Timer
  Description: Counts down or up from a date, fully customisable display, customisable events when countdown reaches zero! Development version - not to be used in a production environment.
  Author: Andrew Urquhart
@@ -207,26 +207,26 @@ function CD_Init() {
                     // Default formatting data
                     objW.servertime = "";
                     objW.d_mindigits = 1;
-                    objW.d_unit = " ng√†y";
-                    objW.d_units = " ng√†y";
+                    objW.d_unit = " ng‡y";
+                    objW.d_units = " ng‡y";
                     objW.d_before = "";
                     objW.d_after = " ";
                     objW.d_hidezero = 0;
                     objW.h_mindigits = 2;
-                    objW.h_unit = "gi·ªù";
-                    objW.h_units = "gi·ªù";
+                    objW.h_unit = "gi?";
+                    objW.h_units = "gi?";
                     objW.h_before = "";
                     objW.h_after = " ";
                     objW.h_hidezero = 0;
                     objW.m_mindigits = 2;
-                    objW.m_unit = "ph√∫t";
-                    objW.m_units = "ph√∫t";
+                    objW.m_unit = "ph˙t";
+                    objW.m_units = "ph˙t";
                     objW.m_before = "";
                     objW.m_after = " ";
                     objW.m_hidezero = 0;
                     objW.s_mindigits = 2;
-                    objW.s_unit = "gi√¢y";
-                    objW.s_units = "gi√¢y";
+                    objW.s_unit = "gi‚y";
+                    objW.s_units = "gi‚y";
                     objW.s_before = "";
                     objW.s_after = " ";
                     objW.s_hidezero = 0;

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   class custom_field_admin extends custom_field {

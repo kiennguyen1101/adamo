@@ -1,4 +1,4 @@
-﻿[12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
+[12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
 [12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
 [12-Apr-2013 13:59:01 Asia/Bangkok] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home/adamo/public_html/index.php:1) in /home/adamo/public_html/index.php on line 17
 [22-Apr-2013 14:02:03 Asia/Bangkok] PHP Fatal error:  Call to undefined function get_home_cat() in /home/adamo/public_html/dev/themes/red/templates/header.tpl.php on line 135

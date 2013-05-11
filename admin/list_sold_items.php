@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -32,8 +32,8 @@
     $msg_changes_saved = '<p align="center" class="contentfont">' . AMSG_CHANGES_SAVED . '</p>';
 
     $form_submitted = false;
-    // kien if (!$start)
-    //$start = 0;
+    if (!$start)
+      $start = 0;
     $limit = 20;
 
     $order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'a.auction_id';
@@ -65,19 +65,6 @@
     (string) $search_filter = null;
 
     $subpage_title = AMSG_SOLD_ITEMS;
-
-    /*
-      if ($_REQUEST['keywords'])
-      {
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " MATCH(a.name, a.description) AGAINST ('".$_REQUEST['keywords']."*' IN BOOLEAN MODE)";
-      $template->set('keywords', $_REQUEST['keywords']);
-      }
-      if ($_REQUEST['src_auction_id'])
-      {
-      $search_filter .= (($search_filter) ? ' AND' : ' WHERE') . " a.auction_id='" . $_REQUEST['src_auction_id'] . "'";
-      $template->set('src_auction_id', $_REQUEST['src_auction_id']);
-      }
-     */
 
     $nb_winners = $db->count_rows('winners w');
 

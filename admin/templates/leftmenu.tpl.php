@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -202,11 +202,6 @@
 
       <?php
         if (
-        //eregi("table_countries.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_item_durations.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_payment_options.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_shipping_options.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_bid_increments.php",$_SERVER['PHP_SELF'])) { } 
           stristr($_SERVER['PHP_SELF'], "table_countries.php") ||
           stristr($_SERVER['PHP_SELF'], "table_item_durations.php") ||
           stristr($_SERVER['PHP_SELF'], "table_payment_options.php") ||
@@ -246,13 +241,6 @@
       </div>
       <?php
         if (
-        //eregi("vouchers_management.php",$_SERVER['PHP_SELF'])||
-        //eregi("content_section.php",$_SERVER['PHP_SELF'])||
-        //eregi("content_pages.php",$_SERVER['PHP_SELF'])||
-        //eregi("content_system_emails.php",$_SERVER['PHP_SELF'])||
-        //eregi("content_banners_management.php",$_SERVER['PHP_SELF'])||
-        //eregi("content_language_files.php",$_SERVER['PHP_SELF'])) { } 
-
           stristr($_SERVER['PHP_SELF'], "vouchers_management.php") ||
           stristr($_SERVER['PHP_SELF'], "content_section.php") ||
           stristr($_SERVER['PHP_SELF'], "content_pages.php") ||
@@ -292,19 +280,6 @@
       </div>
       <?php
         if (
-        //eregi("list_admin_users.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_user_bids.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_site_users.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_users_reputations.php",$_SERVER['PHP_SELF'])||
-        //eregi("user_login.php",$_SERVER['PHP_SELF'])||
-        //eregi("send_activation_emails.php",$_SERVER['PHP_SELF'])||
-        //eregi("user_newsletter.php",$_SERVER['PHP_SELF'])||
-        //eregi("abuse_reports.php",$_SERVER['PHP_SELF'])||
-        //eregi("ban_users.php",$_SERVER['PHP_SELF'])||
-        //eregi("blocked_users.php",$_SERVER['PHP_SELF']) || 
-        //$_REQUEST['page']=='register' ||
-        //$_REQUEST['page']=='reputation_sale' || 
-        //$_REQUEST['page']=='reputation_purchase' ) { } 
           stristr($_SERVER['PHP_SELF'], "list_admin_users.php") ||
           stristr($_SERVER['PHP_SELF'], "list_user_bids.php") ||
           stristr($_SERVER['PHP_SELF'], "list_site_users.php") ||
@@ -350,13 +325,6 @@
       </div>
       <?php
         if (
-        //eregi("list_auctions.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_sold_items.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_wanted_ads.php",$_SERVER['PHP_SELF'])||
-        //eregi("list_messaging.php",$_SERVER['PHP_SELF']) ||
-        //eregi("images_removal_tool.php",$_SERVER['PHP_SELF']) ||
-        //$_REQUEST['page']=='auction' ||
-        //$_REQUEST['page']=='wanted_ad' ) { } 
           stristr($_SERVER['PHP_SELF'], "list_auctions.php") ||
           stristr($_SERVER['PHP_SELF'], "list_sold_items.php") ||
           stristr($_SERVER['PHP_SELF'], "list_wanted_ads.php") ||
@@ -388,9 +356,6 @@
       </div>
       <?php
         if (
-        //eregi("stores_subscriptions.php",$_SERVER['PHP_SELF'])||
-        //eregi("stores_management.php",$_SERVER['PHP_SELF'])||
-        //$_REQUEST['page']=='enable_stores' ) { } 
           stristr($_SERVER['PHP_SELF'], "stores_subscriptions.php") ||
           stristr($_SERVER['PHP_SELF'], "stores_management.php") ||
           $_REQUEST['page'] == 'enable_stores') {
@@ -416,7 +381,6 @@
       </div>
       <?php
         if (
-        //eregi("custom_fields_types.php",$_SERVER['PHP_SELF'])) { } 
           stristr($_SERVER['PHP_SELF'], "custom_fields_types.php")) {
           
         }
@@ -442,9 +406,6 @@
       </div>
       <?php
         if (
-        //eregi("table_categories.php",$_SERVER['PHP_SELF'])||
-        //eregi("categories_lang.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_suggested_categories.php",$_SERVER['PHP_SELF']) ) { } 
           stristr($_SERVER['PHP_SELF'], "table_categories.php") ||
           stristr($_SERVER['PHP_SELF'], "categories_lang.php") ||
           stristr($_SERVER['PHP_SELF'], "table_suggested_categories.php")) {
@@ -474,11 +435,6 @@
       </div>
       <?php
         if (
-        //eregi("fees_settings.php",$_SERVER['PHP_SELF'])||
-        //eregi("fees_payment_gateways.php",$_SERVER['PHP_SELF'])||
-        //eregi("fees_management.php",$_SERVER['PHP_SELF'])||
-        //eregi("table_currencies.php",$_SERVER['PHP_SELF'])||
-        //$_REQUEST['page']=='mcrypt' ) { } 
           stristr($_SERVER['PHP_SELF'], "fees_settings.php") ||
           stristr($_SERVER['PHP_SELF'], "fees_payment_gateways.php") ||
           stristr($_SERVER['PHP_SELF'], "fees_management.php") ||
@@ -507,8 +463,6 @@
       </div>
       <?php
         if (
-        //eregi("accounting.php",$_SERVER['PHP_SELF'])||
-        //$_REQUEST['show']=='accounting_overdue' ) { } 
           stristr($_SERVER['PHP_SELF'], "accounting.php") ||
           $_REQUEST['show'] == 'accounting_overdue') {
           
@@ -534,8 +488,6 @@
       </div>
       <?php
         if (
-        //eregi("tax_settings.php",$_SERVER['PHP_SELF'])||
-        //$_REQUEST['page']=='enable_tax' ) { } 
           stristr($_SERVER['PHP_SELF'], "tax_settings.php") ||
           $_REQUEST['page'] == 'enable_tax') {
           
@@ -562,8 +514,6 @@
       </div>
       <?php
         if (
-        //eregi("word_filter.php",$_SERVER['PHP_SELF'])||
-        //eregi("block_free_emails.php",$_SERVER['PHP_SELF'])) { } 
           stristr($_SERVER['PHP_SELF'], "word_filter.php") ||
           stristr($_SERVER['PHP_SELF'], "block_free_emails.php")) {
           

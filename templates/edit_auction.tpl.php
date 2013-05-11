@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -87,19 +87,18 @@
         <tr>
           <?php if (!$setts['enable_store_only_mode']) { ?>
             <td width="150" align="right"></td>
-            <?php
-          }
+          <?php }
           else {
             ?>
             <td width="150" align="right"><?php echo MSG_LIST_IN; ?></td>
-          <?php } ?>
+    <?php } ?>
           <td class="c1"><input type="radio" name="list_in" value="both" <?php echo ($item_details['list_in'] == 'both') ? 'checked' : (($shop_status['remaining_items'] <= 0 && $item_details['list_in'] == 'auction') ? 'disabled' : ''); ?> <?php echo ($item_details['list_in'] == 'store') ? 'disabled' : ''; ?>></td>
           <td class="c1" width="100%"><?php echo GMSG_BOTH; ?></td>
         </tr>
       </table>
       <br>
     <?php } ?>
-  <?php echo $edit_auction_content; ?>
+<?php echo $edit_auction_content; ?>
   <br />
   <table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
     <tr>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -57,8 +57,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_SIGNUP_SETTS_NOTE; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if ($page == 'closed_auctions_deletion') {
         ?>
         <!-- Closed Auctions Deletion Settings BEGIN HERE -->
@@ -71,8 +70,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_CLOSED_AUCT_DEL_EXPL; ?></td>
         </tr>
-      <?php
-      }
+      <?php }
       else if ($page == 'hpfeat_items') {
         ?>
         <!-- Home Page Featured Auctions Settings BEGIN HERE -->
@@ -97,10 +95,9 @@
           <td align="right"><?php echo AMSG_MAX_ITEMS; ?></td>
           <td><input name="hpfeat_max" type="text" id="hpfeat_max" value="<?php echo $layout_tmp['hpfeat_max']; ?>" size="8"></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'catfeat_items') {
-        ?>
+  <?php }
+  else if ($page == 'catfeat_items') {
+    ?>
         <!-- Category Featured Auctions Settings BEGIN HERE -->
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_ITEMS_PER_ROW; ?></td>
@@ -123,8 +120,7 @@
           <td align="right"><?php echo AMSG_MAX_ITEMS; ?></td>
           <td><input name="catfeat_max" type="text" id="catfeat_max" value="<?php echo $layout_tmp['catfeat_max']; ?>" size="8"></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'recently_listed_auctions') {
     ?>
         <!-- Last Created Auctions Settings BEGIN HERE -->
@@ -136,8 +132,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_RECENT_AUCTIONS_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'popular_auctions') {
     ?>
         <!-- Hot Auctions Settings BEGIN HERE -->
@@ -149,8 +144,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_POPULAR_AUCTIONS_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'ending_soon_auctions') {
     ?>
         <!-- Ending Soon Auctions Settings BEGIN HERE -->
@@ -162,8 +156,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_ENDING_SOON_AUCTIONS_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'auction_images') {
     ?>
         <!-- Images Settings BEGIN HERE -->
@@ -200,8 +193,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_MAX_RESIZE_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'currency_setts') {
     ?>
         <!-- Currency Settings BEGIN HERE -->
@@ -241,8 +233,7 @@
           <td><input type="radio" name="currency_position" value="2" <?php echo ($setts_tmp['currency_position'] == 2) ? 'checked' : ''; ?>>
     <?php echo AMSG_SYMBOL_AFTER_AMOUNT . ': 395 ' . $setts_tmp['currency']; ?> </td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'time_date_setts') {
     ?>
         <!-- Time and Date Settings BEGIN HERE -->
@@ -270,10 +261,9 @@
               <?php echo $date_format_details['name']; ?></td>
           </tr>
             <?php } ?>
-          <?php
-          }
-          else if ($page == 'ssl_support') {
-            ?>
+  <?php }
+  else if ($page == 'ssl_support') {
+    ?>
         <!-- SSL Settings BEGIN HERE -->
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_ACTIVATE_SSL; ?></td>
@@ -302,17 +292,15 @@
           <td><input name="site_path_ssl" type="text" id="content" value="<?php echo $setts_tmp['site_path_ssl']; ?>" size="50">
           </td>
         </tr>
-      <?php
-      }
-      else if ($page == 'meta_tags') {
-        ?>
+  <?php }
+  else if ($page == 'meta_tags') {
+    ?>
         <!-- Meta Tags Settings BEGIN HERE -->
         <tr class="c1">
           <td align="right" width="150"><?php echo AMSG_ADD_META_TAGS; ?></td>
           <td><textarea name="metatags" style="width: 100%; height: 150px;" id="metatags"><?php echo $setts_tmp['metatags']; ?></textarea></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'cron_jobs') {
     ?>
         <!-- Cron Jobs Settings BEGIN HERE -->
@@ -326,8 +314,7 @@
           <td><input type="radio" name="cron_job_type" value="2" <?php echo ($setts_tmp['cron_job_type'] == 2) ? 'checked' : ''; ?>>
           </td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'min_reg_age') {
     ?>
         <!-- Minimum registration age settings BEGIN HERE -->
@@ -350,10 +337,9 @@
           <td class="c1"><input type="radio" name="birthdate_type" value="1" <?php echo ($setts_tmp['birthdate_type'] == 1) ? 'checked' : ''; ?>>
         <?php echo AMSG_DOB_YEAR_ONLY; ?></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'recent_wanted_ads') {
-        ?>
+  <?php }
+  else if ($page == 'recent_wanted_ads') {
+    ?>
         <!-- Recently listed wanted ads Settings BEGIN HERE -->
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_RECENT_WANTED_ADS; ?></td>
@@ -363,8 +349,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_RECENT_WANTED_ADS_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'auction_media') {
     ?>
         <!-- Movie Settings BEGIN HERE -->
@@ -385,29 +370,27 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_MEDIA_MAX_SIZE_EXPL; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'buy_out_method') {
     ?>
         <!-- Buyout procedure selection BEGINS HERE -->
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_CHOOSE_METHOD; ?></td>
           <td nowrap><input type="checkbox" name="buyout_process" value="1" <?php echo ($setts_tmp['buyout_process'] == 1) ? 'checked' : ''; ?>>
-    <?php echo AMSG_BUY_OUT_BUYOUT; ?></td>
+            <?php echo AMSG_BUY_OUT_BUYOUT; ?></td>
         </tr>
         <tr>
           <td></td>
           <td class="c1"><input type="checkbox" name="makeoffer_process" value="1" <?php echo ($setts_tmp['makeoffer_process'] == 1) ? 'checked' : ''; ?>>
-    <?php echo AMSG_BUY_OUT_MAKEOFFER; ?></td>
+            <?php echo AMSG_BUY_OUT_MAKEOFFER; ?></td>
         </tr>
         <tr>
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_BUY_OUT_ALTER_WARNING; ?></td>
         </tr>
-      <?php
-      }
-      else if ($page == 'sellitem_buttons') {
-        ?>
+  <?php }
+  else if ($page == 'sellitem_buttons') {
+    ?>
         <!-- Sell Navigation buttons position page BEGINS HERE -->
         <tr class="c1">
           <td width="150" align="right"><?php echo AMSG_CHOOSE_POSITION; ?></td>
@@ -419,8 +402,7 @@
           <td class="c1"><input type="radio" name="sell_nav_position" value="2" <?php echo ($setts_tmp['sell_nav_position'] == 2) ? 'checked' : ''; ?>>
     <?php echo AMSG_SELLNAV_POS_2; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($page == 'nb_autorelists') {
     ?>
         <!-- Maximum auto relist number page BEGINS HERE -->
@@ -440,10 +422,9 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_NB_AUTORELISTS_EXPL; ?></td>
         </tr>
-  <?php
-  }
-  else if ($_REQUEST['page'] == "enable_tax") {
-    ?>
+      <?php }
+      else if ($_REQUEST['page'] == "enable_tax") {
+        ?>
         <!-- Enable tax for site fees and standard ads -->
         <tr class="c1">
           <td align="right" nowrap><?php echo AMSG_ENABLE_TAX; ?></td>
@@ -461,8 +442,7 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_VAT_NUMBER_DESC; ?></td>
         </tr>
-  <?php
-  }
+  <?php }
   else if ($_REQUEST['page'] == "invoices_settings") {
     ?>
         <!-- Site Invoices Settings -->
@@ -490,10 +470,9 @@
           <td align="right" class="explain"><img src="images/info.gif"></td>
           <td class="explain"><?php echo AMSG_INVOICE_COMMENTS_DESC; ?></td>
         </tr>
-      <?php
-      }
-      else if ($_REQUEST['page'] == "mcrypt") {
-        ?>
+  <?php }
+  else if ($_REQUEST['page'] == "mcrypt") {
+    ?>
         <!-- Enable tax for site fees and standard ads -->
         <tr class="c1">
           <td align="right" nowrap><?php echo AMSG_ENABLE_MCRYPT; ?></td>

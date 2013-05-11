@@ -1,18 +1,5 @@
-﻿<?php
-  /* ======================================================================*\
-    || #################################################################### ||
-    || # gbase.php 6.00, for use with myphpauction script v6.00		          # ||
-    || # ---------------------------------------------------------------- # ||
-    || # Copyright © 2006 RENS Management, LLC. All Rights Reserved.      # ||
-    || # This file is licensed under the End User Licensue Agreement at   # ||
-    || #                 http://myphpauction.rensmllc.com/eula.pdf              # ||
-    || # -----------------  THIS IS NOT FREE SOFTWARE ------------------- # ||
-    || #                                                                  # ||
-    || # 5.22.1 5/24/2006 Search for Buy it Now items only. Discard items # ||
-    || # ending within 24 hours of enddate, Google publishing lag time.   # ||
-    || # 5.22.0 First release                                             # ||
-    || #################################################################### ||
-    \*====================================================================== */
+<?php
+
 
   $path = explode(DIRECTORY_SEPARATOR, dirname(__FILE__));
   array_pop($path);

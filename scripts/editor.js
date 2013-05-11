@@ -1,6 +1,6 @@
-﻿/***********************************************************
+/***********************************************************
  InnovaStudio WYSIWYG Editor 2.9
- Copyright © 2003-2005, INNOVA STUDIO (www.InnovaStudio.com). All rights reserved.
+ Copyright � 2003-2005, INNOVA STUDIO (www.InnovaStudio.com). All rights reserved.
  ************************************************************/
 
         /*** UTILITY OBJECT ***/

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -30,7 +30,7 @@
   }
 </SCRIPT>
 <tr class="c4">
-  <?php echo $sell_item_header; ?>
+<?php echo $sell_item_header; ?>
 </tr>
 <?php echo $display_formcheck_errors; ?>
 

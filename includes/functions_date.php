@@ -14,7 +14,7 @@
 
       $offset_time = $timestamp + (TIME_OFFSET * 60 * 60);
 
-      $display_output = date("m - d - Y H:i:s", $offset_time);
+      $display_output = date($date_format, $offset_time);
     }
     else {
       $display_output = GMSG_NA;
@@ -60,11 +60,11 @@
     (array) $current_date = null;
 
     $thisYear = date('Y');
-    $yearRange = $thisYear + 2;
+    $yearRange = $thisYear+2;
+    
     foreach (range($thisYear, $yearRange) as $year) {
       $years_array[] = $year;
     }
-
 
     $months_array = array('01' => GMSG_MTH_JANUARY, '02' => GMSG_MTH_FEBRUARY, '03' => GMSG_MTH_MARCH, '04' => GMSG_MTH_APRIL,
       '05' => GMSG_MTH_MAY, '06' => GMSG_MTH_JUNE, '07' => GMSG_MTH_JULY, '08' => GMSG_MTH_AUGUST,
@@ -134,7 +134,7 @@
     $display_output .= '</select> ';
 
     /* 	$display_output .= '<a href="#" onclick="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_day)); return false;" '.
-      'title="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_date)); return false;" name="anchor' . $box_number . '" id="anchor' . $box_number . '">'.
+      'title="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_date)); return false;" name="anchor' . $box_number . '" id="anchor' . $box_number . '">' .
       '<img src="' . SITE_PATH . 'themes/' . $setts['default_theme'] . '/img/system/calendar_b2u.gif" border="0" align="absmiddle" /></a> ';
      */
     if ($display_time) {

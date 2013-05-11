@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -25,7 +25,8 @@
     $item = new item();
     $item->setts = &$setts;
     $item->layout = &$layout;
-
+    if (!$start)
+      $start = 0;
     $limit = 20;
 
     $show_history_table = false;
@@ -149,11 +150,11 @@
           }
 
           $views_table_content .= '<tr> ' .
-            '	<td><a href="accounting.php?do=display_accounting&user_id=' . $user_id . '&level=0&date1_month=' . $start['mon'] .
-            '&date1_year=' . $start['year'] . '&date1_day=' . $start['mday'] .
-            '&date2_month=' . $finish['mon'] . '&date2_year=' . $finish['year'] .
-            '&date2_day=' . $finish['mday'] . '">' . $title . '</a></td> ' .
-            '	<td align="center">' . $fees->display_amount($view_details['invoice_amount'], $setts['currency']) . '</td> ';
+              '	<td><a href="accounting.php?do=display_accounting&user_id=' . $user_id . '&level=0&date1_month=' . $start['mon'] .
+              '&date1_year=' . $start['year'] . '&date1_day=' . $start['mday'] .
+              '&date2_month=' . $finish['mon'] . '&date2_year=' . $finish['year'] .
+              '&date2_day=' . $finish['mday'] . '">' . $title . '</a></td> ' .
+              '	<td align="center">' . $fees->display_amount($view_details['invoice_amount'], $setts['currency']) . '</td> ';
         }
       }
 

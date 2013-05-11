@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -29,8 +29,7 @@
   <body>
     <?php if ($form_saved == 1) { ?>
         <p align="center" class="contentfont"><?php echo AMSG_CHANGES_SAVED; ?></p>
-      <?php
-      }
+      <?php }
       else {
         ?>
         <form action="table_categories_options.php" method="post" name="form_category_options" enctype="multipart/form-data">

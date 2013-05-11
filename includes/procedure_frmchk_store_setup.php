@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('FRMCHK_STORE_SETUP')) {

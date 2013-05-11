@@ -1,4 +1,4 @@
-﻿/*** Color Picker Object ***/
+/*** Color Picker Object ***/
         var arrColorPickerObjects = [];
 function ColorPicker(sName, sParent)
 {

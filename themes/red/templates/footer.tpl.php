@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   if (!defined('INCLUDED')) {
     die("Access Denied");
   }
@@ -24,7 +24,7 @@
   </div>
 
   <div class="footer_column">
-    <h2>Đối với người dùng</h2>
+    <h2>�?i v?i ngu?i d�ng</h2>
     <ul>
       <li><?php if ($layout['is_terms']) { ?> <a href="<?php echo process_link('content_pages', array('page' => 'terms')); ?>"><?php echo MSG_BTN_TERMS; ?></a><?php } ?></li>
       <li><?php if (!$setts['enable_private_site'] || $is_seller) { ?><a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a> <?php } ?></li>
@@ -37,7 +37,7 @@
 
 
   <div class="footer_column">
-    <h2>Liên hệ</h2>
+    <h2>Li�n h?</h2>
     <ul>
       <li class="contact_us"><?php if ($layout['is_contact']) { ?><a href="<?php echo process_link('content_pages', array('page' => 'contact_us')); ?>"><?php echo MSG_BTN_CONTACT_US; ?></a><?php } ?></li>
       <li class="facebook"><a href="https://www.facebook.com/adamovietnam">Facebook</a></li>
@@ -47,7 +47,7 @@
     <?php echo $custom_pages_links; ?> 
   </div>
   <div class="footer_column">
-    <h2>Đối tác</h2>
+    <h2>�?i t�c</h2>
     <a href=""><img src="http://adamo.vn/themes/red/img/SSL_200x40_ani1.gif" border="0"></a>
     <a href="" id="cnbanner">SSL</a>
     <script language="JavaScript" src="http://www.comodo.com/javascript/banner.js" type="text/javascript"></script>

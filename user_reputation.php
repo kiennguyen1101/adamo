@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   session_start();
@@ -17,8 +17,9 @@
 
   $user_id = intval($_REQUEST['user_id']);
   $rep_view = (in_array($_REQUEST['view'], array('all', 'positive', 'neutral', 'negative', 'from_buyers', 'from_sellers', 'left'))) ? $_REQUEST['view'] : 'all';
-  if (!$start)
-    $start = 0;
+  
+   if (!$start)
+      $start = 0;
   $limit = 20;
 
   $additional_vars = '&view=' . $rep_view . '&user_id=' . $user_id . '&auction_id=' . $auction_id;

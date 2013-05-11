@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   class db_main {
@@ -91,64 +91,14 @@
     }
 
     function query($query, $debug_output = false, $die = true) {
-      /*
-        if ($debug_output)
-        {
-        (string) $explain_output = null;
 
-        $explain_result = @mysql_query("EXPLAIN " . $query);
-
-        $explain_output = '<table width="100%" cellpadding="3" cellspacing="2" class="contentfont border"> '.
-        '	<tr class="c4"> '.
-        '		<td colspan="10">SQL COMMAND</td> '.
-        '	</tr> '.
-        '	<tr> '.
-        '		<td colspan="10">EXPLAIN ' . $query . '</td> '.
-        '	</tr> '.
-        '	<tr class="c4"> '.
-        '		<td>id</td> '.
-        '		<td>select_type</td> '.
-        '		<td>table</td> '.
-        '		<td>type</td> '.
-        '		<td>possible_keys</td> '.
-        '		<td>key</td> '.
-        '		<td>key_len</td> '.
-        '		<td>ref</td> '.
-        '		<td>rows</td> '.
-        '		<td>Extra</td> '.
-        '	</tr>';
-        '	<tr class="c4"> '.
-        '		<td colspan="10"></td> '.
-        '	</tr> ';
-
-        if ($explain_result)
-        {
-        while ($explain = $this->fetch_array($explain_result))
-        {
-        $explain_output .= '<tr class="c1"> '.
-        '	<td>' . $explain['id'] . '</td> '.
-        '	<td>' . $explain['select_type'] . '</td> '.
-        '	<td>' . $explain['table'] . '</td> '.
-        '	<td>' . $explain['type'] . '</td> '.
-        '	<td>' . implode(', ', explode(',', $explain['possible_keys'])) . '</td> '.
-        '	<td>' . $explain['key'] . '</td> '.
-        '	<td>' . $explain['key_len'] . '</td> '.
-        '	<td>' . $explain['ref'] . '</td> '.
-        '	<td>' . $explain['rows'] . '</td> '.
-        '	<td>' . $explain['Extra'] . '</td> '.
-        '</tr>';
-        }
-        }
-        $explain_output .= '</table>';
-
-        echo $explain_output;
-        }
-       */
       //echo $query . '<br>'; ## used if we want to display all queries made on a page
 
       $result = @mysql_query($query);
 
-      if (!$result) {
+      if ($this->hasError()) {
+        
+        throw new error($this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error(), $query));
         $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
         if (DEBUG)
           $mysql_error .= "<p>{$query}</p>";
@@ -201,15 +151,15 @@
       return $result;
     }
 
-    function fetch_array($query_result, $assoc = false) { {
-        $result = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH );
+    function fetch_array($query_result, $assoc = false) {
 
-        if ($this->sql_error($result)) {
-          throw new Exception($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
-        }
+      $result = @mysql_fetch_array($query_result, ($assoc) ? MYSQL_ASSOC : MYSQL_BOTH );
 
-        return $result;
+      if ($this->sql_error($result)) {
+        throw new Exception($this->display_error(MSG_ERROR_MYSQL_FETCH_ARRAY, $this->sql_error($result)));
       }
+
+      return $result;
     }
 
     function fetch_all($query_result, $assoc = false) {
@@ -306,8 +256,11 @@
 
     function rem_special_chars($string) {
       $string = stripslashes($string);
-      $string = eregi_replace("'", "&#039;", $string);
-      $string = eregi_replace('"', '&quot;', $string);
+//      $string = eregi_replace("'", "&#039;", $string);
+//      $string = eregi_replace('"', '&quot;', $string);
+
+      $string = str_replace("'", "&#039;", $string);
+      $string = str_replace('"', '&quot;', $string);
 
       return $string;
     }
@@ -328,15 +281,24 @@
     function add_special_chars($string, $no_quotes = FALSE) {
       $pattern = "/(?i)<img.+\.php/";
 
-      $string = eregi_replace("&amp;", "&", $string);
+      /*
+        $string = eregi_replace("&amp;", "&", $string);
 
-      if (!$no_quotes)
+        if (!$no_quotes)
         $string = eregi_replace("&#039;", "'", $string);
 
-      $string = eregi_replace('&quot;', '"', $string);
-      $string = eregi_replace('&lt;', '<', $string);
-      $string = eregi_replace('&gt;', '>', $string);
-      $string = eregi_replace('&nbsp;', ' ', $string);
+        $string = eregi_replace('&quot;', '"', $string);
+        $string = eregi_replace('&lt;', '<', $string);
+        $string = eregi_replace('&gt;', '>', $string);
+        $string = eregi_replace('&nbsp;', ' ', $string);
+       */
+
+      if (!$no_quotes)
+        $string = htmlspecialchars_decode($string, ENT_COMPAT);
+      else
+        $string = htmlspecialchars_decode($string, ENT_QUOTES);
+
+      $string = str_replace("&nbsp;", " ", $string);
 
       $string = (preg_match($pattern, $string)) ? strip_tags($string, '<br>') : $string;
 
@@ -420,4 +382,5 @@
     }
 
   }
+
 ?>

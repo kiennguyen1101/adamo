@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.05															##
-##-------------------------------------------------------------##
-## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   $fileExtension = (file_exists('includes/global.php')) ? '' : '../';
 
@@ -20,14 +15,14 @@
 //relative to the script going to use this file.
 //New entries can be added to this list
     $directories = array(
-      INCLUDE_DIR,
+      INCLUDE_DIR,      
     );
 
     //Add your file naming formats here
-    $fileNameFormats = array(
+    $fileNameFormats = array(      
       'class_%s.php',
     );
-
+   
     foreach ($directories as $directory) {
       foreach ($fileNameFormats as $fileNameFormat) {
         $path = $directory . sprintf($fileNameFormat, $className);
@@ -40,8 +35,8 @@
   }
 
   spl_autoload_register('autoLoader');
-
-
+  
+ 
   define('INCLUDED', 1);
 
   define('DEFAULT_DB_LANGUAGE', 'english');
@@ -143,6 +138,21 @@
   /*   * ***************************************************
    * Template
    * ************************************************* */
+
+  require_once(BASE_DIR . '/libs/Smarty/Smarty.class.php');
+
+  $smarty = new Smarty();
+
+  $smarty->setTemplateDir(BASE_DIR . '/templates/');
+  $smarty->setCompileDir(BASE_DIR . '/templates_compiled/');
+  $smarty->setConfigDir(BASE_DIR . '/configs/');
+  $smarty->setCacheDir(BASE_DIR . '/cache/');
+
+  if ($setts['default_theme']) {
+    $smarty->addTemplateDir(THEME_DIR . "{$setts['default_theme']}/templates/");
+  }
+
+
 
 ## initialize the template for the output that will be generated
   $template = new template('templates/');

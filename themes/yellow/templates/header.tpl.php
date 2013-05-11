@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   if (!defined('INCLUDED')) {
     die("Access Denied");
   }
@@ -31,20 +31,20 @@
                   echo ".main_table { width:97%; margin-left:20px; margin-right:20px}";
                 }
               ?> 
-              <?php
-                if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_search.php") {
-                  echo ".main_table { width:97%; margin-left:20px; margin-right:20px}";
-                }
-              ?> 
+<?php
+  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_search.php") {
+    echo ".main_table { width:97%; margin-left:20px; margin-right:20px}";
+  }
+?> 
               -->
             </style>
             <script language="javascript" src="themes/<?php echo $setts['default_theme']; ?>/main.js" type="text/javascript"></script>
             <script type="text/javascript" src="themes/<?php echo $setts['default_theme']; ?>/countdownpro.js" defer="defer"></script>
-            <?php
-              for ($i = 1; $i < 50; $i++) {
-                ?><meta scheme="countdown<?php echo $i; ?>" name="event_msg" content="CLOSED"><?php
-                }
-              ?>
+<?php
+  for ($i = 1; $i < 50; $i++) {
+    ?><meta scheme="countdown<?php echo $i; ?>" name="event_msg" content="CLOSED"><?php
+  }
+?>
               <script language=JavaScript src='scripts/innovaeditor.js'></script>
               <script type="text/javascript">
                 var currenttime = '<?php echo $current_time_display; ?>';
@@ -76,14 +76,13 @@
                         <tr valign="bottom">
                           <td valign="bottom" style="width:5%"><div style="float:left"><a href="<?php echo $index_link; ?>"><img src="images/myphpauction.gif?<?php echo rand(2, 9999); ?>" alt="" vspace="4" border="0"></a></div>
                           </td>
-                          <td width="30%" valign="bottom" style="padding-bottom:5px">Welcome, <?php
-                              if ($member_active == 'Active') {
-                                ;
-                                ?> <?php echo $member_username; ?> (<a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a>) <?php
-                              }
-                              else {
-                                ;
-                                ?><a href="login.php">Sign in</a> or <a href="register.php">register</a><?php } ?>
+                          <td width="30%" valign="bottom" style="padding-bottom:5px">Welcome, <?php if ($member_active == 'Active') {
+    ;
+    ?> <?php echo $member_username; ?> (<a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a>) <?php
+  }
+  else {
+    ;
+    ?><a href="login.php">Sign in</a> or <a href="register.php">register</a><?php } ?>
                           </td>
                           <td valign="top">
 
@@ -91,14 +90,14 @@
 
 
                             <div class="toplink" style=" float:right;<?php
-                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
-                                echo "display:none";
-                              }
-                            ?> <?php
-                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
-                                echo "display:none";
-                              }
-                            ?>"> <!--!!!!!!!!!!!!without right menu-->
+                            if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
+                              echo "display:none";
+                            }
+?> <?php
+                            if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
+                              echo "display:none";
+                            }
+?>"> <!--!!!!!!!!!!!!without right menu-->
                               <div class="nav_r">
                                 <div class="nav_l">	
                                   <div class="nav">  
@@ -124,9 +123,9 @@
                                             <a style="color:#0000CC;"href="<?php echo process_link('content_pages', array('page' => 'contact_us')); ?>"><?php echo MSG_BTN_CONTACT_US; ?></a><?php } ?>
                                       </div>
 
-                                      <?php /* ?>          		
-                                          <a href="<?php echo $index_link;?>"><?php echo MSG_BTN_HOME;?></a> | <a href="<?php echo process_link('content_pages', array('page' => 'faq'));?>"><?php echo MSG_BTN_FAQ;?></a>   <?php if ($layout['is_about']) { ?> | <a href="<?php echo process_link('content_pages', array('page' => 'about_us'));?>"><?php echo MSG_BTN_ABOUT_US;?></a><?php } ?><?php if ($layout['is_contact']) { ?> | <a href="<?php echo process_link('content_pages', array('page' => 'contact_us'));?>"><?php echo MSG_BTN_CONTACT_US;?></a><?php } ?>
-                                          <?php */ ?>
+                            <?php /* ?>          		
+                                <a href="<?php echo $index_link;?>"><?php echo MSG_BTN_HOME;?></a> | <a href="<?php echo process_link('content_pages', array('page' => 'faq'));?>"><?php echo MSG_BTN_FAQ;?></a>   <?php if ($layout['is_about']) { ?> | <a href="<?php echo process_link('content_pages', array('page' => 'about_us'));?>"><?php echo MSG_BTN_ABOUT_US;?></a><?php } ?><?php if ($layout['is_contact']) { ?> | <a href="<?php echo process_link('content_pages', array('page' => 'contact_us'));?>"><?php echo MSG_BTN_CONTACT_US;?></a><?php } ?>
+                                <?php */ ?>
                                     </div>
                                   </div>					
                                 </div>
@@ -135,12 +134,12 @@
 
 
                             <div style="float:right; background:url(themes/<?php echo $setts['default_theme']; ?>/images/imgHdrMainNavSearchRgt2.gif) bottom right no-repeat; margin-right:10px; <?php
-                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
-                                echo " ";
-                              }
-                              else {
-                                echo "display:none";
-                              }
+                                 if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
+                                   echo " ";
+                                 }
+                                 else {
+                                   echo "display:none";
+                                 }
                             ?> ">
                               <div style="float:right; background:url(themes/<?php echo $setts['default_theme']; ?>/images/imgHdrMainNavSearchLft2.gif) bottom left no-repeat; padding:3px 10px">
 
@@ -159,18 +158,18 @@
                                         <div class="srchBox_r">
                                           <div class="srchBox_l">
                                             <div class="srchBox" style="<?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> "><!--without search-->
+                                            if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
+                                              echo "display:none";
+                                            }
+                            ?> <?php
+                                            if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
+                                              echo "display:none";
+                                            }
+                            ?> <?php
+                                                  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
+                                                    echo "display:none";
+                                                  }
+                            ?> "><!--without search-->
                                               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                                                 <tr>
                                                   <form action="auction_search.php" method="post">
@@ -185,7 +184,7 @@
                                                   </form>
                                                   <td nowrap align="right" class="search" width="200">&nbsp;&nbsp;&nbsp;<?php echo $current_date; ?> <span id="servertime"></span>&nbsp;&nbsp;&nbsp;</td>
                                                   <!--<?php if ($setts['user_lang']) { ?>
-                                                              <td nowrap align="center">&nbsp;&nbsp;<?php echo $languages_list; ?>&nbsp;&nbsp;</td>
+                                                          <td nowrap align="center">&nbsp;&nbsp;<?php echo $languages_list; ?>&nbsp;&nbsp;</td>
   <?php } ?>-->
                                                 </tr>
                                               </table>
@@ -213,92 +212,84 @@
                                         <div class="nav_r">
                                           <div class="nav_l">	
                                             <div class="nav" style="<?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
-                                                echo "display:none";
-                                              }
-                                            ?>  "> <!--!!!!!!!!!!!!!without menu-->
+                                                    if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
+                                                      echo "display:none";
+                                                    }
+                                                  ?> <?php
+                                                  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
+                                                    echo "display:none";
+                                                  }
+                                                  ?>  "> <!--!!!!!!!!!!!!!without menu-->
                                               <table border="0" cellspacing="0" cellpadding="0">
                                                 <tr align="center">
-                                                  <?php if (eregi("index.php", $_SERVER['PHP_SELF'])) { ?>
+                                                  <?php if (stristr($_SERVER['PHP_SELF'], "index.php")) { ?>
                                                       <td nowrap class="mainmenu">&nbsp;<a href="<?php echo $index_link; ?>"><?php echo MSG_BTN_HOME; ?></a>&nbsp;</td>
-                                                    <?php
-                                                    }
+                                                    <?php }
                                                     else {
                                                       ?>
                                                       <td nowrap class="mainmenu">&nbsp;<a href="<?php echo $index_link; ?>"><?php echo MSG_BTN_HOME; ?></a>&nbsp;</td>
                                                       <?php
                                                     }
                                                     if (!$setts['enable_private_site'] || $is_seller) {
-                                                      if (eregi("sell_item.php", $_SERVER['PHP_SELF'])) {
+                                                      if (stristr($_SERVER['PHP_SELF'], "sell_item.php")) {
                                                         ?>
                                                         <td nowrap class="mainmenu"style="display:none">&nbsp;<a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a>&nbsp;</td>
-                                                      <?php
-                                                      }
+                                                      <?php }
                                                       else {
                                                         ?>
                                                         <td nowrap class="mainmenu"style="display:none">&nbsp;<a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a>&nbsp;</td>
                                                         <?php
                                                       }
                                                     }
-                                                    if (eregi("members_area.php", $_SERVER['PHP_SELF']) || eregi("register.php", $_SERVER['PHP_SELF'])) {
+                                                    if (stristr($_SERVER['PHP_SELF'], "members_area.php") || stristr($_SERVER['PHP_SELF'], "register.php")) {
                                                       ?>
                                                       <td nowrap class="mainmenu">&nbsp;<a href="<?php echo $register_link; ?>"><?php echo $register_btn_msg; ?></a>&nbsp;</td>
-                                                    <?php
-                                                    }
+                                                    <?php }
                                                     else {
                                                       ?>
                                                       <td nowrap class="mainmenu" style="display:none">&nbsp;<a href="<?php echo $register_link; ?>"><?php echo $register_btn_msg; ?></a>&nbsp;</td>
-                                                    <?php } if (eregi("login.php", $_SERVER['PHP_SELF'])) { ?>
+                                                    <?php } if (stristr($_SERVER['PHP_SELF'], "login.php")) { ?>
                                                       <td nowrap class="mainmenu"style="display:none">&nbsp;<a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a>&nbsp;</td>
-                                                    <?php
-                                                    }
+                                                    <?php }
                                                     else {
                                                       ?>
                                                       <td nowrap class="mainmenu"style="display:none">&nbsp;<a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a>&nbsp;</td>
-                                                      <?php
+                                                    <?php
                                                     } if ($setts['enable_stores']) {
-                                                      if (eregi("stores.php", $_SERVER['PHP_SELF'])) {
+                                                      if (stristr($_SERVER['PHP_SELF'], "stores.php")) {
                                                         ?>
                                                         <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('stores'); ?>"><?php echo MSG_BTN_STORES; ?></a>&nbsp;</td>
-                                                      <?php
-                                                      }
-                                                      else {
-                                                        ?>
+    <?php }
+    else {
+      ?>
                                                         <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('stores'); ?>"><?php echo MSG_BTN_STORES; ?></a>&nbsp;</td>
-                                                        <?php
-                                                      }
-                                                    }
-                                                    if ($setts['enable_wanted_ads']) {
-                                                      if (eregi("wanted_ads.php", $_SERVER['PHP_SELF'])) {
-                                                        ?>
+      <?php
+    }
+  }
+  if ($setts['enable_wanted_ads']) {
+    if (stristr($_SERVER['PHP_SELF'], "wanted_ads.php")) {
+      ?>
                                                         <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('wanted_ads'); ?>"><?php echo MSG_BTN_WANTED_ADS; ?></a>&nbsp;</td>
-                                                      <?php
-                                                      }
-                                                      else {
-                                                        ?>
+                                                <?php }
+                                                else {
+                                                  ?>
                                                         <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('wanted_ads'); ?>"><?php echo MSG_BTN_WANTED_ADS; ?></a>&nbsp;</td>
-                                                        <?php
-                                                      }
-                                                    }
-                                                    if ($_REQUEST['page'] == 'help') {
-                                                      ?>
+                                                  <?php
+                                                }
+                                              }
+                                              if ($_REQUEST['page'] == 'help') {
+                                                ?>
                                                       <td nowrap class="mainmenu" style="display:none">&nbsp;<a href="<?php echo process_link('content_pages', array('page' => 'help')); ?>"><?php echo MSG_BTN_HELP; ?></a>&nbsp;</td>
-                                                    <?php
-                                                    }
-                                                    else {
-                                                      ?>
+  <?php }
+  else {
+    ?>
                                                       <td nowrap class="mainmenu" style="display:none">&nbsp;<a href="<?php echo process_link('content_pages', array('page' => 'help')); ?>"><?php echo MSG_BTN_HELP; ?></a>&nbsp;</td>
-                                                      <?php
-                                                    }
-                                                    if (eregi("site_fees.php", $_SERVER['PHP_SELF'])) {
-                                                      ?>
-                                                      <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('site_fees'); ?>"><?php echo MSG_BTN_SITE_FEES; ?></a>&nbsp;</td>
   <?php
   }
+  if (stristr($_SERVER['PHP_SELF'], "site_fees.php")) {
+    ?>
+                                                      <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('site_fees'); ?>"><?php echo MSG_BTN_SITE_FEES; ?></a>&nbsp;</td>
+  <?php }
   else {
     ?>
                                                       <td nowrap class="mainmenu">&nbsp;<a href="<?php echo process_link('site_fees'); ?>"><?php echo MSG_BTN_SITE_FEES; ?></a>&nbsp;</td>
@@ -315,18 +306,18 @@
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                           <tr valign="top">
                                             <td width="180" style="<?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
-                                                echo "display:none";
-                                              }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
-                                                echo "display:none";
-                                              }
-                                            ?>"><script language="javascript">
+  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
+    echo "display:none";
+  }
+?> <?php
+  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
+    echo "display:none";
+  }
+?> <?php
+  if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
+    echo "display:none";
+  }
+?>"><script language="javascript">
                                                   var ie4 = false;
                                                   if (document.all) {
                                                     ie4 = true;
@@ -352,32 +343,32 @@
                                                     }
                                                   }
                                                 </script>
-                                                <?php if ($is_announcements && $member_active == 'Active') { ?>
-                                                      <?php echo $announcements_box_header; ?>
+<?php if ($is_announcements && $member_active == 'Active') { ?>
+    <?php echo $announcements_box_header; ?>
                                                     <div id="exp1102170555">
     <?php echo $announcements_box_content; ?>
                                                     </div>
 
                                                     <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
-                                                    <?php } ?>
+  <?php } ?>
 
-                                                <?php echo $menu_box_header; ?>
+<?php echo $menu_box_header; ?>
                                                 <div id="exp1102170142">
-                                                  <?php echo $menu_box_content; ?>
+                                            <?php echo $menu_box_content; ?>
                                                 </div>
 
                                                 <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
                                                 <noscript>
-                                                  <?php echo MSG_JS_NOT_SUPPORTED; ?>
+                                            <?php echo MSG_JS_NOT_SUPPORTED; ?>
                                                 </noscript>
 <?php echo $category_box_header; ?>
                                                 <div id="exp1102170166">
-<?php echo $category_box_content; ?>
+                                              <?php echo $category_box_content; ?>
                                                 </div>
                                                 <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="180" height="1"></div>
                                                 <br>
 <?php if ($setts['enable_header_counter']) { ?>
-                                                        <?php echo $header_site_status; ?>
+    <?php echo $header_site_status; ?>
                                                       <table width='100%' border='0' cellpadding='2' cellspacing='1' class='border no_b stat'>
                                                         <tr class='c1'>
                                                           <td width='20%' align='center'><b><?php echo $nb_site_users; ?></b></td>
@@ -387,12 +378,12 @@
                                                           <td width='20%' align='center'><b><?php echo $nb_live_auctions; ?></b></td>
                                                           <td width='80%'>&nbsp;<?php echo MSG_LIVE_AUCTIONS; ?></td>
                                                         </tr>
-    <?php if ($setts['enable_wanted_ads']) { ?>
+                                                  <?php if ($setts['enable_wanted_ads']) { ?>
                                                           <tr class='c1'>
                                                             <td width='20%' align='center'><b><?php echo $nb_live_wanted_ads; ?></b></td>
                                                             <td width='80%'>&nbsp;<?php echo MSG_LIVE_WANT_ADS; ?></td>
                                                           </tr>
-    <?php } ?>
+                                                  <?php } ?>
                                                         <tr class='c2'>
                                                           <td width='20%' align='center'><b><?php echo $nb_online_users; ?></b></td>
                                                           <td width='80%'>&nbsp;<?php echo MSG_ONLINE_USERS; ?></td>
@@ -408,15 +399,15 @@
                                               if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "register.php") {
                                                 echo "display:none";
                                               }
-                                            ?> <?php
+                                              ?> <?php
                                               if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "login.php") {
                                                 echo "display:none";
                                               }
-                                            ?> <?php
-                                              if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
-                                                echo "display:none";
-                                              }
-                                            ?>"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="10" height="1"></td>
+                                              ?> <?php
+                                                if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "auction_details.php") {
+                                                  echo "display:none";
+                                                }
+                                              ?>"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="10" height="1"></td>
                                             <td width="100%">
 
                                               <?php if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "index.php") {
@@ -429,41 +420,41 @@
                                                   <?php if ($member_active != 'Active') { ?>
                                                     <div><a href="<?php echo process_link('register'); ?>"><img src="themes/<?php echo $setts['default_theme']; ?>/img/newuser.jpg" border="0"></a></div>
                                                     <div><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="5"></div>
-                                                  <?php } ?>
+    <?php } ?>
 
-                                                  <?php if ($is_news && $layout['d_news_box']) { ?>
-                                                    <?php echo $news_box_header; ?>
-                                                    <?php echo $news_box_content; ?>
-                                                  <?php } ?>
+    <?php if ($is_news && $layout['d_news_box']) { ?>
+      <?php echo $news_box_header; ?>
+      <?php echo $news_box_content; ?>
+    <?php } ?>
 
-                                                  <?php if ($setts['enable_header_counter']) { ?>
+    <?php if ($setts['enable_header_counter']) { ?>
                                                     <!-- was status site -->
-                                                  <?php } ?>
-                                                  <?php if ($layout['bw_hp_stores']) { ?>
+    <?php } ?>
+    <?php if ($layout['bw_hp_stores']) { ?>
                                                     <div><img src='themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif' width='1' height='5'></div>
-                                                    <?php echo $hp_featured_stores_header; ?>
-                                                    <?php echo $hp_featured_stores_content; ?>
-                                                  <?php } ?>
+      <?php echo $hp_featured_stores_header; ?>
+      <?php echo $hp_featured_stores_content; ?>
+    <?php } ?>
 
-                                                  <?php if ($layout['bw_hp_newusers']) { ?>
+    <?php if ($layout['bw_hp_newusers']) { ?>
                                                     <div><img src='themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif' width='1' height='5'></div>
-                                                    <?php echo $hp_newest_members_header; ?>
-                                                    <?php echo $hp_newest_members_content; ?>
-                                                  <?php } ?>
+      <?php echo $hp_newest_members_header; ?>
+      <?php echo $hp_newest_members_content; ?>
+    <?php } ?>
 
-                                                  <?php if ($layout['bw_hp_mostviewed']) { ?>
+    <?php if ($layout['bw_hp_mostviewed']) { ?>
                                                     <div><img src='themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif' width='1' height='5'></div>
-                                                    <?php echo $hp_most_viewed_header; ?>
-                                                    <?php echo $hp_most_viewed_content; ?>
-                                                  <?php } ?>
+      <?php echo $hp_most_viewed_header; ?>
+      <?php echo $hp_most_viewed_content; ?>
+    <?php } ?>
 
-                                                  <?php if ($layout['bw_hp_topsellers']) { ?>
+    <?php if ($layout['bw_hp_topsellers']) { ?>
                                                     <div><img src='themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif' width='1' height='5'></div>
       <?php echo $hp_top_sellers_header; ?>
       <?php echo $hp_top_sellers_content; ?>
-                                                  <?php } ?>
+    <?php } ?>
 
-                                                  <?php if ($layout['bw_hp_lastsold']) { ?>
+    <?php if ($layout['bw_hp_lastsold']) { ?>
                                                     <div><img src='themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif' width='1' height='5'></div>
       <?php echo $hp_last_sold_header; ?>
       <?php echo $hp_last_sold_content; ?>

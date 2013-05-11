@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -37,8 +37,7 @@
           <td>
             <?php if ($can_edit) { ?>
                 <textarea name="message_content" style="width:100%; height: 130px;"><?php echo $message_content; ?></textarea>
-                <?php
-              }
+              <?php }
               else {
                 ?>
                 <?php echo eregi_replace("\n", '<br>', $message_content); ?>

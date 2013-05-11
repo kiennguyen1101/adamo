@@ -1,4 +1,4 @@
-﻿<table border="0" cellpadding="5" cellspacing="0" width="100%" class="store_main">
+<table border="0" cellpadding="5" cellspacing="0" width="100%" class="store_main">
   <tr>
    	<td width="100%">
       <table border="0" cellpadding="0" cellspacing="0" width="100%" class="store_main">

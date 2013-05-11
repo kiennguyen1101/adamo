@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   define('AMSG_SITE_SETUP', 'Site Setup');

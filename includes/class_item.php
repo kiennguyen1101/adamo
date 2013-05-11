@@ -1,10 +1,6 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.05 														##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
+
 
   include_once($fileExtension . 'includes/class_image.php');
 
@@ -147,10 +143,10 @@
 
       // important: the active, approved & payment_status fields cannot be modified through here!
       ## no auction counter is applied on this query - if needed we will add one (for list_in eventually)
+
       try {
         $this->beginTransaction();
         $sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
-
 			name='" . $word_filter['name'] . "', description='" . $word_filter['description'] . "',
 			quantity='" . $item_details['quantity'] . "', auction_type='" . $item_details['auction_type'] . "',
 			start_price='" . $item_details['start_price'] . "', reserve_price='" . $item_details['reserve_price'] . "',
@@ -194,14 +190,12 @@
         echo $e;
       }
 
-
-      $this->update_page_data($auction_id, $page_handle, $item_details);
-
-      ##keywords watch feature -> added back in v6.04
-      if (!$this->edit_auction) {
-        $mail_input_id = $auction_id;
-        include('language/' . $this->setts['site_lang'] . '/mails/keywords_watch_notification.php');
-      }
+//disable it
+//      ##keywords watch feature -> added back in v6.04
+//      if (!$this->edit_auction) {
+//        $mail_input_id = $auction_id;
+//        include('language/' . $this->setts['site_lang'] . '/mails/keywords_watch_notification.php');
+//      }
 
       return $auction_id;
     }
@@ -641,7 +635,7 @@
             '</tr> ';
         }
 
-        $display_output .= '<tr> ' .
+        $display_output .= '<tr class="reguser"> ' .
           '	<td class="contentfont" align="right">' . $display_fee . '</td> ' .
           '	<td colspan="2">' . MSG_YOU_CAN_UPL_UP_TO . ' ' . $max_media . ' ' . $msg_media . '. ' . $fee_message . '</td> ' .
           '</tr> ';
@@ -901,6 +895,8 @@
         $additional_query = ' AND pg_id IN (' . $selected_values . ')';
       }
 
+      //kiennguyen1101
+//      $sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM " . DB_PREFIX . "payment_gateways WHERE dp_enabled=1" . $additional_query);
       $sql_select_gateways = $this->query("SELECT pg_id, name, logo_url FROM " . DB_PREFIX . "payment_gateways WHERE checked=1" . $additional_query);
 
       $selected_value = explode(',', $selected_values);
@@ -922,7 +918,8 @@
             '		<td>';
 
           if (!$show_only) {
-            //$user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
+//            $user_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . intval($user_id));
+            //($this->setts)
 
             (string) $checkbox_status = null;
 
@@ -3135,4 +3132,5 @@
     }
 
   }
+
 ?>

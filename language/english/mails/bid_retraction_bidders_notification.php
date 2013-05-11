@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 ## File Version -> v6.04
 ## Email File -> notify remaining bidders that a user has retracted his bids on an auction
 ## called only from the item->retract_bid() function!
@@ -16,31 +16,31 @@
 
   while ($bid_details = $this->fetch_array($sql_select_bids)) {
     ## text message - editable
-    $text_message = 'KÃ­nh gá»­i %1$s,
+    $text_message = 'Kính gửi %1$s,
 	
-	Má»™t ngÆ°á»i Ä‘Ã£ há»§y giÃ¡ Ä‘áº¥u trong phiÃªn Ä‘áº¥u giÃ¡ cÃ³ báº¡n tham gia, %2$s.
+	Một người đã hủy giá đấu trong phiên đấu giá có bạn tham gia, %2$s.
 	
-	Äá»ƒ xem trang Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
+	Để xem trang đấu giá, vui lòng bấm vào đường dẫn bên dưới:
 	
 	%3$s
 	
-	Äá»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
+	Để xem lịch sử đấu giá, vui lòng bấm vào đường dẫn bên dưới:
 	
 	%4$s
 		
-	TrÃ¢n trá»ng,
-	Ban quáº£n trá»‹ %5$s';
+	Trân trọng,
+	Ban quản trị %5$s';
 
     ## html message - editable
     $html_message = 'Dear %1$s, <br>
 	<br>
-	Má»™t ngÆ°á»i Ä‘Ã£ há»§y giÃ¡ Ä‘áº¥u trong phiÃªn Ä‘áº¥u giÃ¡ cÃ³ báº¡n tham gia, %2$s. <br>
+	Một người đã hủy giá đấu trong phiên đấu giá có bạn tham gia, %2$s. <br>
 	<br>
-	[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem trang Ä‘áº¥u giÃ¡. <br>
-	[ <a href="%4$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡. <br>
+	[ <a href="%3$s">Bấm vào đây</a> ] để xem trang đấu giá. <br>
+	[ <a href="%4$s">Bấm vào đây</a> ] để xem lịch sử đấu giá. <br>
 	<br>
-	TrÃ¢n trá»ng, <br>
-	Ban quáº£n trá»‹ %5$s';
+	Trân trọng, <br>
+	Ban quản trị %5$s';
 
 
     $auction_link = process_link('auction_details', array('auction_id' => $bid_details['auction_id']));
@@ -49,6 +49,6 @@
     $text_message = sprintf($text_message, $bid_details['user_name'], $bid_details['name'], $auction_link, $bids_link, $this->setts['sitename']);
     $html_message = sprintf($html_message, $bid_details['user_name'], $bid_details['name'], $auction_link, $bids_link, $this->setts['sitename']);
 
-    send_mail($bid_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $bid_details['auction_id'] . ' - GiÃ¡ Ä‘áº¥u bá»‹ há»§y', $text_message, $this->setts['admin_email'], $html_message, null, $send);
+    send_mail($bid_details['email'], 'Mã đấu giá: ' . $bid_details['auction_id'] . ' - Giá đấu bị hủy', $text_message, $this->setts['admin_email'], $html_message, null, $send);
   }
 ?>

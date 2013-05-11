@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.05															##
-##-------------------------------------------------------------##
-## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   class fees extends tax {
 
@@ -542,7 +537,8 @@
       else {
         $direct_payment = true;
         $pg_details = $this->get_sql_row("SELECT * FROM " . DB_PREFIX . "users WHERE user_id=" . $user_id);
-        $gateways_query .= " WHERE dp_enabled=1";
+//        $gateways_query .= " WHERE dp_enabled=1";
+        $gateways_query .= " WHERE checked=1";
 
         if (!empty($dp_gateways)) {
           $gateways_query .= " AND pg_id IN (" . $dp_gateways . ")";
@@ -719,7 +715,8 @@
           if ($winner_details['auction_id'] > 0) {
             $this->set_fees($winner_details['seller_id'], $winner_details['category_id']);
 
-            $payer_id = (eregi('b', $this->fee['endauction_fee_applies'])) ? $winner_details['buyer_id'] : $winner_details['seller_id'];
+            $payer_id = (stristr($this->fee['endauction_fee_applies'], 'b')) ? $winner_details['buyer_id'] : $winner_details['seller_id'];
+
             $invoice_name = GMSG_ENDAUCTION_FEE . ' - ' . MSG_AUCTION_ID . ': ' . $winner_details['auction_id'];
 
             $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$payer_id}', '{$winner_details['auction_id']}', '{$invoice_name}', '{$payment_amount}', 'auction_end', '{$invoice_time}', '0', '1', '{$payment_gateway}')");
@@ -831,8 +828,10 @@
             //note: payment_status: 'confirmed' or ''. If empty, the winner hasn't paid for the item and must undergo the payment process
             //flag_paid: if 0: no payment has been registered for the item.
             //flag_status: 0: in process. 1: done.
-            $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, payment_status='confirmed', flag_status=1 WHERE winner_id='{$custom_id}'");
+            $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, payment_status='confirmed', flag_status=1 WHERE winner_id='{$custom_id}'");            
             //or maybe, we just have to substract the amount from buyer's account instead of going through another process.
+
+            
           }
         }
         else if ($fee_table == 100) { ## direct payment - multiple items
@@ -1152,12 +1151,6 @@
 
       $output = array('display' => null, 'amount' => 0);
 
-      $output['display'] =
-        '<tr class="c4 fees_preview"> ' .
-        '	<td align="right" style="font-weight: bold;font-size: 15px;">' . GMSG_AUCTION_FEES . '</td> ' .
-        '	<td>&nbsp;</td> ' .
-        '</tr> ';
-
       $fees_no_tier = $this->fees_no_tier_array($item_details);
 
       // we start with the setup fee
@@ -1167,14 +1160,27 @@
         $this->set_fees($user_details['user_id'], $item_details['category_id']);
       }
 
-      if (is_array($setup_fee)) {
-        foreach ($setup_fee as $key => $value) {
-          if ($value['amount']) {
+      $charged_fee_tier = array();
+
+      $invoice = new invoice();
+      $invoice_date = CURRENT_TIME;
+      $status = $invoice->getInvoiceStatus('auction_setup');
+
+      try {
+
+        $this->beginTransaction();
+
+        if (is_array($setup_fee)) {
+
+          foreach ($setup_fee as $key => $value) {
+            if (!$value['amount']) {
+              continue;
+            }
             if ($value['calc_type'] == 'flat') {
               $output['amount'] += $value['amount'];
               $fee_display = $this->display_amount($value['amount'], $this->setts['currency']);
             }
-            else if ($value['calc_type'] == 'percent') {
+            elseif ($value['calc_type'] == 'percent') {
               $output['amount'] += $this->round_number($item_details['start_price'] * $value['amount'] / 100);
               $fee_display = $value['amount'] . '%';
             }
@@ -1183,66 +1189,72 @@
               $output['amount'] = $this->round_number($output['amount'] - $output['amount'] * $this->fee['relist_fee_reduction'] / 100);
             }
 
-            $output['display'] .= '<tr class="c1 fees_preview"> ' .
-              '	<td align="right">' . GMSG_SETUP_FEE . '</td> ' .
-              '	<td nowrap colspan="2">' . $fee_display . $value['display'] . '</td> ' .
-              '</tr> ';
+            $charged_fee_tier[$key] = array(
+              'value' => $fee_display,
+              'display' => $value['display'],
+            );
 
             ## now add the row on the invoices table
             if ($user_payment_mode == 2 && $add_invoices) {
-              $account_balance += $output['amount'];
 
-              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
-							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . GMSG_SETUP_FEE . "',
-							'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//            $account_balance += $output['amount'];
+              //kiennguyen1101
+              $invoice_name = GMSG_SETUP_FEE;
 
-              $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
-							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, can_rollback) VALUES ('{$user_details['user_id']}', '{$item_details['auction_id']}', '{$invoice_name}', '{$output['amount']}', '{$status['invoice_status_id']}', '{$invoice_date}', '{$account_balance}', '{$can_rollback}')");
+
+//            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . GMSG_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//            $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
             }
           }
         }
-      }
 
-      foreach ($fees_no_tier as $key => $value) {
-        if ($value[1]) {
-          $fee_details = $this->display_fee($key, $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details, $apply_tax);
+        $charged_fee_no_tier = array();
 
-          if ($item_relist) {
-            $fee_details['amount'] = $this->round_number($fee_details['amount'] - $fee_details['amount'] * $this->fee['relist_fee_reduction'] / 100);
-          }
+        foreach ($fees_no_tier as $key => $value) {
+          if ($value[1]) {
+            $fee_details = $this->display_fee($key, $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details, $apply_tax);
 
-          $output['amount'] += $fee_details['amount'];
+            if ($item_relist) {
+              $fee_details['amount'] = $this->round_number($fee_details['amount'] - $fee_details['amount'] * $this->fee['relist_fee_reduction'] / 100);
+            }
 
-          if ($fee_details['amount']) { ## only do this if there is a fee
-            $output['display'] .= '<tr class="c1 fees_preview"> ' .
-              '	<td align="right">' . $value[0] . '</td> ' .
-              '	<td style="width:50px"></td> ' .
-              '	<td nowrap colspan="2">' . $fee_details['display'] . '</td> ' .
-              '</tr> ';
+            $output['amount'] += $fee_details['amount'];
 
+            if ($fee_details['amount']) { ## only do this if there is a fee
+              $charged_fee_no_tier[$key] = array(
+                'value' => $value[0],
+                'display' => $fee_details['display'],
+              );
 
-            ## now add the row on the invoices table
-            if ($user_payment_mode == 2 && $add_invoices) {
-              $account_balance += $fee_details['amount'];
+              ## now add the row on the invoices table
+              if ($user_payment_mode == 2 && $add_invoices) {
 
-              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
-							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $value[0] . "',
-							'" . $fee_details['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+//              $account_balance += $fee_details['amount'];
 
-              $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
-							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+                $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, can_rollback) VALUES ('{$user_details['user_id']}', '{$item_details['auction_id']}', '{$value[0]}', '{$fee_details['amount']}', '{$status['invoice_status_id']}', '{$invoice_date}', '$account_balance', '$can_rollback')");
+
+//              $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $value[0] . "', '" . $fee_details['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
+                //kiennguyen1101
+//              $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+              }
             }
           }
         }
+
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
 
-      $output['display'] .= '<tr class="c3 fees_preview"> ' .
-        '	<td align="right">' . GMSG_TOTAL . '</td> ' .
-        '	<td style="width:50px"></td> ' .
-        '	<td nowrap colspan="2">' . $this->display_amount($output['amount'], $this->setts['currency']) . '</td> ' .
-        '</tr> ';
+      $display_amount = $this->display_amount($output['amount'], $this->setts['currency']);
+
+      $output['display'] = array(
+        'charged_fee_tier' => $charged_fee_tier,
+        'charged_fee_no_tier' => $charged_fee_no_tier,
+        'display_amount' => $display_amount,
+      );
 
       return $output;
     }
@@ -1288,52 +1300,85 @@
        * mark can_rollback = 0 to all previous transactions on this item so only current fees can be
        * rolled back.
        */
-      $this->query("UPDATE " . DB_PREFIX . "invoices SET can_rollback=0 WHERE
+      try {
+
+        $this->beginTransaction();
+
+        $this->query("UPDATE " . DB_PREFIX . "invoices SET can_rollback=0 WHERE
 			user_id='" . $user_details['user_id'] . "' AND item_id='" . $item_details['auction_id'] . "'");
 
-      $setup_fees = $this->auction_setup_fees($item_details, $user_details, $voucher_details, true, true, $item_relist);
+        $setup_fees = $this->auction_setup_fees($item_details, $user_details, $voucher_details, true, true, $item_relist);
 
-      $user_payment_mode = $this->user_payment_mode($user_details['user_id']);
+        $user_payment_mode = $this->user_payment_mode($user_details['user_id']);
 
-      if ($setup_fees['amount'] && $item_details['list_in'] != 'store') { ## make sure no fees are charged if the item is listed in store
-        $output['amount'] = $setup_fees['amount'];
+        if ($setup_fees['amount'] && $item_details['list_in'] != 'store') { ## make sure no fees are charged if the item is listed in store
+          $output['amount'] = $setup_fees['amount'];
 
-        ## if we edit an auction, suspend the auction first. -> needed for live payment mode especially.
-        if ($output['amount'] && $this->edit_auction_id && $this->edit_user_id) {
-          ## auctions counter - remove process - single auction (suspend if auction edit)
-          $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
+          ## if we edit an auction, suspend the auction first. -> needed for live payment mode especially.
+          if ($output['amount'] && $this->edit_auction_id && $this->edit_user_id) {
+            ## auctions counter - remove process - single auction (suspend if auction edit)
+            $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
 					" . DB_PREFIX . "auctions WHERE auction_id='" . $this->edit_auction_id . "'");
 
-          if ($cnt_details['active'] == 1 && $cnt_details['approved'] == 1 && $cnt_details['closed'] == 0 && $cnt_details['deleted'] == 0 && $cnt_details['list_in'] != 'store') {
-            auction_counter($cnt_details['category_id'], 'remove', $cnt_details['auction_id']);
-            auction_counter($cnt_details['addl_category_id'], 'remove', $cnt_details['auction_id']);
-          }
+            if ($cnt_details['active'] == 1 && $cnt_details['approved'] == 1 && $cnt_details['closed'] == 0 && $cnt_details['deleted'] == 0 && $cnt_details['list_in'] != 'store') {
+              auction_counter($cnt_details['category_id'], 'remove', $cnt_details['auction_id']);
+              auction_counter($cnt_details['addl_category_id'], 'remove', $cnt_details['auction_id']);
+            }
 
-          $sql_update_auction = $this->query("UPDATE " . DB_PREFIX . "auctions SET
+            $sql_update_auction = $this->query("UPDATE " . DB_PREFIX . "auctions SET
 					active=0, payment_status='' WHERE auction_id='" . $this->edit_auction_id . "' AND owner_id='" . $this->edit_user_id . "'");
-        }
-
-        if ($user_payment_mode == 1) { // live payment
-          if ($item_relist && !$charge_relist) { ## if the auction is relisted, dont display the payment dialogue but only a message instead
-            $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
-              '<p class="contentfont" align="center">' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . MSG_HAS_BEEN_LISTED . '</p>' .
-              '<p class="contentfont" align="center">' . MSG_YOU_WILL_NEED_TO_PAY . ' ' . $this->display_amount($output['amount'], $this->setts['currency'], 0) .
-              ' ' . MSG_TO_ACTIVATE_THE_AUCTION . '</p></td></tr></table>';
           }
-          else {
-            $output['display'] = $this->payment_message($output['amount'], 0, MSG_TO_ACTIVATE_YOUR_AUCT);
 
-            $transaction_id = $item_details['auction_id'] . 'TBL' . $fee_table;
+          if ($user_payment_mode == 1) { // live payment
+            if ($item_relist && !$charge_relist) { ## if the auction is relisted, dont display the payment dialogue but only a message instead
+              $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
+                '<p class="contentfont" align="center">' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . MSG_HAS_BEEN_LISTED . '</p>' .
+                '<p class="contentfont" align="center">' . MSG_YOU_WILL_NEED_TO_PAY . ' ' . $this->display_amount($output['amount'], $this->setts['currency'], 0) .
+                ' ' . MSG_TO_ACTIVATE_THE_AUCTION . '</p></td></tr></table>';
+            }
+            else {
+              $output['display'] = $this->payment_message($output['amount'], 0, MSG_TO_ACTIVATE_YOUR_AUCT);
 
-            $payment_description = $this->setts['sitename'] . ' - ' . GMSG_AUCTION_SETUP_FEE;
+              $transaction_id = $item_details['auction_id'] . 'TBL' . $fee_table;
 
-            $output['display'] .= $this->show_gateways($transaction_id, $output['amount'], $this->setts['currency'], 0, $payment_description);
+              $payment_description = $this->setts['sitename'] . ' - ' . GMSG_AUCTION_SETUP_FEE;
+
+              $output['display'] .= $this->show_gateways($transaction_id, $output['amount'], $this->setts['currency'], 0, $payment_description);
+            }
           }
-        }
-        else if ($user_payment_mode == 2) { // account payment - subtract balance and add invoices.
-          ## auctions counter - add process - single auction (activate on account mode)
-          $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
+          else if ($user_payment_mode == 2) { // account payment - subtract balance and add invoices.
+            ## auctions counter - add process - single auction (activate on account mode)
+            $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
 					" . DB_PREFIX . "auctions WHERE auction_id='" . $item_details['auction_id'] . "'");
+
+            if ($cnt_details['active'] == 0 && $cnt_details['approved'] == 1 && $cnt_details['closed'] == 0 && $cnt_details['deleted'] == 0 && $cnt_details['list_in'] != 'store') {
+              auction_counter($cnt_details['category_id'], 'add', $cnt_details['auction_id']);
+              auction_counter($cnt_details['addl_category_id'], 'add', $cnt_details['auction_id']);
+            }
+
+            ## all we need to actually do is activate the auction
+            $sql_update_auction = $this->query("UPDATE " . DB_PREFIX . "auctions SET
+					active=1, payment_status='confirmed' WHERE auction_id='" . $item_details['auction_id'] . "'");
+
+            $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
+              '<p class="contentfont" align="center">' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . MSG_HAS_BEEN_ACTIVATED . '</p>' .
+              '<p class="contentfont" align="center">' . MSG_THE_AMOUNT_OF . ' ' . $this->display_amount($output['amount'], $this->setts['currency'], 0) .
+              ' ' . MSG_HAS_BEEN_ADDED_TO_YOUR_BALANCE . '</p>';
+
+            if ($output['tax_details']) {
+              $output['display'] .= '<p class="contentfont" align="center">' . $output['tax_details'] . '</p>';
+            }
+            $output['display'] .= '</td></tr></table>';
+          }
+
+          if ($this->edit_auction_id) {
+            $output['display'] .= '<p align="center">[ <a href="members_area.php?page=selling&section=rollback&auction_id=' . $item_details['auction_id'] . '">' . MSG_ROLLBACK_TRANSACTION . '</a> ]</p>';
+          }
+        }
+        else {
+          ## auctions counter - add process - single auction (activate if no fees or if list in store)
+          $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
+				" . DB_PREFIX . "auctions WHERE auction_id='" . $item_details['auction_id'] . "'");
 
           if ($cnt_details['active'] == 0 && $cnt_details['approved'] == 1 && $cnt_details['closed'] == 0 && $cnt_details['deleted'] == 0 && $cnt_details['list_in'] != 'store') {
             auction_counter($cnt_details['category_id'], 'add', $cnt_details['auction_id']);
@@ -1342,40 +1387,16 @@
 
           ## all we need to actually do is activate the auction
           $sql_update_auction = $this->query("UPDATE " . DB_PREFIX . "auctions SET
-					active=1, payment_status='confirmed' WHERE auction_id='" . $item_details['auction_id'] . "'");
-
-          $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
-            '<p class="contentfont" align="center">' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . MSG_HAS_BEEN_ACTIVATED . '</p>' .
-            '<p class="contentfont" align="center">' . MSG_THE_AMOUNT_OF . ' ' . $this->display_amount($output['amount'], $this->setts['currency'], 0) .
-            ' ' . MSG_HAS_BEEN_ADDED_TO_YOUR_BALANCE . '</p>';
-
-          if ($output['tax_details']) {
-            $output['display'] .= '<p class="contentfont" align="center">' . $output['tax_details'] . '</p>';
-          }
-          $output['display'] .= '</td></tr></table>';
-        }
-
-        if ($this->edit_auction_id) {
-          $output['display'] .= '<p align="center">[ <a href="members_area.php?page=selling&section=rollback&auction_id=' . $item_details['auction_id'] . '">' . MSG_ROLLBACK_TRANSACTION . '</a> ]</p>';
-        }
-      }
-      else {
-        ## auctions counter - add process - single auction (activate if no fees or if list in store)
-        $cnt_details = $this->get_sql_row("SELECT auction_id, active, approved, closed, deleted, list_in, category_id, addl_category_id FROM
-				" . DB_PREFIX . "auctions WHERE auction_id='" . $item_details['auction_id'] . "'");
-
-        if ($cnt_details['active'] == 0 && $cnt_details['approved'] == 1 && $cnt_details['closed'] == 0 && $cnt_details['deleted'] == 0 && $cnt_details['list_in'] != 'store') {
-          auction_counter($cnt_details['category_id'], 'add', $cnt_details['auction_id']);
-          auction_counter($cnt_details['addl_category_id'], 'add', $cnt_details['auction_id']);
-        }
-
-        ## all we need to actually do is activate the auction
-        $sql_update_auction = $this->query("UPDATE " . DB_PREFIX . "auctions SET
 				active=1, payment_status='confirmed' WHERE auction_id='" . $item_details['auction_id'] . "'");
 
-        $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
-          '<p class=contentfont align=center>' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . (($this->edit_auction_id) ? MSG_HAS_BEEN_UPDATED : MSG_HAS_BEEN_ACTIVATED) . '</p>' .
-          '</td></tr></table>';
+          $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
+            '<p class=contentfont align=center>' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . (($this->edit_auction_id) ? MSG_HAS_BEEN_UPDATED : MSG_HAS_BEEN_ACTIVATED) . '</p>' .
+            '</td></tr></table>';
+        }
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
       }
 
       return $output;
@@ -1387,7 +1408,7 @@
 
       $this->set_fees($item_details['owner_id'], $item_details['category_id']); ## by default the seller will pay
 
-      if (eregi('b', $this->fee['endauction_fee_applies'])) {
+      if (stristr($this->fee['endauction_fee_applies'], 'b')) {
         $payer_id = $winning_bid_details['buyer_id'];
         $this->set_fees($winning_bid_details['buyer_id']); ## if buyer will pay, reset fees
       }
@@ -1423,18 +1444,27 @@
         }
         else if ($user_payment_mode == 2) { // account payment - subtract balance and add invoices.
           ## all we need to actually do is activate the winner row
-          $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
+          try {
+
+            $this->beginTransaction();
+
+            $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
 					active=1, payment_status='confirmed' WHERE winner_id='" . $winning_bid_details['winner_id'] . "'");
 
-          $account_balance = $user_details['balance'] + $output['amount'];
+            $account_balance = $user_details['balance'] + $output['amount'];
+            $invoice_time = CURRENT_TIME;
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, item_id, name, amount, invoice_date, current_balance) VALUES
-					('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $endauction_fee_desc . "',
-					'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+            $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', '{$item_details['auction_id']}', '{$endauction_fee_desc}', '{$output['amount']}', 'auction_end', '{$invoice_time}', '$account_balance')");
 
-          $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, item_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $endauction_fee_desc . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+
+            $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+            $this->commit();
+          } catch (error $e) {
+            $this->rollBack();
+            echo $e;
+          }
 
           $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .
             '<p class="contentfont" align="center">' . MSG_THE_SALE . ' #' . $winning_bid_details['winner_id'] . ' ' . MSG_HAS_BEEN_ACTIVATED . '</p>' .
@@ -1537,10 +1567,14 @@
 
           $account_balance = $user_details['balance'] + $output['amount'];
 
-          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES
-					('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "',
-					'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+          //kiennguyen1101
+
+          $invoice_name = GMSG_WA_SETUP_FEE;
+          $invoice_time = CURRENT_TIME;
+
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', '{$item_details['wanted_ad_id']}', '$invoice_name', '{$payment_amount}', 'completed', '{$invoice_time}', {$account_balance}')");
+
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
 
           $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
@@ -1661,4 +1695,5 @@
     }
 
   }
+
 ?>

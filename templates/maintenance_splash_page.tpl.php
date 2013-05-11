@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   if (!defined('INCLUDED')) {
@@ -7,10 +7,10 @@
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head> 
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
 
-    <title>Giới thiệu - Adamo.vn</title>
+    <title>Gi?i thi?u - Adamo.vn</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 
     <!-- To change the color scheme, change blue.css with green.css, orange.css, red.css, purple.css and pink.css -->
@@ -41,32 +41,32 @@
 
         <ul class="top-buttons"> <!-- drag and toggle buttons-->
           <li><a class="trigger">toggle me</a></li>
-          <li><a class="drag">kéo chuột</a></li>
+          <li><a class="drag">k�o chu?t</a></li>
         </ul><!--end top-buttons-->
 
         <div id="totoggle">
           <div id="infopage">
             <div class="content">
-              <p><span>Adamo.vn </span> là sàn giao dịch điện tử C2C ứng dụng những công nghệ mới nhất trên thế giới nhằm tạo ra trải nghiệm mua sắm tốt nhất cho người tiêu dùng Việt. </p>
-              <p>	Chính sách hoạt động của Adamo Việt Nam được xây dựng nhằm tạo ra một môi trường giao dịch trực tuyến an toàn và thân thiện với người dùng, gồm các phương pháp chủ chốt là: </p>
+              <p><span>Adamo.vn </span> l� s�n giao d?ch di?n t? C2C ?ng d?ng nh?ng c�ng ngh? m?i nh?t tr�n th? gi?i nh?m t?o ra tr?i nghi?m mua s?m t?t nh?t cho ngu?i ti�u d�ng Vi?t. </p>
+              <p>	Ch�nh s�ch ho?t d?ng c?a Adamo Vi?t Nam du?c x�y d?ng nh?m t?o ra m?t m�i tru?ng giao d?ch tr?c tuy?n an to�n v� th�n thi?n v?i ngu?i d�ng, g?m c�c phuong ph�p ch? ch?t l�: </p>
               <ul>
-                <li>-	Cổng thanh toán có độ bảo mật cao,</li>
-                <li>-	Hình thức thanh toán tạm giữ,</li>
-                <li>-	Chính sách giải quyết khiếu nại chặt chẽ và công bằng,</li>
+                <li>-	C?ng thanh to�n c� d? b?o m?t cao,</li>
+                <li>-	H�nh th?c thanh to�n t?m gi?,</li>
+                <li>-	Ch�nh s�ch gi?i quy?t khi?u n?i ch?t ch? v� c�ng b?ng,</li>
                 <li>-	Mua chung.</li>
               </ul>
-              <span>Trải nghiệm mua sắm của Adamo phong phú với nhiều hình thức:</span>
+              <span>Tr?i nghi?m mua s?m c?a Adamo phong ph� v?i nhi?u h�nh th?c:</span>
               <ul>
-                <li>-	Đấu giá,</li>
+                <li>-	�?u gi�,</li>
                 <li>-	Mua ngay,</li>
-                <li>-	Mặc cả với người bán,</li>
-                <li>-	Hệ thống đánh giá người bán,</li>
-                <li>-	Chính sách bảo vệ người mua.</li>
+                <li>-	M?c c? v?i ngu?i b�n,</li>
+                <li>-	H? th?ng d�nh gi� ngu?i b�n,</li>
+                <li>-	Ch�nh s�ch b?o v? ngu?i mua.</li>
               </ul>
-              <p>Mục tiêu của Adamo là thúc đẩy lưu thông hàng hóa trên thị trường, tạo điều kiện cho ngày càng nhiều người có thể tiếp cận và làm giàu từ thương mại điện tử, đồng thời mang lại lợi ích tốt nhất cho người tiêu dùng thông qua những sản phẩm chất lượng cao với giá cả phải chăng và phương thức thanh toán giao nhận thuận tiện nhất.</p>
-              <p>Adamo Việt Nam sẽ liên tục được phát triển để ngày càng hoàn thiện phương pháp hoạt động và đa dạng về chức năng. Với mong muốn đó, mọi liên hệ  góp ý từ người dùng sẽ luôn được chúng tôi trân trọng và cân nhắc nghiêm túc. </p>
-              <p>Xin chân thành cảm ơn.</p>
-              <span>Adamo Việt Nam</span>
+              <p>M?c ti�u c?a Adamo l� th�c d?y luu th�ng h�ng h�a tr�n th? tru?ng, t?o di?u ki?n cho ng�y c�ng nhi?u ngu?i c� th? ti?p c?n v� l�m gi�u t? thuong m?i di?n t?, d?ng th?i mang l?i l?i �ch t?t nh?t cho ngu?i ti�u d�ng th�ng qua nh?ng s?n ph?m ch?t lu?ng cao v?i gi� c? ph?i chang v� phuong th?c thanh to�n giao nh?n thu?n ti?n nh?t.</p>
+              <p>Adamo Vi?t Nam s? li�n t?c du?c ph�t tri?n d? ng�y c�ng ho�n thi?n phuong ph�p ho?t d?ng v� da d?ng v? ch?c nang. V?i mong mu?n d�, m?i li�n h?  g�p � t? ngu?i d�ng s? lu�n du?c ch�ng t�i tr�n tr?ng v� c�n nh?c nghi�m t�c. </p>
+              <p>Xin ch�n th�nh c?m on.</p>
+              <span>Adamo Vi?t Nam</span>
             </div><!--end content-->
 
             <ul class="buttons">
@@ -78,18 +78,18 @@
           <div id="contactpage">
             <div class="content">
               <div class="one-half">
-                <h2>Liên hệ với Adamo.vn </h2>
-                <p>Hãy liên hệ trực tiếp với Adamo.vn để có được thông tin mà bạn cần trong thời gian sớm nhất.</p>
+                <h2>Li�n h? v?i Adamo.vn </h2>
+                <p>H�y li�n h? tr?c ti?p v?i Adamo.vn d? c� du?c th�ng tin m� b?n c?n trong th?i gian s?m nh?t.</p>
               </div><!--end one-half-->
 
               <div class="one-half last cf">
                 <div id="contactform">
                   <div id="message"></div>
                   <form method="post" action="php/contact.php" name="cform" id="cform">
-                    <input type="text" name="name" placeholder="Tên" id="name" />
+                    <input type="text" name="name" placeholder="T�n" id="name" />
                     <input type="text" name="email" placeholder="Email" id="email" />
-                    <textarea name="comments" placeholder="Nội dung gửi" id="comments"></textarea>					
-                    <input type="submit" name="send" value="Gửi" id="submit" /> 
+                    <textarea name="comments" placeholder="N?i dung g?i" id="comments"></textarea>					
+                    <input type="submit" name="send" value="G?i" id="submit" /> 
                   </form>
                 </div><!--end contactform-->
               </div><!--end one-half-->
@@ -105,15 +105,15 @@
 
           <div id="homepage">
             <a class="logo" href="#"><img src="images/logo.png" alt="logo" /></a>
-            <h1><span style="font-size:20px;">Sẽ xuất hiện trên thị trường sau...</span></h1>
+            <h1><span style="font-size:20px;">S? xu?t hi?n tr�n th? tru?ng sau...</span></h1>
 
             <div id="countdown"></div>	
 
             <div id="subscribe">
               <div id="mesaj"></div>
               <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform">
-                <input type="text" name="email" placeholder="Điền email của bạn để nhận thông báo" id="subemail" />
-                <input type="submit" name="send" value="Đăng kí" id="subsubmit" />
+                <input type="text" name="email" placeholder="�i?n email c?a b?n d? nh?n th�ng b�o" id="subemail" />
+                <input type="submit" name="send" value="�ang k�" id="subsubmit" />
               </form>
             </div>
 

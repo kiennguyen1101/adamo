@@ -1,10 +1,6 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.03															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
+
 
   define('RSSlang', 1); // Language English=1, Vietnam=2
   define('RSSlogo', 'images/myphpauction.gif'); // logo must be relative to site url

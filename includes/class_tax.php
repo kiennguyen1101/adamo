@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   class tax extends fees_main {

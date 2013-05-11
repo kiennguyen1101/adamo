@@ -1,10 +1,5 @@
-﻿<?php
-#################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+<?php
+
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -136,17 +131,17 @@
         </tr>
       <?php } ?>
     <!--   <tr>
-     <td>&nbsp;</td>
-     <td class="c1" nowrap><input type="checkbox" name="hl" value="1" <?php echo ($item_details['hl'] == 1) ? 'checked' : ''; ?> />
-      <?php echo MSG_HL_AD; ?></td>
-     <td class="c1"><?php echo $hl_fee_expl_message; ?></td>
-    </tr>
-    <tr>
-     <td>&nbsp;</td>
-     <td class="c2" nowrap><input type="checkbox" name="bold" value="1" <?php echo ($item_details['bold'] == 1) ? 'checked' : ''; ?> />
-      <?php echo MSG_BOLD_AD; ?></td>
-     <td class="c2"><?php echo $bold_fee_expl_message; ?></td>
-    </tr>
+        <td>&nbsp;</td>
+        <td class="c1" nowrap><input type="checkbox" name="hl" value="1" <?php echo ($item_details['hl'] == 1) ? 'checked' : ''; ?> />
+          <?php echo MSG_HL_AD; ?></td>
+        <td class="c1"><?php echo $hl_fee_expl_message; ?></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td class="c2" nowrap><input type="checkbox" name="bold" value="1" <?php echo ($item_details['bold'] == 1) ? 'checked' : ''; ?> />
+          <?php echo MSG_BOLD_AD; ?></td>
+        <td class="c2"><?php echo $bold_fee_expl_message; ?></td>
+      </tr>
       -->
     <?php } ?>
   <?php if ($item_details['start_time'] > CURRENT_TIME || $auction_edit != 1) { ?>
@@ -206,7 +201,6 @@
       <tr class="c4">
         <td colspan="3" class="c3"><?php echo MSG_AUTO_RELIST; ?></td>
       </tr>
-
       <tr class="c1">
         <td width="150" align="right"><a href="#" class="tooltip"><?php echo MSG_ENABLE_AUTO_RELIST; ?><span class="tooltip_content"><?php echo MSG_ENABLE_AUTO_RELIST_EXPL; ?></span></a></td>
         <td colspan="2"><input type="checkbox" name="is_auto_relist" value="1" <?php echo ($item_details['is_auto_relist'] == 1) ? 'checked' : ''; ?>/></td>

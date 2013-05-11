@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 ## for direct payments, call the page like: pg_gc.php?user_id=<USER_ID> !!
 

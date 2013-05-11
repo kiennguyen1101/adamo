@@ -1,4 +1,4 @@
-﻿
+
 
 <?php
   if (!defined('INCLUDED')) {
@@ -76,10 +76,10 @@
 
                 <script type="text/javascript">
                   $(document).ready(function() {
-                    $(".tabContents").hide(); // ?n toÃ n b? n?i dung c?a tab
+                    $(".tabContents").hide(); // ?n toàn b? n?i dung c?a tab
                     $(".tabContents:first").show(); // M?c d?nh s? hi?n th? tab1
 
-                    $("#tabContaier ul li a").click(function() { //Khai bÃ¡o s? ki?n khi click vÃ o m?t tab nÃ o dÃ³
+                    $("#tabContaier ul li a").click(function() { //Khai báo s? ki?n khi click vào m?t tab nào dó
 
                       var activeTab = $(this).attr("href");
                       $("#tabContaier ul li a").removeClass("active");
@@ -156,10 +156,10 @@
                             }
                             else {
                               ?>
-                              <a href="login.php">ÄÄƒng nháº­p</a> hoáº·c <a href="register.php">ÄÄƒng kÃ½</a><?php } ?>
+                              <a href="login.php">Đăng nhập</a> hoặc <a href="register.php">Đăng ký</a><?php } ?>
                         </div>  
                         <ul class="user_menu">			
-                          <li><a href="/members_area.php"><?php echo "Trang cÃ¡ nhÃ¢n"; ?></a></li>
+                          <li><a href="/members_area.php"><?php echo "Trang cá nhân"; ?></a></li>
                           <li><a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a></li>
                           <li><a href="<?php echo process_link('content_pages', array('page' => 'help')); ?>"><?php echo MSG_BTN_HELP; ?></a></li>
                         </ul>
@@ -188,7 +188,7 @@
                                   echo "</ul></li>";
                                 }
                                 ?>
-                                <li><a href='categories.php'>Táº¥t cáº£ danh má»¥c</a></li>
+                                <li><a href='categories.php'>Tất cả danh mục</a></li>
                               </ul>
                             </div><?php } ?>
                         <!---//only show on homepage-->

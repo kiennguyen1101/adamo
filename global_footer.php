@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   $time_end = getmicrotime();

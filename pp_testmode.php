@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 
 
   session_start();
@@ -6,7 +7,6 @@
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_fees.php');
 
   (string) $active_pg = 'Test Mode';
   (string) $error_output = null;
@@ -28,17 +28,17 @@
     $process_fee = new fees();
     $process_fee->setts = &$setts;
 
-    $process_fee->callback_process($custom, $fee_table, $active_pg, $payment_gross, $txn_id, $payment_currency);
+    $result = $process_fee->callback_process($custom, $fee_table, $active_pg, $payment_gross, $txn_id, $payment_currency);
 
     if ($fee_table == 2) /* activate the account if a balance payment is made */ {
       $session->set('membersarea', 'Active');
     }
-
     $redirect_url = SITE_PATH . 'payment_completed.php';
   }
   else {
     $redirect_url = SITE_PATH . 'payment_failed.php';
   }
 
-  header_redirect($redirect_url);
+  if ($result)
+    header_redirect($redirect_url);
 ?>

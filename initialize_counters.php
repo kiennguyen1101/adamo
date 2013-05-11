@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 
   include_once ('includes/global.php'); ## MyPHPAuction 2009# reset all counters
