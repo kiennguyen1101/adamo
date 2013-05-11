@@ -6,7 +6,7 @@
 ##-------------------------------------------------------------##
 #################################################################
 
-function header_redirect($redirect_url) {
+  function header_redirect($redirect_url) {
     echo "<script>document.location.href='" . $redirect_url . "'</script>";
   }
 
@@ -448,7 +448,7 @@ function header_redirect($redirect_url) {
         '	<tr class="c5"> ' .
         '	</tr> ' .
         '	<tr class="c1"> ' .
-        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">'. GMSG_VOUCHER_CODE_EXPL .'</span></a></td> ' .
+        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">' . GMSG_VOUCHER_CODE_EXPL . '</span></a></td> ' .
         '		<td><input name="voucher_value" type="text" class="contentfont" id="voucher_value" value="' . $voucher_value . '" size="40" /></td> ' .
         '	</tr> ';
       $display_output .= ($new_table) ? '</table>' : '';

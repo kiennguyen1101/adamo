@@ -1,5 +1,4 @@
 ﻿<?php
-
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
@@ -21,14 +20,14 @@
 //relative to the script going to use this file.
 //New entries can be added to this list
     $directories = array(
-      INCLUDE_DIR,      
+      INCLUDE_DIR,
     );
 
     //Add your file naming formats here
-    $fileNameFormats = array(      
+    $fileNameFormats = array(
       'class_%s.php',
     );
-   
+
     foreach ($directories as $directory) {
       foreach ($fileNameFormats as $fileNameFormat) {
         $path = $directory . sprintf($fileNameFormat, $className);
@@ -41,8 +40,8 @@
   }
 
   spl_autoload_register('autoLoader');
-  
- 
+
+
   define('INCLUDED', 1);
 
   define('DEFAULT_DB_LANGUAGE', 'english');

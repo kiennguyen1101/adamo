@@ -6,69 +6,66 @@
 ##-------------------------------------------------------------##
 #################################################################
 
-session_start();
+  session_start();
 
-define ('IN_ADMIN', 1);
+  define('IN_ADMIN', 1);
 
-include_once ('../includes/global.php');
+  include_once ('../includes/global.php');
 
-include_once ('../includes/class_site_content.php');
+  include_once ('../includes/class_site_content.php');
 
-if ($session->value('adminarea')!='Active')
-{
-	header_redirect('login.php');
-}
-else
-{
-	$_GET = array_map('stripslashes', $_GET); 
-	$_POST = array_map('stripslashes', $_POST);
-	
-	include_once ('header.php');
+  if ($session->value('adminarea') != 'Active') {
+    header_redirect('login.php');
+  }
+  else {
+    $_GET = array_map('stripslashes', $_GET);
+    $_POST = array_map('stripslashes', $_POST);
 
-	$site_content = new site_content();
+    include_once ('header.php');
 
-	(string) $management_box = NULL;
+    $site_content = new site_content();
 
-	$selected_lang = ($_REQUEST['language']) ? $_REQUEST['language'] : $setts['site_lang'];
-	$template->set('selected_lang', $selected_lang);
+    (string) $management_box = NULL;
 
-	$languages_dropdown = list_languages('admin', true, $selected_lang);
-	$template->set('languages_dropdown', $languages_dropdown);
+    $selected_lang = ($_REQUEST['language']) ? $_REQUEST['language'] : $setts['site_lang'];
+    $template->set('selected_lang', $selected_lang);
 
-	//$template->set('db', $db);
+    $languages_dropdown = list_languages('admin', true, $selected_lang);
+    $template->set('languages_dropdown', $languages_dropdown);
 
-	$file_name = '../language/' . $selected_lang . '/site.lang.php';
+    //$template->set('db', $db);
 
-	if (isset($_POST['form_save_settings']))
-	{
-		$save_file_output = save_file($file_name, $db->rem_special_chars($_POST['file_content']));
+    $file_name = '../language/' . $selected_lang . '/site.lang.php';
 
-		$msg_changes_saved = '<p align="center" class="contentfont">' . $save_file_output . '</p>';
-		$template->set('msg_changes_saved', $msg_changes_saved);
-	}
+    if (isset($_POST['form_save_settings'])) {
+      $save_file_output = save_file($file_name, $db->rem_special_chars($_POST['file_content']));
 
-	//(string) $file_content = null;
+      $msg_changes_saved = '<p align="center" class="contentfont">' . $save_file_output . '</p>';
+      $template->set('msg_changes_saved', $msg_changes_saved);
+    }
 
-	/*
-	$fp = fopen($file_name,"r");
+    //(string) $file_content = null;
 
-	while (!feof ($fp))
-	{
-		$file_content .= fread($fp, 4096);
-	}
-	fclose ($fp);
-	*/
-	$file_content = file_get_contents($file_name);
+    /*
+      $fp = fopen($file_name,"r");
 
-	$template->set('file_content', $file_content);
+      while (!feof ($fp))
+      {
+      $file_content .= fread($fp, 4096);
+      }
+      fclose ($fp);
+     */
+    $file_content = file_get_contents($file_name);
 
-	$template->set('header_section', AMSG_SITE_CONTENT);
-	$template->set('subpage_title', AMSG_EDIT_SITE_LANGUAGE_FILES);
+    $template->set('file_content', $file_content);
 
-	$template_output .= $template->process('content_language_files.tpl.php');
+    $template->set('header_section', AMSG_SITE_CONTENT);
+    $template->set('subpage_title', AMSG_EDIT_SITE_LANGUAGE_FILES);
 
-	include_once ('footer.php');
+    $template_output .= $template->process('content_language_files.tpl.php');
 
-	echo $template_output;
-}
+    include_once ('footer.php');
+
+    echo $template_output;
+  }
 ?>

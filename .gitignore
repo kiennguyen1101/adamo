@@ -4,3 +4,4 @@ online_users.txt
 /templates_compiled/
 /includes/config.php
 .htaccess
+/nbproject/private/

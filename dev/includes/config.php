@@ -1,12 +1,12 @@
 ﻿<?php
-/* Database Host Name */
-$db_host = 'localhost';
-/* Database Username */
-$db_username = 'adamo_dev';
-/* Database Login Password */
-$db_password = 'adamo';
-/* Database Name */
-$db_name = 'adamo_dev';
+  /* Database Host Name */
+  $db_host = 'localhost';
+  /* Database Username */
+  $db_username = 'adamo_dev';
+  /* Database Login Password */
+  $db_password = 'adamo';
+  /* Database Name */
+  $db_name = 'adamo_dev';
 
   /* Database and Session prefixes */
   define('DB_PREFIX', 'myphpauction_'); ## Do not edit !
@@ -18,9 +18,8 @@ $db_name = 'adamo_dev';
   define('ADMIN_PATH', BASE_PATH . "admin/");
   define('THEME_PATH', BASE_PATH . "themes/");
 
-  define('INCLUDE_DIR', dirname(__FILE__).'/');
+  define('INCLUDE_DIR', dirname(__FILE__) . '/');
   define('BASE_DIR', dirname(INCLUDE_DIR));
   define('ADMIN_DIR', BASE_DIR . "/admin/");
   define('THEME_DIR', BASE_DIR . "/themes/");
-
 ?>

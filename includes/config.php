@@ -1,5 +1,4 @@
 ﻿<?php
-
   /* Database Host Name */
   $db_host = 'localhost';
   /* Database Username */

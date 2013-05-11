@@ -5,7 +5,7 @@
 ## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
-if (!defined('INCLUDED')) {
+  if (!defined('INCLUDED')) {
     die("Access Denied");
   }
 ?>

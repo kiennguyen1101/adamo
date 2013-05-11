@@ -14,6 +14,7 @@
     /* Constructor.
      * Take invoice_id as parameter, set all associated keys to data array
      *  */
+
     public function __construct($invoice_id = null) {
       $this->setts = &$setts;
       $this->table_invoice = DB_PREFIX . 'invoices';
@@ -61,7 +62,7 @@
       }
       return $result;
     }
-    
+
     /* Get all invoices from an user
      * Parameter: user_id
      * return invoice assoc array */
@@ -87,14 +88,14 @@
 
       return $invoices;
     }
-    
+
     /* Get invoices of an item by invoice's state instead of status id */
 
     public function getItemInvoicesByState($state, $item_id) {
       $sql = "SELECT i.* FROM  {$this->table_invoice} i LEFT JOIN  {$this->table_invoice_status} s ON i.invoice_status=s.invoice_status_id WHERE s.state='{$state}'";
       if ($item_id)
         $sql .= " AND i.item_id='{$item_id}'";
-     
+
       $result = $this->query($sql);
       $invoices = $this->fetch_all($result, true);
 
@@ -102,7 +103,7 @@
     }
 
     /* Update an invoice with data provided by property data */
-    
+
     public function update() {
       if (!isset($this->data['invoice_id']))
         return false;
@@ -113,12 +114,11 @@
         $sql .= "{$key}='{$value}', ";
       }
       $sql = rtrim($sql, " ,");
-      
+
       $sql .= " WHERE invoice_id='{$this->data['invoice_id']}'";
 
       $this->query($sql);
     }
 
   }
-
 ?>

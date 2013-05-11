@@ -1,5 +1,5 @@
 ﻿function loadTxt()
-    {
+{
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "St\u00F8rrelse";
     txtLang[1].innerHTML = "Egenskaber";
@@ -58,17 +58,20 @@
     optLang[23].text = "Aktuelle r\u00E6kke"
     optLang[24].text = "Aktuelle kolonne"
     optLang[25].text = "Whole Table"
-    }
+}
 function getTxt(s)
+{
+    switch (s)
     {
-    switch(s)
-        {
-        case "Custom Colors": return "Egne farver";
-        case "More Colors...": return "Flere farver...";
-        default: return "";
-        }
+        case "Custom Colors":
+            return "Egne farver";
+        case "More Colors...":
+            return "Flere farver...";
+        default:
+            return "";
     }
+}
 function writeTitle()
-    {
+{
     document.write("<title>Celle egenskaber</title>")
-    }
+}

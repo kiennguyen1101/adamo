@@ -1,26 +1,26 @@
 ﻿/*-----------------------------------------------------------------------------------
 
-	Template Name: Tempo
-	Template URI: http://www.deliciousthemes.com
-	Description: Full Screen Coming Soon Template
-	Author: MafiaShare.net
-	Author URI: http://www.mafiashare.net
-	License: GNU General Public License version 3.0
-	License URI: http://www.gnu.org/licenses/gpl-3.0.html
-	Version: 1.0
-	
-	All files, unless otherwise stated, are released under the GNU General Public License
-	version 3.0 (http://www.gnu.org/licenses/gpl-3.0.html)
+        Template Name: Tempo
+        Template URI: http://www.deliciousthemes.com
+        Description: Full Screen Coming Soon Template
+        Author: MafiaShare.net
+        Author URI: http://www.mafiashare.net
+        License: GNU General Public License version 3.0
+        License URI: http://www.gnu.org/licenses/gpl-3.0.html
+        Version: 1.0
+        
+        All files, unless otherwise stated, are released under the GNU General Public License
+        version 3.0 (http://www.gnu.org/licenses/gpl-3.0.html)
 
 -----------------------------------------------------------------------------------
 
-	1.	CSS Reset & Clearfix
-	2.	Document Setup (body, common classes, structure etc)
-	3.	Main Content Styles
-		3.1. Countdown
-		3.2. Contact Form & Subscribe Form
-		3.3. Social Links
-		3.4. Full Screen Slider - http://buildinternet.com/project/supersized/
+        1.	CSS Reset & Clearfix
+        2.	Document Setup (body, common classes, structure etc)
+        3.	Main Content Styles
+                3.1. Countdown
+                3.2. Contact Form & Subscribe Form
+                3.3. Social Links
+                3.4. Full Screen Slider - http://buildinternet.com/project/supersized/
 
 -----------------------------------------------------------------------------------*/
 
@@ -42,64 +42,64 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 
 body {
-	line-height: 1;
+    line-height: 1;
 }
 
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+    content: '';
+    content: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 a {
-	color:#fff;
-	text-decoration:none;
+    color:#fff;
+    text-decoration:none;
 }
 
 a:hover {
-	text-decoration:none;
+    text-decoration:none;
 }
 
 input,textarea {
-	font-size:12px;
-	line-height:20px;
-	font:inherit;
-	resize:none;
+    font-size:12px;
+    line-height:20px;
+    font:inherit;
+    resize:none;
 }
 
 [placeholder]:active,
 [placeholder]:focus{
-	cursor:text;
-	color:#bfbfbf;
-	font-family: 'architep';
+    cursor:text;
+    color:#bfbfbf;
+    font-family: 'architep';
     src: url('fonts/architep.ttf');
 }
 
@@ -109,7 +109,7 @@ input,textarea {
 
 /* Museo Font - http://www.fontspring.com/fonts/exljbris/museo#fontface_license */
 @font-face {
-   font-family: 'architep';
+    font-family: 'architep';
     src: url('fonts/architep.ttf');
     font-weight: normal;
     font-style: normal;
@@ -125,7 +125,7 @@ input,textarea {
 }
 
 @font-face {
-   font-family: 'architep';
+    font-family: 'architep';
     src: url('fonts/architep.ttf');
     font-weight: normal;
     font-style: normal;
@@ -133,143 +133,143 @@ input,textarea {
 }
 
 body {
-	font-family: 'architep';
+    font-family: 'architep';
     src: url('fonts/architep.ttf');
-	margin:0;
-	padding:0;
-	color:#bfbfbf;
-	background:#222;
+    margin:0;
+    padding:0;
+    color:#bfbfbf;
+    background:#222;
 }
 
 
 #wrapper {
-	width: 100%;
-	height:100%;
-	overflow: hidden;
-	position: fixed;
-	text-align:center;
-	background:url(images/patterns/pat6.png) repeat scroll 0 0;
-	z-index:10;
+    width: 100%;
+    height:100%;
+    overflow: hidden;
+    position: fixed;
+    text-align:center;
+    background:url(images/patterns/pat6.png) repeat scroll 0 0;
+    z-index:10;
 }
 
 a.logo {
-	text-align: center;
-	display: block;
-	margin-top:7px;
+    text-align: center;
+    display: block;
+    margin-top:7px;
 }
 
 h1 {
-	font-size:14px;
-	text-align:center;
-	margin:20px 0;
+    font-size:14px;
+    text-align:center;
+    margin:20px 0;
 }
 
 h1 span {
-	background:#000;
-	padding:7px 10px;
+    background:#000;
+    padding:7px 10px;
 }
 
 h2 {
-	font-size:18px;
-	line-height:24px;
-	margin-bottom:10px;
-	color:#fff;
+    font-size:18px;
+    line-height:24px;
+    margin-bottom:10px;
+    color:#fff;
 }
 
 h3 {
-	color:#fff;
-	font-size:14px;
-	margin-bottom:5px;
+    color:#fff;
+    font-size:14px;
+    margin-bottom:5px;
 }
 
 #container {
-	width:535px;
-	position:relative;
-	background:url(images/container-bg.png) repeat scroll 0 0;
-	overflow:hidden;
-	display:inline-block;
-	top:20px;
-	z-index:1000;
+    width:535px;
+    position:relative;
+    background:url(images/container-bg.png) repeat scroll 0 0;
+    overflow:hidden;
+    display:inline-block;
+    top:20px;
+    z-index:1000;
 }
 
 #totoggle {
-	position:relative;
+    position:relative;
 }
 
 #infopage, #contactpage {
-	display:none;
-	position:relative;
+    display:none;
+    position:relative;
 }
 
 .content {
-	padding:10px 30px;
-	text-align:left;
+    padding:10px 30px;
+    text-align:left;
 }
 .content p {
-	margin-bottom:10px;
+    margin-bottom:10px;
 }
 
 .one-half { 
-	width: 48%; 
+    width: 48%; 
 }
 
 .one-half  {
-	position: relative;
-	margin-right: 4%;
-	float: left;
+    position: relative;
+    margin-right: 4%;
+    float: left;
 }
 
 .last {
-	margin-right: 0!important;
-	clear: right;
+    margin-right: 0!important;
+    clear: right;
 }
 
 .clear {
-	clear:both;
+    clear:both;
 }
 
 .separator {
-	width: 100%;
-	height: 1px;
-	border-top: 1px dotted #BFBFBF;
-	clear: both;
-	padding-bottom: 15px;
+    width: 100%;
+    height: 1px;
+    border-top: 1px dotted #BFBFBF;
+    clear: both;
+    padding-bottom: 15px;
 }
 
 .text {
-	position:absolute;
-	top:0;
-	left:20px;
-	height:31px;
-	line-height:31px;
+    position:absolute;
+    top:0;
+    left:20px;
+    height:31px;
+    line-height:31px;
 }
 
 .top-buttons {
-	position:relative;
-	height:31px;
-	width:100%;
+    position:relative;
+    height:31px;
+    width:100%;
 }
 .buttons {
-	position:relative;
-	height:31px;
-	width:100%;
+    position:relative;
+    height:31px;
+    width:100%;
 }
 .buttons a, .top-buttons a {
-	opacity:0.5;
+    opacity:0.5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=50);	
     display: block;
-	position:absolute;
-	width:31px;
-	height:31px;
-	cursor:pointer;
-	text-indent:-9999px;
+    position:absolute;
+    width:31px;
+    height:31px;
+    cursor:pointer;
+    text-indent:-9999px;
 }
 
 a.trigger {
-	background:url(images/toggle-minus.png) no-repeat scroll 0 0;
-	top:0;
-	right:0;
+    background:url(images/toggle-minus.png) no-repeat scroll 0 0;
+    top:0;
+    right:0;
 }
 
 a.active {
@@ -277,20 +277,20 @@ a.active {
 }
 
 a.drag {
-	background:url(images/drag.png) no-repeat scroll 0 0;
-	top:0;
-	right:32px;
+    background:url(images/drag.png) no-repeat scroll 0 0;
+    top:0;
+    right:32px;
 }
 
 a.contact, a.infocontact {
-	background:url(images/contact.png) no-repeat scroll 0 0;
-	bottom:0;
-	right:0;
+    background:url(images/contact.png) no-repeat scroll 0 0;
+    bottom:0;
+    right:0;
 }
 a.info, a.contactinfo {
-	background:url(images/info.png) no-repeat scroll 0 0;
-	bottom:0;
-	right:32px;
+    background:url(images/info.png) no-repeat scroll 0 0;
+    bottom:0;
+    right:32px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -300,171 +300,171 @@ a.info, a.contactinfo {
 /* 3.1 Countdown */
 
 #countdown {
-	float:left;
-	padding:0;
-	position:relative;
-	width:400px;
-	margin-left:70px;
+    float:left;
+    padding:0;
+    position:relative;
+    width:400px;
+    margin-left:70px;
 }
 
 .hasCountdown {
-	height:70px;
-	margin-bottom:40px;
-	margin-top:20px;
+    height:70px;
+    margin-bottom:40px;
+    margin-top:20px;
 }
 
 .item {
-	float:left;
-	text-align:center;
-	margin:0 15px;
-	width:67px;
-	height:67px;
-	position:relative;
-	background:url(images/countdown-item.png) no-repeat scroll 0 0;
+    float:left;
+    text-align:center;
+    margin:0 15px;
+    width:67px;
+    height:67px;
+    position:relative;
+    background:url(images/countdown-item.png) no-repeat scroll 0 0;
 }
 
 .item span {
-	font-size:14px;
-	clear:both;
-	color:#fff;
-	width:85px;
-	height:20px;
-	display:inline-block;
-	text-transform:lowercase;
+    font-size:14px;
+    clear:both;
+    color:#fff;
+    width:85px;
+    height:20px;
+    display:inline-block;
+    text-transform:lowercase;
 }
 
 .item p {
-	text-align:center;
-	margin:13px 0 5px;
-	font-size:24px;
+    text-align:center;
+    margin:13px 0 5px;
+    font-size:24px;
 }
 
 
 /* 3.2. Contact Form & Subscribe Form */
 
 #subscribe {
-	clear:both;
+    clear:both;
 }
 
 .error_message {
-	margin-bottom:10px;
-	text-align:center;
+    margin-bottom:10px;
+    text-align:center;
 }
 
 #subscribeform {
-	margin-bottom:10px;
-	width:380px;
-	margin-left:auto;
-	margin-right:auto;
-	overflow:hidden;
-	position:relative;
+    margin-bottom:10px;
+    width:380px;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;
+    position:relative;
 }
 
 #contactform {
-	overflow:hidden;
-	position:relative;	
+    overflow:hidden;
+    position:relative;	
 }
 
 #contactform input[type="text"] {
-	background:url(images/bg-form.png) repeat scroll 0 0;
-	width:90%;
-	height:15px;
-	border:0 none;
-	padding-top:10px;
-	padding-bottom:10px;
-	padding-left:5%;
-	padding-right:5%;
-	float:left;
-	color:#bfbfbf;
-	margin-bottom:5px;
+    background:url(images/bg-form.png) repeat scroll 0 0;
+    width:90%;
+    height:15px;
+    border:0 none;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:5%;
+    padding-right:5%;
+    float:left;
+    color:#bfbfbf;
+    margin-bottom:5px;
 }
 
 #contactform textarea {
-	background:url(images/bg-form.png) repeat scroll 0 0;
-	width:90%;
-	height:100px;
-	border:0 none;
-	padding:5%;
-	float:left;
-	color:#bfbfbf;
-	margin-bottom:5px;	
+    background:url(images/bg-form.png) repeat scroll 0 0;
+    width:90%;
+    height:100px;
+    border:0 none;
+    padding:5%;
+    float:left;
+    color:#bfbfbf;
+    margin-bottom:5px;	
 }
 
 #subscribeform input#subemail {
-	background:url(images/bg-form.png) repeat scroll 0 0;
-	width:265px;
-	height:15px;
-	border:0 none;
-	padding:10px;
-	float:left;
-	color:#bfbfbf;
+    background:url(images/bg-form.png) repeat scroll 0 0;
+    width:265px;
+    height:15px;
+    border:0 none;
+    padding:10px;
+    float:left;
+    color:#bfbfbf;
 }
 
 input[type="submit"] {
-	border:0 none;
-	color:#fff;
-	height:35px;
-	width:70px;
-	float:right;
-	cursor:pointer;
-	-webkit-transition:background 0.2s linear; 
-	-moz-transition:background 0.2s linear;
-	-0-transition:background 0.2s linear;
-	transition:background 0.2s linear;	
+    border:0 none;
+    color:#fff;
+    height:35px;
+    width:70px;
+    float:right;
+    cursor:pointer;
+    -webkit-transition:background 0.2s linear; 
+    -moz-transition:background 0.2s linear;
+    -0-transition:background 0.2s linear;
+    transition:background 0.2s linear;	
 }
 
 .cf {
-	margin-bottom:30px;
+    margin-bottom:30px;
 }
 .contact-loader {
-	position:relative;
-	float: right;
-	margin-top: 13px;	
-	margin-right:10px;
+    position:relative;
+    float: right;
+    margin-top: 13px;	
+    margin-right:10px;
 }
 
 #subscribeform input#subsubmit {
-	height:35px;
-	width:95px;
-	float:left;
+    height:35px;
+    width:95px;
+    float:left;
 }	
 
 #subscribeform .subscribe-loader {
-	position:absolute;
-	top:12px;
-	right:103px;
+    position:absolute;
+    top:12px;
+    right:103px;
 }
 
 /* 3.3. Social Links */
 
 #social {
-	position:absolute;
-	left:120px;
+    position:absolute;
+    left:120px;
 }
 #social h4 {
-	position:absolute;
-	left:-100px;
-	height:31px;
-	line-height:31px;
-	width:90px;
+    position:absolute;
+    left:-100px;
+    height:31px;
+    line-height:31px;
+    width:90px;
 }
 #social ul li {
-	display:inline;
-	float:left;
-	margin-right:1px;
-	text-align:center;
-	-webkit-transition:background 0.2s linear; 
-	-moz-transition:background 0.2s linear;
-	-0-transition:background 0.2s linear;
-	transition:background 0.2s linear;
+    display:inline;
+    float:left;
+    margin-right:1px;
+    text-align:center;
+    -webkit-transition:background 0.2s linear; 
+    -moz-transition:background 0.2s linear;
+    -0-transition:background 0.2s linear;
+    transition:background 0.2s linear;
 }
 #social ul li img {
-	padding-top:9px;
+    padding-top:9px;
 }
 #social ul li a {
-	width:31px;
-	height:31px;
-	display:block;
+    width:31px;
+    height:31px;
+    display:block;
 }
 
 
@@ -588,7 +588,7 @@ input[type="submit"] {
 }
 
 #play-button { 
-	float: left; 	
+    float: left; 	
 }
 
 #prevslide, #nextslide {
@@ -611,7 +611,7 @@ ul#slide-list li {
 }
 
 ul#slide-list li.current-slide a, ul#slide-list li.current-slide a:hover { 
-	background-position: 0 0px 
+    background-position: 0 0px 
 }
 
 ul#slide-list li a {
@@ -630,13 +630,13 @@ ul#slide-list li a:hover {
     position: absolute;
     bottom: 0;
     right: 10px;
-	width: 31px;
-	height: 31px;
-	-webkit-transition:background 0.2s linear; 
-	-moz-transition:background 0.2s linear;
-	-0-transition:background 0.2s linear;
-	transition:background 0.2s linear;
-	margin-right:1px;
+    width: 31px;
+    height: 31px;
+    -webkit-transition:background 0.2s linear; 
+    -moz-transition:background 0.2s linear;
+    -0-transition:background 0.2s linear;
+    transition:background 0.2s linear;
+    margin-right:1px;
 }
 
 #tray-button:hover {
@@ -665,24 +665,24 @@ ul#slide-list li a:hover {
 /* Thumbnail Navigation
     ----------------------------*/
 .centered-controls {
-	width:117px;
-	height:31px;
-	margin:0 auto;
+    width:117px;
+    height:31px;
+    margin:0 auto;
 }
 
 .centered-controls a {
     height: 31px;
     width: 31px;
     float: left;
-	-webkit-transition:background 0.2s linear; 
-	-moz-transition:background 0.2s linear;
-	-0-transition:background 0.2s linear;
-	transition:background 0.2s linear;
-	margin-right:1px;
+    -webkit-transition:background 0.2s linear; 
+    -moz-transition:background 0.2s linear;
+    -0-transition:background 0.2s linear;
+    transition:background 0.2s linear;
+    margin-right:1px;
 }
 
 .centered-controls a:hover {
-	cursor:pointer;
+    cursor:pointer;
 }	
 
 #nextthumb, #prevthumb {
@@ -714,17 +714,17 @@ ul#slide-list li a:hover {
 
 /* Thumbnail Tray
     ----------------------------*/
-	
+
 #thumb-tray {
     position: fixed;
     nowhitespace: afterproperty;
     z-index: 3;
     bottom: 0;
     left: 0;
-	height:126px; 
-	width:100%; 
-	overflow:hidden; 
-	text-align:center;
+    height:126px; 
+    width:100%; 
+    overflow:hidden; 
+    text-align:center;
 }
 
 #thumb-back, #thumb-forward {
@@ -760,7 +760,7 @@ ul#thumb-list {
     position: relative;
     left: 0px;
     padding: 4px 2px;
-	background:url(images/container-bg.png) repeat scroll 0 0;
+    background:url(images/container-bg.png) repeat scroll 0 0;
 }
 
 ul#thumb-list li {
@@ -770,7 +770,7 @@ ul#thumb-list li {
     height: 70px;
     overflow: hidden;
     float: left;
-	padding:0 2px;
+    padding:0 2px;
 }
 
 ul#thumb-list li img {
@@ -793,5 +793,5 @@ ul#thumb-list li.current-thumb img, ul#thumb-list li:hover img {
 }
 
 ul#thumb-list li:hover { 
-	cursor: pointer 
+    cursor: pointer 
 }

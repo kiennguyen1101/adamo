@@ -1,128 +1,71 @@
-﻿<?
+﻿<?php
 #################################################################
-
 ## MyPHPAuction v6.05															##
-
 ##-------------------------------------------------------------##
-
 ## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
-
 ##-------------------------------------------------------------##
-
 #################################################################
-session_start();
+  session_start();
 
+  define('IN_SITE', 1);
 
+  define('INDEX_PAGE', 1); ## for integration
 
-define ('IN_SITE', 1);
+  if (!file_exists('includes/config.php'))
+    echo "<script>document.location.href='install/install.php'</script>";
 
-define ('INDEX_PAGE', 1); ## for integration
+  include_once ('includes/global.php');
+  include_once ('includes/functions_login.php');
 
+  include_once ('includes/functions_item.php');
 
+  if (eregi('logout', $_GET['option'])) {
 
-if (!file_exists('includes/config.php')) echo "<script>document.location.href='install/install.php'</script>";
+    logout();
+  }
 
+  include_once ('global_header.php');
 
+  if (isset($_GET['change_language'])) {
 
-include_once ('includes/global.php');
+    $all_languages = list_languages('site');
 
+    if (in_array($_GET['change_language'], $all_languages)) {
 
+      $session->set('site_lang', $_GET['change_language']);
+    }
 
-include_once ('includes/functions_login.php');
+    $refresh_link = 'index.php';
 
-include_once ('includes/functions_item.php');
-
-if (eregi('logout', $_GET['option']))
-
-{
-
-	logout();
-
-}
-
-
-
-include_once ('global_header.php');
-
-
-
-if (isset($_GET['change_language']))
-
-{
-
-	$all_languages = list_languages('site');
-
-
-
-	if (in_array($_GET['change_language'], $all_languages))
-
-	{
-
-		$session->set('site_lang', $_GET['change_language']);
-
-	}
-
-
-
-	$refresh_link = 'index.php';
-
-
-
-	$template_output .= '<br><p class="contentfont" align="center">' . MSG_SITE_LANG_CHANGED . '<br><br>
+    $template_output .= '<br><p class="contentfont" align="center">' . MSG_SITE_LANG_CHANGED . '<br><br>
 
 		Please click <a href="' . process_link('index') . '">' . MSG_HERE . '</a> ' . MSG_PAGE_DOESNT_REFRESH . '</p>';
 
-	$template_output .= '<script>window.setTimeout(\'changeurl();\',300); function changeurl(){window.location=\'' . $refresh_link . '\'}</script>';
+    $template_output .= '<script>window.setTimeout(\'changeurl();\',300); function changeurl(){window.location=\'' . $refresh_link . '\'}</script>';
+  }
+  else if (isset($_GET['change_skin'])) {
 
+    $all_skins = list_skins('site');
 
-}
+    if (in_array($_GET['default_theme'], $all_skins)) {
 
-else if (isset($_GET['change_skin']))
+      $session->set('site_theme', $_GET['default_theme']);
+    }
 
-{
+    $refresh_link = 'index.php';
 
-	$all_skins = list_skins('site');
-
-
-
-	if (in_array($_GET['default_theme'], $all_skins))
-
-	{
-
-		$session->set('site_theme', $_GET['default_theme']);
-
-	}
-
-
-
-	$refresh_link = 'index.php';
-
-
-
-	$template_output .= '<br><p class="contentfont" align="center">' . MSG_SITE_SKIN_CHANGED . '<br><br>
+    $template_output .= '<br><p class="contentfont" align="center">' . MSG_SITE_SKIN_CHANGED . '<br><br>
 
 		Please click <a href="' . process_link('index') . '">' . MSG_HERE . '</a> ' . MSG_PAGE_DOESNT_REFRESH . '</p>';
 
-	$template_output .= '<script>window.setTimeout(\'changeurl();\',300); function changeurl(){window.location=\'' . $refresh_link . '\'}</script>';	
+    $template_output .= '<script>window.setTimeout(\'changeurl();\',300); function changeurl(){window.location=\'' . $refresh_link . '\'}</script>';
+  }
+  else {
 
-}
+    include_once ('global_mainpage.php');
+  }
 
-else
+  include_once ('global_footer.php');
 
-{
-
-	include_once ('global_mainpage.php');
-
-}
-
-
-
-include_once ('global_footer.php');
-
-
-
-echo $template_output;
-
-
-
+  echo $template_output;
 ?>

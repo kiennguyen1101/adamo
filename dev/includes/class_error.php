@@ -15,7 +15,7 @@
     public function __construct($message, $code = 0, $file = '', $line = '', $context = '') {
       parent::__construct($message, $code);
     }
-    
+
     public function __toString() {
       $this->dump_exception($this);
       return '';

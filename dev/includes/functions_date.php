@@ -6,239 +6,219 @@
 ##-------------------------------------------------------------##
 #################################################################
 
-function show_date ($timestamp, $show_time = true)
-{
-	(string) $display_output = null;
+  function show_date($timestamp, $show_time = true) {
+    (string) $display_output = null;
 
-	if ($timestamp)
-	{
-		$date_format = ($show_time) ? DATETIME_FORMAT : DATE_FORMAT;
+    if ($timestamp) {
+      $date_format = ($show_time) ? DATETIME_FORMAT : DATE_FORMAT;
 
-		$offset_time = $timestamp + (TIME_OFFSET * 60 * 60);
-		
-		$display_output_en = date("F d, Y H:i:s", $offset_time);
-		$times = strtotime($display_output_en);
-		$date = date("d", $times);
-		$month = date("F", $times);
-		$year = date("Y", $times);
-		$hour = date("H", $times);
-		$minute = date("i", $times);
-		$second = date("s", $times);
-		if($month == "January"){
+      $offset_time = $timestamp + (TIME_OFFSET * 60 * 60);
 
-			$month = "ThÃ¡ng 1";
+      $display_output_en = date("F d, Y H:i:s", $offset_time);
+      $times = strtotime($display_output_en);
+      $date = date("d", $times);
+      $month = date("F", $times);
+      $year = date("Y", $times);
+      $hour = date("H", $times);
+      $minute = date("i", $times);
+      $second = date("s", $times);
+      if ($month == "January") {
 
-		}elseif($month == "February"){
+        $month = "ThÃ¡ng 1";
+      }
+      elseif ($month == "February") {
 
-			$month = "ThÃ¡ng 2";
+        $month = "ThÃ¡ng 2";
+      }
+      elseif ($month == "March") {
 
-		}elseif($month == "March"){
+        $month = "ThÃ¡ng 3";
+      }
+      elseif ($month == "April") {
 
-		$month = "ThÃ¡ng 3";
+        $month = "ThÃ¡ng 4";
+      }
+      elseif ($month == "May") {
 
-		}elseif($month == "April"){
+        $month = "ThÃ¡ng 5";
+      }
+      elseif ($month == "June") {
 
-		$month = "ThÃ¡ng 4";
+        $month = "ThÃ¡ng 6";
+      }
+      elseif ($month == "July") {
 
-		}elseif($month == "May"){
+        $month = "ThÃ¡ng 7";
+      }
+      elseif ($month == "August") {
 
-		$month = "ThÃ¡ng 5";
+        $month = "ThÃ¡ng 8";
+      }
+      elseif ($month == "September") {
 
-		}elseif($month == "June"){
+        $month = "ThÃ¡ng 9";
+      }
+      elseif ($month == "October") {
 
-		$month = "ThÃ¡ng 6";
+        $month = "ThÃ¡ng 10";
+      }
+      elseif ($month == "November") {
 
-		}elseif($month == "July"){
+        $month = "ThÃ¡ng 11";
+      }
+      elseif ($month == "December") {
 
-		$month = "ThÃ¡ng 7";
+        $month = "ThÃ¡ng 12";
+      }
+      $display_output = $date . " " . $month . " nÄƒm " . $year . " " . $hour . ":" . $minute . ":" . $second;
+    }
+    else {
+      $display_output = GMSG_NA;
+    }
+    return $display_output;
+  }
 
-		}elseif($month == "August"){
+  function time_difference($end_date, $start_date = CURRENT_TIME) {
+    return ($end_date - $start_date);
+  }
 
-		$month = "ThÃ¡ng 8";
+  function time_left($end_date, $start_date = CURRENT_TIME) {
+    (string) $display_output = null;
+    (string) $minute = 60;
+    (string) $hour = 60 * $minute;
+    (string) $day = 24 * $hour;
 
-		}elseif($month == "September"){
+    $time_left = $end_date - $start_date;
 
-		$month = "ThÃ¡ng 9";
+    $days_left = floor($time_left / $day);
 
-		}elseif($month == "October"){
+    $hours = $time_left - ($days_left * $day);
+    $hours_left = floor($hours / $hour);
 
-		$month = "ThÃ¡ng 10";
+    $minutes = $hours - ($hours_left * $hour);
+    $minutes_left = floor($minutes / $minute);
 
-		}elseif($month == "November"){
+    if ($time_left > 0) {
+      $display_output = (($days_left > 0) ? $days_left . ' ' . (($days_left == 1) ? GMSG_DAY : GMSG_DAYS) . ', ' : '') .
+        (($hours_left > 0 || $days_left > 0) ? $hours_left . GMSG_H : '') . ' ' . $minutes_left . GMSG_M;
+    }
+    else {
+      $display_output = GMSG_CLOSED;
+    }
 
-		$month = "ThÃ¡ng 11";
+    return $display_output;
+  }
 
-		}elseif($month == "December"){
+  function date_form_field($current_timestamp = 0, $box_number = 1, $form_name = null, $display_time = true) {
+    global $setts;
 
-		$month = "ThÃ¡ng 12";
+    (string) $display_output = null;
+    (array) $current_date = null;
 
-		}
-		$display_output = $date." ".$month." nÄƒm ". $year." ".$hour.":".$minute.":".$second;
-	}
-	else
-	{
-		$display_output = GMSG_NA;
-	}
-	return $display_output;
-}
-
-function time_difference ($end_date, $start_date = CURRENT_TIME)
-{
-	return ($end_date - $start_date);
-}
-
-function time_left($end_date, $start_date = CURRENT_TIME)
-{
-	(string)	$display_output = null;
-	(string) $minute = 60;
-	(string) $hour = 60 * $minute;
-	(string) $day = 24 * $hour;
-
-	$time_left = $end_date - $start_date;
-
-	$days_left = floor($time_left/$day);
-
-	$hours = $time_left - ($days_left * $day);
-	$hours_left = floor($hours/$hour);
-
-	$minutes = $hours - ($hours_left * $hour);
-	$minutes_left = floor($minutes/$minute);
-
-	if ($time_left > 0)
-	{
-		$display_output = (($days_left>0) ? $days_left . ' ' . (($days_left==1) ? GMSG_DAY : GMSG_DAYS) . ', ' : '') .
-			(($hours_left>0 || $days_left>0) ? $hours_left . GMSG_H : '') . ' ' . $minutes_left . GMSG_M;
-	}
-	else
-	{
-		$display_output = GMSG_CLOSED;
-	}
-
-	return $display_output;
-}
-
-function date_form_field($current_timestamp = 0, $box_number = 1, $form_name = null, $display_time = true)
-{
-	global $setts;
-
-	(string) $display_output = null;
-	(array) $current_date = null;
-
-	$thisYear = date('Y');
-    $yearRange = $thisYear+2;    
+    $thisYear = date('Y');
+    $yearRange = $thisYear + 2;
     foreach (range($thisYear, $yearRange) as $year) {
-		$years_array[] = $year;
+      $years_array[] = $year;
     }
 
 
-	$months_array = array('01' => GMSG_MTH_JANUARY, '02' => GMSG_MTH_FEBRUARY, '03' => GMSG_MTH_MARCH, '04' => GMSG_MTH_APRIL,
-		'05' => GMSG_MTH_MAY, '06' => GMSG_MTH_JUNE, '07' => GMSG_MTH_JULY, '08' => GMSG_MTH_AUGUST,
-		'09' => GMSG_MTH_SEPTEMBER, '10' => GMSG_MTH_OCTOBER, '11' => GMSG_MTH_NOVEMBER, '12' => GMSG_MTH_DECEMBER);
+    $months_array = array('01' => GMSG_MTH_JANUARY, '02' => GMSG_MTH_FEBRUARY, '03' => GMSG_MTH_MARCH, '04' => GMSG_MTH_APRIL,
+      '05' => GMSG_MTH_MAY, '06' => GMSG_MTH_JUNE, '07' => GMSG_MTH_JULY, '08' => GMSG_MTH_AUGUST,
+      '09' => GMSG_MTH_SEPTEMBER, '10' => GMSG_MTH_OCTOBER, '11' => GMSG_MTH_NOVEMBER, '12' => GMSG_MTH_DECEMBER);
 
-	$days_array = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
-		'13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
-		'25', '26', '27', '28', '29', '30', '31');
+    $days_array = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+      '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
+      '25', '26', '27', '28', '29', '30', '31');
 
-	$hours_array = array('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
-		'13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23');
+    $hours_array = array('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12',
+      '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23');
 
-	$minutes_array = array('00', '15', '30', '45');
+    $minutes_array = array('00', '15', '30', '45');
 
-	if ($current_timestamp>0)
-	{
-		list ($current_date['year'], $current_date['month'], $current_date['day'],
-		$current_date['hour'], $current_date['minute'], $current_date['second']) = explode('|', date('Y|m|d|H|i|s', $current_timestamp));
-		
-		$current_date['hour'] += $setts['time_offset'];
-	}
+    if ($current_timestamp > 0) {
+      list ($current_date['year'], $current_date['month'], $current_date['day'],
+        $current_date['hour'], $current_date['minute'], $current_date['second']) = explode('|', date('Y|m|d|H|i|s', $current_timestamp));
 
-	$form_name = ($form_name) ? $form_name : 'forms';
+      $current_date['hour'] += $setts['time_offset'];
+    }
 
-	$display_output = "<SCRIPT LANGUAGE=\"JavaScript\" ID=\"js" . $box_number . "\"> \n".
-		"	var cal" . $box_number . " = new CalendarPopup(); \n".
-		"	cal" . $box_number . ".setReturnFunction(\"setMultipleValues" . $box_number . "\"); \n".
-		"	function setMultipleValues" . $box_number . "(y,m,d) { \n".
-		"		document." . $form_name . ".date" . $box_number . "_year.value=y; \n".
-		"		document." . $form_name . ".date" . $box_number . "_month.selectedIndex=m; \n".
-		"		for (var i=0; i<document." . $form_name . ".date" . $box_number . "_day.options.length; i++) { \n".
-		"			if (document." . $form_name . ".date" . $box_number . "_day.options[i].value==d) { \n".
-		"				document." . $form_name . ".date" . $box_number . "_day.selectedIndex=i; \n".
-		"			} \n".
-		"		} \n".
-		"	} \n".
-		"	function getDateString(y_obj,m_obj,d_obj) { \n".
-		"		var y = y_obj.options[y_obj.selectedIndex].value; \n".
-		"		var m = m_obj.options[m_obj.selectedIndex].value; \n".
-		"		var d = d_obj.options[d_obj.selectedIndex].value; \n".
-		"		if (y==\"\" || m==\"\") { return null; } \n".
-		"		if (d==\"\") { d=1; } \n".
-		"		return str= y+'-'+m+'-'+d; \n".
-		"	} \n".
-		"</SCRIPT> \n";
+    $form_name = ($form_name) ? $form_name : 'forms';
 
-	/* create the months drop down menu */
+    $display_output = "<SCRIPT LANGUAGE=\"JavaScript\" ID=\"js" . $box_number . "\"> \n" .
+      "	var cal" . $box_number . " = new CalendarPopup(); \n" .
+      "	cal" . $box_number . ".setReturnFunction(\"setMultipleValues" . $box_number . "\"); \n" .
+      "	function setMultipleValues" . $box_number . "(y,m,d) { \n" .
+      "		document." . $form_name . ".date" . $box_number . "_year.value=y; \n" .
+      "		document." . $form_name . ".date" . $box_number . "_month.selectedIndex=m; \n" .
+      "		for (var i=0; i<document." . $form_name . ".date" . $box_number . "_day.options.length; i++) { \n" .
+      "			if (document." . $form_name . ".date" . $box_number . "_day.options[i].value==d) { \n" .
+      "				document." . $form_name . ".date" . $box_number . "_day.selectedIndex=i; \n" .
+      "			} \n" .
+      "		} \n" .
+      "	} \n" .
+      "	function getDateString(y_obj,m_obj,d_obj) { \n" .
+      "		var y = y_obj.options[y_obj.selectedIndex].value; \n" .
+      "		var m = m_obj.options[m_obj.selectedIndex].value; \n" .
+      "		var d = d_obj.options[d_obj.selectedIndex].value; \n" .
+      "		if (y==\"\" || m==\"\") { return null; } \n" .
+      "		if (d==\"\") { d=1; } \n" .
+      "		return str= y+'-'+m+'-'+d; \n" .
+      "	} \n" .
+      "</SCRIPT> \n";
 
-	$display_output .= '<select name="date' . $box_number . '_month" id="date' . $box_number . '_month" class="contentfont"> '.
-		'<option> </option> ';
-	foreach ($months_array as $key => $value)
-	{
-		$display_output .= '<option value="' . $key . '" ' . (($key == $current_date['month']) ? 'selected' : '') . '>' . $value . '</option> ';
-	}
-	$display_output .= '</select> ';
+    /* create the months drop down menu */
 
-	$display_output .= '<select name="date' . $box_number . '_day" id="date' . $box_number . '_day" class="contentfont"> '.
-		'<option> </option> ';
-	foreach ($days_array as $value)
-	{
-		$display_output .= '<option value="' . $value . '" ' . (($value == $current_date['day']) ? 'selected' : '') . '>' . $value . '</option> ';
-	}
-	$display_output .= '</select> ';
+    $display_output .= '<select name="date' . $box_number . '_month" id="date' . $box_number . '_month" class="contentfont"> ' .
+      '<option> </option> ';
+    foreach ($months_array as $key => $value) {
+      $display_output .= '<option value="' . $key . '" ' . (($key == $current_date['month']) ? 'selected' : '') . '>' . $value . '</option> ';
+    }
+    $display_output .= '</select> ';
 
-	$display_output .= '<select name="date' . $box_number . '_year" id="date' . $box_number . '_year" class="contentfont"> '.
-		'<option> </option> ';
-	foreach ($years_array as $value)
-	{
-		$display_output .= '<option value="' . $value . '" ' . (($value == $current_date['year']) ? 'selected' : '') . '>' . $value . '</option> ';
-	}
-	$display_output .= '</select> ';
+    $display_output .= '<select name="date' . $box_number . '_day" id="date' . $box_number . '_day" class="contentfont"> ' .
+      '<option> </option> ';
+    foreach ($days_array as $value) {
+      $display_output .= '<option value="' . $value . '" ' . (($value == $current_date['day']) ? 'selected' : '') . '>' . $value . '</option> ';
+    }
+    $display_output .= '</select> ';
 
-/*	$display_output .= '<a href="#" onclick="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_day)); return false;" '.
-		'title="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_date)); return false;" name="anchor' . $box_number . '" id="anchor' . $box_number . '">'.
-		'<img src="' . SITE_PATH . 'themes/' . $setts['default_theme'] . '/img/system/calendar_b2u.gif" border="0" align="absmiddle" /></a> ';
-*/
-	if ($display_time)
-	{
+    $display_output .= '<select name="date' . $box_number . '_year" id="date' . $box_number . '_year" class="contentfont"> ' .
+      '<option> </option> ';
+    foreach ($years_array as $value) {
+      $display_output .= '<option value="' . $value . '" ' . (($value == $current_date['year']) ? 'selected' : '') . '>' . $value . '</option> ';
+    }
+    $display_output .= '</select> ';
 
-		$display_output .= 'Giá»: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> '.
-			'<option> </option> ';
+    /* 	$display_output .= '<a href="#" onclick="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_day)); return false;" '.
+      'title="cal' . $box_number . '.showCalendar(\'anchor' . $box_number . '\',getDateString(document.' . $form_name . '.date' . $box_number . '_year,document.' . $form_name . '.date' . $box_number . '_month,document.' . $form_name . '.date' . $box_number . '_date)); return false;" name="anchor' . $box_number . '" id="anchor' . $box_number . '">'.
+      '<img src="' . SITE_PATH . 'themes/' . $setts['default_theme'] . '/img/system/calendar_b2u.gif" border="0" align="absmiddle" /></a> ';
+     */
+    if ($display_time) {
 
-		foreach ($hours_array as $value)
-		{
-			$display_output .= '<option value="' . $value . '" ' . (($value == $current_date['hour']) ? 'selected' : '') . '>' . $value . '</option> ';
-		}
-		$display_output .= '</select> : ';
+      $display_output .= 'Giá»: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> ' .
+        '<option> </option> ';
 
-		$display_output .= '<select name="date' . $box_number . '_minute" id="date' . $box_number . '_minute" class="contentfont"> '.
-			'<option> </option> ';
-		foreach ($minutes_array as $value)
-		{
-			$display_output .= '<option value="' . $value . '" ' . (($value == $current_date['minute']) ? 'selected' : '') . '>' . $value . '</option> ';
-		}
-	}
-	$display_output .= '</select> ';
+      foreach ($hours_array as $value) {
+        $display_output .= '<option value="' . $value . '" ' . (($value == $current_date['hour']) ? 'selected' : '') . '>' . $value . '</option> ';
+      }
+      $display_output .= '</select> : ';
 
-	return $display_output;
-}
+      $display_output .= '<select name="date' . $box_number . '_minute" id="date' . $box_number . '_minute" class="contentfont"> ' .
+        '<option> </option> ';
+      foreach ($minutes_array as $value) {
+        $display_output .= '<option value="' . $value . '" ' . (($value == $current_date['minute']) ? 'selected' : '') . '>' . $value . '</option> ';
+      }
+    }
+    $display_output .= '</select> ';
 
-function get_box_timestamp($values_array, $time_box_id) /* this function converts the date selected in a date/time field into a timestamp */
-{
-	global $setts;
+    return $display_output;
+  }
 
-	$timestamp = @mktime($values_array['date' . $time_box_id . '_hour'] - $setts['time_offset'],
-		$values_array['date' . $time_box_id . '_minute'], 0, $values_array['date' . $time_box_id . '_month'],
-		$values_array['date' . $time_box_id . '_day'], $values_array['date' . $time_box_id . '_year']);
+  function get_box_timestamp($values_array, $time_box_id) /* this function converts the date selected in a date/time field into a timestamp */ {
+    global $setts;
 
-	return $timestamp;
-}
+    $timestamp = @mktime($values_array['date' . $time_box_id . '_hour'] - $setts['time_offset'], $values_array['date' . $time_box_id . '_minute'], 0, $values_array['date' . $time_box_id . '_month'], $values_array['date' . $time_box_id . '_day'], $values_array['date' . $time_box_id . '_year']);
 
+    return $timestamp;
+  }
 ?>

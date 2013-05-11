@@ -29,7 +29,8 @@
 
                 <td class="smallfont" nowrap>&nbsp;<b>
 
-                    <?php $totalviews = $data['nb_clicks'];
+                    <?php
+                    $totalviews = $data['nb_clicks'];
                     echo "$totalviews";
                     ?></b></td> 
 
@@ -51,7 +52,7 @@
 
                 </td></tr>
 
-  <?php } ?>
+            <?php } ?>
 
           </table>
 

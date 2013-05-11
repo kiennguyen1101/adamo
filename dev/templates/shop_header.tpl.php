@@ -83,12 +83,13 @@
                 </tr>
               </table> 
             </td> 
-          <?php }
+            <?php
+          }
           else {
             ?> 
             <td width="<?php echo $width; ?>"></td>
           <?php } ?>
-    <?php } ?>
+        <?php } ?>
       </tr> 
     </table>
     <br> 		
@@ -97,7 +98,7 @@
     <table width="100%" cellpadding="0" cellspacing="0" border="0"> 
       <tr> 
         <td width="48%" valign="top"> 
-    <?php if ($user_details['shop_nb_ending_items'] && !$parent_id) { ?>
+          <?php if ($user_details['shop_nb_ending_items'] && !$parent_id) { ?>
             <table width="100%" border="0" cellpadding="3" cellspacing="1" class="feat_borders"> 
               <tr height="17"> 
                 <td width="100%" class="c1_shop" colspan="5">&nbsp;&raquo;&nbsp;<?php echo MSG_ENDING_SOON_AUCTIONS; ?></td> 
@@ -107,13 +108,13 @@
                 <td class="smallfont_shop" width="100%">&nbsp;<b><?php echo MSG_ITEM_TITLE; ?></b></td> 
                 <td class="smallfont_shop" nowrap>&nbsp;</td> 
               </tr> 
-            <?php echo $shop_ending_auctions_content; ?>
+              <?php echo $shop_ending_auctions_content; ?>
             </table> 
-    <?php } ?>
+          <?php } ?>
         </td> 
         <td width="4%" valign="top"> </td> 
         <td width="48%" valign="top"> 
-    <?php if ($user_details['shop_nb_recent_items'] && !$parent_id) { ?>
+          <?php if ($user_details['shop_nb_recent_items'] && !$parent_id) { ?>
             <table width="100%" border="0" cellpadding="3" cellspacing="1" class="feat_borders"> 
               <tr height="17"> 
                 <td width="100%" class="c1_shop" colspan="3">&nbsp;&raquo;&nbsp;<?php echo MSG_RECENTLY_LISTED_AUCTIONS; ?></td> 
@@ -125,12 +126,12 @@
                       </tr> 
                       <?php echo $shop_recent_auctions_content; ?>   
                       </table> 
-    <?php } ?>
+                    <?php } ?>
                     </td> 
                     </tr> 
                     </table> 
                     <br>
-  <?php } ?>
+                  <?php } ?>
                 <table width="100%" border="0" cellspacing="0" cellpadding="3">
                   <tr>
                     <td class="catnav_shop"><?php echo $shop_categories_header; ?></td>
@@ -138,10 +139,10 @@
                 </table>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="feat_borders">
                   <tr>
-<?php if ($is_subcategories) { ?>
+                    <?php if ($is_subcategories) { ?>
                         <td width="170" valign="top">
                           <table width="100%" border="0" cellpadding="3" cellspacing="2" class="contentfont_shop">
-                        <?php echo $shop_subcategories_content; ?>
+                            <?php echo $shop_subcategories_content; ?>
                           </table></td>		
-  <?php } ?>
+                      <?php } ?>
                     <td valign="top">

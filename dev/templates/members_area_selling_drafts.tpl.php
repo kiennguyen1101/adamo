@@ -22,14 +22,14 @@
     <td class="membmenu" align="center"><?php echo MSG_START_BID; ?><br><?php echo $page_order_start_bid; ?></td>
     <td class="membmenu" align="center"><?php echo GMSG_OPTIONS; ?></td>
   </tr>
-<!--
-  <tr class="c5">
-    <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="60" height="1"></td>
-    <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100%" height="1"></td>
-    <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100" height="1"></td>
-    <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="140" height="1"></td>
-  </tr>
--->
+  <!--
+    <tr class="c5">
+      <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="60" height="1"></td>
+      <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100%" height="1"></td>
+      <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100" height="1"></td>
+      <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="140" height="1"></td>
+    </tr>
+  -->
   <?php echo $drafts_content; ?>
   <?php if ($nb_items > 0) { ?>
       <tr>

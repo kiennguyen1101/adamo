@@ -20,7 +20,8 @@
               <td>[ <a href="<?php echo process_link('members_area', array('page' => 'store', 'section' => 'subscription')); ?>"><?php echo MSG_UPGRADE_STORE; ?></a> ]</td>
             </tr>
           </table>
-        <?php }
+          <?php
+        }
         else {
           ?>
           <h5 style="margin-bottom: 5px; margin-top: 3px;"><?php echo MSG_STORE_ONLY_MODE_EXPL; ?></h5>
@@ -29,6 +30,6 @@
               <td>[ <a href="<?php echo process_link('members_area', array('page' => 'store', 'section' => 'subscription')); ?>"><?php echo MSG_CREATE_STORE; ?></a> ]</td>
             </tr>
           </table>
-  <?php } ?></td>
+        <?php } ?></td>
   </tr>
 </table>
