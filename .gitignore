@@ -5,3 +5,4 @@ templates_compiled/
 includes/config.php
 .htaccess
 nbproject/private/
+.idea
