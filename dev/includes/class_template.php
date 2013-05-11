@@ -11,12 +11,7 @@
 ## The above copyright notice and this permission notice shall be included in all copies or substantial 			##
 ## portions of the Software																												##
 #################################################################################################################
-#################################################################
-## MyPHPAuction 2009															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+
 
   class template {
     ## constructor, set the home directory for the templates
