@@ -1,10 +1,5 @@
 <?php
-#################################################################
-## MyPHPAuction 2009															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
-##-------------------------------------------------------------##
-#################################################################
+
 
   include_once ('includes/global.php'); ## MyPHPAuction 2009# reset all counters
   $db->query("UPDATE " . DB_PREFIX . "categories SET items_counter=0, wanted_counter=0");
