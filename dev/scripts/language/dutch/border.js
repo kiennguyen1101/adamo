@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "Kleur";
     document.getElementById("btnCancel").value = "annuleren";

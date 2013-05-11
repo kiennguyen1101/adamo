@@ -1,4 +1,4 @@
-/*** Editor Script Wrapper ***/
+﻿/*** Editor Script Wrapper ***/
 var oScripts=document.getElementsByTagName("script");	
 var sEditorPath;
 for(var i=0;i<oScripts.length;i++)

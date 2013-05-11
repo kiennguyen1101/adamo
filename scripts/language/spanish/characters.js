@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "C&oacute;digo HTML";
     document.getElementById("btnClose").value = "Cerrar";

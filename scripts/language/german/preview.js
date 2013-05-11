@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("btnClose").value = "schlie\u00DFen";//"close";
     }

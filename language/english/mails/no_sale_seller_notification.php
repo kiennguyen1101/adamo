@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> notify seller if an item closed but there was no sale
 ## called only from the main_cron.php page
 
@@ -12,28 +12,28 @@ $row_details = $db->get_sql_row("SELECT u.name, u.username, u.email, u.mail_item
 $send = ($row_details['mail_item_closed']) ? true : false;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Phiên đấu giá %2$s của bạn đã bị đóng và chưa tìm được người thắng cuộc.
-Nguyên nhân có thể do không có người đấu giá hoặc giá đấu chưa đạt giá mong muốn của bạn.
+PhiÃªn Ä‘áº¥u giÃ¡ %2$s cá»§a báº¡n Ä‘Ã£ bá»‹ Ä‘Ã³ng vÃ  chÆ°a tÃ¬m Ä‘Æ°á»£c ngÆ°á»i tháº¯ng cuá»™c.
+NguyÃªn nhÃ¢n cÃ³ thá»ƒ do khÃ´ng cÃ³ ngÆ°á»i Ä‘áº¥u giÃ¡ hoáº·c giÃ¡ Ä‘áº¥u chÆ°a Ä‘áº¡t giÃ¡ mong muá»‘n cá»§a báº¡n.
 
-Để xem chi tiết phiên đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %3$s
 
-Trân trọng,
-Ban quản trị %4$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %4$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Phiên đấu giá %2$s của bạn đã bị đóng và chưa tìm được người thắng cuộc. <br>
-Nguyên nhân có thể do không có người đấu giá hoặc giá đấu chưa đạt giá mong muốn của bạn. <br>
+PhiÃªn Ä‘áº¥u giÃ¡ %2$s cá»§a báº¡n Ä‘Ã£ bá»‹ Ä‘Ã³ng vÃ  chÆ°a tÃ¬m Ä‘Æ°á»£c ngÆ°á»i tháº¯ng cuá»™c. <br>
+NguyÃªn nhÃ¢n cÃ³ thá»ƒ do khÃ´ng cÃ³ ngÆ°á»i Ä‘áº¥u giÃ¡ hoáº·c giÃ¡ Ä‘áº¥u chÆ°a Ä‘áº¡t giÃ¡ mong muá»‘n cá»§a báº¡n. <br>
 <br>
-[ <a href="%3$s">Bấm vào đây</a> ] để xem phiên đấu giá. <br>
+[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem phiÃªn Ä‘áº¥u giÃ¡. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị%4$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹%4$s';
 
 
 $auction_link = process_link('auction_details', array('name' => $row_details['item_name'], 'auction_id' => $row_details['auction_id']));
@@ -41,6 +41,6 @@ $auction_link = process_link('auction_details', array('name' => $row_details['it
 $text_message = sprintf($text_message, $row_details['name'], $row_details['item_name'], $auction_link, $setts['sitename']);
 $html_message = sprintf($html_message, $row_details['name'], $row_details['item_name'], $auction_link, $setts['sitename']);
 
-send_mail($row_details['email'], 'Mã đáu giá: ' . $row_details['auction_id'] . ' - Đấu giá bị đóng', $text_message, 
+send_mail($row_details['email'], 'MÃ£ Ä‘Ã¡u giÃ¡: ' . $row_details['auction_id'] . ' - Äáº¥u giÃ¡ bá»‹ Ä‘Ã³ng', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

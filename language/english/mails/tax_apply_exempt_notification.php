@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> apply for tax exempt notification
 ## called only from the $user->insert() and $user->update() functions!
 

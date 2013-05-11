@@ -1,4 +1,4 @@
-/*** Translation ***/
+﻿/*** Translation ***/
 LanguageDirectory="norwegian";
 
 function getTxt(s)

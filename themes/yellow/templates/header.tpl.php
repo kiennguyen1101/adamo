@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if ( !defined('INCLUDED') ) { die("Access Denied"); }
 
 ?>

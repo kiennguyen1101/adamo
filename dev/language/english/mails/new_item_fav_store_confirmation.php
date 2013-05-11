@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.02
 ## Email File -> confirm posting to the seller
 ## called only from the sell_item.php page
@@ -14,48 +14,48 @@ $send = true; // always sent
 while ($row_details = $db->fetch_array($sql_select_fav_stores))
 {
 	## text message - editable
-	$text_message = 'Kính gửi %1$s,
+	$text_message = 'KÃ­nh gá»­i %1$s,
 
-Một phiên đấu giá mới được khởi tạo trong gian hàng ưa thích của bạn:
+Má»™t phiÃªn Ä‘áº¥u giÃ¡ má»›i Ä‘Æ°á»£c khá»Ÿi táº¡o trong gian hÃ ng Æ°a thÃ­ch cá»§a báº¡n:
 
-	- Tên đấu giá: %3$s
-	- Loại đấu giá: %4$s
-	- Số lượng sản phẩm: %5$s
+	- TÃªn Ä‘áº¥u giÃ¡: %3$s
+	- Loáº¡i Ä‘áº¥u giÃ¡: %4$s
+	- Sá»‘ lÆ°á»£ng sáº£n pháº©m: %5$s
 
-	- Giá khởi điểm: %6$s
-	- Giá mua ngay: %7$s
-	- Giá mong muốn: %8$s
+	- GiÃ¡ khá»Ÿi Ä‘iá»ƒm: %6$s
+	- GiÃ¡ mua ngay: %7$s
+	- GiÃ¡ mong muá»‘n: %8$s
 
-	- Ngày kết thúc: %9$s
+	- NgÃ y káº¿t thÃºc: %9$s
 
-Để xem trang đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem trang Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %10$s
 
-Trân trọng,
-Ban quản trị %11$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %11$s';
 
 	## html message - editable
-	$html_message = 'Kính gửi %1$s, <br>
+	$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Một phiên đấu giá mới được khởi tạo trong gian hàng ưa thích của bạn: <br>
+Má»™t phiÃªn Ä‘áº¥u giÃ¡ má»›i Ä‘Æ°á»£c khá»Ÿi táº¡o trong gian hÃ ng Æ°a thÃ­ch cá»§a báº¡n: <br>
 <ul>
-	<li>Tên đấu giá: <b>%3$s</b> </li>
-	<li>Loại đấu giá: <b>%4$s</b> </li>
-	<li>Số lượng sản phẩm: <b>%5$s</b> </li>
+	<li>TÃªn Ä‘áº¥u giÃ¡: <b>%3$s</b> </li>
+	<li>Loáº¡i Ä‘áº¥u giÃ¡: <b>%4$s</b> </li>
+	<li>Sá»‘ lÆ°á»£ng sáº£n pháº©m: <b>%5$s</b> </li>
 </ul>
 <ul>
-	<li>Giá khởi điểm: <b>%6$s</b> </li>
-	<li>Giá mua ngay: <b>%7$s</b> </li>
-	<li>Giá mong muốn: <b>%8$s</b> </li>
+	<li>GiÃ¡ khá»Ÿi Ä‘iá»ƒm: <b>%6$s</b> </li>
+	<li>GiÃ¡ mua ngay: <b>%7$s</b> </li>
+	<li>GiÃ¡ mong muá»‘n: <b>%8$s</b> </li>
 </ul>
 <ul>
-	<li>Ngày kết thúc: <b>%9$s</b> </li>
+	<li>NgÃ y káº¿t thÃºc: <b>%9$s</b> </li>
 </ul>
-[ <a href="%10$s">Bâm vào đây</a> ] để xem trang đâu giá. <br>
+[ <a href="%10$s">BÃ¢m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem trang Ä‘Ã¢u giÃ¡. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %11$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %11$s';
 
 
 	$start_price = $fees->display_amount($row_details['start_price'], $row_details['currency']);
@@ -75,7 +75,7 @@ Ban quản trị %11$s';
 		$row_details['quantity'], $start_price, $buyout_price, $reserve_price, $closing_date, $auction_link, 
 		$setts['sitename']);
 	
-	send_mail($row_details['email'], 'Gian hàng ưa thích - Một phiên đấu giá mới được khởi tạo', $text_message, 
+	send_mail($row_details['email'], 'Gian hÃ ng Æ°a thÃ­ch - Má»™t phiÃªn Ä‘áº¥u giÃ¡ má»›i Ä‘Æ°á»£c khá»Ÿi táº¡o', $text_message, 
 		$setts['admin_email'], $html_message, null, $send);
 }
 ?>

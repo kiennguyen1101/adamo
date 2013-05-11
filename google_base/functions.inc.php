@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 /*======================================================================*\
 || #################################################################### ||
 || # functions.inc.php 6.00, for use with myphpauction v6.00+				 # ||
 || # ---------------------------------------------------------------- # ||
-|| # Copyright � 2005 RENS Management, LLC. All Rights Reserved.      # ||
+|| # Copyright © 2005 RENS Management, LLC. All Rights Reserved.      # ||
 || # This file is licensed under the End User Licensue Agreement at   # ||
 || #                 http://myphpauction.rensmllc.com/eula.pdf              # ||
 || # -----------------  THIS IS NOT FREE SOFTWARE ------------------- # ||

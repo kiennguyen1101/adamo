@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "Radbrytning";
     document.getElementById("btnCancel").value = "Avbryt";

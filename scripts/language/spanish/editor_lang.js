@@ -1,4 +1,4 @@
-/*** Translation ***/
+﻿/*** Translation ***/
 LanguageDirectory="spanish";
 
 function getTxt(s)

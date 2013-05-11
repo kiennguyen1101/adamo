@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File version -> v6.05
 ## Email File -> notify seller if multiple items have been relisted (manually or automatically)
 ## called only from the main_cron.php page
@@ -14,26 +14,26 @@ while ($row_details = $db->fetch_array($sql_select_auctions))
 	$send = ($row_details['mail_confirm_to_seller']) ? true : false;
 
 	## text message - editable
-	$text_message = 'Kính gửi %1$s,
+	$text_message = 'KÃ­nh gá»­i %1$s,
 
-Một trong các phiên đấu do bạn khởi tạo trê %2$s đã được đăng lại.
+Má»™t trong cÃ¡c phiÃªn Ä‘áº¥u do báº¡n khá»Ÿi táº¡o trÃª %2$s Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng láº¡i.
 
-Để xem chi tiết phiên đấu giá được đăng lại, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡ Ä‘Æ°á»£c Ä‘Äƒng láº¡i, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %3$s
 
-Trân trọng,
-Ban quản trị %2$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %2$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Một trong các phiên đấu do bạn khởi tạo trê %2$s đã được đăng lại. <br>
+Má»™t trong cÃ¡c phiÃªn Ä‘áº¥u do báº¡n khá»Ÿi táº¡o trÃª %2$s Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng láº¡i. <br>
 <br>
-[ <a href="%3$s">Bấm vào đây</a> ] để xem chi tiết phiên đấu giá được đăng lại. <br>
+[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡ Ä‘Æ°á»£c Ä‘Äƒng láº¡i. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %2$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %2$s';
 
 
 	$items_open_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'selling', 'section' => 'open'), true);
@@ -41,7 +41,7 @@ Ban quản trị %2$s';
 	$text_message = sprintf($text_message, $row_details['name'], $setts['sitename'], $items_open_link);
 	$html_message = sprintf($html_message, $row_details['name'], $setts['sitename'], $items_open_link);
 	
-	send_mail($row_details['email'], 'Đấu giá được đăng lại', $text_message, 
+	send_mail($row_details['email'], 'Äáº¥u giÃ¡ Ä‘Æ°á»£c Ä‘Äƒng láº¡i', $text_message, 
 		$setts['admin_email'], $html_message, null, $send);
 }
 ?>

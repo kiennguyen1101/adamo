@@ -1,11 +1,11 @@
-function loadTxt()
+﻿function loadTxt()
     {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Tipo";
     txtLang[1].innerHTML = "Nombre";
     txtLang[2].innerHTML = "Tama\u00F1o";
     txtLang[3].innerHTML = "Longitud Max.";
-    txtLang[4].innerHTML = "N\u00FAm. L�neas";
+    txtLang[4].innerHTML = "N\u00FAm. Líneas";
     txtLang[5].innerHTML = "Valor";
 
     var optLang = document.getElementsByName("optLang");

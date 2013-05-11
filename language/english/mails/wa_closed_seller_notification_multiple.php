@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.05
 ## Email File -> notify seller if multiple wanted ads have closed
 ## called only from the main_cron.php page
@@ -11,26 +11,26 @@ $row_details = $db->get_sql_row("SELECT u.name, u.username, u.email, u.mail_item
 $send = ($row_details['mail_item_closed']) ? true : false;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Một số rao vặt của bạn đã bị đóng.
+Má»™t sá»‘ rao váº·t cá»§a báº¡n Ä‘Ã£ bá»‹ Ä‘Ã³ng.
 
-Để xem chi tiết rao vặt bị đóng, vui lòng bấm vào đường dẫn sau đây:
+Äá»ƒ xem chi tiáº¿t rao váº·t bá»‹ Ä‘Ã³ng, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n sau Ä‘Ã¢y:
 
 %2$s
 
-Trân trọng,
-Ban quản trị %3$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %3$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Một số rao vặt của bạn đã bị đóng. <br>
+Má»™t sá»‘ rao váº·t cá»§a báº¡n Ä‘Ã£ bá»‹ Ä‘Ã³ng. <br>
 <br>
-[ <a href="%2$s">Bấm vào đây</a> ] để xem chi tiết rao vặt bị đóng. <br>
+[ <a href="%2$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem chi tiáº¿t rao váº·t bá»‹ Ä‘Ã³ng. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %3$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %3$s';
 
 
 $items_closed_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'wanted_ads', 'section' => 'closed'), true);
@@ -38,6 +38,6 @@ $items_closed_link = SITE_PATH . 'login.php?redirect=' . process_link('members_a
 $text_message = sprintf($text_message, $row_details['name'], $items_closed_link, $setts['sitename']);
 $html_message = sprintf($html_message, $row_details['name'], $items_closed_link, $setts['sitename']);
 
-send_mail($row_details['email'], 'Các rao vặt bị đóng', $text_message, 
+send_mail($row_details['email'], 'CÃ¡c rao váº·t bá»‹ Ä‘Ã³ng', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

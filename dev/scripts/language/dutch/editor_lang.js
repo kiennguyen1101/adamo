@@ -1,4 +1,4 @@
-/*** Translation ***/
+﻿/*** Translation ***/
 LanguageDirectory="dutch";
 
 function getTxt(s)

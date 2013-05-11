@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.04 														##
 ##-------------------------------------------------------------##
-## Copyright �2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -154,7 +154,7 @@ function date_form_field($current_timestamp = 0, $box_number = 1, $form_name = n
 	if ($display_time)
 	{
 
-		$display_output .= 'Giờ: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> '.
+		$display_output .= 'Giá»: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> '.
 			'<option> </option> ';
 
 		foreach ($hours_array as $value)

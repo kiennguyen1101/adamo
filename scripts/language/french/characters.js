@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "Code HTML";
     document.getElementById("btnClose").value = "Fermer";

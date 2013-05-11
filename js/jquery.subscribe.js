@@ -1,4 +1,4 @@
-jQuery(document).ready(function(){
+﻿jQuery(document).ready(function(){
 	$('#subscribeform').submit(function(){
 
 		var action = $(this).attr('action');

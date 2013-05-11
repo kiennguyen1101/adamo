@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.04
 ## Email File -> registration success - signup fee enabled
 ## called only from the $fees->callback_procees() function
@@ -10,35 +10,35 @@ $row_details = $this->get_sql_row("SELECT u.name, u.username, u.email FROM " . D
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Tài khoản của bạn tại %2$s đã được kích hoạt thành công.
+TÃ i khoáº£n cá»§a báº¡n táº¡i %2$s Ä‘Ã£ Ä‘Æ°á»£c kÃ­ch hoáº¡t thÃ nh cÃ´ng.
 
-Chi tiết đăng nhập:
+Chi tiáº¿t Ä‘Äƒng nháº­p:
 
-	- Tên đăng nhập: %3$s
-	- Mật khẩu: -ẩn-
+	- TÃªn Ä‘Äƒng nháº­p: %3$s
+	- Máº­t kháº©u: -áº©n-
 
-Trân trọng,
-Ban quản trị %2$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %2$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Tài khoản của bạn tại <b>%2$s</b> đã được kích hoạt thành công. <br>
+TÃ i khoáº£n cá»§a báº¡n táº¡i <b>%2$s</b> Ä‘Ã£ Ä‘Æ°á»£c kÃ­ch hoáº¡t thÃ nh cÃ´ng. <br>
 <br>
-Chi tiết đăng nhập:<br>
+Chi tiáº¿t Ä‘Äƒng nháº­p:<br>
 <ul>
-	<li>Tên đăng nhập: <b>%3$s</b></li>
-	<li>Mật khẩu: -ẩn-</li>
+	<li>TÃªn Ä‘Äƒng nháº­p: <b>%3$s</b></li>
+	<li>Máº­t kháº©u: -áº©n-</li>
 </ul>
-Trân trọng, <br>
-Ban quản trị %2$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %2$s';
 
 
 $text_message = sprintf($text_message, $row_details['name'], $this->setts['sitename'], $row_details['username']);
 $html_message = sprintf($html_message, $row_details['name'], $this->setts['sitename'], $row_details['username']);
 
-send_mail($row_details['email'], $this->setts['sitename'] . ' - Đăng ký thành công', $text_message, 
+send_mail($row_details['email'], $this->setts['sitename'] . ' - ÄÄƒng kÃ½ thÃ nh cÃ´ng', $text_message, 
 	$this->setts['admin_email'], $html_message, null, $send);
 ?>

@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "F\u00E4rg";
     document.getElementById("btnCancel").value = "Avbryt";

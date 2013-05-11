@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> notify bidder if his offer is deleted (works with all 3 offer types)
 ## called only from the $item->delete_offer() function!
 
@@ -15,27 +15,27 @@ $row_details = $this->get_sql_row("SELECT a.*, u.name AS user_name, u.email FROM
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Đề xuất giá %2$s của bạn trong phiên đấu %3$s đã bị xóa bởi người bán.
+Äá» xuáº¥t giÃ¡ %2$s cá»§a báº¡n trong phiÃªn Ä‘áº¥u %3$s Ä‘Ã£ bá»‹ xÃ³a bá»Ÿi ngÆ°á»i bÃ¡n.
 
-Để xem chi tiết phiên đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 	
 %4$s
 
-Trân trọng
-Ban quản trị %5$s';
+TrÃ¢n trá»ng
+Ban quáº£n trá»‹ %5$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Đề xuất giá %2$s của bạn trong phiên đấu %3$s đã bị xóa bởi người bán. <br>
+Äá» xuáº¥t giÃ¡ %2$s cá»§a báº¡n trong phiÃªn Ä‘áº¥u %3$s Ä‘Ã£ bá»‹ xÃ³a bá»Ÿi ngÆ°á»i bÃ¡n. <br>
 <br>
-[ <a href="%4$s">Bấm vào đây</a> ] để xem chi tiết phiên đấu giá. <br>
+[ <a href="%4$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡. <br>
 <br>
 
-Trân trọng, <br>
-Ban quản trị %5$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %5$s';
 
 
 $offer_type = ($offer_table == 'bids') ? 'reserve' : 'fixed price';
@@ -46,6 +46,6 @@ $auction_link = process_link('auction_details', array('name' => $row_details['na
 $text_message = sprintf($text_message, $row_details['user_name'], $offer_type, $row_details['name'], $auction_link, $this->setts['sitename']);
 $html_message = sprintf($html_message, $row_details['user_name'], $offer_type, $row_details['name'], $auction_link, $this->setts['sitename']);
 
-send_mail($row_details['email'], 'Mã đấu giá: ' . $offer_details['auction_id'] . ' - Đề xuất giá bị từ chối', $text_message, 
+send_mail($row_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $offer_details['auction_id'] . ' - Äá» xuáº¥t giÃ¡ bá»‹ tá»« chá»‘i', $text_message, 
 	$this->setts['admin_email'], $html_message, null, $send);
 ?>

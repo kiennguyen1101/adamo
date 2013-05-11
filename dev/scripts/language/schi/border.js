@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "\u989c\u8272 ";
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";

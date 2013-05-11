@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+﻿<!DOCTYPE html> 
 <html lang="en"> 
 <head> 
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
@@ -94,7 +94,7 @@
 					<div id="subscribe">
 						<div id="mesaj"></div>
 						<form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform">
-							<input type="text" name="email" placeholder="Điền email của bạn để nhận thông báo" id="subemail" />
+							<input type="text" name="email" placeholder="Äiá»n email cá»§a báº¡n Ä‘á»ƒ nháº­n thÃ´ng bÃ¡o" id="subemail" />
 							<input type="submit" name="send" value="Subscribe" id="subsubmit" />
 						</form>
 					</div>

@@ -1,4 +1,4 @@
-var sStyleWeight1;
+﻿var sStyleWeight1;
 var sStyleWeight2;
 var sStyleWeight3;
 var sStyleWeight4; 

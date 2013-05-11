@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
 	{
     document.getElementById("txtLang").innerHTML = "\u4ece MS Word\u8d34\u4e0a\u5185\u5bb9  (CTRL-V) ";
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";

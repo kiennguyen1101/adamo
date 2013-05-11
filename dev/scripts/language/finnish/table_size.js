@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     var txtLang =  document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Lis\u00E4\u00E4 rivi";

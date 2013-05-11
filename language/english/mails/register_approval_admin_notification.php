@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> registration approval - admin notification
 ## called only from the register.php page
 

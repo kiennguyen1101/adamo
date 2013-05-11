@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.04
 ## Email File -> registration approval - user notification
 ## called only from the register.php page
@@ -11,41 +11,41 @@ $row_details = $db->get_sql_row("SELECT u.user_id, u.name, u.username, u.email F
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Tài khoản của bạn tại %2$s đã được đăng ký thành công. 
+TÃ i khoáº£n cá»§a báº¡n táº¡i %2$s Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½ thÃ nh cÃ´ng. 
 
-Chi tiết đăng nhập:
+Chi tiáº¿t Ä‘Äƒng nháº­p:
 
-	- Tên đăng nhập: %3$s
-	- Mật khẩu: -ẩn-
+	- TÃªn Ä‘Äƒng nháº­p: %3$s
+	- Máº­t kháº©u: -áº©n-
 
-Tài khoản của bạn sẽ được quản trị viên kích hoạt.
-Bạn sẽ nhận được email thông báo ngay khi tài khoản được kích hoạt.
+TÃ i khoáº£n cá»§a báº¡n sáº½ Ä‘Æ°á»£c quáº£n trá»‹ viÃªn kÃ­ch hoáº¡t.
+Báº¡n sáº½ nháº­n Ä‘Æ°á»£c email thÃ´ng bÃ¡o ngay khi tÃ i khoáº£n Ä‘Æ°á»£c kÃ­ch hoáº¡t.
 	
-Trân trọng,
-Ban quản trị %2$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %2$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Tài khoản của bạn tại <b>%2$s</b> đã được đăng ký thành công. <br>
+TÃ i khoáº£n cá»§a báº¡n táº¡i <b>%2$s</b> Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½ thÃ nh cÃ´ng. <br>
 <br>
-Chi tiết đăng nhập:<br>
+Chi tiáº¿t Ä‘Äƒng nháº­p:<br>
 <ul>
-	<li>Tên đăng nhập: <b>%3$s</b></li>
-	<li>Mật khẩu: -ẩn-</li>
+	<li>TÃªn Ä‘Äƒng nháº­p: <b>%3$s</b></li>
+	<li>Máº­t kháº©u: -áº©n-</li>
 </ul>
-Tài khoản của bạn sẽ được quản trị viên kích hoạt.<br>
-YBạn sẽ nhận được email thông báo ngay khi tài khoản được kích hoạt.<br>
+TÃ i khoáº£n cá»§a báº¡n sáº½ Ä‘Æ°á»£c quáº£n trá»‹ viÃªn kÃ­ch hoáº¡t.<br>
+YBáº¡n sáº½ nháº­n Ä‘Æ°á»£c email thÃ´ng bÃ¡o ngay khi tÃ i khoáº£n Ä‘Æ°á»£c kÃ­ch hoáº¡t.<br>
 <br>
-Trân trọng, <br>
-Ban quản trị %2$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %2$s';
 
 
 $text_message = sprintf($text_message, $row_details['name'], $setts['sitename'], $row_details['username']);
 $html_message = sprintf($html_message, $row_details['name'], $setts['sitename'], $row_details['username']);
 
-send_mail($row_details['email'], $setts['sitename'] . ' - Xác nhận đăng ký', $text_message, 
+send_mail($row_details['email'], $setts['sitename'] . ' - XÃ¡c nháº­n Ä‘Äƒng kÃ½', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

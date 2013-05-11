@@ -1,4 +1,4 @@
-/*** Translation ***/
+﻿/*** Translation ***/
 LanguageDirectory="tchi";
 
 function getTxt(s)

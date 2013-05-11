@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "\u540d\u79f0 ";

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.05
 ## Email File -> notify buyer on a successful purchase
 ## called only from the $item->assign_winner() function!
@@ -14,48 +14,48 @@ $sale_details = $this->get_sql_row("SELECT w.*, u.name, u.username, u.email, u.m
 $send = ($sale_details['mail_item_won']) ? true : false;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Bạn đã mua thành công sản phẩm %2$s.
+Báº¡n Ä‘Ã£ mua thÃ nh cÃ´ng sáº£n pháº©m %2$s.
 
-Chi tiết mua sản phẩm:
+Chi tiáº¿t mua sáº£n pháº©m:
 
-	- Giá: %3$s
-	- Số lượng: %4$s
-	- Phiên đấu giá: %7$s
+	- GiÃ¡: %3$s
+	- Sá»‘ lÆ°á»£ng: %4$s
+	- PhiÃªn Ä‘áº¥u giÃ¡: %7$s
 	
-Để xem chi tiết mua sản phẩm, vui lòng truy cập trang "Các phiên đã thắng" bằng cách bấm vào đường dẫn dưới đây:  
+Äá»ƒ xem chi tiáº¿t mua sáº£n pháº©m, vui lÃ²ng truy cáº­p trang "CÃ¡c phiÃªn Ä‘Ã£ tháº¯ng" báº±ng cÃ¡ch báº¥m vÃ o Ä‘Æ°á»ng dáº«n dÆ°á»›i Ä‘Ã¢y:  
 
 %5$s
 
-Sau khi truy cập trang bên trên, vui lòng bấm vào "Bảng tin nhắn" cạnh sản phẩm chiến thắng.
-"Bảng tin nhắn" là là công cụ liên hệ trực tiếp với người bán. Vui lòng sử dụng bảng tin nhắn để đặt câu hỏi liên quan đến sản phẩm cho người bán.
+Sau khi truy cáº­p trang bÃªn trÃªn, vui lÃ²ng báº¥m vÃ o "Báº£ng tin nháº¯n" cáº¡nh sáº£n pháº©m chiáº¿n tháº¯ng.
+"Báº£ng tin nháº¯n" lÃ  lÃ  cÃ´ng cá»¥ liÃªn há»‡ trá»±c tiáº¿p vá»›i ngÆ°á»i bÃ¡n. Vui lÃ²ng sá»­ dá»¥ng báº£ng tin nháº¯n Ä‘á»ƒ Ä‘áº·t cÃ¢u há»i liÃªn quan Ä‘áº¿n sáº£n pháº©m cho ngÆ°á»i bÃ¡n.
 
-Quan trọng: Các trao đổi giữa bạn và người bán trong Bảng tin nhắn là cơ sở giải quyết tranh chấp phát sinh.
+Quan trá»ng: CÃ¡c trao Ä‘á»•i giá»¯a báº¡n vÃ  ngÆ°á»i bÃ¡n trong Báº£ng tin nháº¯n lÃ  cÆ¡ sá»Ÿ giáº£i quyáº¿t tranh cháº¥p phÃ¡t sinh.
 
-Trân trọng,
-Ban quản trị %6$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %6$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Bạn đã mua thành công sản phẩm %2$s. <br>
+Báº¡n Ä‘Ã£ mua thÃ nh cÃ´ng sáº£n pháº©m %2$s. <br>
 <br>
-Chi tiết mua sản phẩm: <br>
+Chi tiáº¿t mua sáº£n pháº©m: <br>
 <ul>
-	<li>Giá: <b>%3$s</b> </li>
-	<li>Số lượng: <b>%4$s</b> </li>
-	<li>Phiên đấu giá: [ <a href="%7$s">Bấm vào đây</a> ] </li>
+	<li>GiÃ¡: <b>%3$s</b> </li>
+	<li>Sá»‘ lÆ°á»£ng: <b>%4$s</b> </li>
+	<li>PhiÃªn Ä‘áº¥u giÃ¡: [ <a href="%7$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] </li>
 </ul>
-Để xem chi tiết mua sản phẩm, vui lòng truy cập trang [ <a href="%5$s">Các phiên đã thắng</a> ]. <br>
+Äá»ƒ xem chi tiáº¿t mua sáº£n pháº©m, vui lÃ²ng truy cáº­p trang [ <a href="%5$s">CÃ¡c phiÃªn Ä‘Ã£ tháº¯ng</a> ]. <br>
 <br>
-Sau khi truy cập trang bên trên, vui lòng bấm vào "Bảng tin nhắn" cạnh sản phẩm chiến thắng. <br>
-"Bảng tin nhắn" là là công cụ liên hệ trực tiếp với người bán. Vui lòng sử dụng bảng tin nhắn để đặt câu hỏi liên quan đến sản phẩm cho người bán. <br>
+Sau khi truy cáº­p trang bÃªn trÃªn, vui lÃ²ng báº¥m vÃ o "Báº£ng tin nháº¯n" cáº¡nh sáº£n pháº©m chiáº¿n tháº¯ng. <br>
+"Báº£ng tin nháº¯n" lÃ  lÃ  cÃ´ng cá»¥ liÃªn há»‡ trá»±c tiáº¿p vá»›i ngÆ°á»i bÃ¡n. Vui lÃ²ng sá»­ dá»¥ng báº£ng tin nháº¯n Ä‘á»ƒ Ä‘áº·t cÃ¢u há»i liÃªn quan Ä‘áº¿n sáº£n pháº©m cho ngÆ°á»i bÃ¡n. <br>
 <br>
-Quan trọng: Các trao đổi giữa bạn và người bán trong Bảng tin nhắn là cơ sở giải quyết tranh chấp phát sinh. <br>
+Quan trá»ng: CÃ¡c trao Ä‘á»•i giá»¯a báº¡n vÃ  ngÆ°á»i bÃ¡n trong Báº£ng tin nháº¯n lÃ  cÆ¡ sá»Ÿ giáº£i quyáº¿t tranh cháº¥p phÃ¡t sinh. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %6$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %6$s';
 
 
 $items_won_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'bidding', 'section' => 'won_items'), true);
@@ -68,6 +68,6 @@ $sale_price = $this->fees->display_amount($sale_details['bid_amount'], $sale_det
 $text_message = sprintf($text_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_won_link, $this->setts['sitename'], $auction_link);
 $html_message = sprintf($html_message, $sale_details['name'], $sale_details['item_name'], $sale_price, $sale_details['quantity_offered'], $items_won_link, $this->setts['sitename'], $auction_link);
 
-send_mail($sale_details['email'], 'Mã đấu giá: ' . $sale_details['auction_id'] . ' - Mua thành công', $text_message, 
+send_mail($sale_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $sale_details['auction_id'] . ' - Mua thÃ nh cÃ´ng', $text_message, 
 	$this->setts['admin_email'], $html_message, null, $send);
 ?>

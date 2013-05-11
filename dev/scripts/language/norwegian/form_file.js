@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "Navn";
     document.getElementById("btnCancel").value = "Avbryt";

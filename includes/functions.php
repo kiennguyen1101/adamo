@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -1046,7 +1046,7 @@ function header_redirect($redirect_url) {
       'CONGO, THE DEMOCRATIC REPUBLIC OF THE' => 'CD',
       'COOK ISLANDS' => 'CK',
       'COSTA RICA' => 'CR',
-      'CÔTE D\'IVOIRE' => 'CI',
+      'CÃ”TE D\'IVOIRE' => 'CI',
       'CROATIA' => 'HR',
       'CUBA' => 'CU',
       'CYPRUS' => 'CY',
@@ -1172,11 +1172,11 @@ function header_redirect($redirect_url) {
       'PORTUGAL' => 'PT',
       'PUERTO RICO' => 'PR',
       'QATAR' => 'QA',
-      'RÉUNION' => 'RE',
+      'RÃ‰UNION' => 'RE',
       'ROMANIA' => 'RO',
       'RUSSIAN FEDERATION' => 'RU',
       'RWANDA' => 'RW',
-      'SAINT BARTHÉLEMY' => 'BL',
+      'SAINT BARTHÃ‰LEMY' => 'BL',
       'SAINT HELENA' => 'SH',
       'SAINT KITTS AND NEVIS' => 'KN',
       'SAINT LUCIA' => 'LC',

@@ -1,5 +1,5 @@
-/***********************************************************
-    Copyright � 2004, Yusuf Wiryonoputro. All rights reserved.
+﻿/***********************************************************
+    Copyright © 2004, Yusuf Wiryonoputro. All rights reserved.
 ************************************************************/
 
 function ListEditor(oName)

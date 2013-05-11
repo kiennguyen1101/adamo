@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "HTML\u6e90\u78bc ";
     document.getElementById("btnClose").value = "\u95dc\u9589 ";

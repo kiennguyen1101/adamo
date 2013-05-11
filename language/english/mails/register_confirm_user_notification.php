@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.04
 ## Email File -> registration confirmation message
 ## called only from the register.php page
@@ -15,36 +15,36 @@ if ($mail_input_id)
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Tài khoản của bạn tại %2$s đã được đăng ký thành công.
+TÃ i khoáº£n cá»§a báº¡n táº¡i %2$s Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½ thÃ nh cÃ´ng.
 
-Chi tiết đăng nhập:
+Chi tiáº¿t Ä‘Äƒng nháº­p:
 
-	- Tên đăng nhập: %3$s
-	- Mật khẩu: -ẩn-
+	- TÃªn Ä‘Äƒng nháº­p: %3$s
+	- Máº­t kháº©u: -áº©n-
 
-Để kích hoạt tài khoản, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ kÃ­ch hoáº¡t tÃ i khoáº£n, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %4$s
 	
-Trân trọng,
-Ban quản trị %2$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %2$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Tài khoản của bạn tại <b>%2$s</b> đã được đăng ký thành công. <br>
+TÃ i khoáº£n cá»§a báº¡n táº¡i <b>%2$s</b> Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng kÃ½ thÃ nh cÃ´ng. <br>
 <br>
-Chi tiết đăng nhập:<br>
+Chi tiáº¿t Ä‘Äƒng nháº­p:<br>
 <ul>
-	<li>Tên đăng nhập: <b>%3$s</b></li>
-	<li>Mật khẩu: -ẩn-</li>
+	<li>TÃªn Ä‘Äƒng nháº­p: <b>%3$s</b></li>
+	<li>Máº­t kháº©u: -áº©n-</li>
 </ul>
-Vui lòng [ <a href="%4$s">bấm vào đây</a> ] để kích hoạt tài khoản của bạn. <br>
+Vui lÃ²ng [ <a href="%4$s">báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ kÃ­ch hoáº¡t tÃ i khoáº£n cá»§a báº¡n. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %2$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %2$s';
 
 
 $activation_link = SITE_PATH . 'account_activate.php?user_id=' . $row_details['user_id'] . '&username=' . $row_details['username'];
@@ -52,6 +52,6 @@ $activation_link = SITE_PATH . 'account_activate.php?user_id=' . $row_details['u
 $text_message = sprintf($text_message, $row_details['name'], $setts['sitename'], $row_details['username'], $activation_link);
 $html_message = sprintf($html_message, $row_details['name'], $setts['sitename'], $row_details['username'], $activation_link);
 
-send_mail($row_details['email'], $setts['sitename'] . ' - Xác nhận đăng ký', $text_message, 
+send_mail($row_details['email'], $setts['sitename'] . ' - XÃ¡c nháº­n Ä‘Äƒng kÃ½', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

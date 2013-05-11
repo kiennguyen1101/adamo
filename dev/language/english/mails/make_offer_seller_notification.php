@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.05
 ## Email File -> notify seller on a new offer placed 
 ## called only from the $item->place_offer() function!
@@ -13,37 +13,37 @@ $offer_details = $this->get_sql_row("SELECT o.*, u.name, u.username, u.email, a.
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Một để xuất giá đã được gửi cho bạn, %2$s.
+Má»™t Ä‘á»ƒ xuáº¥t giÃ¡ Ä‘Ã£ Ä‘Æ°á»£c gá»­i cho báº¡n, %2$s.
 
-Chi tiết đề xuất:
+Chi tiáº¿t Ä‘á» xuáº¥t:
 
-	- Giá: %3$s
-	- Số lượng yêu cầu: %4$s
+	- GiÃ¡: %3$s
+	- Sá»‘ lÆ°á»£ng yÃªu cáº§u: %4$s
 	
-Để xem tất cả đề xuất trong phiên đấu giá của bạn, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem táº¥t cáº£ Ä‘á» xuáº¥t trong phiÃªn Ä‘áº¥u giÃ¡ cá»§a báº¡n, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %5$s
 
-Trân trọng,
-Ban quản trị %6$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %6$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Một đề xuất giá đã được gửi cho bạn, %2$s. <br>
+Má»™t Ä‘á» xuáº¥t giÃ¡ Ä‘Ã£ Ä‘Æ°á»£c gá»­i cho báº¡n, %2$s. <br>
 <br>
-Chi tiết đề xuất: <br>
+Chi tiáº¿t Ä‘á» xuáº¥t: <br>
 <ul>
-	<li>Giá: <b>%3$s</b> </li>
-	<li>Số lượng: <b>%4$s</b> </li>
+	<li>GiÃ¡: <b>%3$s</b> </li>
+	<li>Sá»‘ lÆ°á»£ng: <b>%4$s</b> </li>
 </ul>
 <br>
-[ <a href="%5$s">Bấm vào đây</a> ] để xem tất cả đề xuất trong phiên đấu giá của bạn. <br>
+[ <a href="%5$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem táº¥t cáº£ Ä‘á» xuáº¥t trong phiÃªn Ä‘áº¥u giÃ¡ cá»§a báº¡n. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %6$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %6$s';
 
 
 $offer_link = SITE_PATH . 'login.php?redirect=' . process_link('members_area', array('page' => 'selling', 'section' => 'view_offers', 'auction_id' => $offer_details['auction_id']), true);
@@ -55,6 +55,6 @@ $offer_price = $this->fees->display_amount($offer_details['amount'], $offer_deta
 $text_message = sprintf($text_message, $offer_details['name'], $offer_details['item_name'], $offer_price, $offer_details['quantity'], $offer_link, $this->setts['sitename']);
 $html_message = sprintf($html_message, $offer_details['name'], $offer_details['item_name'], $offer_price, $offer_details['quantity'], $offer_link, $this->setts['sitename']);
 
-send_mail($offer_details['email'], 'Mã đấu giá: ' . $offer_details['auction_id'] . ' - Đề xuất giá mới', $text_message, 
+send_mail($offer_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $offer_details['auction_id'] . ' - Äá» xuáº¥t giÃ¡ má»›i', $text_message, 
 	$this->setts['admin_email'], $html_message, null, $send);
 ?>

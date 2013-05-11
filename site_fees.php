@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
-## Copyright �2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -90,9 +90,9 @@ $template->set('is_sale_fee', $is_sale_fee);
 
 (string) $sale_fees_table ='<tr class="c2">
 			  <td align="center" width="50%" class="fees_column"><strong>
-				 Loại phí
+				 Loáº¡i phÃ­
 				 </strong></td>
-			  <td align="center" class="fees_column">Phí</td>
+			  <td align="center" class="fees_column">PhÃ­</td>
 		   </tr>';
 while ($tier_details = $db->fetch_array($sql_select_sale_fees)) 
 {
@@ -102,7 +102,7 @@ while ($tier_details = $db->fetch_array($sql_select_sale_fees))
 	
 	'<tr class="' . $background . '"> '.
 		'	<td align="left" width="50%" class="fees_column">' . MSG_FROM . ' <b>' . $fees->display_amount($tier_details['fee_from']) . '</b> ' . MSG_TO . ' <b>' . $fees->display_amount($tier_details['fee_to']) . '</b></td> '.
-		'	<td align="center" class="fees_column">' . (($tier_details['calc_type'] == 'flat') ? $fees->display_amount($tier_details['fee_amount']) : $tier_details['fee_amount'] . '%') . '/sản phẩm</td> '.
+		'	<td align="center" class="fees_column">' . (($tier_details['calc_type'] == 'flat') ? $fees->display_amount($tier_details['fee_amount']) : $tier_details['fee_amount'] . '%') . '/sáº£n pháº©m</td> '.
 	'</tr> ';
 }
 

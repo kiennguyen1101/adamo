@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnOk").value = " ok ";

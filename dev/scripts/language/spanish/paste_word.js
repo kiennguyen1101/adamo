@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
 	{
     document.getElementById("txtLang").innerHTML = "Pegar contenido desde Word aqui";
     document.getElementById("btnCancel").value = "Cancelar";

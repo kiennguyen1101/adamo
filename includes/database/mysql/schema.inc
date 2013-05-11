@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * @file
@@ -466,7 +466,7 @@ class DatabaseSchema_mysql extends DatabaseSchema {
 
   public function prepareComment($comment, $length = NULL) {
     // Work around a bug in some versions of PDO, see http://bugs.php.net/bug.php?id=41125
-    $comment = str_replace("'", '’', $comment);
+    $comment = str_replace("'", 'â€™', $comment);
 
     // Truncate comment to maximum comment length.
     if (isset($length)) {

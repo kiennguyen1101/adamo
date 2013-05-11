@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.04
 ## Email File -> notify bidder when he is outbid
 ## called only from the bid.php page!
@@ -18,32 +18,32 @@ $send = true; ## always send
 while ($bid_details = $db->fetch_array($sql_select_auctions))
 {
 	## text message - editable
-	$text_message = 'Kính gửi %1$s,
+	$text_message = 'KÃ­nh gá»­i %1$s,
 	
-Giá đặt của bạn trong phiên đấu %2$s đã bị vượt qua.
+GiÃ¡ Ä‘áº·t cá»§a báº¡n trong phiÃªn Ä‘áº¥u %2$s Ä‘Ã£ bá»‹ vÆ°á»£t qua.
 	
-Để xem chi tiết đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem chi tiáº¿t Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 	
 %3$s
 	
-Để xem lịch sử đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 	
 %4$s
 	
-Trân trọng,
-Ban quản trị %5$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %5$s';
 	
 	## html message - editable
-	$html_message = 'Kính gửi %1$s, <br>
+	$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Giá đặt của bạn trong phiên đấu %2$s đã bị vượt qua. <br>
+GiÃ¡ Ä‘áº·t cá»§a báº¡n trong phiÃªn Ä‘áº¥u %2$s Ä‘Ã£ bá»‹ vÆ°á»£t qua. <br>
 <br>
-[ <a href="%3$s">Bấm vào đây</a> ] để xem chi tiết đấu giá. <br>
+[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem chi tiáº¿t Ä‘áº¥u giÃ¡. <br>
 <br>
-Để xem lịch sử đấu giá, vui lòng [ <a href="%4$s">bấm vào đây</a> ]. <br>
+Äá»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡, vui lÃ²ng [ <a href="%4$s">báº¥m vÃ o Ä‘Ã¢y</a> ]. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %5$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %5$s';
 	
 	
 	$bid_history_link = SITE_PATH . 'login.php?redirect=' . process_link('bid_history', array('auction_id' => $bid_details['auction_id']));
@@ -52,7 +52,7 @@ Ban quản trị %5$s';
 	$text_message = sprintf($text_message, $bid_details['buyer_name'], $bid_details['item_name'], $auction_link, $bid_history_link, $setts['sitename']);
 	$html_message = sprintf($html_message, $bid_details['buyer_name'], $bid_details['item_name'], $auction_link, $bid_history_link, $setts['sitename']);
 
-	send_mail($bid_details['email'], 'Mã đấu giá: ' . $bid_details['auction_id'] . ' - Thông báo giá đặt đã bị vượt qua', $text_message, 
+	send_mail($bid_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $bid_details['auction_id'] . ' - ThÃ´ng bÃ¡o giÃ¡ Ä‘áº·t Ä‘Ã£ bá»‹ vÆ°á»£t qua', $text_message, 
 		$setts['admin_email'], $html_message, null, $send);
 }
 ?>

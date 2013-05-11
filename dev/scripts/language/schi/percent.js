@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";
     document.getElementById("btnOk").value = " \u786e\u8ba4  ";

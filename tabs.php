@@ -1,4 +1,4 @@
-<?php
+﻿<?php
   include_once ('includes/global.php');
   include_once ('includes/functions.php');
   $cat = array($_GET['cat']);
@@ -16,7 +16,7 @@
 
  <?php
 	if ($products == NULL) {
-    echo "Chưa có sản phẩm";
+    echo "ChÆ°a cÃ³ sáº£n pháº©m";
   }
   else {
     $i = 0;
@@ -61,9 +61,9 @@
       $pagination .= "<div style='clear:both'></div><div class=\"pagination\">";
       //previous button
       if ($page > 1)
-        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">«</a>";
+        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">Â«</a>";
       else
-        $pagination.= "<span class=\"disabled pre_btn\">«</span>";
+        $pagination.= "<span class=\"disabled pre_btn\">Â«</span>";
 
       //pages	
       if ($lastpage < 7 + ($adjacents * 2)) { //not enough pages to bother breaking it up
@@ -118,9 +118,9 @@
 
       //next button
       if ($page < $counter - 1)
-        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">»</a>";
+        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">Â»</a>";
       else
-        $pagination.= "<span class=\"disabled next_btn\">»</span>";
+        $pagination.= "<span class=\"disabled next_btn\">Â»</span>";
       $pagination.= "</div>\n";
     }
     echo $pagination;

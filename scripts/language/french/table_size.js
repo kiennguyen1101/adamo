@@ -1,4 +1,4 @@
-function loadTxt()
+ï»¿function loadTxt()
     {
     var txtLang =  document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Ins\u00E9rer une ligne";
@@ -26,9 +26,9 @@ function getTxt(s)
     switch(s)
         {
         case "Cannot delete column.":
-            return "Ne pas supprimer la colonne. La colonne contient des cellules \u00E9tendues provenant d\u0027autres colonnes. Commencer à supprimer l\u0027extention en premier.";
+            return "Ne pas supprimer la colonne. La colonne contient des cellules \u00E9tendues provenant d\u0027autres colonnes. Commencer Ã  supprimer l\u0027extention en premier.";
         case "Cannot delete row.":
-            return "Ne pas supprimer la ligne. La ligne contient des cellules \u00E9tendues provenant d\u0027autres lignes. Commencer à supprimer l\u0027extention en premier.";
+            return "Ne pas supprimer la ligne. La ligne contient des cellules \u00E9tendues provenant d\u0027autres lignes. Commencer Ã  supprimer l\u0027extention en premier.";
         default:return "";
         }
     }

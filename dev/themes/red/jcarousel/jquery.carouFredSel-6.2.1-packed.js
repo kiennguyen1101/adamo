@@ -1,4 +1,4 @@
-/*
+﻿/*
  *	jQuery carouFredSel 6.2.1
  *	Demo's and documentation:
  *	caroufredsel.dev7studios.com

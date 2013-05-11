@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> notify user when a bid is placed on an auction on his watch list
 ## called only from the $item->assign_winner() function
 
@@ -16,34 +16,34 @@ while ($row_details = $this->fetch_array($sql_select_auctions))
 {
 	$send = ($row_details['mail_item_won']) ? true : false;
 	## text message - editable
-	$text_message = 'Kính gửi %1$s,
+	$text_message = 'KÃ­nh gá»­i %1$s,
 	
-Phiên đấu giá %$2s, mà bạn hiện là người đặt giá cao nhất đã bị đóng.
-Phiên đấu không có người thắng cuộc vì chưa đạt giá mong muốn của người bán.
+PhiÃªn Ä‘áº¥u giÃ¡ %$2s, mÃ  báº¡n hiá»‡n lÃ  ngÆ°á»i Ä‘áº·t giÃ¡ cao nháº¥t Ä‘Ã£ bá»‹ Ä‘Ã³ng.
+PhiÃªn Ä‘áº¥u khÃ´ng cÃ³ ngÆ°á»i tháº¯ng cuá»™c vÃ¬ chÆ°a Ä‘áº¡t giÃ¡ mong muá»‘n cá»§a ngÆ°á»i bÃ¡n.
 	
-Để xem trang đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem trang Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 	
 %3$s
 	
-Để xem lịch sử đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 	
 %4$s
 	
-Trân trọng,
-Ban quản trị %5$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %5$s';
 	
 	## html message - editable
 	$html_message = 'Dear %1$s, <br>
 <br>
-Phiên đấu giá %$2s, mà bạn hiện là người đặt giá cao nhất đã bị đóng. <br>
-Phiên đấu không có người thắng cuộc vì chưa đạt giá mong muốn của người bán. <br>
+PhiÃªn Ä‘áº¥u giÃ¡ %$2s, mÃ  báº¡n hiá»‡n lÃ  ngÆ°á»i Ä‘áº·t giÃ¡ cao nháº¥t Ä‘Ã£ bá»‹ Ä‘Ã³ng. <br>
+PhiÃªn Ä‘áº¥u khÃ´ng cÃ³ ngÆ°á»i tháº¯ng cuá»™c vÃ¬ chÆ°a Ä‘áº¡t giÃ¡ mong muá»‘n cá»§a ngÆ°á»i bÃ¡n. <br>
 <br>
-[ <a href="%3$s">Bấm vào đây</a> ] để xem trang đấu giá. <br>
+[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem trang Ä‘áº¥u giÃ¡. <br>
 <br>
-Để xem lịch sử đấu giá, vui lòng [ <a href="%4$s">bấm vào đây</a> ]. <br>
+Äá»ƒ xem lá»‹ch sá»­ Ä‘áº¥u giÃ¡, vui lÃ²ng [ <a href="%4$s">báº¥m vÃ o Ä‘Ã¢y</a> ]. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %5$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %5$s';
 	
 	
 	$bid_history_link = SITE_PATH . 'login.php?redirect=' . process_link('bid_history', array('auction_id' => $row_details['auction_id']));
@@ -52,7 +52,7 @@ Ban quản trị %5$s';
 	$text_message = sprintf($text_message, $row_details['buyer_name'], $row_details['item_name'], $auction_link, $bid_history_link, $this->setts['sitename']);
 	$html_message = sprintf($html_message, $watch_details['buyer_name'], $watch_details['item_name'], $auction_link, $bid_history_link, $this->setts['sitename']);
 	
-	send_mail($row_details['email'], 'Mã đấu giá: ' . $row_details['auction_id'] . ' - Đấu giá bị đóng', $text_message, 
+	send_mail($row_details['email'], 'MÃ£ Ä‘áº¥u giÃ¡: ' . $row_details['auction_id'] . ' - Äáº¥u giÃ¡ bá»‹ Ä‘Ã³ng', $text_message, 
 		$this->setts['admin_email'], $html_message, null, $send);
 }
 ?>

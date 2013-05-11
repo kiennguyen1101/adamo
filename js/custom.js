@@ -1,4 +1,4 @@
-$(document).ready(function() {
+﻿$(document).ready(function() {
 
 // initial fade effect for the entire screen
 	var $content = $('#wrapper');

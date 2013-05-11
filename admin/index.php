@@ -1,8 +1,8 @@
-<?
+﻿<?
 #################################################################
 ## MyPHPAuction 2009															##
 ##-------------------------------------------------------------##
-## Copyright �2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -14,7 +14,8 @@ include_once ('../includes/global.php');
 
 include_once ('../includes/functions_login.php');
 
-//if (eregi('logout', $_GET['option']))if (stristr($_GET['option'], 'logout')) 
+//if (eregi('logout', $_GET['option']))
+if (stristr($_GET['option'], 'logout')) 
 {
 	logout(true);
 }

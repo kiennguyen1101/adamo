@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## File Version -> v6.02
 ## Email File -> notify user when his auction is approved by the admin
 ## called only from admin/list_auctions.php
@@ -12,26 +12,26 @@ $row_details = $db->get_sql_row("SELECT a.*, u.name AS user_name, u.username, u.
 $send = true; ## always sent
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Phiên đấu giá của bạn , %2$s, đã được phê duyệt.
+PhiÃªn Ä‘áº¥u giÃ¡ cá»§a báº¡n , %2$s, Ä‘Ã£ Ä‘Æ°á»£c phÃª duyá»‡t.
 
-Để xem chi tiết phiên đấu giá, vui lòng bấm vào đường dẫn URL bên dưới:
+Äá»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n URL bÃªn dÆ°á»›i:
 	
 %3$s
 
-Trân trọng,
-Ban quản trị %4$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %4$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Phiên đấu giá của bạn , %2$s, đã được phê duyệt.
+PhiÃªn Ä‘áº¥u giÃ¡ cá»§a báº¡n , %2$s, Ä‘Ã£ Ä‘Æ°á»£c phÃª duyá»‡t.
 <br>
-[ <a href="%3$s">Bấm vào đây</a> ] để xem chi tiết phiên đấu giá.  <br>
+[ <a href="%3$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem chi tiáº¿t phiÃªn Ä‘áº¥u giÃ¡.  <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %4$s ';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %4$s ';
 
 
 $auction_link = process_link('auction_details', array('name' => $row_details['name'], 'auction_id' => $row_details['auction_id']));

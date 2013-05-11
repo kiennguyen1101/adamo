@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> abuse report admin notification
 
 if ( !defined('INCLUDED') ) { die("Access Denied"); }

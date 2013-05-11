@@ -1,4 +1,4 @@
-var sStyleWeight1;
+﻿var sStyleWeight1;
 var sStyleWeight2;
 var sStyleWeight3;
 var sStyleWeight4;
@@ -9,7 +9,7 @@ function loadTxt()
     txtLang[0].innerHTML = "Teckensnitt";
     txtLang[1].innerHTML = "Format";
     txtLang[2].innerHTML = "Storlek";
-    txtLang[3].innerHTML = "F�rgrund";
+    txtLang[3].innerHTML = "Förgrund";
     txtLang[4].innerHTML = "Bakgrund";
     
     txtLang[5].innerHTML = "M\u00F6nster";

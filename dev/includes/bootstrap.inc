@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * @file
@@ -273,7 +273,7 @@ define('DRUPAL_PHP_FUNCTION_PATTERN', '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
  * otherwise, will fail silently. So $var = &$object['foo'] will not throw an
  * error, and $var will be populated with the contents of $object['foo'], but
  * that data will be passed by value, not reference. For more information on
- * the PHP limitation, see the note in the official PHP documentation at·
+ * the PHP limitation, see the note in the official PHP documentation atÂ·
  * http://php.net/manual/en/arrayaccess.offsetget.php on
  * ArrayAccess::offsetGet().
  *

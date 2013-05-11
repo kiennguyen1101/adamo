@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Classes used to parse xml data
  */

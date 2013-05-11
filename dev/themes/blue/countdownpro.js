@@ -1,4 +1,4 @@
-/*
+﻿/*
 Script: CountDownPro Timer
 Description: Counts down or up from a date, fully customisable display, customisable events when countdown reaches zero! Development version - not to be used in a production environment.
 Author: Andrew Urquhart

@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "Ajustar texto a ventana";
     document.getElementById("btnCancel").value = "Cancelar";

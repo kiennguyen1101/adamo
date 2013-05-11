@@ -1,4 +1,4 @@
-// v5.10 -> jan. 18, 2005
+﻿// v5.10 -> jan. 18, 2005
 // load htmlarea
 _editor_url = "../";                     // URL to htmlarea files
 var win_ie_ver = parseFloat(navigator.appVersion.split("MSIE")[1]);

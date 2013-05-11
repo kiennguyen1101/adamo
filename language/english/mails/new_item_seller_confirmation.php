@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> confirm posting to the seller
 ## called only from the sell_item.php page
 
@@ -10,56 +10,56 @@ $row_details = $db->get_sql_row("SELECT a.*, u.name AS user_name, u.email, u.mai
 $send = ($row_details['mail_confirm_to_seller']) ? true : false;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Bạn vừa khởi tạo phiên đấu giá tại %2$s:
+Báº¡n vá»«a khá»Ÿi táº¡o phiÃªn Ä‘áº¥u giÃ¡ táº¡i %2$s:
 
-	- Tên đấu giá: %3$s
-	- Số lượng sản phẩm: %5$s
-	- Nhóm sản phẩm: %6$s
+	- TÃªn Ä‘áº¥u giÃ¡: %3$s
+	- Sá»‘ lÆ°á»£ng sáº£n pháº©m: %5$s
+	- NhÃ³m sáº£n pháº©m: %6$s
 
-	- Giá khởi điểm: %8$s
-	- Giá mua ngay: %9$s
-	- Giá mong muốn: %10$s
+	- GiÃ¡ khá»Ÿi Ä‘iá»ƒm: %8$s
+	- GiÃ¡ mua ngay: %9$s
+	- GiÃ¡ mong muá»‘n: %10$s
 
-	- Ngày kết thúc: %11$s
+	- NgÃ y káº¿t thÃºc: %11$s
 
-Để xem trang đấu giá, vui lòng bấm vào đường dẫn bên dưới:
+Äá»ƒ xem trang Ä‘áº¥u giÃ¡, vui lÃ²ng báº¥m vÃ o Ä‘Æ°á»ng dáº«n bÃªn dÆ°á»›i:
 
 %12$s
 
-Cảm ơn bạn vì đã sử dụng dịch vụ của Adamo.
+Cáº£m Æ¡n báº¡n vÃ¬ Ä‘Ã£ sá»­ dá»¥ng dá»‹ch vá»¥ cá»§a Adamo.
 
-Trân trọng,
-Ban quản trị %13$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %13$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Bạn vừa khởi tạo phiên đấu giá tại <b>%2$s</b>: <br>
+Báº¡n vá»«a khá»Ÿi táº¡o phiÃªn Ä‘áº¥u giÃ¡ táº¡i <b>%2$s</b>: <br>
 <ul>
-	<li>Tên đấu giá: <b>%3$s</b> </li>
-	<li>Loại đấu giá: <b>%4$s</b> </li>
-	<li>Số lượng đấu giá: <b>%5$s</b> </li>
+	<li>TÃªn Ä‘áº¥u giÃ¡: <b>%3$s</b> </li>
+	<li>Loáº¡i Ä‘áº¥u giÃ¡: <b>%4$s</b> </li>
+	<li>Sá»‘ lÆ°á»£ng Ä‘áº¥u giÃ¡: <b>%5$s</b> </li>
 </ul>
 <ul>
-	<li>Nhóm sản phẩm: <b>%6$s</b> </li>
-	<li>Nhóm phụ: <b>%7$s</b> </li>
+	<li>NhÃ³m sáº£n pháº©m: <b>%6$s</b> </li>
+	<li>NhÃ³m phá»¥: <b>%7$s</b> </li>
 </ul>
 <ul>
-	<li>Giá khởi điểm: <b>%8$s</b> </li>
-	<li>Giá mua ngay: <b>%9$s</b> </li>
-	<li>Giá mong muốn: <b>%10$s</b> </li>
+	<li>GiÃ¡ khá»Ÿi Ä‘iá»ƒm: <b>%8$s</b> </li>
+	<li>GiÃ¡ mua ngay: <b>%9$s</b> </li>
+	<li>GiÃ¡ mong muá»‘n: <b>%10$s</b> </li>
 </ul>
 <ul>
-	<li>Ngày kết thúc: <b>%11$s</b> </li>
+	<li>NgÃ y káº¿t thÃºc: <b>%11$s</b> </li>
 </ul>
-[ <a href="%12$s">Bấm vào đây</a> ] để xem trang đấu giá. <br>
+[ <a href="%12$s">Báº¥m vÃ o Ä‘Ã¢y</a> ] Ä‘á»ƒ xem trang Ä‘áº¥u giÃ¡. <br>
 <br>
-Cảm ơn bạn vì đã sử dụng dịch vụ của Adamo. <br>
+Cáº£m Æ¡n báº¡n vÃ¬ Ä‘Ã£ sá»­ dá»¥ng dá»‹ch vá»¥ cá»§a Adamo. <br>
 <br>
-Trân trọng, <br>
-Ban quản trị %13$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %13$s';
 
 
 $main_category = category_navigator($row_details['category_id'], false, true, null, null, GMSG_NONE_CAT);
@@ -82,6 +82,6 @@ $html_message = sprintf($html_message, $row_details['user_name'], $setts['sitena
 	$row_details['quantity'], $main_category, $addl_category, $start_price, $buyout_price, $reserve_price, $closing_date, $auction_link, 
 	$setts['sitename']);
 	
-send_mail($row_details['email'], 'Xác nhận khởi tạo đấu giá', $text_message, 
+send_mail($row_details['email'], 'XÃ¡c nháº­n khá»Ÿi táº¡o Ä‘áº¥u giÃ¡', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

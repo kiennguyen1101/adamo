@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 #################################################################
 ## MyPHPAuction v6.04 														##
 ##-------------------------------------------------------------##
-## Copyright �2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -26,54 +26,54 @@ function show_date ($timestamp, $show_time = true)
 		$second = date("s", $times);
 		if($month == "January"){
 
-			$month = "Tháng 1";
+			$month = "ThÃ¡ng 1";
 
 		}elseif($month == "February"){
 
-			$month = "Tháng 2";
+			$month = "ThÃ¡ng 2";
 
 		}elseif($month == "March"){
 
-		$month = "Tháng 3";
+		$month = "ThÃ¡ng 3";
 
 		}elseif($month == "April"){
 
-		$month = "Tháng 4";
+		$month = "ThÃ¡ng 4";
 
 		}elseif($month == "May"){
 
-		$month = "Tháng 5";
+		$month = "ThÃ¡ng 5";
 
 		}elseif($month == "June"){
 
-		$month = "Tháng 6";
+		$month = "ThÃ¡ng 6";
 
 		}elseif($month == "July"){
 
-		$month = "Tháng 7";
+		$month = "ThÃ¡ng 7";
 
 		}elseif($month == "August"){
 
-		$month = "Tháng 8";
+		$month = "ThÃ¡ng 8";
 
 		}elseif($month == "September"){
 
-		$month = "Tháng 9";
+		$month = "ThÃ¡ng 9";
 
 		}elseif($month == "October"){
 
-		$month = "Tháng 10";
+		$month = "ThÃ¡ng 10";
 
 		}elseif($month == "November"){
 
-		$month = "Tháng 11";
+		$month = "ThÃ¡ng 11";
 
 		}elseif($month == "December"){
 
-		$month = "Tháng 12";
+		$month = "ThÃ¡ng 12";
 
 		}
-		$display_output = $date." ".$month." năm ". $year." ".$hour.":".$minute.":".$second;
+		$display_output = $date." ".$month." nÄƒm ". $year." ".$hour.":".$minute.":".$second;
 	}
 	else
 	{
@@ -209,7 +209,7 @@ function date_form_field($current_timestamp = 0, $box_number = 1, $form_name = n
 	if ($display_time)
 	{
 
-		$display_output .= 'Giờ: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> '.
+		$display_output .= 'Giá»: <select name="date' . $box_number . '_hour" id="date' . $box_number . '_hour" class="contentfont"> '.
 			'<option> </option> ';
 
 		foreach ($hours_array as $value)

@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
 	{
     document.getElementById("txtLang").innerHTML = "Word-Text hier einf\u00fcgen";
     document.getElementById("btnCancel").value = "Abbrechen";

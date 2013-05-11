@@ -1,4 +1,4 @@
-function loadTxt()
+﻿function loadTxt()
     {
     document.getElementById("txtLang").innerHTML = "V\u00E4ri";
     document.getElementById("btnCancel").value = "Peruuta";

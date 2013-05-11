@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> retrieve username
 ## called only from the retrieve_password.php page
 
@@ -9,35 +9,35 @@ $row_details = $db->get_sql_row("SELECT u.name, u.username, u.email FROM " . DB_
 $send = true; // always sent;
 
 ## text message - editable
-$text_message = 'Kính gửi %1$s,
+$text_message = 'KÃ­nh gá»­i %1$s,
 
-Mật khẩu của bạn tại %2$s đã được thiết lập lại.
+Máº­t kháº©u cá»§a báº¡n táº¡i %2$s Ä‘Ã£ Ä‘Æ°á»£c thiáº¿t láº­p láº¡i.
 
-Chi tiết đăng nhập:
+Chi tiáº¿t Ä‘Äƒng nháº­p:
 
-	- Tên đăng nhập: %3$s
-	- Mật khẩu: %4$s
+	- TÃªn Ä‘Äƒng nháº­p: %3$s
+	- Máº­t kháº©u: %4$s
 
-Trân trọng,
-Ban quản trị %2$s';
+TrÃ¢n trá»ng,
+Ban quáº£n trá»‹ %2$s';
 
 ## html message - editable
-$html_message = 'Kính gửi %1$s, <br>
+$html_message = 'KÃ­nh gá»­i %1$s, <br>
 <br>
-Mật khẩu của bạn tại <b>%2$s</b> đã được thiết lập lại. <br>
+Máº­t kháº©u cá»§a báº¡n táº¡i <b>%2$s</b> Ä‘Ã£ Ä‘Æ°á»£c thiáº¿t láº­p láº¡i. <br>
 <br>
-Chi tiết đăng nhập:<br>
+Chi tiáº¿t Ä‘Äƒng nháº­p:<br>
 <ul>
-	<li>Tên đăng nhập: <b>%3$s</b></li>
-	<li>Mật khẩu: <b>%4$s</b></li>
+	<li>TÃªn Ä‘Äƒng nháº­p: <b>%3$s</b></li>
+	<li>Máº­t kháº©u: <b>%4$s</b></li>
 </ul>
-Trân trọng, <br>
-Ban quản trị %2$s';
+TrÃ¢n trá»ng, <br>
+Ban quáº£n trá»‹ %2$s';
 
 
 $text_message = sprintf($text_message, $row_details['name'], $setts['sitename'], $row_details['username'], $new_password);
 $html_message = sprintf($html_message, $row_details['name'], $setts['sitename'], $row_details['username'], $new_password);
 
-send_mail($row_details['email'], $setts['sitename'] . ' - Khôi phục thông tin đăng nhập', $text_message, 
+send_mail($row_details['email'], $setts['sitename'] . ' - KhÃ´i phá»¥c thÃ´ng tin Ä‘Äƒng nháº­p', $text_message, 
 	$setts['admin_email'], $html_message, null, $send);
 ?>

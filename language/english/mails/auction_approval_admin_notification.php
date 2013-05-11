@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ## Email File -> auction approval admin notification
 ## called only from $item->auction_approval()!
 
