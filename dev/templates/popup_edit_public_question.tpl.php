@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction v6.02															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -28,8 +33,7 @@
         opener.document.hidden_form.option.value = document.popup_form.option.value;
 <?php if ($auction_id) { ?>
             opener.document.hidden_form.auction_id.value = document.popup_form.auction_id.value;
-    <?php
-  }
+  <?php }
   else if ($wanted_ad_id) {
     ?>
             opener.document.hidden_form.wanted_ad_id.value = document.popup_form.wanted_ad_id.value;

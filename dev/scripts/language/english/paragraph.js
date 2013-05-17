@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Alignment";
     txtLang[1].innerHTML = "Indentation";
@@ -8,15 +8,15 @@
     txtLang[4].innerHTML = "Line Height";
     txtLang[5].innerHTML = "Text Case";
     txtLang[6].innerHTML = "White Space";
-
+    
     document.getElementById("divPreview").innerHTML = "Lorem ipsum dolor sit amet, " +
-            "consetetur sadipscing elitr, " +
-            "sed diam nonumy eirmod tempor invidunt ut labore et " +
-            "dolore magna aliquyam erat, " +
-            "sed diam voluptua. At vero eos et accusam et justo " +
-            "duo dolores et ea rebum. Stet clita kasd gubergren, " +
-            "no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-
+        "consetetur sadipscing elitr, " +
+        "sed diam nonumy eirmod tempor invidunt ut labore et " +
+        "dolore magna aliquyam erat, " +
+        "sed diam voluptua. At vero eos et accusam et justo " +
+        "duo dolores et ea rebum. Stet clita kasd gubergren, " +
+        "no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Not Set";
     optLang[1].text = "Left";
@@ -32,12 +32,12 @@
     optLang[11].text = "No Wrap";
     optLang[12].text = "pre";
     optLang[13].text = "Normal";
-
+    
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnApply").value = "apply";
-    document.getElementById("btnOk").value = " ok ";
-}
+    document.getElementById("btnOk").value = " ok ";   
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Paragraph Formatting</title>")
-}
+    }

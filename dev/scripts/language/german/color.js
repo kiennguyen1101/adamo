@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Web Pallete";
     txtLang[1].innerHTML = "benannte Farben";
@@ -13,8 +13,8 @@
     document.getElementById("btnRemove").value = " Farbe entfernen ";
     document.getElementById("btnApply").value = "\u00DCbernehmen"; //"apply";
     document.getElementById("btnOk").value = " OK ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Farben</title>")
-}
+    }

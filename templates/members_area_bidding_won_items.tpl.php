@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -48,7 +53,7 @@
   </tr>
 
   <?php echo $won_auctions_content; ?>
-  <tr class="c5">
+    <tr class="c5">
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
     <td width="10%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
     <td width="17%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>

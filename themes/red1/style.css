@@ -1,4 +1,4 @@
-﻿/* v6.02 CSS */
+/* v6.02 CSS */
 
 
 .toplink { font-size: 12px; color: #000000; text-decoration: none; font-weight:bold; width:205px; }
@@ -169,10 +169,10 @@ span.hlbolditem a:hover{ font-size: 11px; font-weight: bold; color: #FFFFFF; tex
 .subcell_u a:hover {font-weight: normal; color: #0f3f79; text-decoration: underline; }
 
 .membmenu {
-    background:url(images/imgHdrCatsBg2.gif) repeat-x 0% 100%;
-    height:35px;
-    margin:0 10px;
-}
+  background:url(images/imgHdrCatsBg2.gif) repeat-x 0% 100%;
+  height:35px;
+  margin:0 10px;
+  }
 
 
 
@@ -247,14 +247,14 @@ a.hidelayer:visited {font-size: 11px; color: #333333; font-weight: bold; text-de
 .hl_item { background-color: #e6ccff; }
 
 .searchBox{
-    background-image:url('img/magnifying-glass.gif');
-    background-repeat:no-repeat;
-    padding-left:20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 11px;
-    background-color: #FFFFFF;
-    border: 1px solid #7F9DB9;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    width:200px;
+  background-image:url('img/magnifying-glass.gif');
+  background-repeat:no-repeat;
+  padding-left:20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background-color: #FFFFFF;
+  border: 1px solid #7F9DB9;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  width:200px;
 }

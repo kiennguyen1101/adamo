@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Source";
     txtLang[1].innerHTML = "Texte au survol<br>de la souris";
@@ -12,7 +12,7 @@
     txtLang[8].innerHTML = "Gauche";
     txtLang[9].innerHTML = "Hauteur";
     txtLang[10].innerHTML = "Droite";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "absBas";
     optLang[1].text = "absMilieu";
@@ -23,16 +23,16 @@
     optLang[6].text = "droite";
     optLang[7].text = "d\u00E9but du texte";
     optLang[8].text = "haut";
-
+ 
     document.getElementById("btnBorder").value = " style de bordure ";
     document.getElementById("btnReset").value = "r\u00E9initialiser";
-
+    
     document.getElementById("btnCancel").value = "Annuler";
     document.getElementById("btnInsert").value = "Ins\u00E9rer";
     document.getElementById("btnApply").value = "Actualiser";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Insertion d\u0027une image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</title>")
-}
+    }

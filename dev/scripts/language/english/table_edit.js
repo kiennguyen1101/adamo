@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-    var txtLang = document.getElementsByName("txtLang");
+function loadTxt()
+    {
+    var txtLang =  document.getElementsByName("txtLang");
     //txtLang[0].innerHTML = "Size";
     txtLang[0].innerHTML = "AutoFit";
     txtLang[1].innerHTML = "Properties";
@@ -31,7 +31,7 @@
     txtLang[20].innerHTML = "Cell Spacing";
     txtLang[21].innerHTML = "Cell Padding";
     txtLang[22].innerHTML = "CSS Text";
-
+        
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "pixels"
     optLang[1].text = "percent"
@@ -44,30 +44,27 @@
     optLang[8].text = "Yes"
     optLang[9].text = "No"
 
-    document.getElementById("btnPick").value = "Pick";
-    document.getElementById("btnImage").value = "Image";
+    document.getElementById("btnPick").value="Pick";
+    document.getElementById("btnImage").value="Image";
 
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnApply").value = "apply";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function getTxt(s)
-{
-    switch (s)
     {
+    switch(s)
+        {
         case "Cannot delete column.":
             return "Cannot delete column. The column contains spanned cells from another column. Please remove the span first.";
         case "Cannot delete row.":
             return "Cannot delete row. The row contains spanned cells from another rows. Please remove the span first.";
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
     }
-}
 function writeTitle()
-{
+    {
     document.write("<title>Table Properties</title>")
-}
+    }

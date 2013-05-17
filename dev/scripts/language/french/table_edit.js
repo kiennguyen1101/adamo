@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Justifier";
     txtLang[1].innerHTML = "Propri\u00E9t\u00E9s";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "Gauche";
     txtLang[14].innerHTML = "Droit";
     txtLang[15].innerHTML = "Haut";
-    txtLang[16].innerHTML = "Bas";
+    txtLang[16].innerHTML = "Bas";  
     txtLang[17].innerHTML = "Bordures";
     txtLang[18].innerHTML = "Collapse";
     txtLang[19].innerHTML = "Arri\u00E8re plan";
@@ -37,26 +37,23 @@
     optLang[8].text = "Oui"
     optLang[9].text = "Non"
 
-    document.getElementById("btnPick").value = "Couleur";
-    document.getElementById("btnImage").value = "Image";
+    document.getElementById("btnPick").value="Couleur";
+    document.getElementById("btnImage").value="Image";
 
     document.getElementById("btnCancel").value = "Annuler";
     document.getElementById("btnApply").value = "Actualiser";
     document.getElementById("btnOk").value = " ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Propri\u00E9t\u00E9s du tableau</title>")
-}
+    }

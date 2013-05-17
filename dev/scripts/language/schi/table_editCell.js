@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-
+function loadTxt()
+    {
+    
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "\u81ea\u52a8\u8c03\u6574 ";
     txtLang[1].innerHTML = "\u5c5e\u6027 ";
@@ -31,7 +31,7 @@
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";
     document.getElementById("btnApply").value = "\u5e94\u7528 ";
     document.getElementById("btnOk").value = " \u786e\u8ba4  ";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "\u50cf\u7d20 "
     optLang[1].text = "\u767e\u4efd\u6bd4 "
@@ -59,20 +59,17 @@
     optLang[23].text = "Current Row"
     optLang[24].text = "Current Column"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "\u81ea\u8ba2\u8272\u5f69 ";
-        case "More Colors...":
-            return "\u66f4\u591a\u8272\u5f69 ...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "\u81ea\u8ba2\u8272\u5f69 ";
+        case "More Colors...": return "\u66f4\u591a\u8272\u5f69 ...";
+        default: return "";
+        }
+    }    
 function writeTitle()
-{
+    {
     document.write("<title>Cell Properties</title>")
-}
+    }

@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -20,7 +25,7 @@
     <td class="membmenu" align="center" class="contentfont"><?php echo MSG_TYPE; ?></td>
   </tr>
   <?php echo $reputation_received_content; ?>
-  <tr class="c5 no_border">
+   <tr class="c5 no_border">
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="130" height="1"></td>
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="80" height="1"></td>
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="140" height="1"></td>

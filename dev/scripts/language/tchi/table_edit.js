@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-    var txtLang = document.getElementsByName("txtLang");
+function loadTxt()
+    {
+    var txtLang =  document.getElementsByName("txtLang");
     //txtLang[0].innerHTML = "\u5927\u5c0f ";
     txtLang[0].innerHTML = "\u81ea\u52d5\u8abf\u6574 ";
     txtLang[1].innerHTML = "\u5c6c\u6027 ";
@@ -31,7 +31,7 @@
     txtLang[20].innerHTML = "\u5132\u5b58\u683c\u9593\u8ddd ";
     txtLang[21].innerHTML = "\u5132\u5b58\u683c\u5167\u8ddd ";
     txtLang[22].innerHTML = "CSS\u6587\u5b57\u6a23\u5f0f ";
-
+        
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "\u50cf\u7d20 "
     optLang[1].text = "\u767e\u4efd\u6bd4 "
@@ -44,30 +44,27 @@
     optLang[8].text = "\u662f "
     optLang[9].text = "\u5426 "
 
-    document.getElementById("btnPick").value = "\u8272\u5f69 ";
-    document.getElementById("btnImage").value = "\u5f71\u50cf ";
+    document.getElementById("btnPick").value="\u8272\u5f69 ";
+    document.getElementById("btnImage").value="\u5f71\u50cf ";
 
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";
     document.getElementById("btnApply").value = "\u61c9\u7528 ";
     document.getElementById("btnOk").value = " \u78ba\u8a8d  ";
-}
+    }
 function getTxt(s)
-{
-    switch (s)
     {
+    switch(s)
+        {
         case "Cannot delete column.":
             return "\u4e0d\u80fd\u522a\u9664\u6b04\uff0c\u8acb\u5148\u79fb\u9664\u8de8\u6b04\u3002 ";
         case "Cannot delete row.":
             return "\u4e0d\u80fd\u522a\u9664\u5217\uff0c\u8acb\u5148\u79fb\u9664\u8de8\u5217\u3002 ";
-        case "Custom Colors":
-            return "\u81ea\u8a02\u8272\u5f69 ";
-        case "More Colors...":
-            return "\u66f4\u591a\u8272\u5f69 ...";
-        default:
-            return "";
+        case "Custom Colors": return "\u81ea\u8a02\u8272\u5f69 ";
+        case "More Colors...": return "\u66f4\u591a\u8272\u5f69 ...";
+        default:return "";
+        }
     }
-}
 function writeTitle()
-{
+    {
     document.write("<title>\u8868\u683c\u5c6c\u6027 </title>")
-}
+    }

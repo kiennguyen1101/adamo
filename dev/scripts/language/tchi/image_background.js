@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "\u5f71\u50cf\u6a94\u6848 ";
     txtLang[1].innerHTML = "\u91cd\u8907 ";
@@ -21,12 +21,12 @@
     optLang[11].text = "\u4e0b "
     optLang[12].text = "\u50cf\u7d20 "
     optLang[13].text = "\u767e\u4efd\u6bd4 "
-
+    
     document.getElementById("btnCancel").value = "\u53d6\u6d88 ";
     document.getElementById("btnOk").value = " \u78ba\u8a8d  ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>\u80cc\u666f\u5f71\u50cf </title>")
-}
+    }
 

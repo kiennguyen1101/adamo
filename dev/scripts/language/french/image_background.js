@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Source de l\u0027image";
     txtLang[1].innerHTML = "R\u00E9p\u00E9tition";
@@ -21,12 +21,12 @@
     optLang[11].text = "Bas";
     optLang[12].text = "pixels";
     optLang[13].text = "pourcentage";
-
+    
     document.getElementById("btnCancel").value = "Annuler";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Image d\u0027arri\u00E8re plan</title>")
-}
+    }
 

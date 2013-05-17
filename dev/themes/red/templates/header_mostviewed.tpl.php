@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## myphpauction V6.8															##
+##-------------------------------------------------------------##
+## Copyright ©2008 myphpauction SoftwareLTD. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
 
 
@@ -24,8 +29,7 @@
 
                 <td class="smallfont" nowrap>&nbsp;<b>
 
-                    <?php
-                    $totalviews = $data['nb_clicks'];
+                    <?php $totalviews = $data['nb_clicks'];
                     echo "$totalviews";
                     ?></b></td> 
 
@@ -47,7 +51,7 @@
 
                 </td></tr>
 
-            <?php } ?>
+  <?php } ?>
 
           </table>
 

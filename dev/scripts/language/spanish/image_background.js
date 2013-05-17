@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Imagen";
     txtLang[1].innerHTML = "Repetir";
@@ -21,12 +21,12 @@
     optLang[11].text = "Abajo"
     optLang[12].text = unescape("p%EDxels")
     optLang[13].text = "Porcentaje"
-
+    
     document.getElementById("btnCancel").value = "Cancelar";
     document.getElementById("btnOk").value = "Aceptar";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Imagen de fondo</title>")
-}
+    }
 

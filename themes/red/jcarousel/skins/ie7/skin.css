@@ -1,4 +1,4 @@
-﻿.jcarousel-skin-ie7 .jcarousel-container {
+.jcarousel-skin-ie7 .jcarousel-container {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -7,7 +7,7 @@
 }
 
 .jcarousel-skin-ie7 .jcarousel-direction-rtl {
-    direction: rtl;
+	direction: rtl;
 }
 
 .jcarousel-skin-ie7 .jcarousel-container-horizontal {
@@ -52,8 +52,8 @@
 }
 
 .jcarousel-skin-ie7 .jcarousel-direction-rtl .jcarousel-item-horizontal {
-    margin-left: 7px;
-    margin-right: 0;
+	margin-left: 7px;
+	margin-right: 0;
 }
 
 .jcarousel-skin-ie7 .jcarousel-item-vertical {

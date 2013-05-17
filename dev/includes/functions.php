@@ -1,12 +1,12 @@
-﻿<?php
+<?php
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
-## Copyright Â©2009 MyPHPAuction. All rights reserved.	##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
-  function header_redirect($redirect_url) {
+function header_redirect($redirect_url) {
     echo "<script>document.location.href='" . $redirect_url . "'</script>";
   }
 
@@ -448,7 +448,7 @@
         '	<tr class="c5"> ' .
         '	</tr> ' .
         '	<tr class="c1"> ' .
-        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">' . GMSG_VOUCHER_CODE_EXPL . '</span></a></td> ' .
+        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">'. GMSG_VOUCHER_CODE_EXPL .'</span></a></td> ' .
         '		<td><input name="voucher_value" type="text" class="contentfont" id="voucher_value" value="' . $voucher_value . '" size="40" /></td> ' .
         '	</tr> ';
       $display_output .= ($new_table) ? '</table>' : '';
@@ -1046,7 +1046,7 @@
       'CONGO, THE DEMOCRATIC REPUBLIC OF THE' => 'CD',
       'COOK ISLANDS' => 'CK',
       'COSTA RICA' => 'CR',
-      'CÃ”TE D\'IVOIRE' => 'CI',
+      'CÔTE D\'IVOIRE' => 'CI',
       'CROATIA' => 'HR',
       'CUBA' => 'CU',
       'CYPRUS' => 'CY',
@@ -1172,11 +1172,11 @@
       'PORTUGAL' => 'PT',
       'PUERTO RICO' => 'PR',
       'QATAR' => 'QA',
-      'RÃ‰UNION' => 'RE',
+      'RÉUNION' => 'RE',
       'ROMANIA' => 'RO',
       'RUSSIAN FEDERATION' => 'RU',
       'RWANDA' => 'RW',
-      'SAINT BARTHÃ‰LEMY' => 'BL',
+      'SAINT BARTHÉLEMY' => 'BL',
       'SAINT HELENA' => 'SH',
       'SAINT KITTS AND NEVIS' => 'KN',
       'SAINT LUCIA' => 'LC',
@@ -1290,7 +1290,7 @@
 
   function get_home_cat() {
     global $db;
-    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE parent_id=0 ORDER BY order_id ASC, name ASC LIMIT 11";
+    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE parent_id=0 ORDER BY order_id ASC, name ASC LIMIT 10";
     $sql_select_home_cats = $db->query($sql);
     $x = 0;
     $home_cats_list = array();
@@ -1388,10 +1388,10 @@
     return $cat_tabs;
   }
 
-  function get_cat_name(array $cats) {
-    $cats_list = implode(',', $cats);
+  function get_cat_name(array $cats, $order_array) {
+    $list = implode(',', $cats);
     global $db;
-    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE category_id in (" . $cats_list . ") ORDER BY order_id ASC, name ASC";
+    $sql = "SELECT category_id, name FROM " . DB_PREFIX . "categories WHERE category_id in ($list) $order_array";
     $rows = $db->query($sql);
     $categories = array();
     while ($result = $db->fetch_array($rows)) {
@@ -1424,7 +1424,7 @@
 	FROM " . DB_PREFIX . "auctions 
 	INNER JOIN " . DB_PREFIX . "auction_media ON " . DB_PREFIX . "auctions.auction_id = " . DB_PREFIX . "auction_media.auction_id 
 	INNER JOIN " . DB_PREFIX . "users ON " . DB_PREFIX . "users.user_id = " . DB_PREFIX . "auctions.owner_id
-	WHERE category_id in (" . $sub_cats_list . ") AND hpfeat=1 AND " . DB_PREFIX . "auctions.approved=1 AND closed=0 group by auction_id ORDER BY auction_id DESC LIMIT " . $start . "," . $limit . "";
+	WHERE category_id in (" . $sub_cats_list . ") AND deleted NOT IN (1) AND hpfeat=1 AND " . DB_PREFIX . "auctions.approved=1 AND closed=0 group by auction_id ORDER BY auction_id DESC LIMIT " . $start . "," . $limit . "";
     $rows = $db->query($sql);
     $i = 0;
     while ($result = $db->fetch_array($rows)) {

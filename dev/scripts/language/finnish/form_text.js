@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Tyyppi";
     txtLang[1].innerHTML = "Nimi";
@@ -12,13 +12,13 @@
     optLang[0].text = "Teksti"
     optLang[1].text = "Tekstikentt\u00E4"
     optLang[2].text = "Salasana"
-
+    
     document.getElementById("btnCancel").value = "Peruuta";
     document.getElementById("btnInsert").value = "Liit\u00E4";
     document.getElementById("btnApply").value = "K\u00E4yt\u00E4";
     document.getElementById("btnOk").value = " OK ";
-}
+    }
 function writeTitle()
-{
-    document.write("<title>" + "Tekstikentt\u00E4" + "</title>")
-}
+    {
+    document.write("<title>"+"Tekstikentt\u00E4"+"</title>")
+    }

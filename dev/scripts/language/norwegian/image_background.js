@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Sti";
     txtLang[1].innerHTML = "Gjenta";
@@ -21,11 +21,11 @@
     optLang[11].text = "Nederst"
     optLang[12].text = "pixels"
     optLang[13].text = "prosent"
-
+    
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnOk").value = " Ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Bakgrunnsbilde</title>")
-}
+    }

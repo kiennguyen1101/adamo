@@ -1,4 +1,4 @@
-﻿[12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
+[12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
 [12-Apr-2013 13:58:43 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_STRING in /home/adamo/public_html/index.php on line 40
 [12-Apr-2013 13:59:01 Asia/Bangkok] PHP Warning:  session_start() [<a href='function.session-start'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /home/adamo/public_html/index.php:1) in /home/adamo/public_html/index.php on line 17
 [22-Apr-2013 14:02:03 Asia/Bangkok] PHP Fatal error:  Call to undefined function get_home_cat() in /home/adamo/public_html/dev/themes/red/templates/header.tpl.php on line 135
@@ -294,3 +294,10 @@
 [10-May-2013 10:50:13 Asia/Bangkok] PHP Warning:  require_once(/home/adamo/public_html/dev/libs/Smarty/Smarty.class.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/dev/includes/global.php on line 148
 [10-May-2013 10:50:13 Asia/Bangkok] PHP Fatal error:  require_once() [<a href='function.require'>function.require</a>]: Failed opening required '/home/adamo/public_html/dev/libs/Smarty/Smarty.class.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/dev/includes/global.php on line 148
 [10-May-2013 10:50:38 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/adamo/public_html/dev/includes/class_item.php on line 214
+[11-May-2013 09:45:06 Asia/Bangkok] PHP Parse error:  syntax error, unexpected $end in /home/adamo/public_html/themes/red/templates/auction_details.tpl.php on line 482
+[11-May-2013 09:45:12 Asia/Bangkok] PHP Parse error:  syntax error, unexpected $end in /home/adamo/public_html/themes/red/templates/auction_details.tpl.php on line 482
+[11-May-2013 10:16:40 Asia/Bangkok] PHP Catchable fatal error:  Argument 2 passed to get_cat_name() must be an array, string given, called in /home/adamo/public_html/themes/red/templates/header.tpl.php on line 221 and defined in /home/adamo/public_html/includes/functions.php on line 1391
+[11-May-2013 11:10:47 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE in /home/adamo/public_html/includes/class_fees.php on line 298
+[11-May-2013 11:10:48 Asia/Bangkok] PHP Parse error:  syntax error, unexpected $end in /home/adamo/public_html/includes/class_fees.php on line 1336
+[11-May-2013 15:07:57 Asia/Bangkok] PHP Warning:  Missing argument 2 for database::get_sql_field(), called in /home/adamo/public_html/themes/red/templates/header.tpl.php on line 35 and defined in /home/adamo/public_html/includes/class_database.php on line 263
+[11-May-2013 15:08:04 Asia/Bangkok] PHP Warning:  Missing argument 2 for database::get_sql_field(), called in /home/adamo/public_html/themes/red/templates/header.tpl.php on line 35 and defined in /home/adamo/public_html/includes/class_database.php on line 263

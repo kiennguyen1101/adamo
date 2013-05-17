@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -7,44 +12,8 @@
 ?>
 <?php if (!empty($fees_calculator_result)) { ?>
     <br>
-    <table width="100%" border="0" cellpadding="3" cellspacing="2" class="border">
-      <?php if ($fees_calculator_result == -1): ?>
-        <tr><td align="center" height="30" colspan="3"> <?php echo MSG_START_PRICE_ERROR; ?>  </td></tr>        
-
-        <?php
-      else:
-
-        $output['display'] = '<tr class="c4"> ' .
-          '	<td colspan="3">' . GMSG_AUCTION_FEES . '</td> ' .
-          '</tr> ' .
-          '<tr class="c5"> ' .
-          '	<td><img src="themes/' . $this->setts['default_theme'] . '/img/pixel.gif" width="150" height="1"></td> ' .
-          '	<td colspan="2"><img src="themes/' . $this->setts['default_theme'] . '/img/pixel.gif" width="1" height="1"></td> ' .
-          '</tr> ';
-
-        foreach ($fees_calculator_result['charged_fee_tier'] as $key => $value) {
-          $output['display'] .= '<tr class="c1"> ' .
-            '	<td align="right">' . GMSG_SETUP_FEE . '</td> ' .
-            '	<td nowrap colspan="2">' . $value ['value'] . $value['display'] . '</td> ' .
-            '</tr> ';
-        }
-
-        foreach ($fees_calculator_result['charged_fee_no_tier'] as $key => $value) {
-          $output['display'] .= '<tr class="c1"> ' .
-            '	<td align="right">' . $value['value'] . '</td> ' .
-            '	<td nowrap colspan="2">' . $value['display'] . '</td> ' .
-            '</tr> ';
-        }
-
-        $output['display'] .= '<tr class="c3"> ' .
-          '	<td align="right">' . GMSG_TOTAL . '</td> ' .
-          '	<td nowrap colspan="2">' . $fees_calculator_result['display_amount'] . '</td> ' .
-          '</tr> ';
-
-        echo $output['display'];
-
-      endif;
-      ?>
+    <table width="100%" border="0" cellpadding="3" cellspacing="2" class="shared_table">
+      <?php echo $fees_calculator_result; ?>
       <tr class="c5">
         <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="150" height="1"></td>
         <td colspan="2" width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>

@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-    var txtLang = document.getElementsByName("txtLang");
+function loadTxt()
+    {
+    var txtLang =  document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Automaattinen sovitus";
     txtLang[1].innerHTML = "Ominaisuudet";
     txtLang[2].innerHTML = "Tyyli";
@@ -17,14 +17,14 @@
     txtLang[13].innerHTML = "Vasen";
     txtLang[14].innerHTML = "Oikea";
     txtLang[15].innerHTML = "Yl\u00F6s";
-    txtLang[16].innerHTML = "Alas";
+    txtLang[16].innerHTML = "Alas"; 
     txtLang[17].innerHTML = "Kehys";
     txtLang[18].innerHTML = "Pura rakenne";
     txtLang[19].innerHTML = "Tausta";
     txtLang[20].innerHTML = "Solun v\u00E4li";
     txtLang[21].innerHTML = "Solun sis\u00E4lt\u00F6";
     txtLang[22].innerHTML = "CSS teksti";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Pikselit";
     optLang[1].text = "Prosentti";
@@ -37,27 +37,23 @@
     optLang[8].text = "Kyll\u00E4";
     optLang[9].text = "Ei";
 
-    document.getElementById("btnPick").value = "Poimi";
-    document.getElementById("btnImage").value = "Kuva";
+    document.getElementById("btnPick").value="Poimi";
+    document.getElementById("btnImage").value="Kuva";
 
     document.getElementById("btnCancel").value = "Peruuta";
     document.getElementById("btnApply").value = "K\u00E4yt\u00E4";
-    document.getElementById("btnOk").value = " OK ";
-    ;
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
+    document.getElementById("btnOk").value = " OK ";;
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Taulukon ominaisuudet</title>")
-}
+    }

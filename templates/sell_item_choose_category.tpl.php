@@ -5,8 +5,7 @@
 ## Copyright ©2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
-
-  if (!defined('INCLUDED')) {
+if (!defined('INCLUDED')) {
     die("Access Denied");
   }
 ?>
@@ -285,7 +284,7 @@
           <td align=middle width="33%">
             <table id=table_1 cellspacing=5 border=0 width=100%>
               <tr>
-                <td><select class="contentfont" id="selector_1" onchange="populate(1)" size="20" name="selector_1" style="width: 100%; ">
+                <td><select class="contentfont choose_cat" id="selector_1" onchange="populate(1)" size="20" name="selector_1" style="width: 100%; ">
                     <option value=""></option>
                   </select>
                 </td>
@@ -295,7 +294,7 @@
           <td align=middle width="33%">
             <table id=table_2 cellspacing=5 border=0 width=100%>
               <tr>
-                <td><select class="contentfont" id="selector_2" onchange="populate(2)" size="20" name="selector_2" style="width: 100%; ">
+                <td><select class="contentfont choose_cat" id="selector_2" onchange="populate(2)" size="20" name="selector_2" style="width: 100%; ">
                     <option value=""></option>
                   </select>
                 </td>

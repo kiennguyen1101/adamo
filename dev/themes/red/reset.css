@@ -3,10 +3,10 @@
    License: none (public domain)
 */
 html {
-    background:none;
+	background:none;
 }
 div{
-
+	
 }
 ul, h1, h2, h3{
     margin: 0;
@@ -15,7 +15,7 @@ ul, h1, h2, h3{
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    list-style:none;
+	list-style:none;
 }
 
 table, tr,td{

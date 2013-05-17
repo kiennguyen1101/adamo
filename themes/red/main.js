@@ -1,4 +1,4 @@
-function MM_preloadImages() { //v3.0
+﻿function MM_preloadImages() { //v3.0
     var d = document;
     if (d.images) {
         if (!d.MM_p)

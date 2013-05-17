@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## MyPHPAuction v6.05															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -82,27 +87,26 @@
       <td width="150" align="right" class="contentfont"><?php echo MSG_CITY; ?></td>
       <td class="contentfont"><input name="city" type="text" id="city" value="<?php echo $user_details['city']; ?>" size="25" /></td>
     </tr>
-    <tr class="c1">
-      <td width="150" align="right" class="contentfont"><?php echo MSG_STATE; ?></td>
+	 <tr class="c1">
+         <td width="150" align="right" class="contentfont"><?php echo MSG_STATE;?></td>
+         
+     
+         <td><?php echo $state_box;?></td>
+      </tr>
+	
 
-
-      <td><?php echo $state_box; ?></td>
-    </tr>
-
-
-    <tr class="c1">
+	    <tr class="c1">
       <td width="150" align="right" class="contentfont"><?php echo MSG_PHONE; ?></td>
       <td class="contentfont">
         <?php if ($edit_user == 1) { ?>
             <input name="phone" type="text" id="phone" value="<?php echo $user_details['phone']; ?>" size="25" />
-            <?php
-          }
+          <?php }
           else {
             ?>
             <input name="phone_b" type="text" id="phone_b" value="<?php echo $user_details['phone_b']; ?>" size="25" />
-          <?php } ?></td>
+  <?php } ?></td>
     </tr>
-    <?php echo $birthdate_box; ?>
+	<?php echo $birthdate_box; ?>
   </table>
   <br />
 
@@ -128,7 +132,7 @@
       </td>
       <td class="contentfont"><input name="newsletter" type="checkbox" class="newsletter" id="email" value="1" <?php echo ($user_details['newsletter']) ? 'checked' : ''; ?> /></td>
     </tr>
-
+	
     <tr class="c1">
       <td width="150" align="right" class="contentfont"><?php echo MSG_CREATE_USERNAME; ?></td>
       <td class="contentfont"><input name="username" type="text" id="username" value="<?php echo $user_details['username']; ?>" size="40" maxlength="30" <?php echo $edit_disabled; ?> /></td>
@@ -153,7 +157,7 @@
     </tr>
   </table>
   <?php echo $custom_sections_table; ?>
-  <?php if (IN_ADMIN == 1) { ?>
+<?php if (IN_ADMIN == 1) { ?>
       <br />
       <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sell_table">
         <tr>
@@ -165,9 +169,9 @@
           <td class="contentfont"><input type="radio" name="payment_mode" value="2" <?php echo ($user_details['payment_mode'] == 2) ? 'checked' : ''; ?>>
             <?php echo GMSG_ACCOUNT; ?>
             <input type="radio" name="payment_mode" value="1" <?php echo ($user_details['payment_mode'] == 1) ? 'checked' : ''; ?>>
-            <?php echo GMSG_LIVE; ?></td>
+        <?php echo GMSG_LIVE; ?></td>
         </tr>
-        <?php if ($user_details['payment_mode'] == 2) { ?>
+    <?php if ($user_details['payment_mode'] == 2) { ?>
           <tr>
             <td>&nbsp;</td>
             <td><?php echo AMSG_PAYMENT_MODE_EXPL; ?></td>
@@ -193,10 +197,10 @@
             <td>&nbsp;</td>
             <td><?php echo AMSG_MAX_DEBIT_EXPL; ?></td>
           </tr>
-        <?php } ?>
+      <?php } ?>
       </table>
     <?php } ?>
-  <?php if ($setts['enable_tax']) { ?>
+<?php if ($setts['enable_tax']) { ?>
       <br />
       <table width="100%" class="sell_table">
         <tr>
@@ -213,7 +217,7 @@
         </tr>
       </table>
     <?php } ?>
-  <?php if (IN_ADMIN != 1 && !$edit_user) { ?>
+<?php if (IN_ADMIN != 1 && !$edit_user) { ?>
       <br />
       <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sell_table">
 
@@ -231,7 +235,7 @@
         </tr>
       </table>
     <?php } ?>
-  <?php if (!empty($display_direct_payment_methods)) { ?>
+<?php if (!empty($display_direct_payment_methods)) { ?>
       <br>
       <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sell_table">
         <tr>
@@ -241,12 +245,12 @@
           <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="150" height="1"></td>
           <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
-        <?php echo $display_direct_payment_methods; ?>
+      <?php echo $display_direct_payment_methods; ?>
       </table>
     <?php } ?>
 
   <?php echo $signup_voucher_box; ?>
-  <?php echo $registration_terms_box; ?>
+<?php echo $registration_terms_box; ?>
   <br />
   <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sell_table">
     <tr>

@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-    var txtLang = document.getElementsByName("txtLang");
+function loadTxt()
+    {
+    var txtLang =  document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "AutoAnpassen";
     txtLang[1].innerHTML = "Eigenschaften";
     txtLang[2].innerHTML = "Stil";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "links";
     txtLang[14].innerHTML = "rechts";
     txtLang[15].innerHTML = "oben";
-    txtLang[16].innerHTML = "unten";
+    txtLang[16].innerHTML = "unten";    
     txtLang[17].innerHTML = "Rahmen";
     txtLang[18].innerHTML = "kollabieren";
     txtLang[19].innerHTML = "Hintergrund";
@@ -43,20 +43,17 @@
     document.getElementById("btnCancel").value = "Abbrechen";
     document.getElementById("btnApply").value = "\u00DCbernehmen"; //"apply";
     document.getElementById("btnOk").value = " OK ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Benutzerfarben";
-        case "More Colors...":
-            return "weitere Farben...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Benutzerfarben";
+        case "More Colors...": return "weitere Farben...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Tabelle Eigenschaften</title>")
-}
+    }

@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Auto Ajustar";
     txtLang[1].innerHTML = "Propiedades";
@@ -58,20 +58,17 @@
     optLang[23].text = "Fila actual"
     optLang[24].text = "Columna actual"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Colores personalizados";
-        case "More Colors...":
-            return "Mas Colores...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Colores personalizados";
+        case "More Colors...": return "Mas Colores...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Propiedades Celda</title>")
-}
+    }

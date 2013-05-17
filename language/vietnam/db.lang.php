@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   define('MSG_ERROR_MYSQL_CONNECT', 'Could not connect to the database with the credentials you have submitted');
   define('MSG_MYSQL_ERROR_OCCURRED', 'A Mysql error has occurred while running the script: ');

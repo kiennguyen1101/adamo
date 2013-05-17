@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Auto ajustar";
     txtLang[1].innerHTML = "Propiedades";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "Izquierda";
     txtLang[14].innerHTML = "Derecha";
     txtLang[15].innerHTML = "Arriba";
-    txtLang[16].innerHTML = "Abajo";
+    txtLang[16].innerHTML = "Abajo";    
     txtLang[17].innerHTML = "Bordes";
     txtLang[18].innerHTML = "Juntar";
     txtLang[19].innerHTML = "Fondo";
@@ -37,26 +37,23 @@
     optLang[8].text = "Si"
     optLang[9].text = "No"
 
-    document.getElementById("btnPick").value = "Seleccionar";
-    document.getElementById("btnImage").value = "Imagen";
+    document.getElementById("btnPick").value="Seleccionar";
+    document.getElementById("btnImage").value="Imagen";
 
     document.getElementById("btnCancel").value = "Cancelar";
     document.getElementById("btnApply").value = "Aplicar";
     document.getElementById("btnOk").value = " Aplicar y salir ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Propiedades Tabla</title>")
-}
+    }

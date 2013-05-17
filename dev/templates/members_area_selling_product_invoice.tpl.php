@@ -59,12 +59,11 @@
             </form>
           </table></td>
       </tr>
-      <?php
-    }
+    <?php }
     else {
       ?>
       <tr>
         <td align="center"><?php echo MSG_NO_ITEMS_INVOICE; ?></td>
       </tr>
-    <?php } ?>
+  <?php } ?>
 </table>

@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Placering";
     txtLang[1].innerHTML = "Indrag";
@@ -8,14 +8,14 @@
     txtLang[4].innerHTML = "Radavst\u00E5nd";
     txtLang[5].innerHTML = "Text";
     txtLang[6].innerHTML = "Tomt mellanrum";
-
+    
     document.getElementById("divPreview").innerHTML = "Lorem ipsum dolor sit amet, " +
-            "consetetur sadipscing elitr, " +
-            "sed diam nonumy eirmod tempor invidunt ut labore et " +
-            "dolore magna aliquyam erat, " +
-            "sed diam voluptua. At vero eos et accusam et justo " +
-            "duo dolores et ea rebum. Stet clita kasd gubergren, " +
-            "no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+        "consetetur sadipscing elitr, " +
+        "sed diam nonumy eirmod tempor invidunt ut labore et " +
+        "dolore magna aliquyam erat, " +
+        "sed diam voluptua. At vero eos et accusam et justo " +
+        "duo dolores et ea rebum. Stet clita kasd gubergren, " +
+        "no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Ej valt";
@@ -32,12 +32,12 @@
     optLang[11].text = "Ingen brytning";
     optLang[12].text = "pre";
     optLang[13].text = "Normal";
-
+    
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnApply").value = "Verkst\u00E4ll";
-    document.getElementById("btnOk").value = " OK ";
-}
+    document.getElementById("btnOk").value = " OK ";   
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Formatmall</title>")
-}
+    }

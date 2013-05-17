@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Image Source";
     txtLang[1].innerHTML = "Repeat";
@@ -21,12 +21,12 @@
     optLang[11].text = "bottom"
     optLang[12].text = "pixels"
     optLang[13].text = "percent"
-
+    
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Background Image</title>")
-}
+    }
 

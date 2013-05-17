@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "AutoAnpassen";
     txtLang[1].innerHTML = "Eigenschaften";
@@ -30,7 +30,7 @@
     document.getElementById("btnCancel").value = "Abbrechen";
     document.getElementById("btnApply").value = "\u00DCbernehmen"; //"apply";
     document.getElementById("btnOk").value = " OK ";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Pixel"
     optLang[1].text = "Prozent"
@@ -58,20 +58,17 @@
     optLang[23].text = "aktuelle Zeile"
     optLang[24].text = "aktuelle Spalte"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Benutzerfarben";
-        case "More Colors...":
-            return "weitere Farben...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Benutzerfarben";
+        case "More Colors...": return "weitere Farben...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Zelle Eigenschaften</title>")
-}
+    }

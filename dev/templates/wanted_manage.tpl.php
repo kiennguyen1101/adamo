@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction v6.02															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -29,8 +34,8 @@
       myPopup.opener = self;
   }
 </SCRIPT>
-<tr class="c4">
-  <?php echo $sell_item_header; ?>
+    <tr class="c4">
+<?php echo $sell_item_header; ?>
 </tr>
 <?php echo $display_formcheck_errors; ?>
 
@@ -49,7 +54,7 @@
   <table width="100%" border="0" cellpadding="3" cellspacing="2" class="sell_table">
     <tr class="c4">
       <td><?php echo MSG_MAIN_CATEGORY; ?></td>
-      <td class="contentfont" colspan="2"><?php echo $main_category_display; ?>
+	  <td class="contentfont" colspan="2"><?php echo $main_category_display; ?>
         [ <a href="javascript:;"  onClick="openPopup('<?php echo SITE_PATH; ?>category_selector.php?cat=category_id&category_id=<?php echo $item_details['category_id']; ?>&auction_id=<?php echo $item_details['auction_id']; ?>&form_name=ad_create_form')">
           <?php echo GMSG_MODIFY; ?></a> ]</td>
     </tr>
@@ -59,7 +64,7 @@
     </tr>
     <tr class="c4">
       <td><?php echo MSG_ADDL_CATEGORY; ?></td>
-      <td class="contentfont" colspan="2"><?php echo $addl_category_display; ?>
+	  <td class="contentfont" colspan="2"><?php echo $addl_category_display; ?>
         [ <a href="javascript:;"  onClick="openPopup('<?php echo SITE_PATH; ?>category_selector.php?cat=addl_category_id&category_id=<?php echo $item_details['addl_category_id']; ?>&auction_id=<?php echo $item_details['auction_id']; ?>&form_name=ad_create_form')">
           <?php echo GMSG_MODIFY; ?></a> ]</td>
     </tr>

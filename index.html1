@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html> 
 <html lang="en"> 
 <head> 
 <meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
 
-		<title>Giá»›i thiá»‡u - Adamo.vn</title>
+		<title>Giới thiệu - Adamo.vn</title>
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 		
 		<!-- To change the color scheme, change blue.css with green.css, orange.css, red.css, purple.css and pink.css -->
@@ -34,32 +34,32 @@
 			
 			<ul class="top-buttons"> <!-- drag and toggle buttons-->
 				<li><a class="trigger">toggle me</a></li>
-				<li><a class="drag">kÃ©o chuá»™t</a></li>
+				<li><a class="drag">kéo chuột</a></li>
 			</ul><!--end top-buttons-->
 			
 			<div id="totoggle">
 				<div id="infopage">
 					<div class="content">
-						<p><span>Adamo.vn </span> lÃ  sÃ n giao dá»‹ch Ä‘iá»‡n tá»­ C2C á»©ng dá»¥ng nhá»¯ng cÃ´ng nghá»‡ má»›i nháº¥t trÃªn tháº¿ giá»›i nháº±m táº¡o ra tráº£i nghiá»‡m mua sáº¯m tá»‘t nháº¥t cho ngÆ°á»i tiÃªu dÃ¹ng Viá»‡t. </p>
-						<p>	ChÃ­nh sÃ¡ch hoáº¡t Ä‘á»™ng cá»§a Adamo Viá»‡t Nam Ä‘Æ°á»£c xÃ¢y dá»±ng nháº±m táº¡o ra má»™t mÃ´i trÆ°á»ng giao dá»‹ch trá»±c tuyáº¿n an toÃ n vÃ  thÃ¢n thiá»‡n vá»›i ngÆ°á»i dÃ¹ng, gá»“m cÃ¡c phÆ°Æ¡ng phÃ¡p chá»§ chá»‘t lÃ : </p>
+						<p><span>Adamo.vn </span> là sàn giao dịch điện tử C2C ứng dụng những công nghệ mới nhất trên thế giới nhằm tạo ra trải nghiệm mua sắm tốt nhất cho người tiêu dùng Việt. </p>
+						<p>	Chính sách hoạt động của Adamo Việt Nam được xây dựng nhằm tạo ra một môi trường giao dịch trực tuyến an toàn và thân thiện với người dùng, gồm các phương pháp chủ chốt là: </p>
 						<ul>
-							<li>-	Cá»•ng thanh toÃ¡n cÃ³ Ä‘á»™ báº£o máº­t cao,</li>
-							<li>-	HÃ¬nh thá»©c thanh toÃ¡n táº¡m giá»¯,</li>
-							<li>-	ChÃ­nh sÃ¡ch giáº£i quyáº¿t khiáº¿u náº¡i cháº·t cháº½ vÃ  cÃ´ng báº±ng,</li>
+							<li>-	Cổng thanh toán có độ bảo mật cao,</li>
+							<li>-	Hình thức thanh toán tạm giữ,</li>
+							<li>-	Chính sách giải quyết khiếu nại chặt chẽ và công bằng,</li>
 							<li>-	Mua chung.</li>
 						</ul>
-						<span>Tráº£i nghiá»‡m mua sáº¯m cá»§a Adamo phong phÃº vá»›i nhiá»u hÃ¬nh thá»©c:</span>
+						<span>Trải nghiệm mua sắm của Adamo phong phú với nhiều hình thức:</span>
 						<ul>
-							<li>-	Äáº¥u giÃ¡,</li>
+							<li>-	Đấu giá,</li>
 							<li>-	Mua ngay,</li>
-							<li>-	Máº·c cáº£ vá»›i ngÆ°á»i bÃ¡n,</li>
-							<li>-	Há»‡ thá»‘ng Ä‘Ã¡nh giÃ¡ ngÆ°á»i bÃ¡n,</li>
-							<li>-	ChÃ­nh sÃ¡ch báº£o vá»‡ ngÆ°á»i mua.</li>
+							<li>-	Mặc cả với người bán,</li>
+							<li>-	Hệ thống đánh giá người bán,</li>
+							<li>-	Chính sách bảo vệ người mua.</li>
 						</ul>
-						<p>Má»¥c tiÃªu cá»§a Adamo lÃ  thÃºc Ä‘áº©y lÆ°u thÃ´ng hÃ ng hÃ³a trÃªn thá»‹ trÆ°á»ng, táº¡o Ä‘iá»u kiá»‡n cho ngÃ y cÃ ng nhiá»u ngÆ°á»i cÃ³ thá»ƒ tiáº¿p cáº­n vÃ  lÃ m giÃ u tá»« thÆ°Æ¡ng máº¡i Ä‘iá»‡n tá»­, Ä‘á»“ng thá»i mang láº¡i lá»£i Ã­ch tá»‘t nháº¥t cho ngÆ°á»i tiÃªu dÃ¹ng thÃ´ng qua nhá»¯ng sáº£n pháº©m cháº¥t lÆ°á»£ng cao vá»›i giÃ¡ cáº£ pháº£i chÄƒng vÃ  phÆ°Æ¡ng thá»©c thanh toÃ¡n giao nháº­n thuáº­n tiá»‡n nháº¥t.</p>
-						<p>Adamo Viá»‡t Nam sáº½ liÃªn tá»¥c Ä‘Æ°á»£c phÃ¡t triá»ƒn Ä‘á»ƒ ngÃ y cÃ ng hoÃ n thiá»‡n phÆ°Æ¡ng phÃ¡p hoáº¡t Ä‘á»™ng vÃ  Ä‘a dáº¡ng vá» chá»©c nÄƒng. Vá»›i mong muá»‘n Ä‘Ã³, má»i liÃªn há»‡  gÃ³p Ã½ tá»« ngÆ°á»i dÃ¹ng sáº½ luÃ´n Ä‘Æ°á»£c chÃºng tÃ´i trÃ¢n trá»ng vÃ  cÃ¢n nháº¯c nghiÃªm tÃºc. </p>
-						<p>Xin chÃ¢n thÃ nh cáº£m Æ¡n.</p>
-						<span>Adamo Viá»‡t Nam</span>
+						<p>Mục tiêu của Adamo là thúc đẩy lưu thông hàng hóa trên thị trường, tạo điều kiện cho ngày càng nhiều người có thể tiếp cận và làm giàu từ thương mại điện tử, đồng thời mang lại lợi ích tốt nhất cho người tiêu dùng thông qua những sản phẩm chất lượng cao với giá cả phải chăng và phương thức thanh toán giao nhận thuận tiện nhất.</p>
+						<p>Adamo Việt Nam sẽ liên tục được phát triển để ngày càng hoàn thiện phương pháp hoạt động và đa dạng về chức năng. Với mong muốn đó, mọi liên hệ  góp ý từ người dùng sẽ luôn được chúng tôi trân trọng và cân nhắc nghiêm túc. </p>
+						<p>Xin chân thành cảm ơn.</p>
+						<span>Adamo Việt Nam</span>
 					</div><!--end content-->
 					
 					<ul class="buttons">
@@ -71,18 +71,18 @@
 				<div id="contactpage">
 					<div class="content">
 						<div class="one-half">
-							<h2>LiÃªn há»‡ vá»›i Adamo.vn </h2>
-							<p>HÃ£y liÃªn há»‡ trá»±c tiáº¿p vá»›i Adamo.vn Ä‘á»ƒ cÃ³ Ä‘Æ°á»£c thÃ´ng tin mÃ  báº¡n cáº§n trong thá»i gian sá»›m nháº¥t.</p>
+							<h2>Liên hệ với Adamo.vn </h2>
+							<p>Hãy liên hệ trực tiếp với Adamo.vn để có được thông tin mà bạn cần trong thời gian sớm nhất.</p>
 						</div><!--end one-half-->
 						
 						<div class="one-half last cf">
 							<div id="contactform">
 								<div id="message"></div>
 								<form method="post" action="php/contact.php" name="cform" id="cform">
-									<input type="text" name="name" placeholder="TÃªn" id="name" />
+									<input type="text" name="name" placeholder="Tên" id="name" />
 									<input type="text" name="email" placeholder="Email" id="email" />
-									<textarea name="comments" placeholder="Ná»™i dung gá»­i" id="comments"></textarea>					
-									<input type="submit" name="send" value="Gá»­i" id="submit" /> 
+									<textarea name="comments" placeholder="Nội dung gửi" id="comments"></textarea>					
+									<input type="submit" name="send" value="Gửi" id="submit" /> 
 								</form>
 							</div><!--end contactform-->
 						</div><!--end one-half-->
@@ -98,15 +98,15 @@
 			
 				<div id="homepage">
 					<a class="logo" href="#"><img src="images/logo.png" alt="logo" /></a>
-					<h1><span style="font-size:20px;">Sáº½ xuáº¥t hiá»‡n trÃªn thá»‹ trÆ°á»ng sau...</span></h1>
+					<h1><span style="font-size:20px;">Sẽ xuất hiện trên thị trường sau...</span></h1>
 					
 					<div id="countdown"></div>	
 					
 					<div id="subscribe">
 						<div id="mesaj"></div>
 						<form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform">
-							<input type="text" name="email" placeholder="Äiá»n email cá»§a báº¡n Ä‘á»ƒ nháº­n thÃ´ng bÃ¡o" id="subemail" />
-							<input type="submit" name="send" value="ÄÄƒng kÃ­" id="subsubmit" />
+							<input type="text" name="email" placeholder="Điền email của bạn để nhận thông báo" id="subemail" />
+							<input type="submit" name="send" value="Đăng kí" id="subsubmit" />
 						</form>
 					</div>
 					

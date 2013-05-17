@@ -1,25 +1,25 @@
-﻿<?php
-  /*
-   * Copyright (C) 2007 Google Inc.
-   * 
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   * 
-   *      http://www.apache.org/licenses/LICENSE-2.0
-   * 
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   *
-   */
-  /**
-   * Classes used to represent shipping types
-   * @version $Id: googleshipping.php 1234 2007-09-25 14:58:57Z ropu $
-   */
-
+<?php
+/*
+ * Copyright (C) 2007 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+/**
+ * Classes used to represent shipping types
+ * @version $Id: googleshipping.php 1234 2007-09-25 14:58:57Z ropu $
+ */
+ 
   /**
    * Class that represents flat rate shipping
    * 
@@ -52,9 +52,8 @@
     function AddShippingRestrictions($restrictions) {
       $this->shipping_restrictions = $restrictions;
     }
-
   }
-
+  
   /**
    * Represents a merchant calculated shipping
    * 
@@ -97,9 +96,8 @@
     function AddAddressFilters($filters) {
       $this->address_filters = $filters;
     }
-
   }
-
+  
   /**
    * Represents carrier calculated shipping
    */
@@ -107,6 +105,7 @@
 
     var $name;
     var $type = "carrier-calculated-shipping";
+    
     var $CarrierCalculatedShippingOptions = array();
 //    var $ShippingPackages = array();
     var $ShippingPackage;
@@ -122,18 +121,17 @@
      * @param GoogleCarrierCalculatedShippingOption $option the option to be 
      * added to the carrier calculated shipping
      */
-    function addCarrierCalculatedShippingOptions($option) {
-      $this->CarrierCalculatedShippingOptions[] = $option;
+    function addCarrierCalculatedShippingOptions($option){
+      $this->CarrierCalculatedShippingOptions[] = $option; 
     }
 
     /**
      * @param GoogleShippingPackage $package
      */
-    function addShippingPackage($package) {
+    function addShippingPackage($package){
 //      $this->ShippingPackages[] = $package; 
-      $this->ShippingPackage = $package;
+      $this->ShippingPackage = $package; 
     }
-
   }
 
   /**
@@ -148,7 +146,6 @@
     var $carrier_pickup;
     var $additional_fixed_charge;
     var $additional_variable_charge_percent;
-
 //    var $shipping_restrictions;
 //    var $address_filters;
 
@@ -170,25 +167,26 @@
      * "REGULAR_PICKUP", "SPECIAL_PICKUP", "DROP_OFF". Defaults to "DROP_OFF".
      *                
      */
-    function GoogleCarrierCalculatedShippingOption($price, $shipping_company, $shipping_type, $additional_fixed_charge = 0, $additional_variable_charge_percent = 0, $carrier_pickup = 'DROP_OFF') {
-      $this->price = (double) $price;
+    function GoogleCarrierCalculatedShippingOption($price, $shipping_company,
+         $shipping_type, $additional_fixed_charge=0,
+         $additional_variable_charge_percent=0, $carrier_pickup='DROP_OFF') {
+      $this->price = (double)$price;
       $this->shipping_company = $shipping_company;
       $this->shipping_type = trim($shipping_type);
-      switch (strtoupper($carrier_pickup)) {
+      switch(strtoupper($carrier_pickup)){
         case 'DROP_OFF':
         case 'REGULAR_PICKUP':
         case 'SPECIAL_PICKUP':
-          $this->carrier_pickup = $carrier_pickup;
-          ;
+          $this->carrier_pickup = $carrier_pickup;;
           break;
         default:
           $this->carrier_pickup = 'DROP_OFF';
       }
-      if ($additional_fixed_charge) {
-        $this->additional_fixed_charge = (double) $additional_fixed_charge;
+      if($additional_fixed_charge){
+        $this->additional_fixed_charge = (double)$additional_fixed_charge;
       }
-      if ($additional_variable_charge_percent) {
-        $this->additional_variable_charge_percent = (double) $additional_variable_charge_percent;
+      if($additional_variable_charge_percent){
+        $this->additional_variable_charge_percent = (double)$additional_variable_charge_percent;
       }
     }
 
@@ -200,7 +198,7 @@
 //      $this->address_filters = $filters;
 //    }
   }
-
+  
   /**
    * Represents an individual package that will be shipped to the buyer.
    */
@@ -224,11 +222,12 @@
      * method should be applied to a residential or commercial address, valid 
      * values are "RESIDENTIAL", "COMMERCIAL"
      */
-    function GoogleShippingPackage($ship_from, $width, $length, $height, $unit, $delivery_address_category = 'RESIDENTIAL') {
-      $this->width = (double) $width;
-      $this->length = (double) $length;
-      $this->height = (double) $height;
-      switch (strtoupper($unit)) {
+    function GoogleShippingPackage($ship_from, $width, $length, $height, $unit,
+                    $delivery_address_category='RESIDENTIAL') {
+      $this->width = (double)$width;
+      $this->length = (double)$length;
+      $this->height = (double)$height;
+      switch(strtoupper($unit)){
         case 'CM':
           $this->unit = strtoupper($unit);
           break;
@@ -236,9 +235,9 @@
         default:
           $this->unit = 'IN';
       }
-
+      
       $this->ship_from = $ship_from;
-      switch (strtoupper($delivery_address_category)) {
+      switch(strtoupper($delivery_address_category)){
         case 'COMMERCIAL':
           $this->delivery_address_category = strtoupper($delivery_address_category);
           break;
@@ -247,21 +246,19 @@
           $this->delivery_address_category = 'RESIDENTIAL';
       }
     }
-
   }
-
+  
   /**
    * Represents the location from where packages will be shipped from.
    * Used with {@link GoogleShippingPackage}.
    */
   class GoogleShipFrom {
-
     var $id;
     var $city;
     var $country_code;
     var $postal_code;
     var $region;
-
+    
     /**
      * @param string $id an id for this address
      * @param string $city the city
@@ -269,16 +266,16 @@
      * @param string $postal_code the zip
      * @param string $region the region
      */
-    function GoogleShipFrom($id, $city, $country_code, $postal_code, $region) {
+    function GoogleShipFrom($id, $city, $country_code,
+                                  $postal_code, $region) {
       $this->id = $id;
       $this->city = $city;
       $this->country_code = $country_code;
       $this->postal_code = $postal_code;
       $this->region = $region;
     }
-
-  }
-
+  }  
+  
   /**
    * 
    * Shipping restrictions contain information about particular areas where
@@ -301,14 +298,17 @@
   class GoogleShippingFilters {
 
     var $allow_us_po_box = true;
+
     var $allowed_restrictions = false;
     var $excluded_restrictions = false;
+
     var $allowed_world_area = false;
     var $allowed_country_codes_arr;
     var $allowed_postal_patterns_arr;
     var $allowed_country_area;
     var $allowed_state_areas_arr;
     var $allowed_zip_patterns_arr;
+
     var $excluded_country_codes_arr;
     var $excluded_postal_patterns_arr;
     var $excluded_country_area;
@@ -326,7 +326,7 @@
       $this->excluded_state_areas_arr = array();
       $this->excluded_zip_patterns_arr = array();
     }
-
+    
     /**
      * GC tag: {@link http://code.google.com/apis/checkout/developer/index.html#tag_allow-us-po-box <allow-us-po-box>}
      * 
@@ -348,7 +348,7 @@
       $this->allowed_restrictions = true;
       $this->allowed_world_area = $world_area;
     }
-
+    
     // Allows
     /**
      * Add a postal area to be allowed for delivery.
@@ -362,7 +362,7 @@
     function AddAllowedPostalArea($country_code, $postal_pattern = "") {
       $this->allowed_restrictions = true;
       $this->allowed_country_codes_arr[] = $country_code;
-      $this->allowed_postal_patterns_arr[] = $postal_pattern;
+      $this->allowed_postal_patterns_arr[]= $postal_pattern;
     }
 
     /**
@@ -381,10 +381,10 @@
         case "ALL":
           $this->allowed_country_area = $country_area;
           $this->allowed_restrictions = true;
-          break;
+        break;
         default:
           $this->allowed_country_area = "";
-          break;
+        break;
       }
     }
 
@@ -435,7 +435,7 @@
       $this->allowed_restrictions = true;
       $this->allowed_zip_patterns_arr[] = $zip;
     }
-
+    
     /**
      * Exclude postal areas from shipping.
      * 
@@ -444,7 +444,7 @@
     function AddExcludedPostalArea($country_code, $postal_pattern = "") {
       $this->excluded_restrictions = true;
       $this->excluded_country_codes_arr[] = $country_code;
-      $this->excluded_postal_patterns_arr[] = $postal_pattern;
+      $this->excluded_postal_patterns_arr[]= $postal_pattern;
     }
 
     /**
@@ -499,14 +499,13 @@
         case "ALL":
           $this->excluded_country_area = $country_area;
           $this->excluded_restrictions = true;
-          break;
-
-        default:
+     		break;
+      
+      	default:
           $this->excluded_country_area = "";
-          break;
+     		break;
       }
     }
-
   }
 
   /**
@@ -529,6 +528,5 @@
       $this->price = $price;
       $this->name = $name;
     }
-
   }
 ?>

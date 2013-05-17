@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {    
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Autopassa";
     txtLang[1].innerHTML = "Egenskaper";
@@ -58,20 +58,17 @@
     optLang[23].text = "Aktuell rad"
     optLang[24].text = "Aktuell kolumn"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Cellegenskaper</title>")
-}
+    }

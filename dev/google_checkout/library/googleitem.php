@@ -1,36 +1,36 @@
-﻿<?php
-  /*
-   * Copyright (C) 2007 Google Inc.
-   * 
-   * Licensed under the Apache License, Version 2.0 (the "License");
-   * you may not use this file except in compliance with the License.
-   * You may obtain a copy of the License at
-   * 
-   *      http://www.apache.org/licenses/LICENSE-2.0
-   * 
-   * Unless required by applicable law or agreed to in writing, software
-   * distributed under the License is distributed on an "AS IS" BASIS,
-   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   * See the License for the specific language governing permissions and
-   * limitations under the License.
-   */
+<?php
+/*
+ * Copyright (C) 2007 Google Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-  /**
-   * Classes used to represent an item to be used for Google Checkout
-   * @version $Id: googleitem.php 1234 2007-09-25 14:58:57Z ropu $
-   */
+/**
+ * Classes used to represent an item to be used for Google Checkout
+ * @version $Id: googleitem.php 1234 2007-09-25 14:58:57Z ropu $
+ */
 
-  /**
-   * Creates an item to be added to the shopping cart.
-   * A new instance of the class must be created for each item to be added.
-   * 
-   * Required fields are the item name, description, quantity and price
-   * The private-data and tax-selector for each item can be set in the 
-   * constructor call or using individual Set functions
-   */
+ /**
+  * Creates an item to be added to the shopping cart.
+  * A new instance of the class must be created for each item to be added.
+  * 
+  * Required fields are the item name, description, quantity and price
+  * The private-data and tax-selector for each item can be set in the 
+  * constructor call or using individual Set functions
+  */
   class GoogleItem {
-
-    var $item_name;
+     
+    var $item_name; 
     var $item_description;
     var $unit_price;
     var $quantity;
@@ -38,10 +38,11 @@
     var $merchant_item_id;
     var $tax_table_selector;
     var $email_delivery;
-    var $digital_content = false;
+    var $digital_content=false;
     var $digital_description;
     var $digital_key;
     var $digital_url;
+    
     var $item_weight;
     var $numeric_weight;
 
@@ -59,14 +60,14 @@
      * @param double $numeric_weight the weight of the item
      * 
      */
-    function GoogleItem($name, $desc, $qty, $price, $item_weight = '', $numeric_weight = '') {
-      $this->item_name = $name;
-      $this->item_description = $desc;
+    function GoogleItem($name, $desc, $qty, $price, $item_weight='', $numeric_weight='') {
+      $this->item_name = $name; 
+      $this->item_description= $desc;
       $this->unit_price = $price;
       $this->quantity = $qty;
 
-      if ($item_weight != '' && $numeric_weight !== '') {
-        switch (strtoupper($item_weight)) {
+      if($item_weight != '' && $numeric_weight !== '') {
+        switch(strtoupper($item_weight)){
           case 'KG':
             $this->item_weight = strtoupper($item_weight);
             break;
@@ -74,12 +75,12 @@
           default:
             $this->item_weight = 'LB';
         }
-        $this->numeric_weight = (double) $numeric_weight;
-      }
+        $this->numeric_weight = (double)$numeric_weight;
+      } 
     }
-
+    
     function SetMerchantPrivateItemData($private_data) {
-      $this->merchant_private_item_data = $private_data;
+      $this->merchant_private_item_data = $private_data;  
     }
 
     /**
@@ -95,9 +96,9 @@
      * @return void
      */
     function SetMerchantItemId($item_id) {
-      $this->merchant_item_id = $item_id;
+      $this->merchant_item_id = $item_id;  
     }
-
+    
     /**
      * Sets the tax table selector which identifies an alternate tax table that
      * should be used to calculate tax for a particular item. 
@@ -110,7 +111,7 @@
      * @return void
      */
     function SetTaxTableSelector($tax_selector) {
-      $this->tax_table_selector = $tax_selector;
+      $this->tax_table_selector = $tax_selector;  
     }
 
     /**
@@ -126,14 +127,14 @@
      * 
      * @return void
      */
-    function SetEmailDigitalDelivery($email_delivery = 'false') {
+    function SetEmailDigitalDelivery($email_delivery='false') {
       $this->digital_url = '';
       $this->digital_key = '';
       $this->digital_description = '';
-      $this->email_delivery = $email_delivery;
-      $this->digital_content = true;
+      $this->email_delivery = $email_delivery;  
+      $this->digital_content=true;
     }
-
+    
     /**
      * Sets the information related to the digital delivery of the item.
      * 
@@ -153,9 +154,8 @@
       $this->digital_url = $digital_url;
       $this->digital_key = $digital_key;
       $this->digital_description = $digital_description;
-      $this->email_delivery = 'false';
+      $this->email_delivery = 'false';  
       $this->digital_content = true;
     }
-
   }
 ?>

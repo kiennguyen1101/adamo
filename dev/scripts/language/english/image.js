@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Source";
     txtLang[1].innerHTML = "Title";
@@ -12,7 +12,7 @@
     txtLang[8].innerHTML = "Left";
     txtLang[9].innerHTML = "Height";
     txtLang[10].innerHTML = "Right";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "absBottom";
     optLang[1].text = "absMiddle";
@@ -23,16 +23,16 @@
     optLang[6].text = "right";
     optLang[7].text = "textTop";
     optLang[8].text = "top";
-
+ 
     document.getElementById("btnBorder").value = " Border Style ";
     document.getElementById("btnReset").value = "reset"
-
+    
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnInsert").value = "insert";
     document.getElementById("btnApply").value = "apply";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Image</title>")
-}
+    }

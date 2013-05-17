@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Sti";
     txtLang[1].innerHTML = "Bakgrunn";
@@ -10,7 +10,7 @@
     txtLang[6].innerHTML = "Gjenta";
     txtLang[7].innerHTML = "Ja";
     txtLang[8].innerHTML = "Nei";
-
+    
     txtLang[9].innerHTML = "Class ID";
     txtLang[10].innerHTML = "CodeBase";
     txtLang[11].innerHTML = "Plugin side";
@@ -23,25 +23,22 @@
     optLang[4].text = "H\u00F8yre"
     optLang[5].text = "\u00D8verst"
     optLang[6].text = "Nederst"
-
+    
     document.getElementById("btnPick").value = "Velg";
-
+    
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnOk").value = " Ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
-    document.write("<title>" + "Sett inn Flash" + "</title>")
-}
+    {
+    document.write("<title>"+"Sett inn Flash"+"</title>")
+    }

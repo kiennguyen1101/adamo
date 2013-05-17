@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -37,20 +42,19 @@
           <td>
             <?php if ($can_edit) { ?>
                 <textarea name="message_content" style="width:100%; height: 130px;"><?php echo $message_content; ?></textarea>
-                <?php
-              }
+              <?php }
               else {
                 ?>
                 <?php echo eregi_replace("\n", '<br>', $message_content); ?>
-              <?php } ?>
+  <?php } ?>
           </td>
         </tr>
-        <?php if ($can_edit) { ?>
+<?php if ($can_edit) { ?>
             <tr>
               <td colspan="2" align="center" class="c2"><input type="submit" name="form_save_bank_details" value="<?php echo GMSG_PROCEED; ?>"></td>
             </tr>
           </form>
-        <?php } ?>
+  <?php } ?>
     </table>
   </body>
 </html>

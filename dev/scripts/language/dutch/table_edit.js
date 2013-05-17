@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Passend";
     txtLang[1].innerHTML = "Eigenschappen";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "Links";
     txtLang[14].innerHTML = "Rechts";
     txtLang[15].innerHTML = "Boven";
-    txtLang[16].innerHTML = "Onder";
+    txtLang[16].innerHTML = "Onder";    
     txtLang[17].innerHTML = "Randen";
     txtLang[18].innerHTML = "Samenvouwen";
     txtLang[19].innerHTML = "Achtergrond";
@@ -37,26 +37,23 @@
     optLang[8].text = "Ja"
     optLang[9].text = "Nee"
 
-    document.getElementById("btnPick").value = "Kiezen";
-    document.getElementById("btnImage").value = "Afbeelding";
+    document.getElementById("btnPick").value="Kiezen";
+    document.getElementById("btnImage").value="Afbeelding";
 
     document.getElementById("btnCancel").value = "annuleren";
     document.getElementById("btnApply").value = "toepassen";
     document.getElementById("btnOk").value = " ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Tabel Eigenschappen</title>")
-}
+    }

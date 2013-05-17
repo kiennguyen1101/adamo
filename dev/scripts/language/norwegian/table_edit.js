@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "St\u00F8rrelse";
     txtLang[1].innerHTML = "Egenskaper";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "Venstre";
     txtLang[14].innerHTML = "H\u00F8yre";
     txtLang[15].innerHTML = "Topp";
-    txtLang[16].innerHTML = "Nederst";
+    txtLang[16].innerHTML = "Nederst";  
     txtLang[17].innerHTML = "Ramme";
     txtLang[18].innerHTML = "Kollapse";
     txtLang[19].innerHTML = "Bakgrunn";
@@ -37,26 +37,23 @@
     optLang[8].text = "Ja"
     optLang[9].text = "Nei"
 
-    document.getElementById("btnPick").value = "Velg";
-    document.getElementById("btnImage").value = "Bilde";
+    document.getElementById("btnPick").value="Velg";
+    document.getElementById("btnImage").value="Bilde";
 
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnApply").value = "Oppdater";
     document.getElementById("btnOk").value = " Ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Tabell egenskaper</title>")
-}
+    }

@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Imagen";
     txtLang[1].innerHTML = "Texto";
@@ -12,7 +12,7 @@
     txtLang[8].innerHTML = "Izquierda";
     txtLang[9].innerHTML = "Alto";
     txtLang[10].innerHTML = "Derecha";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Inferior absoluto";
     optLang[1].text = "Medio absoluto";
@@ -23,16 +23,16 @@
     optLang[6].text = "Derecha";
     optLang[7].text = "Texto superior";
     optLang[8].text = "Arriba";
-
+ 
     document.getElementById("btnBorder").value = " Estilo Borde ";
     document.getElementById("btnReset").value = "reset"
-
+    
     document.getElementById("btnCancel").value = "Cancelar";
     document.getElementById("btnInsert").value = "Insertar";
     document.getElementById("btnApply").value = "Aplicar";
     document.getElementById("btnOk").value = "Aplicar y salir";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Imagen</title>")
-}
+    }

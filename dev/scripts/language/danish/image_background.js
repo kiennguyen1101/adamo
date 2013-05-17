@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Sti";
     txtLang[1].innerHTML = "Gentag";
@@ -21,11 +21,11 @@
     optLang[11].text = "Nedesrt"
     optLang[12].text = "pixels"
     optLang[13].text = "procent"
-
+    
     document.getElementById("btnCancel").value = "Annuller";
     document.getElementById("btnOk").value = " Ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Baggrundsbillede</title>")
-}
+    }

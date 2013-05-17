@@ -226,24 +226,21 @@ myPopup = '';
         <tr>
           <td align="center" colspan="2"><?php echo MSG_QUESTIONS_LOGGED_AS_ADMIN; ?></td>
         </tr>
-        <?php
-      }
+      <?php }
       else if (!$session->value('user_id')) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_LOGIN_TO_ASK_QUESTIONS; ?></td>
         </tr>
-        <?php
-      }
+      <?php }
       else if ($session->value('user_id') == $item_details['owner_id']) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_CANT_POST_QUESTION_OWNER; ?></td>
         </tr>
-        <?php
-      }
-      else {
-        ?>
+    <?php }
+    else {
+      ?>
         <tr>
           <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
           <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
@@ -263,9 +260,9 @@ myPopup = '';
                   <td><textarea name="message_content" cols="40" rows="3" class="contentfont"></textarea></td>
                   <td><div style="padding: 2px;">
                       <select name="message_handle">
-                        <?php if ($user_details['default_public_questions']) { ?>
+      <?php if ($user_details['default_public_questions']) { ?>
                           <option value="4" selected><?php echo MSG_POST_QUESTION_PUBLICLY; ?></option>
-                        <?php } ?>
+      <?php } ?>
                         <option value="5"><?php echo MSG_POST_QUESTION_PRIVATELY; ?></option>
                       </select>
                     </div>
@@ -276,8 +273,8 @@ myPopup = '';
               </table></td>
           </tr>
         </form>
-      <?php } ?>
     <?php } ?>
+  <?php } ?>
 </table>
 <br>
 <?php if ($is_wanted_offers) { ?>
@@ -301,7 +298,7 @@ myPopup = '';
         <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="50" height="1"></td>
         <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100" height="1"></td>
       </tr>
-      <?php echo $active_offers_content; ?>
+    <?php echo $active_offers_content; ?>
     </table>
     <br>
   <?php } ?>
@@ -316,7 +313,7 @@ myPopup = '';
       <tr>
         <td class="c3" colspan="2"><?php echo MSG_ENTER_AN_OFFER; ?></td>
       </tr>
-      <?php if ($session->value('user_id')) { ?>
+    <?php if ($session->value('user_id')) { ?>
         <form action="wanted_details.php" method="get">
           <input type="hidden" name="wanted_ad_id" value="<?php echo $item_details['wanted_ad_id']; ?>">
           <input type="hidden" name="action" value="submit_offer">
@@ -332,22 +329,20 @@ myPopup = '';
             <td><?php echo $offer_drop_down; ?></td>
           </tr>
         </form>
-        <?php
-      }
-      else if ($item_details['closed']) {
-        ?>
+    <?php }
+    else if ($item_details['closed']) {
+      ?>
         <tr class="c1">
           <td align="center" class="contentfont"><?php echo MSG_CANTOFFER_CLOSED; ?></td>
         </tr>	
-        <?php
-      }
-      else {
-        ?>
+    <?php }
+    else {
+      ?>
         <tr class="c1">
           <td align="center" class="contentfont" style="color: red; font-weight: bold;"><?php echo MSG_CANTOFFER_LOGIN; ?>
             <div align="center" class="contentfont"><a href="login.php?redirect=wanted_details.php?wanted_ad_id=<?php echo $item_details['wanted_ad_id']; ?>"><?php echo MSG_LOGIN_TO_MEMBERS_AREA; ?></a></div>
           </td>
         </tr>
-      <?php } ?>
+    <?php } ?>
     </table>
   <?php } ?>

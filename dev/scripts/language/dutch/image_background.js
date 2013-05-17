@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Afbeelding Bron";
     txtLang[1].innerHTML = "Herhalen";
@@ -21,12 +21,12 @@
     optLang[11].text = "onder"
     optLang[12].text = "pixels"
     optLang[13].text = "procent"
-
+    
     document.getElementById("btnCancel").value = "annuleren";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Achtergrond Afbeelding</title>")
-}
+    }
 

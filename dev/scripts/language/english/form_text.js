@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Type";
     txtLang[1].innerHTML = "Name";
@@ -12,13 +12,13 @@
     optLang[0].text = "Text"
     optLang[1].text = "Textarea"
     optLang[2].text = "Password"
-
+    
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnInsert").value = "insert";
     document.getElementById("btnApply").value = "apply";
     document.getElementById("btnOk").value = " ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Text Field</title>")
-}
+    }

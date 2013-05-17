@@ -1,4 +1,4 @@
-/*! jQuery UI - v1.10.2 - 2013-04-15
+Ôªø/*! jQuery UI - v1.10.2 - 2013-04-15
  * http://jqueryui.com
  * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.position.js, jquery.ui.draggable.js, jquery.ui.droppable.js, jquery.ui.resizable.js, jquery.ui.selectable.js, jquery.ui.sortable.js, jquery.ui.accordion.js, jquery.ui.autocomplete.js, jquery.ui.button.js, jquery.ui.datepicker.js, jquery.ui.dialog.js, jquery.ui.menu.js, jquery.ui.progressbar.js, jquery.ui.slider.js, jquery.ui.spinner.js, jquery.ui.tabs.js, jquery.ui.tooltip.js, jquery.ui.effect.js, jquery.ui.effect-blind.js, jquery.ui.effect-bounce.js, jquery.ui.effect-clip.js, jquery.ui.effect-drop.js, jquery.ui.effect-explode.js, jquery.ui.effect-fade.js, jquery.ui.effect-fold.js, jquery.ui.effect-highlight.js, jquery.ui.effect-pulsate.js, jquery.ui.effect-scale.js, jquery.ui.effect-shake.js, jquery.ui.effect-slide.js, jquery.ui.effect-transfer.js
  * Copyright 2013 jQuery Foundation and other contributors Licensed MIT */
@@ -6696,8 +6696,8 @@
                     prevText: "Prev", // Display text for previous month link
                     nextText: "Next", // Display text for next month link
                     currentText: "Today", // Display text for current month
-                    monthNames: ["th·ng 1", "th·ng 2", "th·ng 3", "th·ng 4", "th·ng 5", "th·ng 6", "th·ng 7", "th·ng 8", "th·ng 9", "th·ng 10", "th·ng 11", "th·ng 12"], // Names of months for drop-down and formatting
-                    monthNamesShort: ["th·ng 1", "th·ng 2", "th·ng 3", "th·ng 4", "th·ng 5", "th·ng 6", "th·ng 7", "th·ng 8", "th·ng 9", "th·ng 10", "th·ng 11", "th·ng 12"], // For formatting
+                    monthNames: ["th√°ng 1", "th√°ng 2", "th√°ng 3", "th√°ng 4", "th√°ng 5", "th√°ng 6", "th√°ng 7", "th√°ng 8", "th√°ng 9", "th√°ng 10", "th√°ng 11", "th√°ng 12"], // Names of months for drop-down and formatting
+                    monthNamesShort: ["th√°ng 1", "th√°ng 2", "th√°ng 3", "th√°ng 4", "th√°ng 5", "th√°ng 6", "th√°ng 7", "th√°ng 8", "th√°ng 9", "th√°ng 10", "th√°ng 11", "th√°ng 12"], // For formatting
                     dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], // For formatting
                     dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], // For formatting
                     dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"], // Column headings for days starting at Sund

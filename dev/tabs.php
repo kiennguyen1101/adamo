@@ -1,4 +1,4 @@
-﻿<?php
+<?php
   include_once ('includes/global.php');
   include_once ('includes/functions.php');
   $cat = array($_GET['cat']);
@@ -12,39 +12,39 @@
   $sub_cats = get_all_subcats($cat);
   $total_pages = get_total_pages($sub_cats);
   $products = get_tab_products($sub_cats, $start, $limit);
-?>
+ ?>
 
-<?php
-  if ($products == NULL) {
-    echo "ChÆ°a cÃ³ sáº£n pháº©m";
+ <?php
+	if ($products == NULL) {
+    echo "Chưa có sản phẩm";
   }
   else {
     $i = 0;
     foreach ($products as $product) {
       ?>
-      <div class="img-wrap <?php if (($i == 0) || ($i == 3)) echo 'first'; if (($i == 2) || ($i == 5)) echo 'last' ?>">
-        <a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>"><img border="0" alt="<?php echo $product['name'] ?>" src="thumbnail.php?pic=<?php echo $product['media_url'] ?>&w=219&sq=Y"></a>        
-        <div class="img-overlay">
-          <a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>" title="<?php echo $product['name']; ?>"><h2><?php echo $product['name']; ?></h2></a>
-          <?php
-          if ($product['listing_type'] == 'buy_out') {
-            $price = intval($product['buyout_price']);
-          }
-          elseif (intval($product['start_price']) > intval($product['max_bid'])) {
-            $price = intval($product['start_price']);
-          }
-          else {
-            $price = intval($product['max_bid']);
-          }
-          ?>
-          <span class="price"><h3><?php
+		<div class="img-wrap <?php if (($i == 0) || ($i == 3)) echo 'first'; if (($i == 2) || ($i == 5)) echo 'last' ?>">
+			<a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>"><img border="0" alt="<?php echo $product['name'] ?>" src="thumbnail.php?pic=<?php echo $product['media_url'] ?>&w=219&sq=Y"></a>        
+			<div class="img-overlay">
+				<a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>" title="<?php echo $product['name']; ?>"><h2><?php echo $product['name']; ?></h2></a>
+			<?php
+			  if ($product['listing_type'] == 'buy_out') {
+				$price = intval($product['buyout_price']);
+			  }
+			  elseif (intval($product['start_price']) > intval($product['max_bid'])) {
+				$price = intval($product['start_price']);
+			  }
+			  else {
+				$price = intval($product['max_bid']);
+			  }
+			  ?>
+			  <span class="price"><h3><?php
               setlocale(LC_MONETARY, 'vi_VN');
               echo money_format('%.0n', $price);
               ;
               ?></h3></span>
-        </div>
-        <span class="owner"><a href="other_items.php?owner_id=<?php echo $product['owner_id']; ?>"><h3><?php echo $product['username']; ?></h3></a></span>
-      </div>
+			</div>
+			<span class="owner"><a href="other_items.php?owner_id=<?php echo $product['owner_id']; ?>"><h3><?php echo $product['username']; ?></h3></a></span>
+		</div>
       <?php
       $i++;
     }
@@ -61,9 +61,9 @@
       $pagination .= "<div style='clear:both'></div><div class=\"pagination\">";
       //previous button
       if ($page > 1)
-        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">Ã‚Â«</a>";
+        $pagination.= "<a class='thisPane pre_btn' href=\"$targetpage&page=$prev\">«</a>";
       else
-        $pagination.= "<span class=\"disabled pre_btn\">Ã‚Â«</span>";
+        $pagination.= "<span class=\"disabled pre_btn\">«</span>";
 
       //pages	
       if ($lastpage < 7 + ($adjacents * 2)) { //not enough pages to bother breaking it up
@@ -118,9 +118,9 @@
 
       //next button
       if ($page < $counter - 1)
-        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">Ã‚Â»</a>";
+        $pagination.= "<a class='thisPane next_btn' href=\"$targetpage&page=$next\">»</a>";
       else
-        $pagination.= "<span class=\"disabled next_btn\">Ã‚Â»</span>";
+        $pagination.= "<span class=\"disabled next_btn\">»</span>";
       $pagination.= "</div>\n";
     }
     echo $pagination;

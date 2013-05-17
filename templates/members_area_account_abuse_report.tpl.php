@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## MyPHPAuction v6.05															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -40,13 +45,13 @@
     </tr>
     <tr class="c1">
       <td nowrap="nowrap" align="right"><?php echo MSG_COMMENTS; ?></td>
-    <script language="javascript" type="text/javascript">
-      function imposeMaxLength(Object, MaxLen)
-      {
-        return (Object.value.length <= MaxLen);
-      }
-    </script> 
-    <td ><textarea  style="resize:none;width:98%" rows="5" onkeypress="return imposeMaxLength(this, 500)" name="comment" style="width: 100%; height: 100" id="block_reason"><?php echo $post_details['comment']; ?></textarea></td>
+	  <script language="javascript" type="text/javascript">
+                     function imposeMaxLength(Object, MaxLen)
+                         {
+                           return (Object.value.length <= MaxLen);
+                         }
+       </script> 
+      <td ><textarea  style="resize:none;width:98%" rows="5" onkeypress="return imposeMaxLength(this, 500)" name="comment" style="width: 100%; height: 100" id="block_reason"><?php echo $post_details['comment']; ?></textarea></td>
     </tr>
     <tr>
       <td colspan="2" class="c4"></td>

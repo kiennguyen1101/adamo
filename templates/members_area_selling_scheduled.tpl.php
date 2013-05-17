@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -19,7 +24,7 @@
     <td class="membmenu" align="center"><?php echo MSG_AUTO_RELIST; ?></td>
     <td class="membmenu" align="center"><?php echo GMSG_OPTIONS; ?></td>
   </tr>
-  <!--
+<!--
   <tr class="c5">
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="60" height="1"></td>
     <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
@@ -28,7 +33,7 @@
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="50" height="1"></td>
     <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="140" height="1"></td>
   </tr>
-  -->
+-->
   <?php echo $scheduled_auctions_content; ?>
   <?php if ($nb_items > 0) { ?>
       <tr>

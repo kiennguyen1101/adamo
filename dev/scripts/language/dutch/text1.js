@@ -1,17 +1,17 @@
-﻿var sStyleWeight1;
+var sStyleWeight1;
 var sStyleWeight2;
 var sStyleWeight3;
-var sStyleWeight4;
+var sStyleWeight4; 
 
 function loadTxt()
-{
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Lettertype";
     txtLang[1].innerHTML = "Tekenstijl";
     txtLang[2].innerHTML = "Dikte";
     txtLang[3].innerHTML = "Voorgrond";
     txtLang[4].innerHTML = "Achtergrond";
-
+    
     txtLang[5].innerHTML = "Decoratie";
     txtLang[6].innerHTML = "Tekst Stand";
     txtLang[7].innerHTML = "Minicaps";
@@ -46,12 +46,12 @@ function loadTxt()
     optLang[1].text = "Cursief"
     optLang[2].text = "Vet"
     optLang[3].text = "Vet Cursief"
-
+    
     optLang[0].value = "Standaard"
     optLang[1].value = "Cursief"
     optLang[2].value = "Vet"
     optLang[3].value = "Vet Cursief"
-
+    
     sStyleWeight1 = "Standaard"
     sStyleWeight2 = "Cursief"
     sStyleWeight3 = "Vet"
@@ -62,27 +62,24 @@ function loadTxt()
     optLang[6].text = "Onder"
     optLang[7].text = "Tekst-boven"
     optLang[8].text = "Tekst-onder"
-
+    
     document.getElementById("btnPick1").value = "Kiezen";
     document.getElementById("btnPick2").value = "Kiezen";
 
     document.getElementById("btnCancel").value = "annuleren";
     document.getElementById("btnApply").value = "toepassen";
     document.getElementById("btnOk").value = " ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Tekst Opmaak</title>")
-}
+    }

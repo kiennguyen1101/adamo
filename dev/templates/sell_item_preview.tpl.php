@@ -1,5 +1,10 @@
 ﻿<?php
-
+#################################################################
+## MyPHPAuction 2009															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -8,7 +13,7 @@
 
 <table width="100%" border="0" cellpadding="3" cellspacing="2">
   <tr class="c4">
-    <td colspan="3">Auction Preview</td>
+    <td colspan="3"></td>
   </tr>
   <tr>
     <td colspan="3"><?php echo $auction_details_page; ?></td>

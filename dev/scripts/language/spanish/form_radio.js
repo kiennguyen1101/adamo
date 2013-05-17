@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Nombre";
     txtLang[1].innerHTML = "Valor";
@@ -8,13 +8,13 @@
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "Activado"
     optLang[1].text = "Desactivado"
-
+    
     document.getElementById("btnCancel").value = "Cancelar";
     document.getElementById("btnInsert").value = "Insertar";
     document.getElementById("btnApply").value = "Aplicar";
     document.getElementById("btnOk").value = "Aplicar y salir";
-}
+    }
 function writeTitle()
-{
-    document.write("<title>" + "Bot\u00F3n de Opcio\u00F3n" + "</title>")
-}
+    {
+    document.write("<title>"+"Bot\u00F3n de Opcio\u00F3n"+"</title>")
+    }

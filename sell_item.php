@@ -1,14 +1,23 @@
 <?php
+#################################################################
+## MyPHPAuction v6.05															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
-
-  session_start();
+session_start();
 
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
+  include_once ('includes/class_formchecker.php');
+  include_once ('includes/class_custom_field.php');
+  include_once ('includes/class_user.php');
+  include_once ('includes/class_fees.php');
+  include_once ('includes/class_item.php');
   include_once ('includes/functions_item.php');
-
-  global $db;
+  include_once ('includes/class_shop.php');
 
   (array) $user_details = null;
   if ($session->value('user_id')) {
@@ -307,7 +316,6 @@
 
       $frmchk_details = $item_details;
 
-      /* Formchecker for user creation/edit */
       include('includes/procedure_frmchk_item.php');
 
       if ($fv->is_error()) {
@@ -404,7 +412,7 @@
 			" . DB_PREFIX . "categories WHERE parent_id=0
 			" . $categories_subquery . " ORDER BY order_id ASC");
 
-      $main_categories_select = '<select class="contentfont" id="selector_0" onchange="populate(0)" size="20" name="selector_0" style="width: 100%; "> ';
+      $main_categories_select = '<select class="contentfont choose_cat" id="selector_0" onchange="populate(0)" size="20" name="selector_0" style="width: 100%; "> ';
 
       while ($cat_details = $db->fetch_array($sql_select_main_categories)) {
         $main_categories_select .= '<option value="' . $cat_details['category_id'] . '">' . $category_lang[$cat_details['category_id']] . ' ' . $cat_details['is_subcat'] . '</option>';
@@ -416,21 +424,18 @@
     }
 
     if ($sale_step == 'finish') /* auction submission page */ {
-
-      $setup_fee = new fees();
-      $setup_fee->setts = &$setts;
-
-      $shop_status = $shop->shop_status($user_details, true);
-
-      $show_list_similar = true;
-
       $template->set('sell_item_header', header7(strtoupper(MSG_FINISH)));
 
       $sell_item_header_menu = $template->process('sell_item_header_menu.tpl.php');
       $template->set('sell_item_header_menu', $sell_item_header_menu);
 
       $template->set('current_step', 'finish'); ## MyPHPAuction 2009 add setup fee procedure here.
+      $setup_fee = new fees();
+      $setup_fee->setts = &$setts;
 
+      $shop_status = $shop->shop_status($user_details, true);
+
+      $show_list_similar = true;
       if ($session->value('refresh_id') > 0) {
         $template->set('sell_item_finish_content', '<p align="center" class="contentfont">' . MSG_DOUBLE_POST_ERROR . '</p>');
       }
@@ -446,26 +451,16 @@
           $refresh_id = $item->insert($item_details, $session->value('user_id'), 'auction', true);
         }
         else {
+          $setup_result = $setup_fee->setup($user_details, $item_details, $voucher_details);
 
-          try {
-            $db->beginTransaction();
+          $template->set('sell_item_finish_content', $setup_result['display']);
 
-            $setup_result = $setup_fee->setup($user_details, $item_details, $voucher_details);
+          // first the insert procedure
+          $refresh_id = $item->insert($item_details, $session->value('user_id'));
 
-            // first the insert procedure
-            $refresh_id = $item->insert($item_details, $session->value('user_id'));
-            $db->Commit();
-
-
-            $mail_input_id = $refresh_id; ## MyPHPAuction 2009 confirm posting to seller
-
-            $template->set('sell_item_finish_content', $setup_result['display']);
-            include('language/' . $setts['site_lang'] . '/mails/new_item_seller_confirmation.php'); ## MyPHPAuction 2009 if listed in store, announce users that have the store added to their favorites about the new item
-            include('language/' . $setts['site_lang'] . '/mails/new_item_fav_store_confirmation.php');
-          } catch (error $e) {
-            $db->rollBack();
-            echo $e;
-          }
+          $mail_input_id = $refresh_id; ## MyPHPAuction 2009 confirm posting to seller
+          include('language/' . $setts['site_lang'] . '/mails/new_item_seller_confirmation.php'); ## MyPHPAuction 2009 if listed in store, announce users that have the store added to their favorites about the new item
+          include('language/' . $setts['site_lang'] . '/mails/new_item_fav_store_confirmation.php');
         }
         $session->unregister('auction_id');
         $session->set('refresh_id', $refresh_id);
@@ -557,9 +552,6 @@
       $template->set('current_step', 'shipping');
 
       $template->set('shipping_methods_drop_down', $item->shipping_methods_drop_down('type_service', $item_details['type_service']));
-
-
-//kiennguyen1101
 
       $direct_payments = $item->select_direct_payment($item_details['direct_payment'], $session->value('user_id'));
 
@@ -720,10 +712,7 @@
 
       $template->set('category_id_type', 'category_id');
 
-      $choose_category_expl_message = '<table width="100%" border="0" cellspacing="2" cellpadding="3" align="center"> ' .
-        '<tr> ' .
-        '	<td class="contentfont cat_explain_message">' . MSG_SUBMIT_ITEM_MAIN_CAT . '</td> ' .
-        '</tr></table><br>';
+      $choose_category_expl_message = '<span class="contentfont cat_explain_message"><h2>' . MSG_SUBMIT_ITEM_MAIN_CAT . '</h2></span>';
       $template->set('choose_category_expl_message', $choose_category_expl_message);
 
       $sell_item_page_content = $template->process('sell_item_choose_category.tpl.php');
@@ -738,16 +727,15 @@
 
       $template->set('category_id_type', 'addl_category_id');
 
-      $choose_category_expl_message = '<table width="100%" border="0" cellspacing="2" cellpadding="3" align="center"> ' .
-        '<tr><td class="contentfont cat_explain_message">' . MSG_SUBMIT_ITEM_ADDL_CAT_A . '</td></tr> ';
+      $choose_category_expl_message = '<span class="contentfont cat_explain_message"><h2>' . MSG_SUBMIT_ITEM_ADDL_CAT_A . '</h2> ';
 
       $category_fee = $setup_fee->display_fee('second_cat_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
       if ($category_fee['amount']) {
-        $choose_category_expl_message .= '<tr><td>' . MSG_A_FEE_OF . ' <b>' . $fees->display_amount($category_fee['amount'], $setts['currency'], true) . '</b> ' . MSG_WILL_BE_APPLIED . '</td></tr>';
+        $choose_category_expl_message .= '<h3>' . MSG_A_FEE_OF . ' <b>' . $fees->display_amount($category_fee['amount'], $setts['currency'], true) . '</b> ' . MSG_WILL_BE_APPLIED . '</h3>';
       }
 
-      $choose_category_expl_message .= '</table><br>';
+      $choose_category_expl_message .= '</span><br>';
       $template->set('choose_category_expl_message', $choose_category_expl_message);
 
       $sell_item_page_content = $template->process('sell_item_choose_category.tpl.php');

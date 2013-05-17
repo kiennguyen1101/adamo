@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Sti";
     txtLang[1].innerHTML = "Bokmerke";
@@ -10,13 +10,13 @@
     optLang[0].text = "Samme"
     optLang[1].text = "Nytt vindu"
     optLang[2].text = "Overordnet"
-
+    
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnInsert").value = "Sett inn";
     document.getElementById("btnApply").value = "Oppdater";
     document.getElementById("btnOk").value = " Ok ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Link</title>")
-}
+    }

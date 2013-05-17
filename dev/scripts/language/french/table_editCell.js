@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {    
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "justifier";
     txtLang[1].innerHTML = "Propri\u00E9t\u00E9s";
@@ -58,20 +58,17 @@
     optLang[23].text = "Ligne courante"
     optLang[24].text = "Colonne courante"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Propri\u00E9t\u00E9s d\u0027une cellule</title>")
-}
+    }

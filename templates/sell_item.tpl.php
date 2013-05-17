@@ -1,16 +1,18 @@
 <?php
-
-
-  if (!defined('INCLUDED')) {
+#################################################################
+## MyPHPAuction v6.04															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
+if (!defined('INCLUDED')) {
     die("Access Denied");
   }
 ?>
-
 <?php echo $sell_item_header; ?>
 <?php echo $sell_item_header_menu; ?>
 <?php echo $check_voucher_message; ?>
 <?php echo $display_formcheck_errors; ?>
-
 <?php if ($current_step != 'finish') { ?>
     <form action="sell_item.php" method="post" enctype="multipart/form-data" name="ad_create_form">
       <input type="hidden" name="current_step" value="<?php echo $current_step; ?>" >
@@ -81,6 +83,4 @@
     <?php } ?>
   <?php echo $sell_item_page_content; ?>
   <?php if ($current_step != 'finish') { ?>
-    </form>
-    
-  <?php } ?>
+    </form><?php } ?>

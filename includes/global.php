@@ -1,5 +1,11 @@
 <?php
 
+#################################################################
+## MyPHPAuction v6.05															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   $fileExtension = (file_exists('includes/global.php')) ? '' : '../';
 
@@ -138,21 +144,6 @@
   /*   * ***************************************************
    * Template
    * ************************************************* */
-
-  require_once(BASE_DIR . '/libs/Smarty/Smarty.class.php');
-
-  $smarty = new Smarty();
-
-  $smarty->setTemplateDir(BASE_DIR . '/templates/');
-  $smarty->setCompileDir(BASE_DIR . '/templates_compiled/');
-  $smarty->setConfigDir(BASE_DIR . '/configs/');
-  $smarty->setCacheDir(BASE_DIR . '/cache/');
-
-  if ($setts['default_theme']) {
-    $smarty->addTemplateDir(THEME_DIR . "{$setts['default_theme']}/templates/");
-  }
-
-
 
 ## initialize the template for the output that will be generated
   $template = new template('templates/');

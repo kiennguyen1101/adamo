@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Autopassa";
     txtLang[1].innerHTML = "Egenskaper";
@@ -17,7 +17,7 @@
     txtLang[13].innerHTML = "V\u00E4nster";
     txtLang[14].innerHTML = "H\u00F6ger";
     txtLang[15].innerHTML = "\u00D6verst";
-    txtLang[16].innerHTML = "Nederst";
+    txtLang[16].innerHTML = "Nederst";  
     txtLang[17].innerHTML = "Kantlinjer";
     txtLang[18].innerHTML = "Sammanfoga";
     txtLang[19].innerHTML = "Bakgrund";
@@ -37,26 +37,23 @@
     optLang[8].text = "Ja"
     optLang[9].text = "Nej"
 
-    document.getElementById("btnPick").value = "V\u00E4lj";
-    document.getElementById("btnImage").value = "Bild";
+    document.getElementById("btnPick").value="V\u00E4lj";
+    document.getElementById("btnImage").value="Bild";
 
     document.getElementById("btnCancel").value = "Avbryt";
     document.getElementById("btnApply").value = "Verkst\u00E4ll";
     document.getElementById("btnOk").value = " OK ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default:return "";
+        }
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Tabellegenskaper</title>")
-}
+    }

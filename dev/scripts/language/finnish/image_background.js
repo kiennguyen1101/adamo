@@ -1,5 +1,5 @@
-﻿function loadTxt()
-{
+function loadTxt()
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Kuvan l\u00E4hde";
     txtLang[1].innerHTML = "Toista";
@@ -21,12 +21,12 @@
     optLang[11].text = "Alareuna"
     optLang[12].text = "Pikselit"
     optLang[13].text = "Prosentti"
-
+    
     document.getElementById("btnCancel").value = "Peruuta";
     document.getElementById("btnOk").value = " OK ";
-}
+    }
 function writeTitle()
-{
+    {
     document.write("<title>Taustakuva</title>")
-}
+    }
 

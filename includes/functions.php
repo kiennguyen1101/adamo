@@ -1,7 +1,12 @@
-﻿<?php
+<?php
+#################################################################
+## MyPHPAuction v6.05															##
+##-------------------------------------------------------------##
+## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
-
-  function header_redirect($redirect_url) {
+function header_redirect($redirect_url) {
     echo "<script>document.location.href='" . $redirect_url . "'</script>";
   }
 
@@ -36,7 +41,7 @@
   function unlink_pin() {
     global $session;
 
-    $path = (@IN_ADMIN == 1) ? '../' : '';
+    $path = (IN_ADMIN == 1) ? '../' : '';
 
     if ($session->is_set('pin_value')) {
       @unlink($path . 'uplimg/site_pin_' . $session->value('pin_value') . '.jpg');
@@ -51,17 +56,12 @@
 
   function sanitize_var($value) {
     if (!is_numeric($value)) {
-      $value = preg_replace("#[^A-Za-z0-9_ ]#", "", $value);
-      //$value = ereg_replace("[^A-Za-z0-9_ ]", "", $value);
-      // $value = eregi_replace('amp','and',$value);
-      // $value = eregi_replace('quot','',$value);
-      // $value = eregi_replace('039','',$value);
-      // $value = eregi_replace(' ','-',$value);
+      $value = ereg_replace("[^A-Za-z0-9_ ]", "", $value);
 
-      $value = preg_replace('/amp/i', 'and', $value);
-      $value = preg_replace('/quot/i', '', $value);
-      $value = preg_replace('/039/i', '', $value);
-      $value = preg_replace('/ /i', '-', $value);
+      $value = eregi_replace('amp', 'and', $value);
+      $value = eregi_replace('quot', '', $value);
+      $value = eregi_replace('039', '', $value);
+      $value = eregi_replace(' ', '-', $value);
     }
 
     return $value;
@@ -284,7 +284,7 @@
     $handle = opendir($relative_path . 'themes');
 
     while ($file = readdir($handle)) {
-      if (!strstr($file, '[.]')) {
+      if (!ereg('[.]', $file)) {
         $output[] = $file;
       }
     }
@@ -323,7 +323,7 @@
     $handle = opendir($relative_path . 'language');
 
     while ($file = readdir($handle)) {
-      if (!strstr($file, '[.]')) {
+      if (!ereg('[.]', $file)) {
         $output[] = $file;
       }
     }
@@ -448,7 +448,7 @@
         '	<tr class="c5"> ' .
         '	</tr> ' .
         '	<tr class="c1"> ' .
-        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">' . GMSG_VOUCHER_CODE_EXPL . '</span></a></td> ' .
+        '		<td width="150" align="right" class="contentfont"><a href="#" class="tooltip">' . GMSG_VOUCHER_CODE . '<span class="tooltip_content">'. GMSG_VOUCHER_CODE_EXPL .'</span></a></td> ' .
         '		<td><input name="voucher_value" type="text" class="contentfont" id="voucher_value" value="' . $voucher_value . '" size="40" /></td> ' .
         '	</tr> ';
       $display_output .= ($new_table) ? '</table>' : '';
@@ -625,13 +625,13 @@
     (array) $output = null;
     (array) $subcats_array = null;
 
-    if (stristr($base_url, 'auction_details.php')) {
+    if (eregi('auction_details.php', $base_url)) {
       $item_details = $db->get_sql_row("SELECT auction_id, name, end_time, category_id FROM " . DB_PREFIX . "auctions WHERE
 			auction_id='" . $auction_id . "'");
 
       $parent_id = $item_details['category_id'];
     }
-    else if (stristr($base_url, 'wanted_details.php')) {
+    else if (eregi('wanted_details.php', $base_url)) {
       $item_details = $db->get_sql_row("SELECT wanted_ad_id, name, end_time, category_id FROM " . DB_PREFIX . "wanted_ads WHERE
 			wanted_ad_id='" . $wanted_ad_id . "'");
 
@@ -651,7 +651,7 @@
     }
 
     /* now generate the title and meta tags */
-    if (stristr($base_url, 'auction_details.php')) {
+    if (eregi('auction_details.php', $base_url)) {
       $output['title'] = $db->add_special_chars($item_details['name']) . ' (' . MSG_AUCTION_ID . ': ' . $item_details['auction_id'] . ', ' .
         GMSG_END_TIME . ': ' . show_date($item_details['end_time']) . ') - ' . $setts['sitename'];
 
@@ -660,7 +660,7 @@
         '<meta name="keywords" content="' . $db->add_special_chars($item_details['name']) . ', ' . $db->add_special_chars($db->implode_array($subcats_array, ', ')) . ', ' .
         $setts['sitename'] . '"> ';
     }
-    else if (stristr($base_url, 'wanted_details.php')) {
+    else if (eregi('wanted_details.php', $base_url)) {
       $output['title'] = $db->add_special_chars($item_details['name']) . ' (' . MSG_WANTED_AD_ID . ': ' . $item_details['wanted_ad_id'] . ', ' .
         GMSG_END_TIME . ': ' . show_date($item_details['end_time']) . ') - ' . $setts['sitename'];
 
@@ -669,7 +669,7 @@
         '<meta name="keywords" content="' . $db->add_special_chars($item_details['name']) . ', ' . $db->add_special_chars($db->implode_array($subcats_array, ', ')) . ', ' .
         $setts['sitename'] . '"> ';
     }
-    else if (stristr($base_url, 'categories.php')) {
+    else if (eregi('categories.php', $base_url)) {
       $output['title'] = ((is_array($subcats_array)) ? $db->add_special_chars($db->implode_array($subcats_array, ' - ')) . ' - ' : '') . $setts['sitename'];
 
       $main_category_id = $db->main_category($parent_id);
@@ -1257,8 +1257,7 @@
   }
 
   function optimize_search_string($keywords) {
-    //$output = eregi_replace(' ', ' +', $keywords);
-    $output = preg_replace('/ /i', ' +', $keywords);
+    $output = eregi_replace(' ', ' +', $keywords);
 
     return $output;
   }
@@ -1283,8 +1282,7 @@
     return ($output > 0) ? $output : GMSG_NA;
   }
 
-  function get_slide_url() {
-    $dir = '/home/adamo/public_html/themes/red/nivo_slider/images';
+  function get_slide_url($dir) {
     $allFiles = scandir($dir);
     $files = array_diff($allFiles, array('.', '..'));
     return $files;
@@ -1444,3 +1442,4 @@
 
     return $products;
   }
+?>

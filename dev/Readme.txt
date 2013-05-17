@@ -1,4 +1,4 @@
-﻿================================================== =
+================================================== =
 To Upgrade:-
 
 Upload all of the files contained within the update kit and overwrite if/when prompted 

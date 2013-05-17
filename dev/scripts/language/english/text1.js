@@ -1,17 +1,17 @@
-﻿var sStyleWeight1;
+var sStyleWeight1;
 var sStyleWeight2;
 var sStyleWeight3;
-var sStyleWeight4;
+var sStyleWeight4; 
 
 function loadTxt()
-{
+    {
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "Font";
     txtLang[1].innerHTML = "Style";
     txtLang[2].innerHTML = "Size";
     txtLang[3].innerHTML = "Foreground";
     txtLang[4].innerHTML = "Background";
-
+    
     txtLang[5].innerHTML = "Decoration";
     txtLang[6].innerHTML = "Text Case";
     txtLang[7].innerHTML = "Minicaps";
@@ -38,7 +38,7 @@ function loadTxt()
     txtLang[24].innerHTML = "Subscript";
     txtLang[25].innerHTML = "Relative";
     txtLang[26].innerHTML = "Baseline";
-
+    
     txtLang[27].innerHTML = "Character Spacing";
 
     var optLang = document.getElementsByName("optLang");
@@ -46,43 +46,40 @@ function loadTxt()
     optLang[1].text = "Italic"
     optLang[2].text = "Bold"
     optLang[3].text = "Bold Italic"
-
+    
     optLang[0].value = "Regular"
     optLang[1].value = "Italic"
     optLang[2].value = "Bold"
     optLang[3].value = "Bold Italic"
-
+    
     sStyleWeight1 = "Regular"
     sStyleWeight2 = "Italic"
     sStyleWeight3 = "Bold"
     sStyleWeight4 = "Bold Italic"
-
+    
     optLang[4].text = "Top"
     optLang[5].text = "Middle"
     optLang[6].text = "Bottom"
     optLang[7].text = "Text-Top"
     optLang[8].text = "Text-Bottom"
-
+    
     document.getElementById("btnPick1").value = "Pick";
     document.getElementById("btnPick2").value = "Pick";
 
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnApply").value = "apply";
     document.getElementById("btnOk").value = " ok ";
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }    
 function writeTitle()
-{
+    {
     document.write("<title>Text Formatting</title>")
-}
+    }

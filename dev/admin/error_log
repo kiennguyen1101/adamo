@@ -1,4 +1,4 @@
-﻿[22-Apr-2013 14:10:45 Asia/Bangkok] PHP Warning:  include_once(../language/vietnam/global.lang.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/dev/includes/init.php on line 26
+[22-Apr-2013 14:10:45 Asia/Bangkok] PHP Warning:  include_once(../language/vietnam/global.lang.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/dev/includes/init.php on line 26
 [22-Apr-2013 14:10:45 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '../language/vietnam/global.lang.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/dev/includes/init.php on line 26
 [22-Apr-2013 14:10:45 Asia/Bangkok] PHP Warning:  include_once(../language/vietnam/category.lang.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/dev/includes/init.php on line 27
 [22-Apr-2013 14:10:45 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '../language/vietnam/category.lang.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/dev/includes/init.php on line 27
@@ -165,3 +165,6 @@
 [10-May-2013 11:40:25 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_IF, expecting T_CATCH in /home/adamo/public_html/admin/fees_management.php on line 60
 [10-May-2013 16:17:49 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_CATCH in /home/adamo/public_html/admin/table_bid_increments.php on line 57
 [10-May-2013 16:18:11 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_CATCH in /home/adamo/public_html/admin/table_bid_increments.php on line 57
+[11-May-2013 19:07:46 Asia/Bangkok] PHP Parse error:  syntax error, unexpected '}' in /home/adamo/public_html/admin/table_bid_increments.php on line 91
+[11-May-2013 19:07:49 Asia/Bangkok] PHP Parse error:  syntax error, unexpected '}' in /home/adamo/public_html/admin/table_bid_increments.php on line 91
+[11-May-2013 19:08:19 Asia/Bangkok] PHP Parse error:  syntax error, unexpected '}' in /home/adamo/public_html/admin/table_bid_increments.php on line 91

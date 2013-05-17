@@ -1,6 +1,6 @@
-﻿function loadTxt()
-{
-
+function loadTxt()
+    {
+    
     var txtLang = document.getElementsByName("txtLang");
     txtLang[0].innerHTML = "AutoFit";
     txtLang[1].innerHTML = "Properties";
@@ -31,7 +31,7 @@
     document.getElementById("btnCancel").value = "cancel";
     document.getElementById("btnApply").value = "apply";
     document.getElementById("btnOk").value = " ok ";
-
+    
     var optLang = document.getElementsByName("optLang");
     optLang[0].text = "pixels"
     optLang[1].text = "percent"
@@ -59,20 +59,17 @@
     optLang[23].text = "Current Row"
     optLang[24].text = "Current Column"
     optLang[25].text = "Whole Table"
-}
-function getTxt(s)
-{
-    switch (s)
-    {
-        case "Custom Colors":
-            return "Custom Colors";
-        case "More Colors...":
-            return "More Colors...";
-        default:
-            return "";
     }
-}
+function getTxt(s)
+    {
+    switch(s)
+        {
+        case "Custom Colors": return "Custom Colors";
+        case "More Colors...": return "More Colors...";
+        default: return "";
+        }
+    }    
 function writeTitle()
-{
+    {
     document.write("<title>Cell Properties</title>")
-}
+    }
