@@ -2467,3 +2467,7 @@
 [17-May-2013 22:38:59 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
 [17-May-2013 22:38:59 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
 [17-May-2013 22:40:09 Asia/Bangkok] PHP Notice:  Undefined variable: setts in /home/adamo/public_html/includes/config.php on line 16
+[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  scandir(http://adamo.vn//themes/red/nivo_slider/images) [<a href='function.scandir'>function.scandir</a>]: failed to open dir: not implemented in /home/adamo/public_html/includes/functions.php on line 1286
+[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  scandir() [<a href='function.scandir'>function.scandir</a>]: (errno 0): Success in /home/adamo/public_html/includes/functions.php on line 1286
+[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  array_diff() [<a href='function.array-diff'>function.array-diff</a>]: Argument #1 is not an array in /home/adamo/public_html/includes/functions.php on line 1287
+[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  Invalid argument supplied for foreach() in /home/adamo/public_html/themes/red/templates/header.tpl.php on line 215

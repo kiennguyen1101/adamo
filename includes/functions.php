@@ -1442,4 +1442,15 @@ function header_redirect($redirect_url) {
 
     return $products;
   }
+  function get_product_stt($id){
+	global $db;
+	$sql = "SELECT box_value 
+			FROM " . DB_PREFIX . "custom_fields_data
+			WHERE box_id = 1 AND owner_id = " .$id."";
+	$rows = $db->query($sql);	
+	while ($result = $db->fetch_array($rows)){
+		$status = $result['box_value'];
+	}
+	return $status;
+  }
 ?>
