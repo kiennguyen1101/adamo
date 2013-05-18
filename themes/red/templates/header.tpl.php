@@ -208,7 +208,7 @@
 			<!---only show on homepage-->
 			
             <?php if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "index.php") { ?>
-            <?php $files = get_slide_url($_SERVER['DOCUMENT_ROOT'].'/themes/'.$setts['default_theme'].'/nivo_slider/images'); ?>
+            <?php $files = get_slide_url('/home/adamo/public_html/themes/red/nivo_slider/images'); ?>
                 <div id="home_slider" class="slider-wrapper theme-light">
                     <div id="slider" class="nivoSlider">
                         <?php
@@ -226,7 +226,7 @@
 		<!---only show on homepage-->
         <?php
         if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "index.php") {
-            $cats = array(2409, 2347, 2320, 2816, 2163, 2774, 2176);
+            $cats = array(2409, 2347, 2320, 2722, 2774, 2176);
 			$order_array = 'ORDER BY';
 			foreach ($cats as $item) {
 			  $order_array .= ' category_id = ' . $item . ' DESC,';

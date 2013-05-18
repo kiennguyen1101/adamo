@@ -48,6 +48,8 @@ else
 
 		$form_submitted = false;
 	     //sua cua kien
+      if (!$start)
+        $start = 0;
 		$limit = 20;
 
 		$order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'a.auction_id';

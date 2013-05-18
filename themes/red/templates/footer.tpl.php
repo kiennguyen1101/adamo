@@ -18,8 +18,8 @@
 			<li><a href="<?php echo $register_link; ?>"><?php echo $register_btn_msg; ?></a></li>
 			<li><a href="<?php echo $login_link; ?>"><?php echo $login_btn_msg; ?></a></li>
 			<li> <?php if ($layout['is_about']) { ?><a href="<?php echo process_link('content_pages', array('page' => 'about_us')); ?>"><?php echo MSG_BTN_ABOUT_US; ?></a><?php } ?></li>
+			
 			<li><a href="<?php echo process_link('site_fees'); ?>"><?php echo MSG_BTN_SITE_FEES; ?></a></li>
-			<li><a href="http://adamo.vn/content_pages.php?page=custom_page&topic_id=56">Thanh toán tạm giữ</a></li>
 		</ul>
 	</div>
   
@@ -30,7 +30,6 @@
 			<li><?php if (!$setts['enable_private_site'] || $is_seller) { ?><a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a> <?php } ?></li>
 			<li><a href="<?php echo process_link('content_pages', array('page' => 'help')); ?>"><?php echo MSG_BTN_HELP; ?></a></li>
 			<li><a href="<?php echo process_link('content_pages', array('page' => 'faq')); ?>"><?php echo MSG_BTN_FAQ; ?></a></li>
-			<li><a href="http://adamo.vn/content_pages.php?page=custom_page&topic_id=58">Chính sách bảo vệ người dùng</a></li>
 			<li><?php if ($layout['is_pp']) { ?> <a href="<?php echo process_link('content_pages', array('page' => 'privacy')); ?>"><?php echo MSG_BTN_PRIVACY; ?></a><?php } ?> </li>
 			
 		</ul>
@@ -45,20 +44,14 @@
 			<li class="twitter"><a href="https://twitter.com/adamovietnam">Twitter</a></li>
 		</ul>
   
-  <?php /**echo $custom_pages_links; **/?> 
+  <?php echo $custom_pages_links; ?> 
   </div>
   <div class="footer_column">
 	<h2>Đối tác</h2>
-		<script src="https://www.nganluong.vn/tooltip_nbdb/nldb_tootip.js"></script>
-		<script type="text/javascript">
-		var merchantID=	0; // 22287 là Mã merchant site( hay mã website dăng ky trên Ngân Lượng)
-		var uesrID=245009; //  là Mã tài khoản NgânLượng.vn của bạn
-		var imageType=180; // 230 là kích thước logo rộng 230px
-		ngaluongloadframe(merchantID,uesrID,imageType);	
-		</script>
-		
-	<span id="siteseal" style="margin: 20px auto;display: block;width: 132px;"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=vmbtHwia7LTvKE4mkL60e1YMfy4JN2PwaoOds3EvThNWcwOTZ5"></script></span>
-
+	<a href=""><img src="http://adamo.vn/themes/red/img/SSL_200x40_ani1.gif" border="0"></a>
+	<a href="" id="cnbanner">SSL</a>
+	<script language="JavaScript" src="http://www.comodo.com/javascript/banner.js" type="text/javascript"></script>
+	<img src="http://adamo.vn/themes/red/img/nldb_s_200.png" border="0">
   </div>
 </div>       
 </body>

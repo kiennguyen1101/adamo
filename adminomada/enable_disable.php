@@ -60,11 +60,11 @@ else
 					break;
 				case 'registration_terms':
 					$sql_update_secondary = $db->query("UPDATE " . DB_PREFIX . "layout_setts SET
-						reg_terms_content='" . eregi_replace("\n", '<br>', $post_details['reg_terms_content']) . "'");
+						reg_terms_content='" . stristr_replace("\n", '<br>', $post_details['reg_terms_content']) . "'");
 					break;
 				case 'sellitem_terms':
 					$sql_update_secondary = $db->query("UPDATE " . DB_PREFIX . "layout_setts SET
-						auct_terms_content='" . eregi_replace("\n", '<br>', $post_details['auct_terms_content']) . "'");
+						auct_terms_content='" . stristr_replace("\n", '<br>', $post_details['auct_terms_content']) . "'");
 					break;
 				case 'auction_sniping':
 					$sql_update_secondary = $db->query("UPDATE " . DB_PREFIX . "gen_setts SET

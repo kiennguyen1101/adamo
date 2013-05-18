@@ -173,7 +173,7 @@ else
 		
 		$eoa_fee->set_fees($session->value('user_id'));
 
-		if (eregi('b', $eoa_fee->fee['endauction_fee_applies']))
+		if (stristr('b', $eoa_fee->fee['endauction_fee_applies']))
 		{
 			$unpaid_fees = $db->count_rows('winners', "WHERE buyer_id='" . $session->value('user_id') . "' AND active!=1 AND payment_status!='confirmed'");
 

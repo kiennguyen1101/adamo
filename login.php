@@ -72,7 +72,7 @@ else
 			$template->set('invalid_login_message', $invalid_login_message);
 		}
 
-		$redirect = @ereg_replace('_AND_', '&', $_REQUEST['redirect']);		
+		$redirect = preg_replace('#_AND_#', '&', $_REQUEST['redirect']);		
 		$template->set('redirect', $redirect);
 
 		$template_output .= $template->process('login.tpl.php');

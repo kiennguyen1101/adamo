@@ -196,7 +196,7 @@ function uploadfiles($pics)
 			}
 			$cc++;
 		} 
-		else if (eregi("http://",$pictures[$i]))
+		else if (stristr("http://",$pictures[$i]))
 		{
 			//dump("$i - http");
 			$return[$i]=$pictures[$i];
@@ -390,7 +390,7 @@ while ($row=mysql_fetch_array($result))
 		{
 			if ($pictures[$ii]) 
 			{
-				if (eregi("http://",$pictures[$ii]))
+				if (stristr("http://",$pictures[$ii]))
 				{
 					$addpic = $pictures[$ii];
 				}
@@ -405,7 +405,7 @@ while ($row=mysql_fetch_array($result))
 		////////////////  ADD MOVIE TO MEDIA TABLE   //////////////////////
 		if ($mymovie != "") 
 		{
-			if (eregi("http://",$mymovei)) $addmov = $mymovie;
+			if (stristr("http://",$mymovei)) $addmov = $mymovie;
 			else $addmov = $mymovie;
 			mysql_query("INSERT INTO " . DB_PREFIX . "auction_media(media_url,auction_id,media_type) VALUES('$addmov','$auid','2')");
 		}

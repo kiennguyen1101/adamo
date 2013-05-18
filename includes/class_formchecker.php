@@ -120,7 +120,7 @@ class formchecker extends database
 	{
 		foreach ($value_array as $key => $value)
 		{
-			if (eregi('custom_box_', $key))
+			if (stristr('custom_box_', $key))
 			{
 				$custom_box_id = intval(str_replace('custom_box_', '', $key));
 				$custom_box_id = intval(str_replace('[]', '', $custom_box_id));

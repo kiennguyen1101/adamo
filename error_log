@@ -2445,29 +2445,4 @@
 [13-May-2013 12:16:52 Asia/Bangkok] PHP Warning:  touch() [<a href='function.touch'>function.touch</a>]: Unable to create file cache/cache_219_1__httppicovnUploadsProducts44851_bdf6500p4jpg.img because Permission denied in /home/adamo/public_html/includes/class_image.php on line 275
 [13-May-2013 12:16:52 Asia/Bangkok] PHP Warning:  imagejpeg() [<a href='function.imagejpeg'>function.imagejpeg</a>]: Unable to open 'cache/cache_219_1__httppicovnUploadsProducts44851_bdf6500p4jpg.img' for writing: Permission denied in /home/adamo/public_html/includes/class_image.php on line 276
 [13-May-2013 12:16:52 Asia/Bangkok] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/adamo/public_html/includes/class_image.php:275) in /home/adamo/public_html/thumbnail.php on line 57
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  Division by zero in /home/adamo/public_html/includes/class_image.php on line 200
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  Division by zero in /home/adamo/public_html/includes/class_image.php on line 201
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagecreate() [<a href='function.imagecreate'>function.imagecreate</a>]: Invalid image dimensions in /home/adamo/public_html/includes/class_image.php on line 228
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 230
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagecolorallocate() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 231
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagefilledrectangle() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 233
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagestring() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 235
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagejpeg() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 237
-[15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagedestroy() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 238
-[17-May-2013 22:38:54 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:54 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:54 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
-[17-May-2013 22:38:54 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
-[17-May-2013 22:38:58 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:58 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:58 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
-[17-May-2013 22:38:58 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
-[17-May-2013 22:38:59 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:59 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
-[17-May-2013 22:38:59 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
-[17-May-2013 22:38:59 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
-[17-May-2013 22:40:09 Asia/Bangkok] PHP Notice:  Undefined variable: setts in /home/adamo/public_html/includes/config.php on line 16
-[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  scandir(http://adamo.vn//themes/red/nivo_slider/images) [<a href='function.scandir'>function.scandir</a>]: failed to open dir: not implemented in /home/adamo/public_html/includes/functions.php on line 1286
-[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  scandir() [<a href='function.scandir'>function.scandir</a>]: (errno 0): Success in /home/adamo/public_html/includes/functions.php on line 1286
-[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  array_diff() [<a href='function.array-diff'>function.array-diff</a>]: Argument #1 is not an array in /home/adamo/public_html/includes/functions.php on line 1287
-[18-May-2013 15:36:30 Asia/Bangkok] PHP Warning:  Invalid argument supplied for foreach() in /home/adamo/public_html/themes/red/templates/header.tpl.php on line 215
+[18-May-2013 14:41:04 Asia/Bangkok] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_CATCH in /home/adamo/public_html/dev/includes/class_fees.php on line 1346

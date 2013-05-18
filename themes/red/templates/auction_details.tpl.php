@@ -83,9 +83,7 @@ function openPopup(url) {
 			</div>
 			<!--show buy out -->
 			<div class="product_info_detail">
-			<h3><?php echo MSG_AUCTION_ID;?>: <b><?php echo $item_details['auction_id'];?></b></h3> 
-			<?php $status = get_product_stt($item_details['auction_id']);?>
-			<p>Tình trạng sản phẩm: <?php echo $status?></p>
+			 <h3><?php echo MSG_AUCTION_ID;?>: <b><?php echo $item_details['auction_id'];?></b></h3> 
 			<!-- show box bid if have aution -->
 			<?php if ($item_can_bid['show_box']) { ?>
            

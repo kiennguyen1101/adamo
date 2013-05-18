@@ -261,8 +261,8 @@ ul.tabs_name li {
     display: block;
     float: left;
     position: relative;
-    width: 96px;
-    height:96px;
+    width: 100px;
+    height:100px;
     z-index: 100;
     white-space: normal;
     margin-top:5px;

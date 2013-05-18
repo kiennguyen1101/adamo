@@ -326,7 +326,7 @@ define ('MSG_BTN_SITE_FEES', 'Phí dịch vụ tại Adamo');
 define ('MSG_BTN_ABOUT_US', 'Giới thiệu');
 define ('MSG_BTN_CONTACT_US', 'Liên hệ');
 define ('MSG_CREDIT_LIMIT_WARNING', '<strong>CẢNH BÁO</strong>: Tải khoản của bạn đã đạt hoặc vượt quá giới hạn. Bạn cần giảm số dư trong tài khoản thông qua trang <b>Tài khoản</b> -> <b>Quản lý tài khoản</b>');
-define ('MSG_PREFERRED_SELLER', 'Người bán đảm bảo');
+define ('MSG_PREFERRED_SELLER', 'Người bán ưa thích');
 define ('MSG_REDUCTION_EXPL', 'miễn toàn bộ phí.');
 define ('MSG_MM_BULK_SHORT', 'Bulk');
 define ('MSG_GO_TO', 'Đi đến');

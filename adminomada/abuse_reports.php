@@ -1,8 +1,6 @@
 <?php
 #################################################################
-## MyPHPAuction v6.04															##
-##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## 	       adamo.vn                                             ##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -40,7 +38,8 @@ else
 		
 		$template->set('msg_changes_saved', '<p align="center">' . AMSG_AUCTION_DELETED . '</p>');		
 	}
-	
+	if (!$start)
+    $start = 0;
 	$limit = 20;
 
 	$order_field = ($_REQUEST['order_field']) ? $_REQUEST['order_field'] : 'a.reg_date';
