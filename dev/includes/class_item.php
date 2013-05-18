@@ -1059,7 +1059,7 @@ class item extends custom_field
 							$checkbox_status = ($this->setts['pg_ikobo_username'] && $user_details['pg_ikobo_password']) ? '' : 'disabled';
 							break;
 						case 'nganluong':
-							$checkbox_status = ($this->setts['pg_nganluong_email'] && $user_details['pg_nganluong_username'] && $user_details['pg_nganluong_password']) ? '' : 'checked';
+							$checkbox_status = ($this->setts['pg_nganluong_email'] && $this->setts['pg_nganluong_username'] && $this->setts['pg_nganluong_password']) ? '' : 'disabled';
 							break;
 						case 'Protx':
 							$checkbox_status = ($this->setts['pg_protx_username'] && $user_details['pg_protx_password']) ? '' : 'disabled';

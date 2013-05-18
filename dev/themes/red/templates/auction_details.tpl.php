@@ -247,8 +247,8 @@ function openPopup(url) {
 		 
 					<?php if ($ad_display == 'live') { ?>
 				   
-					 <a href="<?php echo process_link('other_items', array('owner_id' => $item_details['owner_id']));?>">
-						  <?php echo MSG_OTHER_ITEMS_FROM_SELLER;?>
+					 <a class="buttons" href="<?php echo process_link('other_items', array('owner_id' => $item_details['owner_id']));?>">
+						  Gian hàng
 					 </a>
 						 
 					<?php if ($user_details['shop_active']) { ?>

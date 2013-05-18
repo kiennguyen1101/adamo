@@ -317,7 +317,6 @@ define ('GMSG_WORLDPAY_CALLBACK', 'Worldpay Callback URL');
 define ('GMSG_CHECKOUT_CALLBACK', '2Checkout Callback URL');
 define ('GMSG_NOCHEX_CALLBACK', 'Nochex Callback URL');
 define ('GMSG_IKOBO_CALLBACK', 'Ikobo Callback URL');
-define ('GMSG_IKOBO_CALLBACK', 'Ikobo Callback URL');
 define ('GMSG_NGANLUONG_CALLBACK', 'Nganluong callback url'); // them mess url callback cho nganluong
 define ('GMSG_PROTX_CALLBACK', 'Protx Callback URL');
 define ('GMSG_AUTHNET_CALLBACK', 'Authorize.net Callback URL');

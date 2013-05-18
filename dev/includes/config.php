@@ -2,11 +2,11 @@
 /* Database Host Name */
 $db_host = 'localhost';
 /* Database Username */
-$db_username = 'adamo_dev';
+$db_username = 'dev_adamo';
 /* Database Login Password */
 $db_password = 'adamo';
 /* Database Name */
-$db_name = 'adamo_dev';
+$db_name = 'dev_adamo';
 
   /* Database and Session prefixes */
   define('DB_PREFIX', 'myphpauction_'); ## Do not edit !

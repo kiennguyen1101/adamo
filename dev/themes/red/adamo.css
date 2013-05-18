@@ -698,3 +698,7 @@ blockquote li{
 .catfeatc3{
 	background-color: #c2c2c2;
 }
+.choose_cat{
+	font-size: 15px !important;
+	height:420px
+}

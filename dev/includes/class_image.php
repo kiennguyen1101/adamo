@@ -161,7 +161,7 @@ class image
 		$filename_output = eregi_replace("\.","",$filename_output);
 		$filename_output = eregi_replace("\:","",$filename_output);
 
-		return $this->cache_dir . 'cache_' . $width . '_' . $square . '_' . $border . '_' . $filename_output . '.img';
+		return $this->cache_dir . 'cache_' . $width . '_' . $square . '_' . $border . '_' . $filename_output . '.cache';
 	}
 
 	function generate_thumb($source_filename, $thumb_x, $square=false, $border=false, $cache_output = null, $watermark = false, $watermark_text = null)

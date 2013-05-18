@@ -2454,3 +2454,16 @@
 [15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagestring() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 235
 [15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagejpeg() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 237
 [15-May-2013 16:44:45 Asia/Bangkok] PHP Warning:  imagedestroy() expects parameter 1 to be resource, boolean given in /home/adamo/public_html/includes/class_image.php on line 238
+[17-May-2013 22:38:54 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:54 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:54 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
+[17-May-2013 22:38:54 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
+[17-May-2013 22:38:58 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:58 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:58 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
+[17-May-2013 22:38:58 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
+[17-May-2013 22:38:59 Asia/Bangkok] PHP Warning:  include_once(includes/config.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:59 Asia/Bangkok] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening 'includes/config.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/adamo/public_html/includes/global.php on line 12
+[17-May-2013 22:38:59 Asia/Bangkok] PHP Notice:  Use of undefined constant INCLUDE_DIR - assumed 'INCLUDE_DIR' in /home/adamo/public_html/includes/global.php on line 24
+[17-May-2013 22:38:59 Asia/Bangkok] PHP Fatal error:  Class 'database' not found in /home/adamo/public_html/includes/global.php on line 81
+[17-May-2013 22:40:09 Asia/Bangkok] PHP Notice:  Undefined variable: setts in /home/adamo/public_html/includes/config.php on line 16

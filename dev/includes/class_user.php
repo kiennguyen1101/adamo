@@ -69,7 +69,7 @@ class user extends custom_field
 			'" . $user_details['pg_gc_merchant_id'] . "', '" . $user_details['pg_gc_merchant_key'] . "')");
 
 		$user_id = $this->insert_id();
-		
+
 		if ($tax_apply_exempt && IN_ADMIN != 1) ## if not in admin, notify admin of a tax exempt request.
 		{
 			$mail_input_id = $user_id;

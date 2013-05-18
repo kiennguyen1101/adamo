@@ -58,39 +58,39 @@ if ($setts['is_mod_rewrite'])
     }
 }
 
-if (!eregi("sell_item.php", $_SERVER['PHP_SELF']) || !eregi("sell_item.php", $_SERVER['PHP_SELF']) || $_REQUEST['option'] == "new_item" || eregi("sell_item.php", $_SERVER['PHP_SELF']) && $_REQUEST['option'] == "sell_similar")
+if (!stristr("sell_item.php", $_SERVER['PHP_SELF']) || !stristr("sell_item.php", $_SERVER['PHP_SELF']) || $_REQUEST['option'] == "new_item" || stristr("sell_item.php", $_SERVER['PHP_SELF']) && $_REQUEST['option'] == "sell_similar")
 {
     $session->unregister("auction_id");
     $session->unregister("refresh_id");
 }
 
-if (!eregi("wanted_manage.php", $_SERVER['PHP_SELF']))
+if (!stristr("wanted_manage.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("wanted_ad_id");
     $session->unregister("wa_refresh_id");
 }
 
-if (!eregi("edit_item.php", $_SERVER['PHP_SELF']))
+if (!stristr("edit_item.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("edit_refresh_id");
 }
 
-if (!eregi("bid.php", $_SERVER['PHP_SELF']))
+if (!stristr("bid.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("bid_id");
 }
 
-if (!eregi("buy_out.php", $_SERVER['PHP_SELF']))
+if (!stristr("buy_out.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("buyout_id");
 }
 
-if (!eregi("make_offer.php", $_SERVER['PHP_SELF']))
+if (!stristr("make_offer.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("make_offer_id");
 }
 
-if (!eregi("swap_offer.php", $_SERVER['PHP_SELF']))
+if (!stristr("swap_offer.php", $_SERVER['PHP_SELF']))
 {
     $session->unregister("swap_offer_id");
 }

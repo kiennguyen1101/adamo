@@ -230,7 +230,7 @@ class fees extends tax
 
 		return $display_output;
 	}
-	
+
 	function form_nganluong ($transaction_id, $nganluong_email, $nganluong_merchant_id, $nganluong_password, $payment_amount, $payment_description=null, $direct_payment=FALSE, $post_url='https://www.nganluong.vn/checkout.php')
 	{
 		(string) $display_output = null;
@@ -799,7 +799,7 @@ class fees extends tax
           if ($winner_details['auction_id'] > 0) {
             $this->set_fees($winner_details['seller_id'], $winner_details['category_id']);
 
-            $payer_id = (eregi('b', $this->fee['endauction_fee_applies'])) ? $winner_details['buyer_id'] : $winner_details['seller_id'];
+            $payer_id = (stristr('b',$this->fee['endauction_fee_applies'])) ? $winner_details['buyer_id'] : $winner_details['seller_id'];
             $invoice_name = GMSG_ENDAUCTION_FEE . ' - ' . MSG_AUCTION_ID . ': ' . $winner_details['auction_id'];
 
             $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$payer_id}', '{$winner_details['auction_id']}', '{$invoice_name}', '{$payment_amount}', 'auction_end', '{$invoice_time}', '0', '1', '{$payment_gateway}')");
@@ -1291,14 +1291,23 @@ class fees extends tax
 			$this->set_fees($user_details['user_id'], $item_details['category_id']);
    	}
 
-   	if (is_array($setup_fee))
-   	{
-   		foreach ($setup_fee as $key => $value)
-   		{
-   			if ($value['amount'])
-   			{
-   				if ($value['calc_type'] == 'flat')
-   				{
+      $charged_fee_tier = array();
+
+      $invoice = new invoice();
+      $invoice_date = CURRENT_TIME;
+      $status = $invoice->getInvoiceStatus('auction_setup');
+
+      try {
+
+        $this->beginTransaction();
+
+        if (is_array($setup_fee)) {
+
+          foreach ($setup_fee as $key => $value) {
+            if (!$value['amount']) {
+              continue;
+            }
+            if ($value['calc_type'] == 'flat') {
    					$output['amount'] += $value['amount'];
    					$fee_display = $this->display_amount($value['amount'], $this->setts['currency']);
    				}
@@ -1313,29 +1322,30 @@ class fees extends tax
    					$output['amount'] = $this->round_number($output['amount'] - $output['amount'] * $this->fee['relist_fee_reduction'] / 100);
    				}
 
-   				$output['display'] .= '<tr class="c1 fees_preview"> '.
-   					'	<td align="right">' . GMSG_SETUP_FEE . '</td> '.
-   					'	<td nowrap colspan="2">' . $fee_display . $value['display'] . '</td> '.
-   					'</tr> ';
-
+            $charged_fee_tier[$key] = array(
+              'value' => $fee_display,
+              'display' => $value['display'],
+            );
    				## now add the row on the invoices table
    				if ($user_payment_mode == 2 && $add_invoices)
    				{
-   					$account_balance += $output['amount'];
-
+   	//				$account_balance += $output['amount'];
+              $invoice_name = GMSG_SETUP_FEE;
    					$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
 							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
 							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . GMSG_SETUP_FEE . "',
 							'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
 
-   					$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
-							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+   //					$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
+//							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
    				}
    			}
    		}
    	}
 
-   	foreach ($fees_no_tier as $key => $value)
+        $charged_fee_no_tier = array();
+   	
+	foreach ($fees_no_tier as $key => $value)
    	{
    		if ($value[1])
    		{
@@ -1350,38 +1360,41 @@ class fees extends tax
 
    			if ($fee_details['amount']) ## only do this if there is a fee
    			{
-   				$output['display'] .= '<tr class="c1 fees_preview"> '.
-   					'	<td align="right">' . $value[0] . '</td> '.
-					'	<td style="width:50px"></td> '.
-   					'	<td nowrap colspan="2">' . $fee_details['display'] . '</td> '.
-
-   					'</tr> ';
-
+              $charged_fee_no_tier[$key] = array(
+                'value' => $value[0],
+                'display' => $fee_details['display'],
+);
 
    				## now add the row on the invoices table
    				if ($user_payment_mode == 2 && $add_invoices)
    				{
    					$account_balance += $fee_details['amount'];
 
-   					$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
+   		//			$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
 							(user_id, item_id, name, amount, invoice_date, current_balance, can_rollback) VALUES
 							('" . $user_details['user_id'] . "', '" . $item_details['auction_id'] . "', '" . $value[0] . "',
 							'" . $fee_details['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "', " . $can_rollback . ")");
-
-   					$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
+                $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, can_rollback) VALUES ('{$user_details['user_id']}', '{$item_details['auction_id']}', '{$value[0]}', '{$fee_details['amount']}', '{$status['invoice_status_id']}', '{$invoice_date}', '$account_balance', '$can_rollback')");
+   		//			$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 							balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
    				}
    			}
     		}
    	}
 
-		$output['display'] .= '<tr class="c3 fees_preview"> '.
-  			'	<td align="right">' . GMSG_TOTAL . '</td> '.
-			'	<td style="width:50px"></td> '.
-  			'	<td nowrap colspan="2">' . $this->display_amount($output['amount'], $this->setts['currency']) . '</td> '.
-  			'</tr> '.
-			'<tr></tr>'
-			;
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
+      }
+
+      $display_amount = $this->display_amount($output['amount'], $this->setts['currency']);
+
+      $output['display'] = array(
+        'charged_fee_tier' => $charged_fee_tier,
+        'charged_fee_no_tier' => $charged_fee_no_tier,
+        'display_amount' => $display_amount,
+      );
 
    	return $output;
 	}
@@ -1430,6 +1443,7 @@ class fees extends tax
 		 * mark can_rollback = 0 to all previous transactions on this item so only current fees can be
 		 * rolled back.
 		 */
+        $this->beginTransaction();
 		$this->query("UPDATE " . DB_PREFIX . "invoices SET can_rollback=0 WHERE
 			user_id='" . $user_details['user_id'] . "' AND item_id='" . $item_details['auction_id'] . "'");
 
@@ -1531,7 +1545,11 @@ class fees extends tax
 			$output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> '.
 				'<p class=contentfont align=center>' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . (($this->edit_auction_id) ? MSG_HAS_BEEN_UPDATED : MSG_HAS_BEEN_ACTIVATED) . '</p>'.
 				'</td></tr></table>';
-
+        }
+        $this->commit();
+      } catch (error $e) {
+        $this->rollBack();
+        echo $e;
 		}
 
 		return $output;
@@ -1587,6 +1605,9 @@ class fees extends tax
 			else if ($user_payment_mode == 2) // account payment - subtract balance and add invoices.
 			{
 				## all we need to actually do is activate the winner row
+          try {
+
+            $this->beginTransaction();
 				$sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
 					active=1, payment_status='confirmed' WHERE winner_id='" . $winning_bid_details['winner_id'] . "'");
 
@@ -1599,6 +1620,11 @@ class fees extends tax
 
    			$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
+            $this->commit();
+          } catch (error $e) {
+            $this->rollBack();
+            echo $e;
+          }
 
 				$output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> '.
 					'<p class="contentfont" align="center">' . MSG_THE_SALE . ' #' . $winning_bid_details['winner_id'] . ' ' . MSG_HAS_BEEN_ACTIVATED . '</p>'.
@@ -1711,10 +1737,14 @@ class fees extends tax
 
 				$account_balance = $user_details['balance'] + $output['amount'];
 
-				$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
-					(user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES
-					('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "',
-					'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+				//$sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices
+				//	(user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES
+				//	('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "',
+				//	'" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
+          $invoice_name = GMSG_WA_SETUP_FEE;
+          $invoice_time = CURRENT_TIME;
+          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', '{$item_details['wanted_ad_id']}', '$invoice_name', '{$payment_amount}', 'completed', '{$invoice_time}', {$account_balance}')");
+//          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
 
    			$sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");

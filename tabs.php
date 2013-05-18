@@ -4,7 +4,7 @@
   $cat = array($_GET['cat']);
   $page = $_GET['page'];
   $adjacents = 3;
-  $limit = 6;         //how many items to show per page
+  $limit = 12;         //how many items to show per page
   if ($page)
     $start = ($page - 1) * $limit;    //first item to display on this page
   else
@@ -22,7 +22,7 @@
     $i = 0;
     foreach ($products as $product) {
       ?>
-		<div class="img-wrap <?php if (($i == 0) || ($i == 3)) echo 'first'; if (($i == 2) || ($i == 5)) echo 'last' ?>">
+		<div class="img-wrap <?php if (($i == 0) || ($i == 3) || ($i == 6) || ($i == 9)) echo 'first'; if (($i == 2) || ($i == 5)|| ($i == 8)|| ($i == 11)) echo 'last' ?>">
 			<a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>"><img border="0" alt="<?php echo $product['name'] ?>" src="thumbnail.php?pic=<?php echo $product['media_url'] ?>&w=219&sq=Y"></a>        
 			<div class="img-overlay">
 				<a href="<?php echo process_link('auction_details', array('name' => $product['name'], 'auction_id' => $product['auction_id'])); ?>" title="<?php echo $product['name']; ?>"><h2><?php echo $product['name']; ?></h2></a>

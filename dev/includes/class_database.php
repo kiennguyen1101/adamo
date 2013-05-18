@@ -168,7 +168,8 @@ class db_main
 
 		       $result = @mysql_query($query);
  
-		   if (!$result) {
+		   if ($this->hasError()) {
+                          throw new error($this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error(), $query));
 			 $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
 			if (DEBUG)
 			  $mysql_error .= "<p>{$query}</p>";
@@ -369,15 +370,23 @@ class database extends db_main
 	function add_special_chars($string, $no_quotes = FALSE)
 	{
 		$pattern = "/(?i)<img.+\.php/";
-
+/*
 		$string = eregi_replace("&amp;","&",$string);
 
-		if (!$no_quotes) $string = eregi_replace("&#039;","'",$string);
+		if (!$no_quotes)
+		$string = eregi_replace("&#039;","'",$string);
 
 		$string = eregi_replace('&quot;','"',$string);
 		$string = eregi_replace('&lt;','<',$string);
 		$string = eregi_replace('&gt;','>',$string);
 		$string = eregi_replace('&nbsp;',' ',$string);
+*/     
+ if (!$no_quotes)
+        $string = htmlspecialchars_decode($string, ENT_COMPAT);
+      else
+        $string = htmlspecialchars_decode($string, ENT_QUOTES);
+
+      $string = str_replace("&nbsp;", " ", $string);
 
 		$string = (preg_match($pattern, $string)) ? strip_tags($string, '<br>') : $string;
 

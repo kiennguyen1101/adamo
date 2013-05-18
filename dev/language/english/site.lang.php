@@ -40,7 +40,8 @@ define ('MSG_REGISTRATION_CONFIRMATION', 'Xác nhận đăng ký');
 define ('MSG_REGISTER_SUCCESS_TYPE0', 'Đăng ký thành công.<br>
 Bạn có thể đăng nhập bằng Tên đăng nhập và mật khẩu đã đăng ký.');
 define ('MSG_REGISTER_SUCCESS_TYPE1', 'Đăng ký hoàn tất.<br>
-Một email đã được gửi tới địa chỉ email bạn đăng ký để hướng dẫn cách kích hoạt tài khoản của bạn.');
+Một email đã được gửi tới địa chỉ email bạn đăng ký để hướng dẫn cách kích hoạt tài khoản của bạn.<br>
+Vui lòng tìm trong hòm spam mail nếu bạn không tìm thấy email của chúng tôi trong inbox.');
 define ('MSG_REGISTER_SUCCESS_TYPE2', 'Đăng ký hoàn tất.<br>
 Quản trị viên đang kiểm tra tài khoản của bạn và duyệt trực tiếp.<br>
 Bạn sẽ được thông báo qua email khi tài khoản của bạn được kích hoạt');
