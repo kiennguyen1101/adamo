@@ -2,22 +2,24 @@
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## Copyright ï¿½2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
-if ( !defined('EDIT_AUCTION') ) { die("Access Denied"); }
+if (!defined('EDIT_AUCTION')) {
+    die("Access Denied");
+}
 
-(string) $edit_auction_content = null;
+(string)$edit_auction_content = null;
 
 ## BEGIN pages upload
 ## 1.- details section
 $item_description_editor = "<script> \n" .
-	" 	var oEdit1 = new InnovaEditor(\"oEdit1\"); \n" .
-	" 	oEdit1.width=\"100%\";//You can also use %, for example: oEdit1.width=\"100%\" \n" .
-	"	oEdit1.height=300; \n" .
-	"	oEdit1.REPLACE(\"description_main\");//Specify the id of the textarea here \n" .
-	"</script>";
+    " 	var oEdit1 = new InnovaEditor(\"oEdit1\"); \n" .
+    " 	oEdit1.width=\"100%\";//You can also use %, for example: oEdit1.width=\"100%\" \n" .
+    "	oEdit1.height=300; \n" .
+    "	oEdit1.REPLACE(\"description_main\");//Specify the id of the textarea here \n" .
+    "</script>";
 
 $template->set('item_description_editor', $item_description_editor);
 
@@ -26,11 +28,10 @@ $template->set('setup_voucher_box', voucher_form('setup', $item_details['voucher
 $template->set('main_category_display', category_navigator($item_details['category_id'], false));
 $template->set('addl_category_display', category_navigator($item_details['addl_category_id'], false, true, null, null, GMSG_NONE_CAT));
 
-if (!empty($item_details['voucher_value']))
-{
-	$voucher_details = $item->check_voucher($item_details['voucher_value'], 'setup');
+if (!empty($item_details['voucher_value'])) {
+    $voucher_details = $item->check_voucher($item_details['voucher_value'], 'setup');
 
-	$template->set('check_voucher_message', $voucher_details['display']);
+    $template->set('check_voucher_message', $voucher_details['display']);
 }
 
 $edit_auction_content .= $template->process('sell_item_details.tpl.php');
@@ -46,87 +47,76 @@ $template->set('can_add_tax', $can_add_tax['can_add_tax']);
 
 $template->set('duration_drop_down', $item->durations_drop_down('duration', $item_details['duration']));
 
-if (IN_ADMIN != 1)
-{
-	$buyout_fee = $setup_fee->display_fee('buyout_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+if (IN_ADMIN != 1) {
+    $buyout_fee = $setup_fee->display_fee('buyout_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($buyout_fee['amount'])
-	{
-		$buyout_fee_expl_message = '(<b>+' . $fees->display_amount($buyout_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('buyout_fee_expl_message', $buyout_fee_expl_message);
-	}
+    if ($buyout_fee['amount']) {
+        $buyout_fee_expl_message = '(<b>+' . $fees->display_amount($buyout_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('buyout_fee_expl_message', $buyout_fee_expl_message);
+    }
 
-	$makeoffer_fee = $setup_fee->display_fee('makeoffer_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $makeoffer_fee = $setup_fee->display_fee('makeoffer_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($makeoffer_fee['amount'])
-	{
-		$makeoffer_fee_expl_message = '(<b>+' . $fees->display_amount($makeoffer_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('makeoffer_fee_expl_message', $makeoffer_fee_expl_message);
-	}
+    if ($makeoffer_fee['amount']) {
+        $makeoffer_fee_expl_message = '(<b>+' . $fees->display_amount($makeoffer_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('makeoffer_fee_expl_message', $makeoffer_fee_expl_message);
+    }
 
-	$rp_fee = $setup_fee->display_fee('rp_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $rp_fee = $setup_fee->display_fee('rp_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($rp_fee['amount'])
-	{
-		$rp_fee_expl_message = '(<b>+' . $fees->display_amount($rp_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('rp_fee_expl_message', $rp_fee_expl_message);
-	}
+    if ($rp_fee['amount']) {
+        $rp_fee_expl_message = '(<b>+' . $fees->display_amount($rp_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('rp_fee_expl_message', $rp_fee_expl_message);
+    }
 
-	$hpfeat_fee = $setup_fee->display_fee('hpfeat_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $hpfeat_fee = $setup_fee->display_fee('hpfeat_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($hpfeat_fee['amount'])
-	{
-		$hpfeat_fee_expl_message = '(<b>+' . $fees->display_amount($hpfeat_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('hpfeat_fee_expl_message', $hpfeat_fee_expl_message);
-	}
+    if ($hpfeat_fee['amount']) {
+        $hpfeat_fee_expl_message = '(<b>+' . $fees->display_amount($hpfeat_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('hpfeat_fee_expl_message', $hpfeat_fee_expl_message);
+    }
 
-	$catfeat_fee = $setup_fee->display_fee('catfeat_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $catfeat_fee = $setup_fee->display_fee('catfeat_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($catfeat_fee['amount'])
-	{
-		$catfeat_fee_expl_message = '(<b>+' . $fees->display_amount($catfeat_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('catfeat_fee_expl_message', $catfeat_fee_expl_message);
-	}
+    if ($catfeat_fee['amount']) {
+        $catfeat_fee_expl_message = '(<b>+' . $fees->display_amount($catfeat_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('catfeat_fee_expl_message', $catfeat_fee_expl_message);
+    }
 
-	$hl_fee = $setup_fee->display_fee('hlitem_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $hl_fee = $setup_fee->display_fee('hlitem_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($hl_fee['amount'])
-	{
-		$hl_fee_expl_message = '(<b>+' . $fees->display_amount($hl_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('hl_fee_expl_message', $hl_fee_expl_message);
-	}
+    if ($hl_fee['amount']) {
+        $hl_fee_expl_message = '(<b>+' . $fees->display_amount($hl_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('hl_fee_expl_message', $hl_fee_expl_message);
+    }
 
-	$bold_fee = $setup_fee->display_fee('bolditem_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $bold_fee = $setup_fee->display_fee('bolditem_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($bold_fee['amount'])
-	{
-		$bold_fee_expl_message = '(<b>+' . $fees->display_amount($bold_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('bold_fee_expl_message', $bold_fee_expl_message);
-	}
+    if ($bold_fee['amount']) {
+        $bold_fee_expl_message = '(<b>+' . $fees->display_amount($bold_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('bold_fee_expl_message', $bold_fee_expl_message);
+    }
 
-	$custom_start_fee = $setup_fee->display_fee('custom_start_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $custom_start_fee = $setup_fee->display_fee('custom_start_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($custom_start_fee['amount'])
-	{
-		$custom_start_fee_expl_message = '(<b>+' . $fees->display_amount($custom_start_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('custom_start_fee_expl_message', $custom_start_fee_expl_message);
-	}
+    if ($custom_start_fee['amount']) {
+        $custom_start_fee_expl_message = '(<b>+' . $fees->display_amount($custom_start_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('custom_start_fee_expl_message', $custom_start_fee_expl_message);
+    }
 
-	$picture_fee = $setup_fee->display_fee('picture_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $picture_fee = $setup_fee->display_fee('picture_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($picture_fee['amount'])
-	{
-		$picture_fee_expl_message = '(<b>+' . $fees->display_amount($picture_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('picture_fee_expl_message', $picture_fee_expl_message);
-	}
+    if ($picture_fee['amount']) {
+        $picture_fee_expl_message = '(<b>+' . $fees->display_amount($picture_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('picture_fee_expl_message', $picture_fee_expl_message);
+    }
 
-	$video_fee = $setup_fee->display_fee('video_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
+    $video_fee = $setup_fee->display_fee('video_fee', $user_details, $item_details['category_id'], $item_details['list_in'], $voucher_details);
 
-	if ($video_fee['amount'])
-	{
-		$video_fee_expl_message = '(<b>+' . $fees->display_amount($video_fee['amount'], $setts['currency'], true) . '</b>)';
-		$template->set('video_fee_expl_message', $video_fee_expl_message);
-	}
+    if ($video_fee['amount']) {
+        $video_fee_expl_message = '(<b>+' . $fees->display_amount($video_fee['amount'], $setts['currency'], true) . '</b>)';
+        $template->set('video_fee_expl_message', $video_fee_expl_message);
+    }
 }
 
 $start_date_box = date_form_field($item_details['start_time'], $start_time_id, 'ad_create_form');

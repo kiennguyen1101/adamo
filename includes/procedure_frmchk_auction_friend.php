@@ -2,11 +2,13 @@
 #################################################################
 ## MyPHPAuction v6.04															##
 ##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## Copyright ï¿½2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
-if ( !defined('FRMCHK_AUCTION_FRIEND') ) { die("Access Denied"); }
+if (!defined('FRMCHK_AUCTION_FRIEND')) {
+    die("Access Denied");
+}
 
 $fv = new formchecker;
 

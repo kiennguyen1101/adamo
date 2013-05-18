@@ -156,7 +156,7 @@
 				<a href="login.php">Đăng nhập</a> hoặc <a href="register.php">Đăng ký</a><?php } ?>
 			</div>  
             <ul class="user_menu">			
-                <li><a href="/members_area.php"><?php echo "Trang cá nhân"; ?></a></li>
+                <li><a href="members_area.php"><?php echo "Trang cá nhân"; ?></a></li>
                 <li><a href="<?php echo $place_ad_link; ?>"><?php echo $place_ad_btn_msg; ?></a></li>
                 <li><a href="<?php echo process_link('content_pages', array('page' => 'help')); ?>"><?php echo MSG_BTN_HELP; ?></a></li>
             </ul>
@@ -208,7 +208,7 @@
 			<!---only show on homepage-->
 			
             <?php if (substr(strrchr($_SERVER['PHP_SELF'], '/'), 1) == "index.php") { ?>
-            <?php $files = get_slide_url('/home/adamo/public_html/themes/red/nivo_slider/images'); ?>
+            <?php $files = get_slide_url(); ?>
                 <div id="home_slider" class="slider-wrapper theme-light">
                     <div id="slider" class="nivoSlider">
                         <?php

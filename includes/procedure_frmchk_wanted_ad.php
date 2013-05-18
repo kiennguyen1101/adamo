@@ -2,19 +2,20 @@
 #################################################################
 ## MyPHPAuction 2009															##
 ##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## Copyright ï¿½2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
-if ( !defined('FRMCHK_ITEM') ) { die("Access Denied"); }
+if (!defined('FRMCHK_ITEM')) {
+    die("Access Denied");
+}
 
 $fv = new formchecker;
 
 $fv->check_box($frmchk_details['category_id'], MSG_MAIN_CATEGORY, array('field_empty'));
 
-if ($frmchk_details['category_id'] == $frmchk_details['addl_category_id'])
-{
-	$fv->error_list[] = array('value' => $frmchk_details['category_id'], 'msg' => MSG_FRMCHK_SAME_CATS);
+if ($frmchk_details['category_id'] == $frmchk_details['addl_category_id']) {
+    $fv->error_list[] = array('value' => $frmchk_details['category_id'], 'msg' => MSG_FRMCHK_SAME_CATS);
 }
 
 $fv->check_box($frmchk_details['name'], MSG_ITEM_TITLE, array('field_empty', 'field_html'));
