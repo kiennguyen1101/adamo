@@ -293,7 +293,7 @@ define ('GMSG_OPEN_AUCTIONS_ONLY', 'Các phiên đấu giá đang mở');
 define ('GMSG_CLOSED_AUCTIONS_ONLY', 'Các phiên đấu giá đã đóng');
 define ('GMSG_ALL_COUNTRIES', 'Tất cả các nước');
 define ('GMSG_COULDNT_EXECUTE', 'Không thể thực thi');
-define ('GMSG_MAIL_SENDING_FAILED', 'Gửi mai thất bại..');
+define ('GMSG_MAIL_SENDING_FAILED', 'Gửi mail không thành công..');
 define ('GMSG_NONE_CAT', '-- không có --');
 define ('GMSG_ABOVE', 'Bên trên');
 define ('GMSG_MB_EMAIL', 'Địa chỉ email Moneybookers');
