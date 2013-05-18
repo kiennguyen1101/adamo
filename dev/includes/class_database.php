@@ -348,8 +348,10 @@ class database extends db_main
 	function rem_special_chars($string)
 	{
 		$string = stripslashes($string);
-		$string = eregi_replace("'","&#039;",$string);
-		$string = eregi_replace('"','&quot;',$string);
+	//	$string = eregi_replace("'","&#039;",$string);
+//	$string = eregi_replace('"','&quot;',$string);
+      $string = str_replace("'", "&#039;", $string);
+      $string = str_replace('"', '&quot;', $string);
 
 		return $string;
 	}

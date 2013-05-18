@@ -289,7 +289,7 @@ function header_redirect($redirect_url) {
     $handle = opendir($relative_path . 'themes');
 
     while ($file = readdir($handle)) {
-      if (!stristr('[.]', $file)) {
+      if (!strstr('[.]', $file)) {
         $output[] = $file;
       }
     }
@@ -328,7 +328,7 @@ function header_redirect($redirect_url) {
     $handle = opendir($relative_path . 'language');
 
     while ($file = readdir($handle)) {
-      if (!stristr('[.]', $file)) {
+      if (!strstr('[.]', $file)) {
         $output[] = $file;
       }
     }
