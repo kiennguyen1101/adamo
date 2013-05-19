@@ -19,31 +19,60 @@ class TestLogin extends PHPUnit_Extensions_Selenium2TestCase
         $this->setPort(4444);
         $this->setBrowser('chrome');
         $this->setBrowserUrl(TEST_URL);
+        $this->setRunTestInSeparateProcess(false);
+        $this->setPreserveGlobalState(true);
     }
 
-    public function testLoginFormAttributes()
+    public function testLoginError()
     {
+
+        //login using user1
         $this->url('login.php');
         $form = $this->byId('form_login');
         $username = $this->byId('username');
         $password = $this->byId('password');
+        $username->value('user1');
+        $password->value('123456');
+        $form->submit();
 
+        //sell new item, multiple steps
+        $this->url('sell_item.php?option=new_item');
+        $category = $this->select($this->byId('selector_0'));
+        $category->selectOptionByValue('2320');
 
-        //test initiate value
-        $this->assertEquals('', $username->value());
-        $this->assertEquals('', $password->value());
+        $subcat = $this->select($this->byId('selector_1'));
+        $subcat->selectOptionByValue('2321');
+        //category
+        $this->assertContains('Điện thoại & Phụ kiện', $category->selectedLabel());
+        $this->assertContains('Điện thoại phổ thông', $subcat->selectedLabel());
+        $this->byId('form_next_step')->click();
 
-        //test form submit to login.php
-        $this->assertContains('login.php', $form->attribute('action'));
+        //next step: name and description
+        $this->byId('name')->value(uniqid('Phone_'));
+//        $this->frame('idContentoEdit1');
+//        $description = $this->byCssSelector('body');
 
-    }
+        $script = "jQuery('#idContentoEdit1').contents().find('body').text('New description')";
+        $this->execute(array(
+            'script' => $script,
+            'args' => array()
+        ));
 
-    public function testLoginError() {
-        $this->url('login.php');
-        $form = $this->byId('form_login');
-        $username = $this->byId('username');
-        $password = $this->byId('password');
+        $this->byId('form_next_step')->click();
 
-        
+        //next step: pricing
+        $this->byName('start_price')->value(rand(250, 400) * 1000);
+        $this->byName('is_buy_out')->click();
+        $this->byName('buyout_price')->value(rand(350, 450) * 1000);
+        $this->byName('hpfeat')->click();
+        $this->byName('catfeat')->click();
+        $this->byId('form_next_step')->click();
+
+        //next step: payment and shipping
+        $this->byName('postage_amount')->value('0');
+//        $this->by
+
+        //next step: finish
+
     }
 }

@@ -319,7 +319,7 @@ class formchecker extends database
     {
         $value = $this->add_special_chars($value);
 
-        if (!eregi('<script', $value)) {
+        if (!stristr($value, '<script')) {
             return true;
         } else {
             $this->error_list[] = array("value" => $value, "msg" => $msg);
@@ -331,7 +331,7 @@ class formchecker extends database
     {
         $value = $this->add_special_chars($value);
 
-        if (!eregi('<iframe', $value)) {
+        if (!stristr($value, '<iframe')) {
             return true;
         } else {
             $this->error_list[] = array("value" => $value, "msg" => $msg);
