@@ -20,7 +20,7 @@
 		<?php echo $setts['sitename']; ?>?</b><br>
 		<br>
 		<?php echo MSG_REGISTRATION_MSG; ?>
-		<form action="register.php" method="post">
+		<form id="form_register" action="register.php" method="post">
 		<input name="submit" type="submit" class="buttons" value="<?php echo MSG_REGISTER_FOR_ACCOUNT; ?>">
 		</form>
 		</p>
@@ -31,7 +31,7 @@
         <?php echo $setts['sitename']; ?>
         <?php echo MSG_USER ?>?
       </b><br>
-      <form action="<?php echo ($setts['enable_enhanced_ssl']) ? $setts['site_path_ssl'] : SITE_PATH; ?>login.php" method="post">
+      <form id="form_login" action="<?php echo ($setts['enable_enhanced_ssl']) ? $setts['site_path_ssl'] : SITE_PATH; ?>login.php" method="post">
         <input type="hidden" name="operation" value="submit">
         <input type="hidden" name="redirect" value="<?php echo $redirect; ?>">
         <table width="100%" border="0" cellpadding="2" cellspacing="2" align="center">

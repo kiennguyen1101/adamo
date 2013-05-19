@@ -48,6 +48,9 @@ function unlink_pin()
 
     $path = (@IN_ADMIN == 1) ? '../' : '';
 
+    if (!is_object($session))
+        return;
+
     if ($session->is_set('pin_value')) {
         @unlink($path . 'uplimg/site_pin_' . $session->value('pin_value') . '.jpg');
         $session->unregister('pin_value');
@@ -713,9 +716,8 @@ function meta_tags($base_url, $parent_id, $auction_id, $wanted_ad_id)
 
 function remove_cache_img()
 {
-    global $fileExtension;
 
-    $cache_directory = $fileExtension . 'cache/';
+    $cache_directory = BASE_DIR . 'cache/';
     $time_limit = 60 * 60 * 24; ## one day
 
     $cache_dir = opendir($cache_directory);

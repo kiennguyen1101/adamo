@@ -83,5 +83,6 @@ if (!stristr("swap_offer.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("swap_offer_id");
 }
 
-$start = abs(intval($_GET['start']));
+if (isset($_GET['start']))
+    $start = abs(intval($_GET['start']));
 ?>

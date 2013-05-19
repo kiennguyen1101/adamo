@@ -13,7 +13,7 @@ define ('IN_SITE', 1);
 (string) $page_handle = 'login';
 
 include_once ('includes/global.php');
-include_once ('includes/class_fees.php');
+
 include_once ('includes/functions_login.php');
 
 if ($session->value('membersarea')=='Active')

@@ -2,33 +2,16 @@
 #################################################################
 ## MyPHPAuction v6.05															##
 ##-------------------------------------------------------------##
-## Copyright ©2009 MyPHPAuction. All rights reserved.	##
+## Copyright ï¿½2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
-session_start();
+if (!isset($_SESSION))
+    session_start();
 
 define ('IN_SITE', 1);
-
-if (!$manual_cron || IN_ADMIN == 1)
-{
-	include_once ('../includes/global.php');
-	$parent_dir = '../';
-}
-else
-{
-	$parent_dir = '';
-}
-
-include_once ($parent_dir . 'includes/class_formchecker.php');
-include_once ($parent_dir . 'includes/class_custom_field.php');
-include_once ($parent_dir . 'includes/class_user.php');
-include_once ($parent_dir . 'includes/class_fees.php');
-include_once ($parent_dir . 'includes/class_shop.php');
-include_once ($parent_dir . 'includes/class_item.php');
-include_once ($parent_dir . 'includes/functions_item.php');
-include_once ($parent_dir . 'includes/class_messaging.php');
-
+require_once(BASE_DIR . 'includes/global.php');
+include_once (BASE_DIR . 'includes/functions_item.php');
 
 $sql_select_cron_wa = $db->query("SELECT * FROM " . DB_PREFIX . "wanted_ads WHERE
 	active=1 AND closed=0 AND end_time<'" . CURRENT_TIME . "' LIMIT 0, 50");
@@ -68,12 +51,12 @@ if ($nb_cron_wa)
 		if ($value == 1)
 		{
 			$mail_input_id = $wa_counter[$key];
-			include($parent_dir . 'language/' . $setts['site_lang'] . '/mails/wa_closed_seller_notification.php');
+			include(BASE_DIR . 'language/' . $setts['site_lang'] . '/mails/wa_closed_seller_notification.php');
 		}
 		else if ($value > 1)
 		{
 			$mail_input_id = $key;
-			include($parent_dir . 'language/' . $setts['site_lang'] . '/mails/wa_closed_seller_notification_multiple.php');			
+			include(BASE_DIR . 'language/' . $setts['site_lang'] . '/mails/wa_closed_seller_notification_multiple.php');			
 		}
 	}
 }
@@ -85,7 +68,7 @@ $cron_item = new item();
 $cron_item->setts = &$setts;
 $cron_item->layout = &$layout;
 
-$cron_item->extension = $parent_dir;
+$cron_item->extension = BASE_DIR;
 
 /**
  * Possible solution to avoiding the cron to create more winner rows than necessary.
@@ -148,12 +131,12 @@ if ($nb_cron_auctions)
 			if ($value == 1)
 			{
 				$mail_input_id = $auction_counter[$key];
-				include($parent_dir . 'language/' . $setts['site_lang'] . '/mails/no_sale_seller_notification.php');
+				include(BASE_DIR . 'language/' . $setts['site_lang'] . '/mails/no_sale_seller_notification.php');
 			}
 			else if ($value > 1)
 			{
 				$mail_input_id = $key;
-				include($parent_dir . 'language/' . $setts['site_lang'] . '/mails/no_sale_seller_notification_multiple.php');			
+				include(BASE_DIR . 'language/' . $setts['site_lang'] . '/mails/no_sale_seller_notification_multiple.php');			
 			}
 		}
 	}
@@ -229,7 +212,7 @@ $is_relisted_items = $db->count_rows('auctions', "WHERE is_relisted_item=1 AND n
 
 if ($is_relisted_items)
 {
-	include($parent_dir . 'language/' . $setts['site_lang'] . '/mails/seller_relist_notification_multiple.php');
+	include(BASE_DIR . 'language/' . $setts['site_lang'] . '/mails/seller_relist_notification_multiple.php');
 	$db->query("UPDATE " . DB_PREFIX . "auctions SET notif_item_relisted=1 WHERE 
 		is_relisted_item=1 AND notif_item_relisted=0");
 }
@@ -295,7 +278,7 @@ $db->query("UPDATE " . DB_PREFIX . "users SET preferred_seller=0 WHERE
 	preferred_seller=1 AND preferred_seller_exp_date<" . CURRENT_TIME);
 
 ## google base plugin
-//define('Gbase_plugin', $parent_dir); // Path to plugin folder
+//define('Gbase_plugin', BASE_DIR); // Path to plugin folder
 //include_once(Gbase_plugin . 'google_base/gbase.inc.php');
 
 ?>

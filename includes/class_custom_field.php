@@ -352,7 +352,7 @@ class custom_field extends formchecker
     function insert_page_data($user_id, $page_handle, $value_array)
     {
         foreach ($value_array as $key => $value) {
-            if (eregi('custom_box_', $key)) {
+            if (stristr($key, 'custom_box_')) {
                 $custom_box_id = intval(str_replace('custom_box_', '', $key));
                 $custom_box_id = intval(str_replace('[]', '', $custom_box_id));
 
@@ -372,7 +372,7 @@ class custom_field extends formchecker
     function update_page_data($user_id, $page_handle, $value_array)
     {
         foreach ($value_array as $key => $value) {
-            if (eregi('custom_box_', $key)) {
+            if (stristr($key, 'custom_box_')) {
                 $custom_box_id = intval(str_replace('custom_box_', '', $key));
                 $custom_box_id = intval(str_replace('[]', '', $custom_box_id));
 
@@ -419,7 +419,7 @@ class custom_field extends formchecker
         (string)$display_output = null;
 
         foreach ($this->vars as $key => $value) {
-            if (eregi('custom_box_', $key)) {
+            if (stristr($key, 'custom_box_')) {
                 $display_output .= '<input type="hidden" name="' . $key . '" value="' . $this->rem_special_chars($value) . '" /> ';
             }
         }

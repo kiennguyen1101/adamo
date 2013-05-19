@@ -11,7 +11,7 @@ $fileExtension = (file_exists('includes/global.php')) ? '' : '../';
 
 include_once($fileExtension . 'includes/config.php');
 
-require_once(BASE_DIR . 'vendor/autoload.php');
+
 
 
 /**
@@ -192,7 +192,7 @@ $linkable_tables = array('countries');
 ## load the cron if it is run from the site.
 if ($setts['cron_job_type'] == 2 && @IN_ADMIN != 1) {
     $manual_cron = true;
-    include_once($fileExtension . 'cron_jobs/main_cron.php');
+    include_once(BASE_DIR . 'cron_jobs/main_cron.php');
 }
 
 $auction_ordering = array('a.name', 'a.start_price', 'a.max_bid', 'a.nb_bids', 'a.end_time');

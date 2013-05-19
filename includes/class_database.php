@@ -104,59 +104,6 @@ class db_main
 
     function query($query, $debug_output = false, $die = true)
     {
-        /*
-                if ($debug_output)
-                {
-                    (string) $explain_output = null;
-
-                    $explain_result = @mysql_query("EXPLAIN " . $query);
-
-                    $explain_output = '<table width="100%" cellpadding="3" cellspacing="2" class="contentfont border"> '.
-                        '	<tr class="c4"> '.
-                        '		<td colspan="10">SQL COMMAND</td> '.
-                        '	</tr> '.
-                        '	<tr> '.
-                        '		<td colspan="10">EXPLAIN ' . $query . '</td> '.
-                        '	</tr> '.
-                        '	<tr class="c4"> '.
-                        '		<td>id</td> '.
-                        '		<td>select_type</td> '.
-                        '		<td>table</td> '.
-                        '		<td>type</td> '.
-                        '		<td>possible_keys</td> '.
-                        '		<td>key</td> '.
-                        '		<td>key_len</td> '.
-                        '		<td>ref</td> '.
-                        '		<td>rows</td> '.
-                        '		<td>Extra</td> '.
-                        '	</tr>';
-                        '	<tr class="c4"> '.
-                        '		<td colspan="10"></td> '.
-                        '	</tr> ';
-
-                    if ($explain_result)
-                    {
-                        while ($explain = $this->fetch_array($explain_result))
-                        {
-                            $explain_output .= '<tr class="c1"> '.
-                                '	<td>' . $explain['id'] . '</td> '.
-                                '	<td>' . $explain['select_type'] . '</td> '.
-                                '	<td>' . $explain['table'] . '</td> '.
-                                '	<td>' . $explain['type'] . '</td> '.
-                                '	<td>' . implode(', ', explode(',', $explain['possible_keys'])) . '</td> '.
-                                '	<td>' . $explain['key'] . '</td> '.
-                                '	<td>' . $explain['key_len'] . '</td> '.
-                                '	<td>' . $explain['ref'] . '</td> '.
-                                '	<td>' . $explain['rows'] . '</td> '.
-                                '	<td>' . $explain['Extra'] . '</td> '.
-                                '</tr>';
-                        }
-                    }
-                    $explain_output .= '</table>';
-
-                    echo $explain_output;
-                }
-        */
         //echo $query . '<br>'; ## used if we want to display all queries made on a page
 
         $result = @mysql_query($query);

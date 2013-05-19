@@ -6,7 +6,7 @@
 ##-------------------------------------------------------------##
 #################################################################
 
-include_once($fileExtension . 'includes/class_image.php');
+include_once('class_image.php');
 
 class item extends custom_field
 {

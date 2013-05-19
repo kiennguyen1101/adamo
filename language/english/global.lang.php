@@ -2,7 +2,7 @@
 #################################################################
 ## myphpauction Inc 															##
 ##-------------------------------------------------------------##
-## Copyright ©2008-09  myphpauction Inc.            All rights reserved.	##
+## Copyright ï¿½2008-09  myphpauction Inc.            All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
 
@@ -349,7 +349,5 @@ define ('GMSG_GC_MERCHANT_KEY', 'Google Checkout Merchant Key');
 define ('GMSG_GC_CALLBACK', 'Google Checkout Callback Process');
 define ('GMSG_GC_DESCRIPTION', 'Click on the button on the right to proceed to Google Checkout');
 define ('', '');
-define ('', '');
-define ('', '');
-define ('', '');
+
 ?>

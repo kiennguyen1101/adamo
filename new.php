@@ -1,22 +1,10 @@
 <?php
 
-  define('IN_SITE', 1);
+define('IN_SITE', 1);
 
-  include_once ('includes/global.php');
+include_once('includes/global.php');
 
-  $invoice = new invoice();
-  $invoice_date = CURRENT_TIME;
-  $status = $invoice->getInvoiceStatus('auction_setup');
-  
+$db->beginTransaction();
+$db->query("INSERT INTO `myphpauction_invoice_statuses` (`invoice_status_id`, `title`, `state`, `weight`, `locked`) VALUES ('nnana', 'abcxyz', 'adddd', '0', '0')");
 
-  function xxx() {
-    throw new error('adsfasf');
-  }
-  
-  try {
-    xxx();
-  } catch (error $e) {
-    echo $e;
-  }
-
-  var_dump($status);
+$db->rollBack();
