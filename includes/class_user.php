@@ -247,10 +247,11 @@ class user extends custom_field
     {
         (string)$display_output = null;
 
-        $display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ';
-
-        $display_output .= ($balance > 0) ? GMSG_CREDIT : GMSG_DEBIT;
-
+      //format with currency
+      $display_output = fees_main::display_amount(abs($balance), $currency, true) . ' ';
+      
+      $display_output .= ($balance > 0) ? GMSG_CREDIT : GMSG_DEBIT;
+      
         return $display_output;
     }
 

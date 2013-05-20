@@ -416,7 +416,7 @@ else
 			(string) $display_balance_details = null;
 			$display_balance_details = $user->show_balance($row_user['balance'], $setts['currency']);
 
-			if ($user_payment_mode == 2 && $row_user['balance']>=$setts['min_invoice_value'])
+        		if ($user_payment_mode == 2 && $row_user['balance'] <= $setts['min_invoice_value']) {
 			{
 				$display_balance_details .= ' [ <a href="fee_payment.php?do=clear_balance">' . MSG_CLEAR_ACC_BALANCE . '</a> ]';
 			}

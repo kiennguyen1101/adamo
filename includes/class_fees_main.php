@@ -24,6 +24,7 @@ class fees_main extends voucher
             $currency = ($currency) ? $currency : $this->setts['currency'];
 
             $amount = ($this->setts['amount_format'] == 1) ? number_format((double)$amount, $this->setts['amount_digits'], '.', ',') : number_format((double)$amount, $this->setts['amount_digits'], ',', '.');
+        
             $display_output = ($this->setts['currency_position'] == 1) ? ($currency . ' ' . $amount) : ($amount . ' ' . $currency);
 
             if ($fee_amount == 0) {

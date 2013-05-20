@@ -3305,7 +3305,7 @@ CREATE TABLE IF NOT EXISTS `myphpauction_keywords_watch` (
   PRIMARY KEY (`keyword_id`),
   KEY `user_id` (`user_id`)
   
-) ENGINE = MYISAM ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
+) ENGINE = MYISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Table with keywords for auction watch option' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
