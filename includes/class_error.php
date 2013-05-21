@@ -22,12 +22,15 @@ class error extends Exception
 
     public function __toString()
     {
-        $this->dump_exception($this);
+        self::dump_exception($this);
         return '';
     }
 
-    private function dump_exception(error $ex)
+    public static function dump_exception(error $ex)
     {
+        if (!defined(DEBUG) || !DEBUG)
+            return;
+
         $file = $ex->getFile();
         $line = $ex->getLine();
 

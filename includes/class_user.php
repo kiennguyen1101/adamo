@@ -161,11 +161,11 @@ class user extends custom_field
 
             $this->update_page_data($user_id, $page_handle, $user_details);
 
-            $this->beginTransaction();
-            $this->commit();
+//            $this->beginTransaction();
+//            $this->commit();
         } catch (error $e) {
-            $this->rollBack();
-            echo $e;
+//            $this->rollBack();
+            error::dump_exception($e);
         }
     }
 

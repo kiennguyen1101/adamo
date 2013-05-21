@@ -565,11 +565,12 @@ class fees extends tax
 
         $payment_description = substr(str_replace("&#039;", '', $payment_description), 0, 120);
         while ($gateway_details = $this->fetch_array($sql_select_gateways)) {
-            if ($gateway_details['name'] == 'PayPal' && (!$user_id || $pg_details['pg_paypal_email'])) {
+            if ($gateway_details['name'] == 'PayPal' /*&& (!$user_id || $pg_details['pg_paypal_email'])*/) {
                 $paypal_email = ($user_id) ? $pg_details['pg_paypal_email'] : $this->setts['pg_paypal_email'];
                 $this->process_url = SITE_PATH . 'pp_paypal.php';
 
                 $display_output .= $this->form_paypal($transaction_id, $paypal_email, $payment_amount, $currency, $payment_description);
+
             }
             if ($gateway_details['name'] == 'Worldpay' && (!$user_id || $pg_details['pg_worldpay_id'])) {
                 $worldpay_id = ($user_id) ? $pg_details['pg_worldpay_id'] : $this->setts['pg_worldpay_id'];
@@ -632,6 +633,24 @@ class fees extends tax
             if ($gateway_details['name'] == 'Test Mode') {
                 $display_output .= $this->form_testmode($transaction_id, $payment_amount);
             }
+
+            if ($gateway_details['name'] == 'nganluong') {
+                $pgw = new paymentgateway($gateway_details['name']);
+                $pgw->setts = $this->setts;
+                $nganluong_email = ($user_id) ? $pg_details['pg_nganluong_email'] : $this->setts['pg_nganluong_email'];
+                $nganluong_merchant_id = ($user_id) ? $pg_details['pg_nganluong_username'] : $this->setts['pg_nganluong_username'];
+                $nganluong_password = ($user_id) ? $pg_details['pg_nganluong_password'] : $this->setts['pg_nganluong_password'];
+                $this->process_url = SITE_PATH . 'pp_nganluong.php';
+
+                include(INCLUDE_DIR. 'gateways/nganluong.php');
+
+                $nganluong = new nganluong('', $nganluong_merchant_id, $nganluong_password, '');
+                //todo: add sandbox and live environment for nganluong
+                $built_url = 'https://www.nganluong.vn/checkout.php';
+                $built_url .= $nganluong->buildCheckoutUrl($this->process_url, $nganluong_email, '', $transaction_id, $payment_amount);
+
+                $display_output .= $pgw->form_nganluong($built_url);
+            }
         }
 
         return $display_output;
@@ -646,7 +665,7 @@ class fees extends tax
 
         try {
 
-            $this->beginTransaction();
+//            $this->beginTransaction();
 
 
             if ($fee_table == 1) { ## signup process - alter 'users' table
@@ -846,11 +865,11 @@ class fees extends tax
                 $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, direct_payment_paid=1 WHERE winner_id IN (" . $custom_id . ")");
             }
 
-            $this->commit();
+//            $this->commit();
             return true;
         } catch (error $e) {
-            $this->rollBack();
-            echo $e;
+            //$this->rollBack();
+            error::dump_exception($e);
             return false;
         }
     }
@@ -1175,7 +1194,7 @@ class fees extends tax
 
         try {
 
-            $this->beginTransaction();
+//            $this->beginTransaction();
 
             if (is_array($setup_fee)) {
 
@@ -1248,10 +1267,10 @@ class fees extends tax
                 }
             }
 
-            $this->commit();
+//            $this->commit();
         } catch (error $e) {
-            $this->rollBack();
-            echo $e;
+//            $this->rollBack();
+            error::dump_exception($e);
         }
 
         $display_amount = $this->display_amount($output['amount'], $this->setts['currency']);
@@ -1310,7 +1329,7 @@ class fees extends tax
          */
         try {
 
-            $this->beginTransaction();
+//            $this->beginTransaction();
 
             $this->query("UPDATE " . DB_PREFIX . "invoices SET can_rollback=0 WHERE
 			user_id='" . $user_details['user_id'] . "' AND item_id='" . $item_details['auction_id'] . "'");
@@ -1398,10 +1417,10 @@ class fees extends tax
                     '<p class=contentfont align=center>' . MSG_YOUR_AUCTION . ' #' . $item_details['auction_id'] . ' ' . (($this->edit_auction_id) ? MSG_HAS_BEEN_UPDATED : MSG_HAS_BEEN_ACTIVATED) . '</p>' .
                     '</td></tr></table>';
             }
-            $this->commit();
+//            $this->commit();
         } catch (error $e) {
-            $this->rollBack();
-            echo $e;
+//            $this->rollBack();
+            error::dump_exception($e);
         }
 
         return $output;
@@ -1449,7 +1468,7 @@ class fees extends tax
                 ## all we need to actually do is activate the winner row
                 try {
 
-                    $this->beginTransaction();
+//                    $this->beginTransaction();
 
                     $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET
 					active=1, payment_status='confirmed' WHERE winner_id='" . $winning_bid_details['winner_id'] . "'");
@@ -1463,10 +1482,10 @@ class fees extends tax
 
                     $sql_update_user_balance = $this->query("UPDATE " . DB_PREFIX . "users SET
 					balance='" . $account_balance . "' WHERE user_id='" . $user_details['user_id'] . "'");
-                    $this->commit();
+//                    $this->commit();
                 } catch (error $e) {
-                    $this->rollBack();
-                    echo $e;
+//                    $this->rollBack();
+                    error::dump_exception($e);;
                 }
 
                 $output['display'] = '<table class="errormessage" align="center"><tr><td align="center"> ' .

@@ -152,7 +152,7 @@ class item extends custom_field
         // important: the active, approved & payment_status fields cannot be modified through here!
         ## no auction counter is applied on this query - if needed we will add one (for list_in eventually)
         try {
-            $this->beginTransaction();
+//            $this->beginTransaction();
             $sql_insert_item = $this->query("UPDATE " . DB_PREFIX . "auctions SET
 
 			name='" . $word_filter['name'] . "', description='" . $word_filter['description'] . "',
@@ -192,10 +192,11 @@ class item extends custom_field
                 $this->auction_approval($variables_array, $owner_id);
             }
             $this->update_page_data($auction_id, $page_handle, $item_details);
-            $this->commit();
+//            $this->commit();
         } catch (error $e) {
-            $this->rollBack();
-            echo $e;
+//            $this->rollBack();
+            error::dump_exception($e);
+
         }
 
 
