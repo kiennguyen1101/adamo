@@ -231,7 +231,7 @@ function openPopup(url) {
 					}
 					else
 					{
-						echo '<a href="buy_out.php?auction_id=' . $item_details['auction_id'] . '"><img src="themes/' . $setts['default_theme'] . '/img/system/buyitnow25.png" border="0"></a>';
+                        echo "<a id='product_buy_out' href='buy_out.php?auction_id=" . $item_details["auction_id"] . "'><img src='themes/" . $setts["default_theme"] . "/img/system/buyitnow25.png' border='0'></a>";
 					}
 							
 				?>

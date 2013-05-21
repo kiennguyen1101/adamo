@@ -928,7 +928,7 @@ class item extends custom_field
                 (string)$field_output = null;
                 $logo_url = SITE_PATH . (($payment_gateway['logo_url']) ? $payment_gateway['logo_url'] : 'images/noimg.gif');
 
-                $field_output = '<table cellpadding="0" cellspacing="0" border="0"> ' .
+                $field_output = "<table cellpadding='0' cellspacing='0' border='0'> " .
                     '	<tr> ';
 
                 $field_output .= '<td><img src="' . $logo_url . '" border="0" alt="' . $payment_gateway['name'] . '"></td> ' .
@@ -977,7 +977,9 @@ class item extends custom_field
                             break;
                     }
 
-                    $field_output .= '<input type="checkbox" name="payment_gateway[]" value="' . $payment_gateway['pg_id'] . '" ' . ((in_array($payment_gateway['pg_id'], $selected_value)) ? 'checked' : '') . ' ' . $checkbox_status . '> ';
+                    $gateway_name = strtolower($payment_gateway['name']);
+
+                    $field_output .= "<input id='{$gateway_name}' type='checkbox' name='payment_gateway[]' value='" . $payment_gateway["pg_id"] . "' " . ((in_array($payment_gateway["pg_id"], $selected_value)) ? "checked" : "") . " " . $checkbox_status . "> ";
                 }
 
                 $field_output .= $payment_gateway['name'] . '</td> ' .

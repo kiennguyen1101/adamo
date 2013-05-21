@@ -135,6 +135,7 @@
                     function displaytime() {
                       serverdate.setSeconds(serverdate.getSeconds() + 1)
                       var timestring = padlength(serverdate.getHours()) + ":" + padlength(serverdate.getMinutes()) + ":" + padlength(serverdate.getSeconds());
+                        if (jQuery('#servertime').length)
                       document.getElementById("servertime").innerHTML = timestring;
                     }
 

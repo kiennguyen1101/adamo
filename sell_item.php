@@ -11,13 +11,9 @@ session_start();
   define('IN_SITE', 1);
 
   include_once ('includes/global.php');
-  include_once ('includes/class_formchecker.php');
-  include_once ('includes/class_custom_field.php');
-  include_once ('includes/class_user.php');
-  include_once ('includes/class_fees.php');
-  include_once ('includes/class_item.php');
+
   include_once ('includes/functions_item.php');
-  include_once ('includes/class_shop.php');
+
 
   (array) $user_details = null;
   if ($session->value('user_id')) {

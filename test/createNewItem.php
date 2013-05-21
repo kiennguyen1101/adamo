@@ -19,7 +19,7 @@ class TestLogin extends PHPUnit_Extensions_Selenium2TestCase
         $this->setPort(4444);
         $this->setBrowser('chrome');
         $this->setBrowserUrl(TEST_URL);
-        $this->setRunTestInSeparateProcess(false);
+//        $this->setRunTestInSeparateProcess(false);
         $this->setPreserveGlobalState(true);
     }
 
@@ -36,6 +36,7 @@ class TestLogin extends PHPUnit_Extensions_Selenium2TestCase
         $form->submit();
 
         //sell new item, multiple steps
+        //step: choose category
         $this->url('sell_item.php?option=new_item');
         $category = $this->select($this->byId('selector_0'));
         $category->selectOptionByValue('2320');
@@ -47,11 +48,12 @@ class TestLogin extends PHPUnit_Extensions_Selenium2TestCase
         $this->assertContains('Điện thoại phổ thông', $subcat->selectedLabel());
         $this->byId('form_next_step')->click();
 
-        //next step: name and description
+        //step: name and description
         $this->byId('name')->value(uniqid('Phone_'));
 //        $this->frame('idContentoEdit1');
 //        $description = $this->byCssSelector('body');
 
+        //fill in iframe description with text
         $script = "jQuery('#idContentoEdit1').contents().find('body').text('New description')";
         $this->execute(array(
             'script' => $script,
@@ -60,19 +62,35 @@ class TestLogin extends PHPUnit_Extensions_Selenium2TestCase
 
         $this->byId('form_next_step')->click();
 
-        //next step: pricing
-        $this->byName('start_price')->value(rand(250, 400) * 1000);
+        //step: pricing
+        $parent = $this->byCssSelector('.sell_table');
+        $start_price = $parent->element($this->using('name')->value('start_price'));
+        $start_price->value((string)rand(250, 400) * 1000);
+
+
         $this->byName('is_buy_out')->click();
-        $this->byName('buyout_price')->value(rand(350, 450) * 1000);
+
+        $buyout_price = $parent->element($this->using('name')->value('buyout_price'));
+        $buyout_price->value((string)rand(350, 450) * 1000);
+
         $this->byName('hpfeat')->click();
+
         $this->byName('catfeat')->click();
+
         $this->byId('form_next_step')->click();
 
-        //next step: payment and shipping
-        $this->byName('postage_amount')->value('0');
-//        $this->by
+        //step: payment and shipping
+        $parent = $this->byCssSelector('.sell_table');
+        $postage_amount = $parent->element($this->using('name')->value('postage_amount'));
+        $postage_amount->value('0');
+        $this->byId('paypal')->click();
+        $this->byId('nganluong')->click();
+        $this->byId('form_next_step')->click();
 
-        //next step: finish
+        //step: preview
+        $this->byId('form_next_step')->click();
+
+        //step: finish
 
     }
 }
