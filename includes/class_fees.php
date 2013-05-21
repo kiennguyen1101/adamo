@@ -637,17 +637,16 @@ class fees extends tax
             if ($gateway_details['name'] == 'nganluong') {
                 $pgw = new paymentgateway($gateway_details['name']);
                 $pgw->setts = $this->setts;
-                $nganluong_email = ($user_id) ? $pg_details['pg_nganluong_email'] : $this->setts['pg_nganluong_email'];
-                $nganluong_merchant_id = ($user_id) ? $pg_details['pg_nganluong_username'] : $this->setts['pg_nganluong_username'];
-                $nganluong_password = ($user_id) ? $pg_details['pg_nganluong_password'] : $this->setts['pg_nganluong_password'];
+
+
                 $this->process_url = SITE_PATH . 'pp_nganluong.php';
 
                 include(INCLUDE_DIR. 'gateways/nganluong.php');
 
-                $nganluong = new nganluong('', $nganluong_merchant_id, $nganluong_password, '');
+                $nganluong = new nganluong('', $pgw->setts['pg_nganluong_username'], $pgw->setts['pg_nganluong_password'], '');
                 //todo: add sandbox and live environment for nganluong
                 $built_url = 'https://www.nganluong.vn/checkout.php';
-                $built_url .= $nganluong->buildCheckoutUrl($this->process_url, $nganluong_email, '', $transaction_id, $payment_amount);
+                $built_url .= $nganluong->buildCheckoutUrl($this->process_url, $pgw->setts['pg_nganluong_email'], '', $transaction_id, $payment_amount);
 
                 $display_output .= $pgw->form_nganluong($built_url);
             }
