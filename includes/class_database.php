@@ -5,6 +5,7 @@
 ## Copyright �2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
+include_once('global.php');
 
 class db_main
 {
@@ -109,7 +110,7 @@ class db_main
         $result = @mysql_query($query);
 
         if ($this->hasError()) {
-            throw new error($this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error(), $query));
+
             $mysql_error = $this->display_error(MSG_ERROR_MYSQL_QUERY, $this->sql_error($result), $query);
             if (DEBUG)
                 $mysql_error .= "<p>{$query}</p>";
@@ -189,12 +190,19 @@ class database extends db_main
 {
     public function __autoload($class_name)
     {
-        if (file_exists(BASE_DIR . $className . '.php')) {
+        if (file_exists(BASE_DIR . $class_name . '.php')) {
             if (!class_exists($class_name))
-                require_once $className . '.php';
+                require_once $class_name . '.php';
             return true;
         }
     }
+
+    public function maybe_serialize($data)
+    {
+        if (is_array($data) || is_object($data))
+            return serialize($data);
+    }
+
 
     function get_sql_field($query, $field, $null_message = NULL)
     {

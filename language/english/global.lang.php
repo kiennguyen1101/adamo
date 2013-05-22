@@ -52,9 +52,15 @@ define ('GMSG_CHECKOUT_ID', '2Checkout ID');
 define ('GMSG_NOCHEX_EMAIL', 'Nochex Email Address');
 define ('GMSG_IKOBO_USERNAME', 'Ikobo Member ID');
 define ('GMSG_IKOBO_PASSWORD', 'Ikobo Password');
+
+define('GMSG_SANDBOX_MODE', 'Sandbox Mode');
+define('GMSG_NGANLUONG_URL', 'Nganluong url');
+define('GMSG_NGANLUONG_SANDBOX_URL', 'Nganluong Sandbox url');
 define ('GMSG_NGANLUONG_EMAIL', 'Nganluong email');
-define ('GMSG_NGANLUONG_USERNAME', 'Nganluong merchant site id');// them mess cho ngan luong user name va password
+define ('GMSG_NGANLUONG_USERNAME', 'Nganluong merchant site id'); // them mess cho ngan luong user name va password
 define ('GMSG_NGANLUONG_PASSWORD', 'Nganluong Password');
+
+
 define ('GMSG_PROTX_USERNAME', 'Protx Vendor Name');
 define ('GMSG_PROTX_PASSWORD', 'Protx Password');
 define ('GMSG_AUTHNET_USERNAME', 'Authorize.net ID');

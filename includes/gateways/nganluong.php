@@ -114,7 +114,7 @@ class nganluong
             'order_code'		=>	strval($order_code),
             'price'				=>	strval($price)
         );
-        $secure_code ='';
+
         $secure_code = implode(' ', $arr_param) . ' ' . $this->secure_pass;
         $arr_param['secure_code'] = md5($secure_code);
 

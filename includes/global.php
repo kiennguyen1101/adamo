@@ -231,4 +231,5 @@ if ($session->value('user_id') > 0) {
 }
 
 include_once($fileExtension . 'includes/functions_addons.php');
-?>
+
+$option = new option();

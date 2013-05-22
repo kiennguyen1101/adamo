@@ -30,8 +30,6 @@ class paymentgateway extends database
     {
 
         (string)$display_output = null;
-        $secure_code = md5($nganluong_password);
-        $payment_description = (!$payment_description) ? GMSG_SERVICE_ACTIVATION_FEE : $payment_description;
 
         $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
             '<tr>' .
