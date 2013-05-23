@@ -12,6 +12,10 @@ define ('IN_ADMIN', 1);
 
 include_once('../includes/global.php');
 
+global $option;
+
+var_dump($option);
+
 if ($session->value('adminarea') != 'Active') {
     header_redirect('login.php');
 } else {
@@ -35,10 +39,14 @@ if ($session->value('adminarea') != 'Active') {
         $sql_update_checked = $db->query("UPDATE " . DB_PREFIX . "payment_gateways SET
 			dp_enabled = 1 WHERE pg_id IN (" . $pg_dp_enabled . ")");
 
-        global $option;
 
-        $option->updateOption('pg_nganluong_url', $db->rem_special_chars($_POST['pg_nganluong_url']));
+
         $option->updateOption('pg_nganluong_sandbox', $db->rem_special_chars($_POST['pg_nganluong_sandbox']));
+        $option->updateOption('pg_nganluong_sandbox_url', $db->rem_special_chars($_POST['pg_nganluong_sandbox_url']));
+        $option->updateOption('pg_nganluong_sandbox_email', $db->rem_special_chars($_POST['pg_nganluong_sandbox_email']));
+        $option->updateOption('pg_nganluong_sandbox_username', $db->rem_special_chars($_POST['pg_nganluong_sandbox_username']));
+        $option->updateOption('pg_nganluong_sandbox_password', $db->rem_special_chars($_POST['pg_nganluong_sandbox_password']));
+        $option->updateOption('pg_nganluong_url', $db->rem_special_chars($_POST['pg_nganluong_url']));
         $option->updateOption('pg_nganluong_email', $db->rem_special_chars($_POST['pg_nganluong_email']));
         $option->updateOption('pg_nganluong_username', $db->rem_special_chars($_POST['pg_nganluong_username']));
         $option->updateOption('pg_nganluong_password', $db->rem_special_chars($_POST['pg_nganluong_password']));
@@ -83,10 +91,12 @@ if ($session->value('adminarea') != 'Active') {
     $gen_setts = $db->get_sql_row("SELECT * FROM
 		" . DB_PREFIX . "gen_setts LIMIT 0,1");
 
+
     while ($pg_details = $db->fetch_array($sql_select_pg)) {
         $template->set('pg_details', $pg_details);
 
         (string)$pg_settings_rows = null;
+
 
         $background = ($counter++ % 2) ? 'c1' : 'c2';
 
@@ -208,25 +218,51 @@ if ($session->value('adminarea') != 'Active') {
                     '</tr> ';
                 break;
             case 'nganluong':
+                $pg_nganluong_sandbox = $option->getOption('pg_nganluong_sandbox') ? 'checked' : '';
+                $pg_nganluong_sandbox_password = $option->getOption('pg_nganluong_sandbox_password');
+                $pg_nganluong_sandbox_username = $option->getOption(('pg_nganluong_sandbox_username'));
+                $pg_nganluong_sandbox_email = $option->getOption('pg_nganluong_sandbox_email');
+                $pg_nganluong_sandbox_url = $option->getOption('pg_nganluong_sandbox_url');
+                $pg_nganluong_password = $option->getOption('pg_nganluong_password');
+                $pg_nganluong_username = $option->getOption(('pg_nganluong_username'));
+                $pg_nganluong_email = $option->getOption('pg_nganluong_email');
+                $pg_nganluong_url = $option->getOption('pg_nganluong_url');
+
                 $pg_settings_rows .= '<tr class="' . $background . '"> ' .
                     '	<td width="250">' . GMSG_SANDBOX_MODE . '</td> ' .
-                    '	<td><input name="pg_nganluong_sandbox" type="checkbox" value="' . $gen_setts['pg_nganluong_sandbox'] . '" size="50"></td> ' .
+                    "	<td><input name='pg_nganluong_sandbox' type='checkbox' value='1' {$pg_nganluong_sandbox} size='50'></td> " .
+                    '</tr> ';
+                $pg_settings_rows .= '<tr class="' . $background . '"> ' .
+                    '	<td width="250">' . GMSG_NGANLUONG_SANDBOX_URL . '</td> ' .
+                    '	<td><input name="pg_nganluong_sandbox_url" type="text" value="' . $pg_nganluong_sandbox_url . '" size="50"></td> ' .
+                    '</tr> ';
+                $pg_settings_rows .= '<tr class="' . $background . '"> ' .
+                    '	<td width="250">' . GMSG_NGANLUONG_SANDBOX_EMAIL . '</td> ' .
+                    '	<td><input name="pg_nganluong_sandbox_email" type="text" value="' . $pg_nganluong_sandbox_email . '" size="50"></td> ' .
+                    '</tr> ';
+                $pg_settings_rows .= '<tr class="' . $background . '"> ' .
+                    '	<td width="250">' . GMSG_NGANLUONG_SANDBOX_USERNAME . '</td> ' .
+                    '	<td><input name="pg_nganluong_sandbox_username" type="text" value="' . $pg_nganluong_sandbox_username . '" size="50"></td> ' .
+                    '</tr> ';
+                $pg_settings_rows .= '<tr class="' . $background . '"> ' .
+                    '	<td width="250">' . GMSG_NGANLUONG_SANDBOX_PASSWORD . '</td> ' .
+                    '	<td><input name="pg_nganluong_sandbox_password" type="text" value="' . $pg_nganluong_sandbox_password . '" size="50"></td> ' .
                     '</tr> ';
                 $pg_settings_rows .= '<tr class="' . $background . '"> ' .
                     '	<td width="250">' . GMSG_NGANLUONG_URL . '</td> ' .
-                    '	<td><input name="pg_nganluong_url" type="text" value="' . $gen_setts['pg_nganluong_url'] . '" size="50"></td> ' .
+                    '	<td><input name="pg_nganluong_url" type="text" value="' . $pg_nganluong_url . '" size="50"></td> ' .
                     '</tr> ';
                 $pg_settings_rows .= '<tr class="' . $background . '"> ' .
                     '	<td width="250">' . GMSG_NGANLUONG_EMAIL . '</td> ' .
-                    '	<td><input name="pg_nganluong_email" type="text" value="' . $gen_setts['pg_nganluong_email'] . '" size="50"></td> ' .
+                    '	<td><input name="pg_nganluong_email" type="text" value="' . $pg_nganluong_email . '" size="50"></td> ' .
                     '</tr> ';
                 $pg_settings_rows .= '<tr class="' . $background . '"> ' .
                     '	<td width="250">' . GMSG_NGANLUONG_USERNAME . '</td> ' .
-                    '	<td><input name="pg_nganluong_username" type="text" value="' . $gen_setts['pg_nganluong_username'] . '" size="50"></td> ' .
+                    '	<td><input name="pg_nganluong_username" type="text" value="' . $pg_nganluong_username . '" size="50"></td> ' .
                     '</tr> ';
                 $pg_settings_rows .= '<tr class="' . $background . '"> ' .
                     '	<td width="250">' . GMSG_NGANLUONG_PASSWORD . '</td> ' .
-                    '	<td><input name="pg_nganluong_password" type="text" value="' . $gen_setts['pg_nganluong_password'] . '" size="50"></td> ' .
+                    '	<td><input name="pg_nganluong_password" type="text" value="' . $pg_nganluong_password . '" size="50"></td> ' .
                     '</tr> ';
                 $pg_settings_rows .= '<tr> ' .
                     '	<td></td> ' .

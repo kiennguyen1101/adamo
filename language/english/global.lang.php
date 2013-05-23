@@ -56,8 +56,11 @@ define ('GMSG_IKOBO_PASSWORD', 'Ikobo Password');
 define('GMSG_SANDBOX_MODE', 'Sandbox Mode');
 define('GMSG_NGANLUONG_URL', 'Nganluong url');
 define('GMSG_NGANLUONG_SANDBOX_URL', 'Nganluong Sandbox url');
+define ('GMSG_NGANLUONG_SANDBOX_EMAIL', 'Nganluong Sandbox email');
+define ('GMSG_NGANLUONG_SANDBOX_USERNAME', 'Nganluong Sandbox merchant site id');
+define ('GMSG_NGANLUONG_SANDBOX_PASSWORD', 'Nganluong Sandbox Password');
 define ('GMSG_NGANLUONG_EMAIL', 'Nganluong email');
-define ('GMSG_NGANLUONG_USERNAME', 'Nganluong merchant site id'); // them mess cho ngan luong user name va password
+define ('GMSG_NGANLUONG_USERNAME', 'Nganluong merchant site id');
 define ('GMSG_NGANLUONG_PASSWORD', 'Nganluong Password');
 
 

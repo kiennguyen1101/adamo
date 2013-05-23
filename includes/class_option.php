@@ -9,7 +9,7 @@
 
 class option extends database
 {
-    public $data;
+    private $data;
 
     public function __construct()
     {
@@ -22,72 +22,74 @@ class option extends database
 
     private function get($name)
     {
-        $name = trim($name);
-        if (!$name)
-            return false;
 
-        $query = $this->query("SELECT name, value FROM " . DB_PREFIX . "option WHERE name='{name}' LIMIT 0,1");
-        $option = $this->fetch_array($query, true);
+        if (!isset($this->data[$name])) {
+            $query = $this->query("SELECT name, value FROM " . DB_PREFIX . "option WHERE name='{$name}' LIMIT 0,1");
+            $option = $this->fetch_array($query, true);
+            $this->data[$name] = $this->maybe_serialize($option['value']);
 
-        return $option;
+        }
+
+        return $this->data[$name];
     }
 
     private function set($name, $value, $autoload = false)
     {
-        $name = trim($name);
-        $value = trim($value);
-        if (!$name || !$value)
-            return false;
-        if (!is_bool($autoload))
-            return false;
         $this->query("INSERT INTO " . DB_PREFIX . "option
                                 (id, name, value, autoload) VALUES
-                                ('', '{$name}', '{$value}', '{$autoload}' ");
+                                ('', '{$name}', '{$value}', '{$autoload}' )");
 
         return $this->insert_id();
     }
 
     private function update($name, $value, $autoload = false)
     {
-        $name = trim($name);
-        $value = trim($value);
-        if (!$name || !$value)
-            return false;
-        if (!is_bool($autoload))
-            return false;
-
         $this->query("UPDATE " . DB_PREFIX . "option SET value='{$value}', autoload='{$autoload}' WHERE name='{$name}'");
     }
 
     public function getOption($option)
     {
-        if (!isset($this->data[$option])) {
-            $this->data[$option] = $this->get($option);
-        }
+        if ($this->isNullOrEmpty($option))
+            return false;
 
-        $this->data[$option] = @unserialize($this->data[$option]);
+        return $this->get($option);
+    }
 
-        return $this->data[$option];
+    protected function isNullOrEmpty($var)
+    {
+        return (!isset($var) || trim($var) === '');
     }
 
     public function updateOption($option, $value, $autoload = false)
     {
+
+        if ($this->isNullOrEmpty($option) || $this->isNullOrEmpty($value))
+            return false;
+        if (!is_bool($autoload))
+            return false;
+
         $value = $this->maybe_serialize($value);
 
-        if (isset($this->data[$option])) {
-            if ($this->data[$option] === $value)
-                return false;
+         if (isset($this->data[$option])) {
+             if ($this->data[$option] === $value)
+                 return false;
 
-            $this->update($option, $value, $autoload);
-            return true;
+             $this->update($option, $value, $autoload);
+             return true;
 
-        } else {
-            $id = $this->set($option, $value, $autoload);
-            if ($id)
-                return true;
-            else
-                return false;
-        }
+         } elseif (!$this->isNullOrEmpty($this->get($option))) {
+             if ($this->data[$option] === $value)
+                 return false;
+
+             $this->update($option, $value, $autoload);
+             return true;
+         } else {
+             $id = $this->set($option, $value, $autoload);
+             if ($id)
+                 return true;
+             else
+                 return false;
+         }
 
 
     }
