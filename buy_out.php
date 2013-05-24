@@ -88,7 +88,7 @@ else
 			bid_in_progress=0 WHERE auction_id='" . $item_details['auction_id'] . "'");
 
         $action = 'buy_out_success';
-//        $db->commit();
+        $db->commit();
       } catch (error $e) {
         $db->rollBack();
         $action = 'buy_out_error';              
@@ -150,7 +150,6 @@ else
 		$template->set('buy_out_success_message', $buy_out_success_message);
 
 		$direct_payment_box = $item->direct_payment_box($item_details, $session->value('user_id'), $purchase_result['winner_id']);
-
 
 		$template->set('direct_payment_box', $direct_payment_box[0]);
 

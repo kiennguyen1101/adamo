@@ -2646,8 +2646,12 @@ class item extends custom_field
 
                 if (!$winner_details['direct_payment_paid'] && !$winner_details['flag_paid'] && $winner_details['bid_amount'] > 0) {
                     $transaction_id = $winner_details['winner_id'] . 'TBL' . $fee_table;
+//                    $transaction_id = 10023 . 'TBL' . $fee_table;
+//                    $transaction_id = $item_details['auction_id'];
 
-                    $payment_description = MSG_DIRECT_PAYMENT . ' - ' . $item_details['name'] . ', ' . MSG_AUCTION_ID . ': ' . $item_details['auction_id'];
+                    $payment_description = implode(',', array($item_details['name'], $item_details['auction_id']));;
+//                    $payment_description = implode(',', array($item_details['name'], $winner_id));;
+
 
                     $payment_amount = $winner_details['bid_amount'] * $winner_details['quantity_offered'];
 

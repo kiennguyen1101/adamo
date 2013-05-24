@@ -14,8 +14,6 @@ include_once('../includes/global.php');
 
 global $option;
 
-var_dump($option);
-
 if ($session->value('adminarea') != 'Active') {
     header_redirect('login.php');
 } else {

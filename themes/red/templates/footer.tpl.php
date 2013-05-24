@@ -48,10 +48,10 @@
   </div>
   <div class="footer_column">
 	<h2>Đối tác</h2>
-	<a href=""><img src="http://adamo.vn/themes/red/img/SSL_200x40_ani1.gif" border="0"></a>
+	<a href=""><img src="<?php echo CURRENT_THEME; ?>/img/SSL_200x40_ani1.gif" border="0"></a>
 	<a href="" id="cnbanner">SSL</a>
 	<script language="JavaScript" src="http://www.comodo.com/javascript/banner.js" type="text/javascript"></script>
-	<img src="http://adamo.vn/themes/red/img/nldb_s_200.png" border="0">
+	<img src="<?php echo CURRENT_THEME; ?>/img/nldb_s_200.png" border="0">
   </div>
 </div>       
 </body>

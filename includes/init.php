@@ -10,6 +10,8 @@ $setts = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "gen_setts LIMIT 1");
 
 define("DEFAULT_THEME", $setts['default_theme']);
 define("SITE_PATH", $setts['site_path']);
+define("THEME_PATH", SITE_PATH . 'themes/');
+define("CURRENT_THEME", THEME_PATH . DEFAULT_THEME . '/');
 define("EMAIL_FONT", "<font face=\"Verdana, Arial, Helvetica\" size=\"2\">");
 
 $layout = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "layout_setts LIMIT 1");

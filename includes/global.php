@@ -12,8 +12,6 @@ $fileExtension = (file_exists('includes/global.php')) ? '' : '../';
 include_once($fileExtension . 'includes/config.php');
 
 
-
-
 /**
  *
  * @param string $className Class or Interface name automatically

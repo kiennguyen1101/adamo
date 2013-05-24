@@ -5,7 +5,7 @@
 ## Copyright �2009 MyPHPAuction. All rights reserved.	##
 ##-------------------------------------------------------------##
 #################################################################
-include_once('global.php');
+include_once(INCLUDE_DIR. 'global.php');
 
 class db_main
 {
@@ -188,14 +188,7 @@ class db_main
 
 class database extends db_main
 {
-    public function __autoload($class_name)
-    {
-        if (file_exists(BASE_DIR . $class_name . '.php')) {
-            if (!class_exists($class_name))
-                require_once $class_name . '.php';
-            return true;
-        }
-    }
+
 
     public function maybe_serialize($data)
     {

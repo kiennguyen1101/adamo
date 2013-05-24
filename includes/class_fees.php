@@ -537,6 +537,7 @@ class fees extends tax
 
     function show_gateways($transaction_id, $payment_amount, $currency, $user_id, $payment_description = null, $dp_gateways = null)
     {
+        global $option;
         ## here, depending if there is a fee to be paid or a direct payment, we will show the necessary gateways in a table.
         ## if user_id is submitted, it means that there is a direct payment request.
         (string)$display_output = null;
@@ -635,19 +636,38 @@ class fees extends tax
             }
 
             if ($gateway_details['name'] == 'nganluong') {
+
                 $pgw = new paymentgateway($gateway_details['name']);
                 $pgw->setts = $this->setts;
 
-
                 $this->process_url = SITE_PATH . 'pp_nganluong.php';
 
-                include(INCLUDE_DIR. 'gateways/nganluong.php');
+                include(INCLUDE_DIR . 'gateways/nganluong.php');
 
-                $nganluong = new nganluong('', $pgw->setts['pg_nganluong_username'], $pgw->setts['pg_nganluong_password'], '');
-                //todo: add sandbox and live environment for nganluong
-                $built_url = 'https://www.nganluong.vn/checkout.php';
-                $built_url .= $nganluong->buildCheckoutUrl($this->process_url, $pgw->setts['pg_nganluong_email'], '', $transaction_id, $payment_amount);
+                $sandbox = $option->getOption('pg_nganluong_sandbox');
 
+                if ($sandbox === '1') {
+                    $pg_nganluong_password = $option->getOption('pg_nganluong_sandbox_password');
+                    $pg_nganluong_username = $option->getOption(('pg_nganluong_sandbox_username'));
+                    $pg_nganluong_email = $option->getOption('pg_nganluong_sandbox_email');
+                    $pg_nganluong_url = $option->getOption('pg_nganluong_sandbox_url');
+
+                } else {
+                    $pg_nganluong_password = $option->getOption('pg_nganluong_password');
+                    $pg_nganluong_username = $option->getOption(('pg_nganluong_username'));
+                    $pg_nganluong_email = $option->getOption('pg_nganluong_email');
+                    $pg_nganluong_url = $option->getOption('pg_nganluong_url');
+                }
+
+                //additional details about transaction
+                echo $payment_description;
+                $transaction_info = array();
+                $transaction_info['currency'] = $currency;
+                $transaction_info['payment_description'] = $payment_description;
+                $transaction_info = $this->implode_array($transaction_info);
+
+                $nganluong = new nganluong($pg_nganluong_url, $pg_nganluong_username, $pg_nganluong_password, '');
+                $built_url = $nganluong->buildCheckoutUrl($this->process_url, $pg_nganluong_email, $transaction_info, $transaction_id, $payment_amount);
                 $display_output .= $pgw->form_nganluong($built_url);
             }
         }
@@ -660,6 +680,7 @@ class fees extends tax
     function callback_process($custom_id, $fee_table, $payment_gateway, $payment_amount, $txn_id = null, $currency = null)
     {
         $custom_id = intval(ppb_mcrypt_decode($custom_id));
+
         $invoice_time = CURRENT_TIME;
 
         try {
