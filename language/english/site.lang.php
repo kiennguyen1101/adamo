@@ -1116,5 +1116,6 @@ define ('MSG_SITE_PAYMENT', 'Site Payment');
 define ('MSG_PAYMENT_DATE', 'Ngày');
 define ('MSG_SEARCH_DESCRIPTION', 'Tìm tên sản phẩm và mô tả');
 define ('', '');
-define ('', '');
+
+define('MSG_PAYMENT_ERROR', 'There is something wrong with the transaction, the server said: %s');
 ?>

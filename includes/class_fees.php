@@ -85,203 +85,6 @@ class fees extends tax
         return $display_output;
     }
 
-    ### moneybookers form
-
-    function form_moneybookers($transaction_id, $mb_email, $payment_amount, $currency, $direct_payment = false, $payment_description = null, $post_url = 'https://www.moneybookers.com/app/payment.pl')
-    {
-        (string)$display_output = null;
-
-        $mb_trans_id = md5(uniqid(rand()));
-        ### this will be the new payment form design
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/mb_logo.gif"></td> ' .
-            '		<form action="' . $post_url . '" method="post" id="form_mb"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_MB_DESCRIPTION . '</td> ' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="pay_to_email" value="' . $mb_email . '"> 	' .
-            //'		<input type="hidden" name="transaction_id" value="' . $mb_trans_id . '"> '.
-            '		<input type="hidden" name="return_url" value="' . $this->return_url . '"> ' .
-            '		<input type="hidden" name="cancel_url" value="' . $this->failure_url . '">	' .
-            '		<input type="hidden" name="status_url" value="' . $this->process_url . '">	' .
-            '		<input type="hidden" name="language" value="EN"> ' .
-            '		<input type="hidden" name="merchant_fields" value="trans_id"> ' .
-            '		<input type="hidden" name="amount" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="currency" value="' . $currency . '"> ' .
-            '		<input type="hidden" name="trans_id" value="' . $transaction_id . '"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form>' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    ## nochex - localized for GBP payments only
-
-    function form_nochex($transaction_id, $nochex_email, $payment_amount, $direct_payment = FALSE, $post_url = 'https://www.nochex.com/nochex.dll/checkout')
-    {
-        (string)$display_output = null;
-
-        $transaction_code = md5(uniqid(mt_rand(), true));
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/nochex_logo.gif"></td> ' .
-            '		<form action="' . $post_url . '" method="post" id="form_nochex"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_NOCHEX_DESCRIPTION . '</td> ' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="returnurl" value="' . $this->return_url . '"> ' .
-            '		<input type="hidden" name="cancelurl" value="' . $this->failure_url . '"> ' .
-            '		<input type="hidden" name="email" value="' . $nochex_email . '"> ' .
-            '		<input type="hidden" name="amount" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="responderurl" value="' . $this->process_url . '"> ' .
-            '		<input type="hidden" name="ordernumber" value="' . $transaction_id . 'TBL' . $transaction_code . '"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table> ';
-
-        return $display_output;
-    }
-
-    ## 2checkout - localized for USD payments only
-
-    function form_checkout($transaction_id, $checkout_id, $payment_amount, $direct_payment = FALSE, $post_url = 'https://www2.2checkout.com/2co/buyer/purchase')
-    {
-
-        (string)$display_output = null;
-
-        ## v1 LINK
-        $co_link_v1 = 'https://www.2checkout.com/cgi-bin/sbuyers/cartpurchase.2c';
-        ## v2 LINK
-        $co_link_v2 = 'https://www2.2checkout.com/2co/buyer/purchase';
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr> ' .
-            '	<td width="160" class="paytable1"><img src="img/checkout_logo.gif"></td> ' .
-            '		<form action="' . $post_url . '" method="get" id="form_checkout"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_CHECKOUT_DESCRIPTION . '</td>' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="sid" value="' . $checkout_id . '">	' .
-            '		<input type="hidden" name="total" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="cart_order_id" value="' . $transaction_id . '"> ' .
-            '		<input type="hidden" name="c_prod" value="CO_' . $transaction_id . '"> ' .
-            '		<input type="hidden" name="id_type" value="1"> ' .
-            '		<input type="hidden" name="sh_cost" value="0"> ' .
-            '		<input type="hidden" name="c_name" value="' . GMSG_SERVICE_ACTIVATION_FEE . '"> ' .
-            '		<input type="hidden" name="c_description" value="' . GMSG_SERVICE_ACTIVATION_FEE . '"> ' .
-            '		<input type="hidden" name="c_price" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="c_tangible" value="N"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    function form_worldpay($transaction_id, $worldpay_id, $payment_amount, $currency, $direct_payment = FALSE, $post_url = 'https://select.worldpay.com/wcc/purchase')
-    {
-
-        (string)$display_output = null;
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr> ' .
-            '	<td width="160" class="paytable1"><img src="img/worldpay_logo.gif"></td> ' .
-            '		<form action="' . $post_url . '" method=POST id="form_worldpay"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_WORLDPAY_DESCRIPTION . '</td>' .
-            '	<td class="paytable3"> ' .
-            '		<input type=hidden name="instId" value="' . $worldpay_id . '">	' .
-            '		<input type=hidden name="cartId" value="' . $transaction_id . '"> ' .
-            '		<input type=hidden name="amount" value="' . $payment_amount . '"> ' .
-            '		<input type=hidden name="currency" value="' . $currency . '"> ' .
-            '		<input type=hidden name="desc" value="' . GMSG_SERVICE_ACTIVATION_FEE . '"> ' .
-            '		<input type=hidden name=MC_callback value="' . $this->process_url . '"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    ## ikobo - localized for USD payments only
-
-    function form_ikobo($transaction_id, $ikobo_member_id, $ikobo_password, $payment_amount, $direct_payment = FALSE, $post_url = 'https://www.ikobo.com/store/index.php')
-    {
-        (string)$display_output = null;
-
-        $transaction_id = $transaction_id . 'TBL' . md5(rand());
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/ikobo_logo.gif"></td>' .
-            '		<form method="post" action="' . $post_url . '" id="form_ikobo"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_IKOBO_DESCRIPTION . '</td> ' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="cmd" value="cart"> ' .
-            '		<input type="hidden" name="item_id" value="' . $transaction_id . '"> ' .
-            '		<input type="hidden" name="item" value="' . GMSG_SERVICE_ACTIVATION_FEE . '"> ' .
-            '		<input type="hidden" name="price" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="poid" value="' . $ikobo_member_id . '"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    function form_protx($transaction_id, $protx_username, $protx_password, $payment_amount, $currency, $direct_payment = false, $post_url = 'https://ukvps.protx.com/vps2form/submit.asp')
-    {
-        (string)$display_output = null;
-
-        $transaction_code = substr(md5(uniqid(mt_rand(), true)), -8);
-
-        $user_details = $this->get_sql_row("SELECT email, address, zip_code FROM " . DB_PREFIX . "users WHERE
-			user_id='" . $this->user_id . "'"); ## user_id is provided from the payment functions
-        ## the user details we will get later.
-        $string = 'VendorTxCode=' . $transaction_id . 'TBL' . $transaction_code . '&' .
-            'Amount=' . $payment_amount . '&' .
-            'Currency=' . $currency . '&' .
-            'Description=' . GMSG_SERVICE_ACTIVATION_FEE . '&' .
-            'CustomerEmail=' . $user_details['email'] . '&' .
-            'SuccessURL=' . $this->process_url . '&' .
-            'FailureURL=' . $this->failure_url . '&' .
-            'BillingAddress=' . $user_details['address'] . '&';
-        $string .= 'BillingPostCode=' . $user_details['zip_code'] . '';
-
-        $key_values = array();
-
-        $password_length = strlen($protx_password);
-        $string_length = strlen($string);
-
-        for ($i = 0; $i < $password_length; $i++) {
-            $key_values[$i] = ord(substr($protx_password, $i, 1));
-        }
-
-        (string)$secret_string = '';
-
-        for ($i = 0; $i < $string_length; $i++) {
-            $secret_string .= chr(ord(substr($string, $i, 1)) ^ ($key_values[$i % $password_length]));
-        }
-
-        $secret_string = base64_encode($secret_string);
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/protx_logo.gif"></td>' .
-            '		<form method="post" action="' . $post_url . '" id="form_protx"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_PROTX_DESCRIPTION . '</td>' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="cmd" value="cart"> ' .
-            '		 <input type="hidden" name="VPSProtocol" value="2.22">			' .
-            '		 <input type="hidden" name="TxType" value="PAYMENT">				' .
-            '		 <input type="hidden" name="Vendor" value="' . $protx_username . '">' .
-            '		 <input type="hidden" name="Crypt" value="' . $secret_string . '">	' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
     function form_testmode($transaction_id, $payment_amount)
     {
         (string)$display_output = null;
@@ -294,145 +97,6 @@ class fees extends tax
             '	<td class="paytable3"> ' .
             '		<input type="hidden" name="amount" value="' . $payment_amount . '"> ' .
             '		<input type="hidden" name="custom" value="' . $transaction_id . '"> ' .
-            '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    ## BEGIN of Authorize.Net related functions
-
-    function hmac($key, $data)
-    {
-        // RFC 2104 HMAC implementation for php.
-        // Creates an md5 HMAC.
-        // Eliminates the need to install mhash to compute a HMAC
-        // Hacked by Lance Rushing
-
-        $b = 64; // byte length for md5
-        if (strlen($key) > $b) {
-            $key = pack("H*", md5($key));
-        }
-        $key = str_pad($key, $b, chr(0x00));
-        $ipad = str_pad('', $b, chr(0x36));
-        $opad = str_pad('', $b, chr(0x5c));
-        $k_ipad = $key ^ $ipad;
-        $k_opad = $key ^ $opad;
-
-        return md5($k_opad . pack("H*", md5($k_ipad . $data)));
-    }
-
-    // Calculate and return fingerprint
-    // Use when you need control on the HTML output
-    function CalculateFP($loginid, $x_tran_key, $amount, $sequence, $tstamp, $currency = "")
-    {
-        return ($this->hmac($x_tran_key, $loginid . "^" . $sequence . "^" . $tstamp . "^" . $amount . "^" . $currency));
-    }
-
-    // Inserts the hidden variables in the HTML FORM required for SIM
-    // Invokes hmac function to calculate fingerprint.
-
-    function InsertFP($loginid, $x_tran_key, $amount, $sequence, $currency = "")
-    {
-
-        $tstamp = time();
-
-        $fingerprint = $this->hmac($x_tran_key, $loginid . "^" . $sequence . "^" . $tstamp . "^" . $amount . "^" . $currency);
-
-        $output = '<input type="hidden" name="x_fp_sequence" value="' . $sequence . '"> ' .
-            '<input type="hidden" name="x_fp_timestamp" value="' . $tstamp . '"> ' .
-            '<input type="hidden" name="x_fp_hash" value="' . $fingerprint . '">';
-
-        return $output;
-    }
-
-    /*
-
-      // Inserts the hidden variables in the HTML FORM required for SIM
-      // Invokes hmac function to calculate fingerprint.
-      function InsertFP ($loginid, $x_tran_key, $amount, $sequence, $currency = "")
-      {
-      $tstamp = time();
-      $fingerprint = $this->hmac ($x_tran_key, $loginid . "^" . $sequence . "^" . $tstamp . "^" . $amount . "^" . $currency);
-      echo ('<input type="hidden" name="x_fp_sequence" value="' . $sequence . '">');
-      echo ('<input type="hidden" name="x_fp_timestamp" value="' . $tstamp . '">');
-      echo ('<input type="hidden" name="x_fp_hash" value="' . $fingerprint . '">');
-      return (0);
-      }
-     */
-
-    ## authorize.net -> localized for USD payments only.
-
-    function form_authnet($transaction_id, $authnet_username, $authnet_password, $payment_amount, $direct_payment = false, $payment_description = null, $post_url = 'https://secure.authorize.net/gateway/transact.dll')
-    {
-        (string)$display_output = null;
-
-        $TESTMODE = 0;
-        ## UnComment this line out to enter Testing Mode!
-        ## $TESTMODE = 1;
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/authorize_logo.gif"></td>';
-
-        if ($TESTMODE) {
-            $display_output .= '<form action="https://test.authorize.net/gateway/transact.dll" method="POST">';
-        } else {
-            $display_output .= '<form action="' . $post_url . '" method="post" id="form_authnet">';
-        }
-        $display_output .= '	<td class="paytable2" width="100%">' . GMSG_AUTHNET_DESCRIPTION;
-
-        srand(time());
-        $sequence = rand(1, 1000);
-        $ret = $this->InsertFP($authnet_username, $authnet_password, $payment_amount, $sequence);
-
-        $display_output .= '	</td>' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="x_description" value="' . $payment_description . '">' .
-            '		<input type="hidden" name="x_login" value="' . $authnet_username . '">' .
-            '		<input type="hidden" name="x_amount" value="' . $payment_amount . '">' .
-            '		<input type="hidden" name="x_currency" value="' . $this->setts['currency'] . '">' .
-            '		<input type="hidden" name="x_method" value="CC">' .
-            '		<input type="hidden" name="x_type" value="AUTH_CAPTURE">' .
-            '		<input type="hidden" name="x_show_form" value="PAYMENT_FORM">' .
-            '		<input type="hidden" name="x_relay_response" value="TRUE">' .
-            $ret .
-            '		<input type="hidden" name="myphpauction_id" value="' . $transaction_id . '">';
-
-        if ($TESTMODE) {
-            $display_output .= '<input type="hidden" name="x_test_request" value="TRUE">';
-        }
-
-        $display_output .= '<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
-            '	</td></form> ' .
-            '</tr></table>';
-
-        return $display_output;
-    }
-
-    ## END of Authorize.Net related functions
-
-    function form_paymate($transaction_id, $paymate_merchant_id, $payment_amount, $currency, $payment_description = null, $direct_payment = false, $post_url = 'https://www.paymate.com/PayMate/ExpressPayment')
-    {
-
-        (string)$display_output = null;
-
-        $payment_description = (!$payment_description) ? GMSG_SERVICE_ACTIVATION_FEE : $payment_description;
-
-        $display_output = '<table width="100%" border="0" cellspacing="2" cellpadding="3" class="paymenttable"> ' .
-            '<tr>' .
-            '	<td width="160" class="paytable1"><img src="img/paymate_logo.gif"></td> ' .
-            '		<form action="' . $post_url . '" method="post" id="form_paymate"> ' .
-            '	<td class="paytable2" width="100%">' . GMSG_PAYMATE_DESCRIPTION . '</td> ' .
-            '	<td class="paytable3"> ' .
-            '		<input type="hidden" name="mid" value="' . $paymate_merchant_id . '"> ' .
-            '		<input type="hidden" name="amt" value="' . $payment_amount . '"> ' .
-            '		<input type="hidden" name="amt_editable" value="N"> ' .
-            '		<input type="hidden" name="currency" value="' . $currency . '"> ' .
-            '		<input type="hidden" name="return" value="' . $this->process_url . '"> ' .
-            '		<input type="hidden" name="ref" value="' . $transaction_id . '"> ' .
-            '		<input type="hidden" name="popup" value="false"> ' .
             '		<input name="submit" type="image" src="themes/' . $this->setts['default_theme'] . '/img/system/but_pay.gif" border="0"> ' .
             '	</td></form> ' .
             '</tr></table>';
@@ -573,57 +237,6 @@ class fees extends tax
                 $display_output .= $this->form_paypal($transaction_id, $paypal_email, $payment_amount, $currency, $payment_description);
 
             }
-            if ($gateway_details['name'] == 'Worldpay' && (!$user_id || $pg_details['pg_worldpay_id'])) {
-                $worldpay_id = ($user_id) ? $pg_details['pg_worldpay_id'] : $this->setts['pg_worldpay_id'];
-                $this->process_url = SITE_PATH . 'pp_worldpay.php';
-
-                $display_output .= $this->form_worldpay($transaction_id, $worldpay_id, $payment_amount, $currency);
-            }
-            if ($gateway_details['name'] == '2Checkout' && (!$user_id || $pg_details['pg_checkout_id'])) {
-                $checkout_id = ($user_id) ? $pg_details['pg_checkout_id'] : $this->setts['pg_checkout_id'];
-                $this->process_url = SITE_PATH . 'pp_checkout.php';
-
-                $display_output .= $this->form_checkout($transaction_id, $checkout_id, $payment_amount);
-            }
-            if ($gateway_details['name'] == 'Nochex' && (!$user_id || $pg_details['pg_nochex_email'])) {
-                $nochex_email = ($user_id) ? $pg_details['pg_nochex_email'] : $this->setts['pg_nochex_email'];
-                $this->process_url = SITE_PATH . 'pp_nochex.php';
-
-                $display_output .= $this->form_nochex($transaction_id, $nochex_email, $payment_amount);
-            }
-            if ($gateway_details['name'] == 'Ikobo' && (!$user_id || $pg_details['pg_ikobo_username'])) {
-                $ikobo_username = ($user_id) ? $pg_details['pg_ikobo_username'] : $this->setts['pg_ikobo_username'];
-                $ikobo_password = ($user_id) ? $pg_details['pg_ikobo_password'] : $this->setts['pg_ikobo_password'];
-                $this->process_url = SITE_PATH . 'pp_ikobo.php';
-
-                $display_output .= $this->form_ikobo($transaction_id, $ikobo_username, $ikobo_password, $payment_amount);
-            }
-            if ($gateway_details['name'] == 'Protx' && (!$user_id || $pg_details['pg_protx_username'])) {
-                $protx_username = ($user_id) ? $pg_details['pg_protx_username'] : $this->setts['pg_protx_username'];
-                $protx_password = ($user_id) ? $pg_details['pg_protx_password'] : $this->setts['pg_protx_password'];
-                $this->process_url = SITE_PATH . 'pp_protx.php';
-
-                $display_output .= $this->form_protx($transaction_id, $protx_username, $protx_password, $payment_amount, $currency);
-            }
-            if ($gateway_details['name'] == 'Authorize.net' && (!$user_id || $pg_details['pg_authnet_username'])) {
-                $authnet_username = ($user_id) ? $pg_details['pg_authnet_username'] : $this->setts['pg_authnet_username'];
-                $authnet_password = ($user_id) ? $pg_details['pg_authnet_password'] : $this->setts['pg_authnet_password'];
-                $this->process_url = SITE_PATH . 'pp_authnet.php';
-
-                $display_output .= $this->form_authnet($transaction_id, $authnet_username, $authnet_password, $payment_amount, false, $payment_description);
-            }
-            if ($gateway_details['name'] == 'Moneybookers' && (!$user_id || $pg_details['pg_mb_email'])) {
-                $mb_email = ($user_id) ? $pg_details['pg_mb_email'] : $this->setts['pg_mb_email'];
-                $this->process_url = SITE_PATH . 'pp_moneybookers.php';
-
-                $display_output .= $this->form_moneybookers($transaction_id, $mb_email, $payment_amount, $currency, false, $payment_description);
-            }
-            if ($gateway_details['name'] == 'Paymate' && (!$user_id || $pg_details['pg_paymate_merchant_id'])) {
-                $paymate_merchant_id = ($user_id) ? $pg_details['pg_paymate_merchant_id'] : $this->setts['pg_paymate_merchant_id'];
-                $this->process_url = SITE_PATH . 'pp_paymate.php';
-
-                $display_output .= $this->form_paymate($transaction_id, $paymate_merchant_id, $payment_amount, $currency, $payment_description);
-            }
             if ($gateway_details['name'] == 'Google Checkout' && (!$user_id || $pg_details['pg_gc_merchant_id'])) {
                 $gc_merchant_id = ($user_id) ? $pg_details['pg_gc_merchant_id'] : $this->setts['pg_gc_merchant_id'];
                 $gc_merchant_key = ($user_id) ? $pg_details['pg_gc_merchant_key'] : $this->setts['pg_gc_merchant_key'];
@@ -646,6 +259,7 @@ class fees extends tax
 
                 $sandbox = $option->getOption('pg_nganluong_sandbox');
 
+                //set parameters for nganluong class according to environment
                 if ($sandbox === '1') {
                     $pg_nganluong_password = $option->getOption('pg_nganluong_sandbox_password');
                     $pg_nganluong_username = $option->getOption(('pg_nganluong_sandbox_username'));
@@ -659,14 +273,15 @@ class fees extends tax
                     $pg_nganluong_url = $option->getOption('pg_nganluong_url');
                 }
 
-                //additional details about transaction
-                echo $payment_description;
+                //additional details about transaction: echo $payment_description
+
                 $transaction_info = array();
                 $transaction_info['currency'] = $currency;
                 $transaction_info['payment_description'] = $payment_description;
                 $transaction_info = $this->implode_array($transaction_info);
 
                 $nganluong = new nganluong($pg_nganluong_url, $pg_nganluong_username, $pg_nganluong_password, '');
+                //$transaction_id:
                 $built_url = $nganluong->buildCheckoutUrl($this->process_url, $pg_nganluong_email, $transaction_info, $transaction_id, $payment_amount);
                 $display_output .= $pgw->form_nganluong($built_url);
             }
@@ -1539,7 +1154,7 @@ class fees extends tax
         if ($this->fee['signup_fee'] > 0) {
             $output = $this->apply_tax($this->fee['signup_fee'], $this->setts['currency'], $user_id, $this->setts['enable_tax']);
 
-            $output['display'] = $this->payment_message($output['amount'], 0, $signup_message, $output['tax_details']);
+            $output['display'] = $this->payment_message($output['amount'], 0, $signup_message='', $output['tax_details']);
 
             $transaction_id = $user_id . 'TBL' . $fee_table;
 
@@ -1615,7 +1230,7 @@ class fees extends tax
                 $invoice_name = GMSG_WA_SETUP_FEE;
                 $invoice_time = CURRENT_TIME;
 
-                $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', '{$item_details['wanted_ad_id']}', '$invoice_name', '{$payment_amount}', 'completed', '{$invoice_time}', {$account_balance}')");
+                $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, wanted_ad_id, name, amount, invoice_status, invoice_date, current_balance) VALUES ('{$user_details['user_id']}', '{$item_details['wanted_ad_id']}', '$invoice_name', '{$output['amount']}', 'completed', '{$invoice_time}', {$account_balance}')");
 
 //          $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices (user_id, wanted_ad_id, name, amount, invoice_date, current_balance) VALUES ('" . $user_details['user_id'] . "', '" . $item_details['wanted_ad_id'] . "', '" . GMSG_WA_SETUP_FEE . "', '" . $output['amount'] . "', '" . CURRENT_TIME . "', '" . $account_balance . "')");
 
@@ -1674,7 +1289,7 @@ class fees extends tax
         if ($subscription_details['fee_amount'] > 0) {
             $output = $this->apply_tax($subscription_details['fee_amount'], $this->setts['currency'], $user_id, $this->setts['enable_tax']);
 
-            $output['display'] = $this->payment_message($output['amount'], 0, $store_subscription_message, $output['tax_details']);
+            $output['display'] = $this->payment_message($output['amount'], 0, $store_subscription_message='', $output['tax_details']);
 
             $transaction_id = $user_id . 'TBL' . $fee_table;
 

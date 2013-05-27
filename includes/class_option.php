@@ -13,6 +13,8 @@ class option extends database
 
     public function __construct()
     {
+        $cache = new cache('apc');
+
         $query = $this->query('SELECT name, value FROM ' . DB_PREFIX . 'option WHERE autoload=1');
         $result = $this->fetch_all($query, true);
         foreach ($result as $option) {

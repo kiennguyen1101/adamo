@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class paymentgateway extends database
+class paymentgateway extends fees
 {
 
     const GW_DISABLED = 0;
@@ -42,6 +42,35 @@ class paymentgateway extends database
             '</tr></table>';
 
         return $display_output;
+    }
+
+    /* @params: $params['error'], $params['transaction_id'],
+     *          $params['amount'], $params['currency'],
+     *          $params['order_id'] */
+    public function process($params)
+    {
+        //what we do with payments:
+        //check returned message for errors
+        //add invoices
+        //add information about transaction
+        //change user balance
+        //notify user
+        //show messages accordingly
+
+        //parameters needed: error message & code, gateway's transaction id, amount, currency, submitted order id (auction id)
+        //other parameters should be handled by subclasses
+
+        //BEGIN
+        if ($params['error']) {
+            //should we log the error for administration?
+
+            //thow out an error
+            throw new error(printf(MSG_PAYMENT_ERROR, $params['error']));
+        }
+
+
+
+
     }
 
 

@@ -58,7 +58,7 @@ if ($nganluong->verifyPaymentUrl($transaction_info, $order_code, $price, $paymen
 
             $redirect_url = SITE_PATH . 'payment_completed.php';
 
-            $db->commit();
+//            $db->commit();
         } catch (error $e) {
             $db->rollBack();
             error::dump_exception($e);
