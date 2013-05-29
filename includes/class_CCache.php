@@ -1,6 +1,7 @@
 <?php
 
   require_once("ICache.php");
+  require_once("class_database.php");
   /**
    * CCache class file.
    *
@@ -49,7 +50,7 @@
    * @package system.caching
    * @since 1.0
    */
-  abstract class CCache implements ICache, ArrayAccess {
+  abstract class CCache extends db_main implements ICache, ArrayAccess {
 
     /**
      * @var string a string prefixed to every cache key so that it is unique. Defaults to null which means
@@ -106,10 +107,10 @@
       if ($value === false || $this->serializer === false)
         return $value;
       if ($this->serializer === null)
-        $value = unserialize($value);
+        $value = $this->maybe_serialize($value);
       else
         $value = call_user_func($this->serializer[1], $value);
-       if (is_array($value) && (!$value[1] instanceof ICacheDependency || !$value[1]->getHasChanged())) {
+      if (is_array($value) && (!$value[1] instanceof ICacheDependency || !$value[1]->getHasChanged())) {
 //        Yii::trace('Serving "' . $id . '" from cache', 'system.caching.' . get_class($this));
         return $value[0];
       }
@@ -142,7 +143,7 @@
         foreach ($uids as $id => $uid) {
           $results[$id] = false;
           if (isset($values[$uid])) {
-            $value = $this->serializer === null ? unserialize($values[$uid]) : call_user_func($this->serializer[1], $values[$uid]);
+            $value = $this->serializer === null ? $this->maybe_unserialize($values[$uid]) : call_user_func($this->serializer[1], $values[$uid]);
             if (is_array($value) && !$value[1]->getHasChanged()) {
 //              Yii::trace('Serving "' . $id . '" from cache', 'system.caching.' . get_class($this));
               $results[$id] = $value[0];
@@ -171,7 +172,7 @@
         $dependency->evaluateDependency();
 
       if ($this->serializer === null)
-        $value = serialize(array($value, $dependency));
+        $value = $this->maybe_serialize(array($value, $dependency));
       elseif ($this->serializer !== false)
         $value = call_user_func($this->serializer[0], array($value, $dependency));
 
@@ -188,17 +189,7 @@
      * @return boolean true if the value is successfully stored into cache, false otherwise
      */
     public function add($id, $value, $expire = 0, $dependency = null) {
-//      Yii::trace('Adding "' . $id . '" to cache', 'system.caching.' . get_class($this));
-
-      if ($dependency !== null && $this->serializer !== false)
-        $dependency->evaluateDependency();
-
-      if ($this->serializer === null)
-        $value = serialize(array($value, $dependency));
-      elseif ($this->serializer !== false)
-        $value = call_user_func($this->serializer[0], array($value, $dependency));
-
-      return $this->addValue($this->generateUniqueKey($id), $value, $expire);
+      return $this->set($id, $value, $expire, $dependency);
     }
 
     /**

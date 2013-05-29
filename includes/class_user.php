@@ -10,7 +10,7 @@
   class user extends custom_field {
 
     var $item;
-    private $userTable;
+    private $tableName;
     private $cache;
     private $user_details = array();
 
@@ -22,7 +22,7 @@
       //we prefer memcached over apc for caching private data
       $extension = 'memcached';
       $this->cache = extension_loaded($extension) ? cache::createCache('memcached') : cache::createCache('apc');
-      $this->userTable = DB_PREFIX . "users";
+      $this->tableName = DB_PREFIX . "users";
 
       if ($id)
         $this->user_details = $this->get($id);
@@ -34,10 +34,10 @@
      */
 
     private function get($id) {
-      var_dump(get_class($this->cache));
+
       $user_details = $this->cache->get("user_{$id}");
       if (!$user_details) {
-        $query = $this->query("SELECT * FROM {$this->userTable} WHERE user_id='{$id}' LIMIT 0,1");
+        $query = $this->query("SELECT * FROM {$this->tableName} WHERE user_id='{$id}' LIMIT 0,1");
         $user_details = $this->fetch_array($query, TRUE);
         $this->cache->set("user_{$id}", $user_details);
       }
