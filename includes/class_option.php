@@ -60,6 +60,7 @@
     }
 
     private function update($name, $value, $autoload = false) {
+      $this->cache->set("option_$name", $value);
       $this->query("UPDATE " . DB_PREFIX . "option SET value='{$value}', autoload='{$autoload}' WHERE name='{$name}'");
     }
 
@@ -88,8 +89,8 @@
 
     public function updateOption($option, $value, $autoload = false) {
 
-      if ($this->isNullOrEmpty($option) || $this->isNullOrEmpty($value))
-        return false;
+//      if ($this->isNullOrEmpty($option) || $this->isNullOrEmpty($value))
+//        return false;
       if (!is_bool($autoload))
         return false;
 

@@ -10,8 +10,7 @@
     public $tableName;
     public $tableInvoiceStatus;
     public $data = array();
-    private $cache;
-    private $tableName;
+    private $cache;    
 
     /* Constructor.
      * Take invoice_id as parameter, set all associated keys to data array
