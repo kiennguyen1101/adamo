@@ -248,23 +248,7 @@
           $this->process_url = SITE_PATH . 'pp_nganluong.php';
 
           include(INCLUDE_DIR . 'gateways/nganluong.php');
-
-          $sandbox = $option->getOption('pg_nganluong_sandbox');
-
-          //set parameters for nganluong class according to environment
-          if ($sandbox === '1') {
-            $pg_nganluong_password = $option->getOption('pg_nganluong_sandbox_password');
-            $pg_nganluong_username = $option->getOption(('pg_nganluong_sandbox_username'));
-            $pg_nganluong_email = $option->getOption('pg_nganluong_sandbox_email');
-            $pg_nganluong_url = $option->getOption('pg_nganluong_sandbox_url');
-          }
-          else {
-            $pg_nganluong_password = $option->getOption('pg_nganluong_password');
-            $pg_nganluong_username = $option->getOption(('pg_nganluong_username'));
-            $pg_nganluong_email = $option->getOption('pg_nganluong_email');
-            $pg_nganluong_url = $option->getOption('pg_nganluong_url');
-          }
-
+         
           //additional details about transaction: echo $payment_description
 
           $transaction_info = array();
@@ -272,8 +256,9 @@
           $transaction_info['payment_description'] = $payment_description;
           $transaction_info = $this->implode_array($transaction_info);
 
-          $nganluong = new nganluong($pg_nganluong_url, $pg_nganluong_username, $pg_nganluong_password, '');
-          //$transaction_id:
+          $nganluong = new nganluong();
+//          var_dump($payment_amount);
+//          var_dump(number_format($payment_amount, 0, '', ''));
           $built_url = $nganluong->buildCheckoutUrl($this->process_url, $pg_nganluong_email, $transaction_info, $transaction_id, $payment_amount);
           $display_output .= $pgw->form_nganluong($built_url);
         }
@@ -479,12 +464,14 @@
             $this->query("UPDATE " . DB_PREFIX . "users SET active=1, balance={$account_balance} WHERE user_id=" . intval($winner_details['seller_id']));
             //add the final invoice: end of auction
             $sql_insert_invoice = $this->query("INSERT INTO " . DB_PREFIX . "invoices	(user_id, item_id, name, amount, invoice_status, invoice_date, current_balance, live_fee, processor) VALUES ('{$payer_id}', '{$winner_details['auction_id']}', '{$invoice_name}', '{$payment_amount}', 'completed', '{$invoice_time}', '{$account_balance}', '1', '{$payment_gateway}')");
+            
+            $invoice_id = $this->insert_id();
 
-            //update the winner: confirm the payment, flag_paid, flag_status
+            //update the winner: confirm the payment, flag_paid, flag_status, set invoice_id and invoice_sent
             //note: payment_status: 'confirmed' or ''. If empty, the winner hasn't paid for the item and must undergo the payment process
             //flag_paid: if 0: no payment has been registered for the item.
             //flag_status: 0: in process. 1: done.
-            $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, payment_status='confirmed', flag_status=1 WHERE winner_id='{$custom_id}'");
+            $sql_update_winner = $this->query("UPDATE " . DB_PREFIX . "winners SET flag_paid=1, payment_status='confirmed', flag_status=1, invoice_id='{$invoice_id}', invoice_sent=1 WHERE winner_id='{$custom_id}'");
             //or maybe, we just have to substract the amount from buyer's account instead of going through another process.
           }
         }

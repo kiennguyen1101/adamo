@@ -1,32 +1,46 @@
 <?php
 
-/**
- *        MODULE TẠO ĐƯỜNG LINK THANH TOÁN QUA NGÂNLƯỢNG VÀ KIỂM TRA ĐƯỜNG LINK KẾT QUẢ THANH TOÁN TRẢ VỀ TỪ NGÂNLƯỢNG.VN.
- *        Mã checksum là: một tham số được tạo bởi thuật toán MD5 các tham số giao tiếp giữa NgânLượng.vn & website bán hàng
- *        và một chuỗi ký tự gọi là mật khẩu giao tiếp.
- *        Người dùng không thể tự động sửa được giá trị tham số giao tiếp giữa website của bạn và NgânLượng.vn nếu như không biết chính xác tham số bạn đã lưu và mật khẩu giao tiếp là gì.
- **/
+  /**
+   *        MODULE TẠO ĐƯỜNG LINK THANH TOÁN QUA NGÂNLƯỢNG VÀ KIỂM TRA ĐƯỜNG LINK KẾT QUẢ THANH TOÁN TRẢ VỀ TỪ NGÂNLƯỢNG.VN.
+   *        Mã checksum là: một tham số được tạo bởi thuật toán MD5 các tham số giao tiếp giữa NgânLượng.vn & website bán hàng
+   *        và một chuỗi ký tự gọi là mật khẩu giao tiếp.
+   *        Người dùng không thể tự động sửa được giá trị tham số giao tiếp giữa website của bạn và NgânLượng.vn nếu như không biết chính xác tham số bạn đã lưu và mật khẩu giao tiếp là gì.
+   * */
+  class nganluong extends paymentgateway {
 
-class nganluong extends paymentgateway
-{
     // Địa chỉ thanh toán hoá đơn của NgânLượng.vn
     private $nganluong_url = 'https://www.nganluong.vn/checkout.php';
-
     // Mã website của bạn đăng ký trong chức năng tích hợp thanh toán của NgânLượng.vn.
     private $merchant_site_code = '17260'; //100001 chỉ là ví dụ, bạn hãy thay bằng mã của bạn
-
     // Mật khẩu giao tiếp giữa website của bạn và NgânLượng.vn.
     private $secure_pass = 'abc123'; //d685739bf1 chỉ là ví dụ, bạn hãy thay bằng mật khẩu của bạn
     // Nếu bạn thay đổi mật khẩu giao tiếp trong quản trị website của chức năng tích hợp thanh toán trên NgânLượng.vn, vui lòng update lại mật khẩu này trên website của bạn
-
     private $affiliate_code = ''; //Mã đối tác tham gia chương trình liên kết của NgânLượng.vn
 
-    public function __construct($nganluong_url = '', $merchant_site_code = '', $secure_pass = '', $affiliate_code = '')
-    {
-        $this->nganluong_url = $nganluong_url;
-        $this->merchant_site_code = $merchant_site_code;
-        $this->secure_pass = $secure_pass;
-        $this->affiliate_code = $affiliate_code;
+    public function __construct($pg_nganluong_url = '', $pg_nganluong_username = '', $pg_nganluong_password = '', $affiliate_code = '') {
+      global $option;
+
+      $sandbox = $option->getOption('pg_nganluong_sandbox');
+
+      //set parameters for nganluong class according to environment
+      if ($sandbox === '1') {
+        $pg_nganluong_password = $option->getOption('pg_nganluong_sandbox_password');
+        $pg_nganluong_username = $option->getOption(('pg_nganluong_sandbox_username'));
+        $pg_nganluong_email = $option->getOption('pg_nganluong_sandbox_email');
+        $pg_nganluong_url = $option->getOption('pg_nganluong_sandbox_url');
+      }
+      else {
+        $pg_nganluong_password = $option->getOption('pg_nganluong_password');
+        $pg_nganluong_username = $option->getOption(('pg_nganluong_username'));
+        $pg_nganluong_email = $option->getOption('pg_nganluong_email');
+        $pg_nganluong_url = $option->getOption('pg_nganluong_url');
+      }
+
+      $this->nganluong_url = $pg_nganluong_url;
+      $this->pg_nganluong_email = $pg_nganluong_email;
+      $this->merchant_site_code = $pg_nganluong_username;
+      $this->secure_pass = $pg_nganluong_password;
+      $this->affiliate_code = $affiliate_code;
     }
 
     /**
@@ -48,49 +62,51 @@ class nganluong extends paymentgateway
      * @param string $affiliate_code: Mã đối tác tham gia chương trình liên kết của NgânLượng.vn
      * @return string
      */
-    public function buildCheckoutUrlExpand($return_url, $receiver, $transaction_info, $order_code, $price, $currency = 'vnd', $quantity = 1, $tax = 0, $discount = 0, $fee_cal = 0, $fee_shipping = 0, $order_description = '', $buyer_info = '', $affiliate_code = '')
-    {
-        if ($affiliate_code == "") $affiliate_code = $this->affiliate_code;
-        $arr_param = array(
-            'merchant_site_code' => strval($this->merchant_site_code),
-            'return_url' => strval(strtolower($return_url)),
-            'receiver' => strval($receiver),
-            'transaction_info' => strval($transaction_info),
-            'order_code' => strval($order_code),
-            'price' => strval($price),
-            'currency' => strval($currency),
-            'quantity' => strval($quantity),
-            'tax' => strval($tax),
-            'discount' => strval($discount),
-            'fee_cal' => strval($fee_cal),
-            'fee_shipping' => strval($fee_shipping),
-            'order_description' => strval($order_description),
-            'buyer_info' => strval($buyer_info),
-            'affiliate_code' => strval($affiliate_code)
-        );
-        $secure_code = '';
-        $secure_code = implode(' ', $arr_param) . ' ' . $this->secure_pass;
-        $arr_param['secure_code'] = md5($secure_code);
-        /* */
-        $redirect_url = $this->nganluong_url;
-        if (strpos($redirect_url, '?') === false) {
-            $redirect_url .= '?';
-        } else if (substr($redirect_url, strlen($redirect_url) - 1, 1) != '?' && strpos($redirect_url, '&') === false) {
-            $redirect_url .= '&';
-        }
+    public function buildCheckoutUrlExpand($return_url, $receiver, $transaction_info, $order_code, $price, $currency = 'vnd', $quantity = 1, $tax = 0, $discount = 0, $fee_cal = 0, $fee_shipping = 0, $order_description = '', $buyer_info = '', $affiliate_code = '') {
+      if ($affiliate_code == "")
+        $affiliate_code = $this->affiliate_code;
+      $arr_param = array(
+        'merchant_site_code' => strval($this->merchant_site_code),
+        'return_url' => strval(strtolower($return_url)),
+        'receiver' => strval($receiver),
+        'transaction_info' => strval($transaction_info),
+        'order_code' => strval($order_code),
+        'price' => strval($price),
+        'currency' => strval($currency),
+        'quantity' => strval($quantity),
+        'tax' => strval($tax),
+        'discount' => strval($discount),
+        'fee_cal' => strval($fee_cal),
+        'fee_shipping' => strval($fee_shipping),
+        'order_description' => strval($order_description),
+        'buyer_info' => strval($buyer_info),
+        'affiliate_code' => strval($affiliate_code)
+      );
+      $secure_code = '';
+      $secure_code = implode(' ', $arr_param) . ' ' . $this->secure_pass;
+      $arr_param['secure_code'] = md5($secure_code);
+      /* */
+      $redirect_url = $this->nganluong_url;
+      if (strpos($redirect_url, '?') === false) {
+        $redirect_url .= '?';
+      }
+      else if (substr($redirect_url, strlen($redirect_url) - 1, 1) != '?' && strpos($redirect_url, '&') === false) {
+        $redirect_url .= '&';
+      }
 
-        /* */
-        $url = '';
-        foreach ($arr_param as $key => $value) {
-            $value = urlencode($value);
-            if ($url == '') {
-                $url .= $key . '=' . $value;
-            } else {
-                $url .= '&' . $key . '=' . $value;
-            }
+      /* */
+      $url = '';
+      foreach ($arr_param as $key => $value) {
+        $value = urlencode($value);
+        if ($url == '') {
+          $url .= $key . '=' . $value;
         }
+        else {
+          $url .= '&' . $key . '=' . $value;
+        }
+      }
 
-        return $redirect_url . $url;
+      return $redirect_url . $url;
     }
 
     /**
@@ -103,43 +119,46 @@ class nganluong extends paymentgateway
      * @param int $price: Tổng tiền phải thanh toán
      * @return string
      */
-    public function buildCheckoutUrl($return_url, $receiver, $transaction_info, $order_code, $price)
-    {
+    public function buildCheckoutUrl($return_url, $receiver = '', $transaction_info, $order_code, $price) {
 
-        // Bước 1. Mảng các tham số chuyển tới nganluong.vn
-        $arr_param = array(
-            'merchant_site_code' => strval($this->merchant_site_code),
-            'return_url' => strtolower(urlencode($return_url)),
-            'receiver' => strval($receiver),
-            'transaction_info' => strval($transaction_info),
-            'order_code' => strval($order_code),
-            'price' => strval($price)
-        );
+      $receiver = ($this->pg_nganluong_email) ? $this->pg_nganluong_email : $receiver;
 
-        $secure_code = implode(' ', $arr_param) . ' ' . $this->secure_pass;
-        $arr_param['secure_code'] = md5($secure_code);
+      // Bước 1. Mảng các tham số chuyển tới nganluong.vn
+      $arr_param = array(
+        'merchant_site_code' => strval($this->merchant_site_code),
+        'return_url' => strtolower(urlencode($return_url)),
+        'receiver' => strval($receiver),
+        'transaction_info' => strval($transaction_info),
+        'order_code' => strval($order_code),
+        'price' => strval($price)
+      );
 
-        /* Bước 2. Kiểm tra  biến $redirect_url xem có '?' không, nếu không có thì bổ sung vào*/
-        $redirect_url = $this->nganluong_url;
-        if (strpos($redirect_url, '?') === false) {
-            $redirect_url .= '?';
-        } else if (substr($redirect_url, strlen($redirect_url) - 1, 1) != '?' && strpos($redirect_url, '&') === false) {
-            // Nếu biến $redirect_url có '?' nhưng không kết thúc bằng '?' và có chứa dấu '&' thì bổ sung vào cuối
-            $redirect_url .= '&';
-        }
+      $secure_code = implode(' ', $arr_param) . ' ' . $this->secure_pass;
+      $arr_param['secure_code'] = md5($secure_code);
 
-        /* Bước 3. tạo url*/
-        $url = '';
-        foreach ($arr_param as $key => $value) {
-            if ($key != 'return_url') $value = urlencode($value);
+      /* Bước 2. Kiểm tra  biến $redirect_url xem có '?' không, nếu không có thì bổ sung vào */
+      $redirect_url = $this->nganluong_url;
+      if (strpos($redirect_url, '?') === false) {
+        $redirect_url .= '?';
+      }
+      else if (substr($redirect_url, strlen($redirect_url) - 1, 1) != '?' && strpos($redirect_url, '&') === false) {
+        // Nếu biến $redirect_url có '?' nhưng không kết thúc bằng '?' và có chứa dấu '&' thì bổ sung vào cuối
+        $redirect_url .= '&';
+      }
 
-            if ($url == '')
-                $url .= $key . '=' . $value;
-            else
-                $url .= '&' . $key . '=' . $value;
-        }
+      /* Bước 3. tạo url */
+      $url = '';
+      foreach ($arr_param as $key => $value) {
+        if ($key != 'return_url')
+          $value = urlencode($value);
 
-        return $redirect_url . $url;
+        if ($url == '')
+          $url .= $key . '=' . $value;
+        else
+          $url .= '&' . $key . '=' . $value;
+      }
+
+      return $redirect_url . $url;
     }
 
     /**
@@ -154,28 +173,29 @@ class nganluong extends paymentgateway
      * @param string $secure_code: Mã checksum (mã kiểm tra)
      * @return unknown
      */
+    public function verifyPaymentUrl($transaction_info, $order_code, $price, $payment_id, $payment_type, $error_text, $secure_code) {
+      // Tạo mã xác thực từ chủ web
+      $str = '';
+      $str .= ' ' . strval($transaction_info);
+      $str .= ' ' . strval($order_code);
+      $str .= ' ' . strval($price);
+      $str .= ' ' . strval($payment_id);
+      $str .= ' ' . strval($payment_type);
+      $str .= ' ' . strval($error_text);
+      $str .= ' ' . strval($this->merchant_site_code);
+      $str .= ' ' . strval($this->secure_pass);
 
-    public function verifyPaymentUrl($transaction_info, $order_code, $price, $payment_id, $payment_type, $error_text, $secure_code)
-    {
-        // Tạo mã xác thực từ chủ web
-        $str = '';
-        $str .= ' ' . strval($transaction_info);
-        $str .= ' ' . strval($order_code);
-        $str .= ' ' . strval($price);
-        $str .= ' ' . strval($payment_id);
-        $str .= ' ' . strval($payment_type);
-        $str .= ' ' . strval($error_text);
-        $str .= ' ' . strval($this->merchant_site_code);
-        $str .= ' ' . strval($this->secure_pass);
+      // Mã hóa các tham số
+      $verify_secure_code = '';
+      $verify_secure_code = md5($str);
 
-        // Mã hóa các tham số
-        $verify_secure_code = '';
-        $verify_secure_code = md5($str);
-
-        // Xác thực mã của chủ web với mã trả về từ nganluong.vn
-        if ($verify_secure_code === $secure_code) return true;
-        else return false;
+      // Xác thực mã của chủ web với mã trả về từ nganluong.vn
+      if ($verify_secure_code === $secure_code)
+        return true;
+      else
+        return false;
     }
-}
+
+  }
 
 ?>

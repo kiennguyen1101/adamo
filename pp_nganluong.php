@@ -12,7 +12,7 @@
   define('IN_SITE', 1);
 
   include_once('includes/global.php');
-  include_once('includes/class_fees.php');
+ 
   require_once(INCLUDE_DIR . "gateways/nganluong.php");
 
   (string) $active_pg = 'nganluong';
@@ -45,8 +45,9 @@
   $redirect_url = SITE_PATH . 'payment_failed.php';
 
   if ($nganluong->verifyPaymentUrl($transaction_info, $order_code, $price, $payment_id, $payment_type, $error_text, $secure_code)) {
-
+    
     if (!$error_text) {
+      
       $process_fee = new fees();
       $process_fee->setts = & $setts;
       try {
@@ -69,6 +70,8 @@
       $error_output = $error_text;
     }
   }
+  
+// var_dump($redirect_url);
 //die();
   header_redirect($redirect_url);
 ?>

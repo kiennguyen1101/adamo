@@ -1,90 +1,91 @@
 <?php
-$current_version = "6.03";
 
-(array)$setts = NULL;
+  $current_version = "6.03";
 
-define("CURRENT_TIME", time());
-define("CURRENT_TIME_MYSQL", date("Y-m-d H:i:s", time()));
+  (array) $setts = NULL;
 
-$setts = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "gen_setts LIMIT 1");
+  define("CURRENT_TIME", time());
+  define("CURRENT_TIME_MYSQL", date("Y-m-d H:i:s", time()));
 
-define("DEFAULT_THEME", $setts['default_theme']);
-define("SITE_PATH", $setts['site_path']);
-define("THEME_PATH", SITE_PATH . 'themes/');
-define("CURRENT_THEME", THEME_PATH . DEFAULT_THEME . '/');
-define("EMAIL_FONT", "<font face=\"Verdana, Arial, Helvetica\" size=\"2\">");
+  $setts = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "gen_setts LIMIT 1");
 
-$layout = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "layout_setts LIMIT 1");
-$layout['nb_want_ads'] = $setts['enable_wanted_ads'] ? $layout['nb_want_ads'] : 0;
-$db->setts =& $setts;
-$db->layout =& $layout;
-$currentTime = time();
+  define("DEFAULT_THEME", $setts['default_theme']);
+  define("SITE_PATH", $setts['site_path']);
+  define("THEME_PATH", SITE_PATH . 'themes/');
+  define("CURRENT_THEME", SITE_PATH . 'themes/' . DEFAULT_THEME . '/');
+  define("EMAIL_FONT", "<font face=\"Verdana, Arial, Helvetica\" size=\"2\">");
 
-if (!$session->is_set("site_lang")) {
+  $layout = $db->get_sql_row("SELECT * FROM " . DB_PREFIX . "layout_setts LIMIT 1");
+  $layout['nb_want_ads'] = $setts['enable_wanted_ads'] ? $layout['nb_want_ads'] : 0;
+  $db->setts = & $setts;
+  $db->layout = & $layout;
+  $currentTime = time();
+
+  if (!$session->is_set("site_lang")) {
     $session->set("site_lang", $setts['site_lang']);
-}
+  }
 
-include_once($fileExtension . "language/" . $session->value("site_lang") . "/global.lang.php");
-include_once($fileExtension . "language/" . $session->value("site_lang") . "/category.lang.php");
+  include_once($fileExtension . "language/" . $session->value("site_lang") . "/global.lang.php");
+  include_once($fileExtension . "language/" . $session->value("site_lang") . "/category.lang.php");
 
-if (IN_SITE == 1) {
+  if (IN_SITE == 1) {
     include_once($fileExtension . "language/" . $session->value("site_lang") . "/site.lang.php");
-}
+  }
 
-if (IN_ADMIN == 1) {
+  if (IN_ADMIN == 1) {
     include_once($fileExtension . "language/" . $setts['admin_lang'] . "/admin.lang.php");
-}
+  }
 
-include_once($fileExtension . "language/" . $session->value("site_lang") . "/categories_array.php");
-$date_format_row = $db->get_sql_row("SELECT value FROM " . DB_PREFIX . "dateformat WHERE active='checked'");
-$datetime_format = $date_format_row['value'];
-define("DATETIME_FORMAT", $datetime_format);
-$date_format = substr($datetime_format, 0, -6);
-define("DATE_FORMAT", $date_format);
-define("TIME_OFFSET", $setts['time_offset']);
+  include_once($fileExtension . "language/" . $session->value("site_lang") . "/categories_array.php");
+  $date_format_row = $db->get_sql_row("SELECT value FROM " . DB_PREFIX . "dateformat WHERE active='checked'");
+  $datetime_format = $date_format_row['value'];
+  define("DATETIME_FORMAT", $datetime_format);
+  $date_format = substr($datetime_format, 0, -6);
+  define("DATE_FORMAT", $date_format);
+  define("TIME_OFFSET", $setts['time_offset']);
 
-if ($setts['is_mod_rewrite']) {
+  if ($setts['is_mod_rewrite']) {
     $valsArray = explode(",", $_REQUEST['rewrite_params']);
     $valsCnt = 0;
     $count_valsArray = count($valsArray);
     while ($valsCnt < $count_valsArray) {
-        $_REQUEST[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
-        $_GET[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
-        $_POST[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
-        $valsCnt += 2;
+      $_REQUEST[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
+      $_GET[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
+      $_POST[$valsArray[$valsCnt + 1]] = $valsArray[$valsCnt];
+      $valsCnt += 2;
     }
-}
+  }
 
-if (!stristr("sell_item.php", $_SERVER['PHP_SELF']) || !stristr("sell_item.php", $_SERVER['PHP_SELF']) || $_REQUEST['option'] == "new_item" || stristr("sell_item.php", $_SERVER['PHP_SELF']) && $_REQUEST['option'] == "sell_similar") {
+  if (!stristr("sell_item.php", $_SERVER['PHP_SELF']) || !stristr("sell_item.php", $_SERVER['PHP_SELF']) || $_REQUEST['option'] == "new_item" || stristr("sell_item.php", $_SERVER['PHP_SELF']) && $_REQUEST['option'] == "sell_similar") {
     $session->unregister("auction_id");
     $session->unregister("refresh_id");
-}
+  }
 
-if (!stristr("wanted_manage.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("wanted_manage.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("wanted_ad_id");
     $session->unregister("wa_refresh_id");
-}
+  }
 
-if (!stristr("edit_item.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("edit_item.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("edit_refresh_id");
-}
+  }
 
-if (!stristr("bid.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("bid.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("bid_id");
-}
+  }
 
-if (!stristr("buy_out.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("buy_out.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("buyout_id");
-}
+  }
 
-if (!stristr("make_offer.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("make_offer.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("make_offer_id");
-}
+  }
 
-if (!stristr("swap_offer.php", $_SERVER['PHP_SELF'])) {
+  if (!stristr("swap_offer.php", $_SERVER['PHP_SELF'])) {
     $session->unregister("swap_offer_id");
-}
+  }
 
-if (isset($_GET['start']))
+  if (isset($_GET['start']))
     $start = abs(intval($_GET['start']));
 ?>

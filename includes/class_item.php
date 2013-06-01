@@ -929,34 +929,10 @@
             switch ($payment_gateway['name']) {
               case 'PayPal':
                 $checkbox_status = ($this->setts['pg_paypal_email']) ? '' : 'disabled';
-                break;
-              case 'Worldpay':
-                $checkbox_status = ($this->setts['pg_worldpay_id']) ? '' : 'disabled';
-                break;
-              case '2Checkout':
-                $checkbox_status = ($this->setts['pg_checkout_id']) ? '' : 'disabled';
-                break;
-              case 'Nochex':
-                $checkbox_status = ($this->setts['pg_nochex_email']) ? '' : 'disabled';
-                break;
-              case 'Ikobo':
-                $checkbox_status = ($this->setts['pg_ikobo_username'] && $user_details['pg_ikobo_password']) ? '' : 'disabled';
-                break;
+                break;            
               case 'nganluong':
                 $checkbox_status = ($this->setts['pg_nganluong_email'] && $this->setts['pg_nganluong_username'] && $this->setts['pg_nganluong_password']) ? '' : 'disabled';
-                break;
-              case 'Protx':
-                $checkbox_status = ($this->setts['pg_protx_username'] && $user_details['pg_protx_password']) ? '' : 'disabled';
-                break;
-              case 'Authorize.net':
-                $checkbox_status = ($this->setts['pg_authnet_username'] && $user_details['pg_authnet_password']) ? '' : 'disabled';
-                break;
-              case 'Moneybookers':
-                $checkbox_status = ($this->setts['pg_mb_email']) ? '' : 'disabled';
-                break;
-              case 'Paymate':
-                $checkbox_status = ($this->setts['pg_paymate_merchant_id']) ? '' : 'disabled';
-                break;
+                break;            
               case 'Google Checkout':
                 $checkbox_status = ($this->setts['pg_gc_merchant_id'] && $user_details['pg_gc_merchant_key']) ? '' : 'disabled';
                 break;
@@ -2660,8 +2636,8 @@
 
             $this->fees->user_id = $user_id;
             $this->fees->seller_id = $item_details['owner_id'];
-
-            $payment_amount = number_format($payment_amount, 2);
+//kiennguyen1101
+//            $payment_amount = number_format($payment_amount, 2);
 
             $display_output .= $this->fees->show_gateways($transaction_id, $payment_amount, $item_details['currency'], $item_details['owner_id'], $payment_description, $item_details['direct_payment']);
           }
