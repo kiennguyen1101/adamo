@@ -79,7 +79,7 @@ if (!show_buyout($item_details) || $session->is_set('buyout_id') || $session->va
 			bid_in_progress=0 WHERE auction_id='" . $item_details['auction_id'] . "'");
 
         $action = 'buy_out_success';
-//        $db->commit();
+        $db->commit();
     } catch (error $e) {
         $db->rollBack();
         $action = 'buy_out_error';

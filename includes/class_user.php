@@ -142,7 +142,6 @@
 
       try {
 
-
         $user_details = $this->rem_special_chars_array($user_details);
 
         $sql_update_query = "UPDATE " . DB_PREFIX . "users SET
@@ -219,11 +218,7 @@
         }
 
         $this->update_page_data($user_id, $page_handle, $user_details);
-
-//            $this->beginTransaction();
-//            $this->commit();
       } catch (error $e) {
-//            $this->rollBack();
         error::dump_exception($e);
       }
     }
