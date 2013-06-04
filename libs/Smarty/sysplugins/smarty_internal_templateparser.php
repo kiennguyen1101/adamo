@@ -85,7 +85,8 @@
 
 #line 12 "smarty_internal_templateparser.y"
 
-  class Smarty_Internal_Templateparser#line 79 "smarty_internal_templateparser.php" {
+  class Smarty_Internal_Templateparser#line 79 "smarty_internal_templateparser.php" 
+  {
 #line 14 "smarty_internal_templateparser.y"
 
   const Err1 = "Security error: Call to private object member not allowed";

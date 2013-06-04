@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## myphpauction V6.8															##
+##-------------------------------------------------------------##
+## Copyright ©2008 myphpauction SoftwareLTD. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -9,7 +14,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="2" class="bordercat">
   <?php while ($news_details = $db->fetch_array($sql_select_news)) { ?>
       <tr> 
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/arrow.gif" width="8" height="8" hspace="4"></td> 
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/arrow.gif" width="8" height="8" hspace="4"></td> 
         <td width="100%" class="smallfont"><b><?php echo show_date($news_details['reg_date'], false); ?></b></td> 
       </tr> 
       <tr> 

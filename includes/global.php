@@ -157,6 +157,19 @@ $template->set('is_seller', $session->value('is_seller'));
 
 (string)$template_output = NULL;
 
+require_once(BASE_DIR . 'libs/Smarty/Smarty.class.php');
+
+$smarty = new Smarty();
+$smarty->setTemplateDir(BASE_DIR . 'templates/');
+$smarty->setCompileDir(BASE_DIR . 'templates_compiled/');
+$smarty->setConfigDir(BASE_DIR . 'configs/');
+$smarty->setCacheDir(BASE_DIR . 'cache/');
+
+if ($setts['default_theme']) {
+    $smarty->addTemplateDir(THEME_DIR . "{$setts['default_theme']}/templates/");
+}
+
+
 if ($setts['maintenance_mode'] && $session->value('adminarea') != 'Active' && IN_ADMIN != 1) {
     $template_output = $template->process('maintenance_splash_page.tpl.php');
 
@@ -201,14 +214,7 @@ $order_types = array('DESC', 'ASC');
 if ($session->value('user_id') > 0) {
     $set = 0;
 
-    $db->query("CREATE TABLE IF NOT EXISTS " . DB_PREFIX . "iphistory (
-		`memberid` INT NOT NULL, 
-		`time1` INT NOT NULL, 
-		`time2` INT NOT NULL, 
-		`ip` VARCHAR(20) NOT NULL
-	)");
-
-    $sql_select_iphistory = $db->query("SELECT time1, time2, ip FROM " . DB_PREFIX . "iphistory WHERE 
+    $sql_select_iphistory = $db->query("SELECT time1, time2, ip FROM " . DB_PREFIX . "iphistory WHERE
 		memberid='" . $session->value('user_id') . "' ORDER by time1 DESC LIMIT 1");
 
     if ($db->num_rows($sql_select_iphistory) > 0) {

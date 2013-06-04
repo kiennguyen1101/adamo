@@ -1,4 +1,4 @@
-/*
+﻿/*
  Script: CountDownPro Timer
  Description: Counts down or up from a date, fully customisable display, customisable events when countdown reaches zero! Development version - not to be used in a production environment.
  Author: Andrew Urquhart
@@ -207,26 +207,26 @@ function CD_Init() {
                     // Default formatting data
                     objW.servertime = "";
                     objW.d_mindigits = 1;
-                    objW.d_unit = " day";
-                    objW.d_units = " days";
+                    objW.d_unit = " ngày";
+                    objW.d_units = " ngày";
                     objW.d_before = "";
                     objW.d_after = " ";
                     objW.d_hidezero = 0;
                     objW.h_mindigits = 2;
-                    objW.h_unit = "h";
-                    objW.h_units = "h";
+                    objW.h_unit = "giờ";
+                    objW.h_units = "giờ";
                     objW.h_before = "";
                     objW.h_after = " ";
                     objW.h_hidezero = 0;
                     objW.m_mindigits = 2;
-                    objW.m_unit = "m";
-                    objW.m_units = "m";
+                    objW.m_unit = "phút";
+                    objW.m_units = "phút";
                     objW.m_before = "";
                     objW.m_after = " ";
                     objW.m_hidezero = 0;
                     objW.s_mindigits = 2;
-                    objW.s_unit = "s";
-                    objW.s_units = "s";
+                    objW.s_unit = "giây";
+                    objW.s_units = "giây";
                     objW.s_before = "";
                     objW.s_after = " ";
                     objW.s_hidezero = 0;

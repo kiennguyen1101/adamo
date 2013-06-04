@@ -1,5 +1,10 @@
-<?php
-
+﻿<?php
+#################################################################
+## myphpauction V6.8															##
+##-------------------------------------------------------------##
+## Copyright ©2008 myphpauction SoftwareLTD. All rights reserved.	##
+##-------------------------------------------------------------##
+#################################################################
 
   if (!defined('INCLUDED')) {
     die("Access Denied");
@@ -16,7 +21,7 @@
 
       <tr>
         <td class="contentfont">
-      <!--<img src="themes/<?php echo $setts['default_theme']; ?>/images/arrow.gif" hspace="3" align="absmiddle">--><a class="ln" href="<?php echo $category_link; ?>" <?php echo ((!empty($cats_header_details['hover_title'])) ? 'title="' . $cats_header_details['hover_title'] . '"' : ''); ?>>
+      <!--<img src="themes/<?php echo $setts['default_theme']; ?>/img/arrow.gif" hspace="3" align="absmiddle">--><a class="ln" href="<?php echo $category_link; ?>" <?php echo ((!empty($cats_header_details['hover_title'])) ? 'title="' . $cats_header_details['hover_title'] . '"' : ''); ?>>
             <?php echo $category_lang[$cats_header_details['category_id']]; ?>
             <?php echo (($setts['enable_cat_counters']) ? (($cats_header_details['items_counter']) ? '(<strong>' . $cats_header_details['items_counter'] . '</strong>)' : '(' . $cats_header_details['items_counter'] . ')') : ''); ?></a></td>
       </tr>

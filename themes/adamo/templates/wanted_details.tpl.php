@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 #################################################################
 ## myphpauction															##
 ##-------------------------------------------------------------##
@@ -35,7 +35,7 @@ myPopup = '';
 
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
-    <td class="contentfont" nowrap style="padding-right: 10px;"><img src="themes/<?php echo $setts['default_theme']; ?>/images/system/home.gif" align="absmiddle" border="0" hspace="5">
+    <td class="contentfont" nowrap style="padding-right: 10px;"><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/home.gif" align="absmiddle" border="0" hspace="5">
       <a href="<?php echo process_link('index'); ?>"><?php echo MSG_BACK_TO_HP; ?></a></td>
     <td width="100%">
       <table width="100%" border="0" cellpadding="3" cellspacing="3" class="errormessage">
@@ -57,8 +57,8 @@ myPopup = '';
 
 <table width='100%' border='0' cellspacing='0' cellpadding='0' height='21' style='border-bottom: 2px solid #a6a6a6;'>
   <tr>
-    <td width='30'><img src='themes/<?php echo $setts['default_theme']; ?>/images/det_start.gif' width='35' height='30' align='absmiddle'></td>
-    <td width='100%' background='themes/<?php echo $setts['default_theme']; ?>/images/det_bg.gif' valign='bottom' class='cathead' style='padding-left: 5px; padding-bottom: 3px;'>
+    <td width='30'><img src='themes/<?php echo $setts['default_theme']; ?>/img/det_start.gif' width='35' height='30' align='absmiddle'></td>
+    <td width='100%' background='themes/<?php echo $setts['default_theme']; ?>/img/det_bg.gif' valign='bottom' class='cathead' style='padding-left: 5px; padding-bottom: 3px;'>
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td class="itemid">&nbsp;&nbsp;<?php echo $item_details['name']; ?></td>
@@ -66,7 +66,7 @@ myPopup = '';
         </tr>
       </table>
     </td>
-    <td width='5'><img src='themes/<?php echo $setts['default_theme']; ?>/images/det_end.gif' width='5' height='30' align='absmiddle'></td>
+    <td width='5'><img src='themes/<?php echo $setts['default_theme']; ?>/img/det_end.gif' width='5' height='30' align='absmiddle'></td>
   </tr>
 </table>
 <br>
@@ -86,8 +86,8 @@ myPopup = '';
     <td width="50%" class="border"><!-- Start Table for item details -->
       <table width="100%" border="0" cellspacing="3" cellpadding="3">
         <tr class="c5">
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="120" height="1"></td>
-          <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="120" height="1"></td>
+          <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
         <tr class="c1">
           <td><b><?php echo MSG_OFFERS; ?></b></td>
@@ -118,8 +118,8 @@ myPopup = '';
           <td><?php echo item::item_status($item_details['closed']); ?></td>
         </tr>
         <tr class="c5">
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
       </table>
     </td>
@@ -128,7 +128,7 @@ myPopup = '';
           <td class="c3"><?php echo MSG_POSTER_INFORMATION; ?> </td>
         </tr>
         <tr class="c5">
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
         <tr>
           <td><b><?php echo $user_details['username']; ?></b> <?php echo user_pics($user_details['user_id']); ?></td>
@@ -138,7 +138,7 @@ myPopup = '';
             <?php echo GMSG_IN . ' <b>' . $seller_country . '</b>'; ?></td>
         </tr>
         <tr class="c5">
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
       </table>
       <?php echo $reputation_table_small; ?>
@@ -151,8 +151,8 @@ myPopup = '';
     <td class="c3" colspan="2"><strong><?php echo GMSG_DESCRIPTION; ?></strong></td>
   </tr>
   <tr class="c5">
-    <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="150" height="1"></td>
-    <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+    <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="150" height="1"></td>
+    <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
   </tr>
   <tr>
     <td colspan="2"><?php echo database::add_special_chars($item_details['description']); ?></td>
@@ -163,8 +163,8 @@ myPopup = '';
         <td class="c3" colspan="2"><strong><?php echo MSG_WANTED_AD_IMAGES; ?></strong> </td>
       </tr>
       <tr class="c5">
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
       </tr>
       <tr>
         <td class="border" colspan="2"><table width="100%" cellpadding="3" cellspacing="0" border="0">
@@ -187,8 +187,8 @@ myPopup = '';
         <td class="c3" colspan="2"><strong><?php echo MSG_WANTED_AD_MEDIA; ?></strong> </td>
       </tr>
       <tr class="c5">
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
       </tr>
       <tr>
         <td class="border" colspan="2"><table width="100%" cellpadding="3" cellspacing="0" border="0">
@@ -218,35 +218,32 @@ myPopup = '';
         <td class="c4" colspan="2"><b><?php echo MSG_ASK_SELLER_QUESTION; ?></b> </td>
       </tr>
       <tr class="c5">
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
       </tr>
       <?php echo $public_questions_content; ?>
       <?php if ($session->value('adminarea') == 'Active') { ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_QUESTIONS_LOGGED_AS_ADMIN; ?></td>
         </tr>
-        <?php
-      }
+      <?php }
       else if (!$session->value('user_id')) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_LOGIN_TO_ASK_QUESTIONS; ?></td>
         </tr>
-        <?php
-      }
+      <?php }
       else if ($session->value('user_id') == $item_details['owner_id']) {
         ?>
         <tr>
           <td align="center" colspan="2"><?php echo MSG_CANT_POST_QUESTION_OWNER; ?></td>
         </tr>
-        <?php
-      }
-      else {
-        ?>
+    <?php }
+    else {
+      ?>
         <tr>
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
-          <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
+          <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="1" height="1"></td>
         </tr>
         <form action="wanted_details.php" method="POST">
           <input type="hidden" name="wanted_ad_id" value="<?php echo $item_details['wanted_ad_id']; ?>">
@@ -254,7 +251,7 @@ myPopup = '';
           <tr class="c1">
             <td><table width="100%">
                 <tr>
-                  <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/system/i_faq.gif" align="absmiddle"/></td>
+                  <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/system/i_faq.gif" align="absmiddle"/></td>
                   <td width="100%" align="right"><strong><?php echo MSG_POST_QUESTION; ?></strong></td>
                 </tr>
               </table></td>
@@ -263,9 +260,9 @@ myPopup = '';
                   <td><textarea name="message_content" cols="40" rows="3" class="contentfont"></textarea></td>
                   <td><div style="padding: 2px;">
                       <select name="message_handle">
-                        <?php if ($user_details['default_public_questions']) { ?>
+      <?php if ($user_details['default_public_questions']) { ?>
                           <option value="4" selected><?php echo MSG_POST_QUESTION_PUBLICLY; ?></option>
-                        <?php } ?>
+      <?php } ?>
                         <option value="5"><?php echo MSG_POST_QUESTION_PRIVATELY; ?></option>
                       </select>
                     </div>
@@ -276,8 +273,8 @@ myPopup = '';
               </table></td>
           </tr>
         </form>
-      <?php } ?>
     <?php } ?>
+  <?php } ?>
 </table>
 <br>
 <?php if ($is_wanted_offers) { ?>
@@ -294,14 +291,14 @@ myPopup = '';
         <td align="center"><?php echo MSG_ENDS; ?></td>
       </tr>
       <tr class="c5">
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="60" height="1"></td>
-        <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="100%" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="80" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="80" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="50" height="1"></td>
-        <td><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="100" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="60" height="1"></td>
+        <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100%" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="80" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="80" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="50" height="1"></td>
+        <td><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100" height="1"></td>
       </tr>
-      <?php echo $active_offers_content; ?>
+    <?php echo $active_offers_content; ?>
     </table>
     <br>
   <?php } ?>
@@ -316,7 +313,7 @@ myPopup = '';
       <tr>
         <td class="c3" colspan="2"><?php echo MSG_ENTER_AN_OFFER; ?></td>
       </tr>
-      <?php if ($session->value('user_id')) { ?>
+    <?php if ($session->value('user_id')) { ?>
         <form action="wanted_details.php" method="get">
           <input type="hidden" name="wanted_ad_id" value="<?php echo $item_details['wanted_ad_id']; ?>">
           <input type="hidden" name="action" value="submit_offer">
@@ -324,30 +321,28 @@ myPopup = '';
             <td class="c2" colspan="2"><b><?php echo $item_details['name']; ?></b></td>
           </tr>
           <tr class="c5">
-            <td width="150"><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="150" height="1"></td>
-            <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/images/pixel.gif" width="100%" height="1"></td>
+            <td width="150"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="150" height="1"></td>
+            <td width="100%"><img src="themes/<?php echo $setts['default_theme']; ?>/img/pixel.gif" width="100%" height="1"></td>
           </tr>
           <tr class="c1">
             <td align="right"><?php echo MSG_CHOOSE_AN_ITEM; ?></td>
             <td><?php echo $offer_drop_down; ?></td>
           </tr>
         </form>
-        <?php
-      }
-      else if ($item_details['closed']) {
-        ?>
+    <?php }
+    else if ($item_details['closed']) {
+      ?>
         <tr class="c1">
           <td align="center" class="contentfont"><?php echo MSG_CANTOFFER_CLOSED; ?></td>
         </tr>	
-        <?php
-      }
-      else {
-        ?>
+    <?php }
+    else {
+      ?>
         <tr class="c1">
           <td align="center" class="contentfont" style="color: red; font-weight: bold;"><?php echo MSG_CANTOFFER_LOGIN; ?>
             <div align="center" class="contentfont"><a href="login.php?redirect=wanted_details.php?wanted_ad_id=<?php echo $item_details['wanted_ad_id']; ?>"><?php echo MSG_LOGIN_TO_MEMBERS_AREA; ?></a></div>
           </td>
         </tr>
-      <?php } ?>
+    <?php } ?>
     </table>
   <?php } ?>

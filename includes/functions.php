@@ -339,7 +339,7 @@ function list_languages($location = 'site', $drop_down = false, $selected_langua
     (string)$display_output = null;
 
 
-    $relative_path = ($location == 'site') ? '' : '../';
+    $relative_path = BASE_DIR;
 
     $handle = opendir($relative_path . 'language');
 
